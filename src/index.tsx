@@ -67,6 +67,7 @@ import UpdateFormAnalysis from "./components/form/update-analysis";
 import PublicationPage from "./page/(User)/publicationPage";
 import AnalysisDetails from "./page/(User)/anylis-page";
 import NewsDetails from "./page/(User)/new-page";
+import ReportIndex from "./page/(Admin)/Reports";
 
 const router = createBrowserRouter([
   {
@@ -160,7 +161,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/admin-dashboard/reports",
-        element: <Index />,
+        element: <ReportIndex />,
       },
       {
         path: "/admin-dashboard/reports/add-report",
