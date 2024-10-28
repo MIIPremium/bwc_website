@@ -64,61 +64,34 @@ export interface sidInfo {
   type: string;
 }
 
-interface PostCardProps {
-  image: string;
-  title: string;
-  timeAgo: string;
-  author: string;
-  description: string;
-}
-export interface PublicationResp {
+export interface ReportsRespons {
   id: number;
-  type: Type;
-  ar_Title: null | string;
-  en_Title: null | string;
-  b_image: string;
-  images: string[];
-  writers: Writer[];
-  reportId: null;
-  report: null;
-  publish: boolean;
-  t2read: number;
-  tags: string[];
-  date_of_publish: Date;
-  ar_table_of_content: string[];
-  en_table_of_content: string[];
-  ar_description: null | string;
-  en_description: null | string;
-  ar_Note: null | string;
-  en_Note: null | string;
-  references: any[];
-}
-export interface Writer {
-  id: number;
-  ar_fullName: string;
-  en_fullName: string;
-  image: string;
+  ar_Title: string;
+  en_Title: string;
+  img: string;
   ar_description: string;
   en_description: string;
-  ar_role: string;
-  en_role: string;
-  publication: null[];
-  soicalmedia: any[];
-}
-export enum Type {
-  Analysis = "analysis",
-  News = "news",
-  Publish = "publish",
+  ar_executive_summary: string;
+  en_executive_summary: string;
+  ar_table_of_content: string[];
+  en_table_of_content: string[];
+  date_of_report: Date;
+  date_of_publish: Date;
+  pdfImg: string;
+  pdfFile: string;
+  an_note: string;
+  en_note: string;
+  listOfSections: any[];
 }
 
-const PublicationPage = () => {
+const ReportPage = () => {
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const [searchQuery, setSearchQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
-  const [selectedValue, setSelectedValue] = useState("all");
+  const [selectedValue, setSelectedValue] = useState("");
   const [isAscending, setIsAscending] = useState(false);
   // const [date, setDate] = React.useState<Date>();
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,33 +114,29 @@ const PublicationPage = () => {
     setIsAscending(value === "oldest");
   };
 
-  const { data: PubResp, isPending } = useQuery({
-    queryKey: [
-      "ManagingPublications",
-      submittedQuery,
-      isAscending,
-      selectedValue,
-    ],
+  const { data: ReportResp, isPending } = useQuery({
+    queryKey: ["ManagingReports", submittedQuery],
     queryFn: () =>
-      getApi<PublicationResp[]>(
-        `/api/website/Publications?query=${submittedQuery}&type=${selectedValue}&ascending=${isAscending}`
-      ),
+      getApi<ReportsRespons[]>(`/api/website/Reports?query=${submittedQuery}`),
   });
 
   const { data: SidInfoResp } = useQuery({
     queryKey: ["ReadMore"],
     queryFn: () => getApi<sidInfo[]>(`/api/website/Publications/ReadMore/5`),
   });
-  console.log("SidInfoResp", SidInfoResp?.data);
+  console.log("ReportResp", ReportResp?.data);
   const itemsPerPage = 3; // Display 3 posts per page
-  const totalItems = PubResp?.data.length || 0;
+  const totalItems = ReportResp?.data.length || 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const [currentPage, setCurrentPage] = useState(1);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = PubResp?.data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = ReportResp?.data.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
@@ -265,33 +234,9 @@ const PublicationPage = () => {
             </div>
 
             <div className="grid grid-cols-4  gap-3 mt-3">
-              <div className="col-span-4 md:col-span-1 flex justify-between gap-4">
-                <Select dir="ltr" onValueChange={handleAscendingChange}>
-                  <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="select Publication order" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="oldest">oldest</SelectItem>
-                    <SelectItem value="newest">newest</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="col-span-4 md:col-span-1 flex justify-between gap-4"></div>
 
-                <Select
-                  dir="ltr"
-                  onValueChange={(value) => setSelectedValue(value)}
-                >
-                  <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="search by type " />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="publish">publish</SelectItem>
-                    <SelectItem value="news">news</SelectItem>
-                    <SelectItem value="analysis">analysis</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
+              <div className="col-span-4 md:col-span-1"></div>
               <div className="col-span-4 md:col-span-2">
                 <Input
                   dir="ltr"
@@ -301,11 +246,9 @@ const PublicationPage = () => {
                   onChange={handleSearchChange} // Update state as the user types
                   onKeyDown={handleKeyDown}
                   className="rounded-[32.5px]"
-                  placeholder="Search by the name of the publication"
+                  placeholder="Search by the name of the Report"
                 />
               </div>
-
-              <div className="col-span-4 md:col-span-1"></div>
             </div>
             {currentItems && currentItems.length > 0 ? (
               <div className="">
@@ -315,7 +258,7 @@ const PublicationPage = () => {
                     <div className="shadow p-6 rounded-lg flex flex-col lg:flex-row gap-6 bg-white">
                       <div className="w-full h-[300px] md:w-[455px] md:h-[300px] overflow-hidden rounded-md">
                         <img
-                          src={item.b_image}
+                          src={item.img}
                           className="object-cover w-full h-full"
                           alt="Post Image"
                         />
@@ -325,68 +268,16 @@ const PublicationPage = () => {
                         <h1 className="text-2xl font-bold text-gray-800">
                           {item.en_Title}
                         </h1>
-                        <p
-                          className={
-                            item.type === "publish"
-                              ? "inline-block bg-[#FFDAA0]/[.35] rounded-[5px] px-3 text-sm font-semibold text-[#CEA461] mt-2"
-                              : item.type === "news"
-                              ? "inline-block bg-[#C5FFBC]/[.35] rounded-[5px] px-3 text-sm font-semibold text-[#69DB57] mt-2"
-                              : item.type === "analysis"
-                              ? "inline-block bg-[#DBDBDB]/[.35] rounded-[5px] px-3 text-sm font-semibold text-[#979797] mt-2"
-                              : ""
-                          }
-                        >
-                          {item.type}
-                        </p>
+
                         <p className="flex items-center gap-2 text-sm text-gray-500 mt-3 md:text-gray-500 sm:text-black sm:py-2 sm:px-2 md:py-0 md:px-0 sm:rounded-lg md:rounded-none  md:bg-white sm:bg-[#E3E3E3]">
                           <CalendarMinus2Icon size={19} />
                           {formattedDateEn(new Date(item.date_of_publish))}
                         </p>
 
-                        {item.type === "news" ? (
-                          <div className="h-20"></div>
-                        ) : (
-                          <div className="flex flex-wrap">
-                            {item.writers.map((writersPub, index) => (
-                              <div className="flex items-center gap-3 my-4 ml-3">
-                                <img
-                                  src={writersPub.image}
-                                  className="rounded-full object-cover w-[40px] h-[40px]"
-                                  alt="Author"
-                                />
-                                <h1 className="font-medium text-gray-700">
-                                  {writersPub.en_fullName}
-                                </h1>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                        <p className="text-gray-600 text-base leading-6 publicationEn">
-                          {item.type === "news" ? (
-                            <>
-                              {item?.en_description && (
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: item.en_description,
-                                  }}
-                                />
-                              )}
-                            </>
-                          ) : (
-                            <>{item.en_Note}</>
-                          )}
+                        <p className="text-gray-600 text-base leading-7 mt-5 reportIndex">
+                          <>{item.en_note}</>
                         </p>
-                        <Link
-                          to={
-                            item.type === "publish"
-                              ? `/publish-details/${item.id}`
-                              : item.type === "news"
-                              ? `/news-details/${item.id}`
-                              : item.type === "analysis"
-                              ? `/Analysis-details/${item.id}`
-                              : ""
-                          }
-                        >
+                        <Link to={`/report-details/${item.id}`}>
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
                             Read More ...
                           </button>
@@ -462,7 +353,7 @@ const PublicationPage = () => {
             <div className="w-full h-36 flex justify-start items-center ">
               <div className="flex py-5 ">
                 <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
-                <h1 className="text-3xl">المنشورات</h1>
+                <h1 className="text-3xl">التقارير</h1>
               </div>
             </div>
             <div className=" grid grid-cols-3 gap-3">
@@ -505,11 +396,10 @@ const PublicationPage = () => {
             </div>
 
             <div className="grid grid-cols-4 gap-3 mt-3">
-              <div className="col-span-4 md:col-span-1"></div>
               <div className=" col-span-4 md:col-span-2">
                 <Input
                   className=" rounded-[32.5px]"
-                  placeholder="بحث باسم المنشور"
+                  placeholder="بحث باسم التقرير"
                   type="text"
                   id="simple-search"
                   value={searchQuery}
@@ -517,32 +407,9 @@ const PublicationPage = () => {
                   onKeyDown={handleKeyDown}
                 />
               </div>
-              <div className="col-span-4 md:col-span-1 flex justify-between gap-4">
-                <Select
-                  dir="rtl"
-                  onValueChange={(value) => setSelectedValue(value)}
-                >
-                  <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="ابحث بالنوع " />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="all">الكل</SelectItem>
-                    <SelectItem value="publish">مشنورات</SelectItem>
-                    <SelectItem value="news">الاخبار</SelectItem>
-                    <SelectItem value="analysis">تحليلات</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="col-span-4 md:col-span-1"></div>
 
-                <Select dir="rtl" onValueChange={handleAscendingChange}>
-                  <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="فلتر بالتاريخ" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white">
-                    <SelectItem value="oldest">الاقدم</SelectItem>
-                    <SelectItem value="newest">الاحدث</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+              <div className="col-span-4 md:col-span-1 flex justify-between gap-4"></div>
             </div>
             {currentItems && currentItems.length > 0 ? (
               <div className="">
@@ -552,7 +419,7 @@ const PublicationPage = () => {
                     <div className="shadow p-6 rounded-lg flex flex-col lg:flex-row gap-6 min-h-80 ">
                       <div className="w-full h-[300px] md:w-[455px] md:h-[300px] overflow-hidden rounded-md">
                         <img
-                          src={item.b_image}
+                          src={item.img}
                           className="object-cover w-full h-full"
                           alt="Post Image"
                         />
@@ -563,31 +430,12 @@ const PublicationPage = () => {
                           {item.ar_Title}
                         </h1>
 
-                        <p
-                          className={
-                            item.type === "publish"
-                              ? "inline-block bg-[#FFDAA0]/[.35] rounded-[5px] px-3 text-sm font-semibold text-[#CEA461] mt-2"
-                              : item.type === "news"
-                              ? "inline-block bg-[#C5FFBC]/[.35] rounded-[5px] px-3 text-sm font-semibold text-[#69DB57] mt-2"
-                              : item.type === "analysis"
-                              ? "inline-block bg-[#DBDBDB]/[.35] rounded-[5px] px-3 text-sm font-semibold text-[#979797] mt-2"
-                              : ""
-                          }
-                        >
-                          {item.type === "publish"
-                            ? "منشور"
-                            : item.type === "news"
-                            ? "الاخبار"
-                            : item.type === "analysis"
-                            ? "تحليلات"
-                            : ""}
-                        </p>
                         <p className="flex items-center gap-2 text-sm md:text-gray-500 sm:text-black sm:py-2 sm:px-2 md:py-0 md:px-0 sm:rounded-lg md:rounded-none  mt-3 md:bg-white sm:bg-[#E3E3E3]">
                           <CalendarMinus2Icon size={19} className="" />
                           {formattedDate(new Date(item.date_of_publish))}
                         </p>
 
-                        {item.type === "news" ? (
+                        {/* {item.type === "news" ? (
                           <div className="h-20"></div>
                         ) : (
                           <div className="flex flex-wrap">
@@ -604,32 +452,12 @@ const PublicationPage = () => {
                               </div>
                             ))}
                           </div>
-                        )}
-                        <p className="text-gray-600 text-base leading-6 publication">
-                          {item.type === "news" ? (
-                            <>
-                              {item?.ar_description && (
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: item.ar_description,
-                                  }}
-                                />
-                              )}
-                            </>
-                          ) : (
-                            <>{item.ar_Note}</>
-                          )}
+                        )} */}
+                        <p className="text-gray-600 text-base leading-7 reportIndex mt-5">
+                          <>{item.an_note}</>
                         </p>
                         <Link
-                          to={
-                            item.type === "publish"
-                              ? `/publish-details/${item.id}`
-                              : item.type === "news"
-                              ? `/news-details/${item.id}`
-                              : item.type === "analysis"
-                              ? `/Analysis-details/${item.id}`
-                              : ""
-                          }
+                          to={`/report-details/${item.id}`}
                           className="  w-full"
                         >
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
@@ -700,4 +528,4 @@ const PublicationPage = () => {
   );
 };
 
-export default PublicationPage;
+export default ReportPage;
