@@ -3,8 +3,8 @@ import axios, { AxiosRequestConfig } from "axios";
 // import { redirect } from 'react-router-dom';
 
 export const axiosInstance = axios.create({
-  baseURL: "https://localhost:7157",
-  // baseURL: "https://bwc-api-testing.runasp.net",
+  // baseURL: "https://localhost:7157",
+  baseURL: "https://bwc-api-testing.runasp.net",
 });
 
 type Config = AxiosRequestConfig<unknown> | undefined;
