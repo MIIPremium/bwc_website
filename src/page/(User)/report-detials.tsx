@@ -9,7 +9,9 @@ import Author from "../../components/(user)/author";
 import { MoveLeft, MoveRight } from "lucide-react";
 import AuthorCard from "../../components/(user)/author-card";
 import NewsList from "../../components/(user)/news-list";
+import { useParams } from "react-router-dom";
 export default function ReportDetials() {
+  const { id } = useParams<{ id: string }>();
   return (
     <div>
       <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">

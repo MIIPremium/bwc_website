@@ -69,6 +69,7 @@ import AnalysisDetails from "./page/(User)/anylis-page";
 import NewsDetails from "./page/(User)/new-page";
 import ReportIndex from "./page/(Admin)/Reports";
 import ViewReportById from "./components/view/report-view";
+import ReportPage from "./page/(User)/reportPage";
 
 const router = createBrowserRouter([
   {
@@ -100,7 +101,11 @@ const router = createBrowserRouter([
     element: <PublicationPage />,
   },
   {
-    path: "/report-detials",
+    path: "/all-Reports",
+    element: <ReportPage />,
+  },
+  {
+    path: "/report-details/:id",
     element: <ReportDetials />,
   },
   {

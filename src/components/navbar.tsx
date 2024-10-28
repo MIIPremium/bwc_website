@@ -6,7 +6,7 @@ import job1 from "../assets/img/jobs-2.png";
 import LanguageWorld from "../assets/icons/language-world";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import DropDownLang from "./dropDownLang";
 import { CgMenuLeft } from "react-icons/cg";
 import Button from "../components/button";
@@ -190,9 +190,12 @@ export default function Navbar() {
                   : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
               }
             >
-              <a className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
+              <NavLink
+                to={"/all-Reports"}
+                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+              >
                 {t("reports")}
-              </a>
+              </NavLink>
             </li>
             <li
               className={
@@ -302,9 +305,12 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md">
-              <a className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
+              <NavLink
+                to={"/all-Reports"}
+                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+              >
                 {t("reports")}
-              </a>
+              </NavLink>
             </li>
             <li className="md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md">
               <a className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">

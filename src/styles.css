@@ -645,6 +645,19 @@ opacity: 1;
   max-width: 100%; /* Prevent overflow beyond the parent container */
   overflow-wrap: anywhere; /* Allow breaking of long words anywhere */
 }
+.reportIndex {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  width: 100%; /* Ensure the element respects the container's width */
+  max-width: 100%; /* Prevent overflow beyond the parent container */
+  overflow-wrap: anywhere; /* Allow breaking of long words anywhere */
+}
 .publicationEn {
   text-align: start;
   display: -webkit-box;
