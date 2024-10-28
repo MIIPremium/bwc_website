@@ -1,31 +1,30 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
-import { axiosInstance } from "src/lib/http";
+import { addPublishes } from "src/types/validation";
+import { z } from "zod";
 import Label from "src/ui/label";
+import { useQuery } from "@tanstack/react-query";
+import { axiosInstance, postApi } from "src/lib/http";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-export interface publicationView {
+export interface ReportRespById {
   id: number;
-  type: string;
   ar_Title: string;
   en_Title: string;
-  b_image: string;
-  images: string[];
-  writers: Writer[];
-  reportId: null;
-  report: null;
-  publish: boolean;
-  t2read: number;
-  tags: string[];
-  date_of_publish: Date;
-  ar_table_of_content: any[];
-  en_table_of_content: any[];
+  img: string;
   ar_description: string;
   en_description: string;
-  ar_Note: null;
-  en_Note: string;
-  references: Reference[];
+  ar_executive_summary: string;
+  en_executive_summary: string;
+  ar_table_of_content: string[];
+  en_table_of_content: string[];
+  date_of_report: Date;
+  date_of_publish: Date;
+  pdfImg: string;
+  pdfFile: string;
+  an_note: string;
+  en_note: string;
+  listOfSections: any[];
 }
 
 export interface Reference {
@@ -72,15 +71,18 @@ export interface Writer {
   soicalmedia: any[];
 }
 
-export default function ViewAnalysis() {
+type ReferenceFormValue = z.infer<typeof addPublishes>;
+
+export default function ViewReportById() {
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
   const { id } = useParams<{ id: string }>();
 
   const fetchData = async () => {
-    const response = await axiosInstance.get<publicationView>(
-      `/api/ManagingPublications/${id}`,
+    const response = await axiosInstance.get<ReportRespById>(
+      `api/Reports/${id}`,
       {}
     );
     return response.data;
@@ -90,19 +92,27 @@ export default function ViewAnalysis() {
     error: PublicationInfoError,
     isLoading: PublicationInfoIsLoading,
   } = useQuery({
-    queryKey: ["getByIdAnalysis", id],
+    queryKey: ["getByIdPublication", id],
     queryFn: fetchData,
     enabled: !!id,
   });
-
   const openModal = () => {
-    if (PublicationInfoData?.b_image) {
+    if (PublicationInfoData?.img) {
       setModalOpen(true);
     }
   };
 
   const closeModal = () => {
     setModalOpen(false);
+  };
+
+  const openArrayModal = (image: any) => {
+    setSelectedImage(image);
+  };
+
+  // Function to close the modal
+  const closeArrayModal = () => {
+    setSelectedImage(null);
   };
   return (
     <>
@@ -111,11 +121,11 @@ export default function ViewAnalysis() {
           <div className="border-2 border-black w-[100%] rounded-lg my-5 p-2 mx-auto ">
             <div className="grid   grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[20vh] ">
               <div className="text-start col-span-1 h-auto ">
-                <label className="font-bold float-start text-xl">
-                  Analysis image
+                <label htmlFor="" className="float-start font-bold text-xl">
+                  Report Image
                 </label>
                 <img
-                  src={PublicationInfoData?.b_image}
+                  src={PublicationInfoData?.img}
                   className="cursor-pointer"
                   onClick={openModal}
                   alt=""
@@ -133,8 +143,8 @@ export default function ViewAnalysis() {
                 >
                   <>
                     <img
-                      src={PublicationInfoData?.b_image!}
-                      className="w-[80%] h-[80%] mx-auto object-contain"
+                      src={PublicationInfoData?.img!}
+                      className="w-[80%] h-[80%] mx-auto object-fill"
                       alt=""
                     />
                     <button
@@ -148,17 +158,18 @@ export default function ViewAnalysis() {
               </div>
             )}
             <div className="h-[2px]  w-[100%] mx-auto bg-black my-3"></div>
+
             <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
               <div className=" col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">عنوان التحيل</label>
+                <label className="font-bold text-xl">عنوان التقرير</label>
                 <p>{PublicationInfoData?.ar_Title}</p>
               </div>
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">Analysis Title</label>
+                <label className="font-bold text-xl">Report Title</label>
                 <p>{PublicationInfoData?.en_Title}</p>
               </div>
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">Date of Publication</label>
+                <label className="font-bold text-xl">Publication Date</label>
                 <p>
                   {String(PublicationInfoData?.date_of_publish).split("T")[0]}
                 </p>
@@ -168,87 +179,61 @@ export default function ViewAnalysis() {
             {/*  */}
             <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">Writers</label>
-                <div className="flex flex-wrap gap-4">
-                  {PublicationInfoData?.writers.map((Item, index) => (
-                    <div key={index} className="flex items-end gap-4">
-                      <p>{Item.en_fullName}</p>
-                      <img
-                        src={Item.image}
-                        alt=""
-                        className="w-[100px] h-auto"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">Time to read</label>
-                <p>{PublicationInfoData?.t2read}</p>
+                <label className="font-bold text-xl">Date Of The Report</label>
+                <p>
+                  {String(PublicationInfoData?.date_of_report).split("T")[0]}
+                </p>
               </div>
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">References</label>
-                <div className="flex flex-wrap gap-4">
-                  {PublicationInfoData?.references.map((Item, index) => (
-                    <div key={index} className="flex items-end gap-4">
-                      <a href={Item.link}>{Item.en_title}</a>
-                    </div>
-                  ))}
-                </div>
+                <label className="font-bold text-xl">File Link</label>
+                <a
+                  href={PublicationInfoData?.pdfFile}
+                  target="_blank"
+                  className="block"
+                >
+                  اضغط هنا للمشاهدة
+                </a>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">
+                  Cover Image Of The Report
+                </label>
+                <img src={PublicationInfoData?.pdfImg} alt="" />
               </div>
             </div>
-
-            {/*  */}
 
             <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-              <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">Tags</label>
-                <div className="">
-                  {PublicationInfoData?.tags.map((Item, index) => (
-                    <div key={index} className="">
-                      <p>
-                        {index}. {Item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="text-start col-span-1 h-auto translate-y-10">
+              <div
+                dir="rtl"
+                className="text-start col-span-1 h-auto translate-y-10"
+              >
                 <label className="font-bold text-xl">جدول محتويات</label>
-                <div className="">
-                  {PublicationInfoData?.ar_table_of_content.map(
-                    (Item, index) => (
-                      <div key={index} className="">
-                        <p>
-                          {index}. {Item}
-                        </p>
-                      </div>
-                    )
-                  )}
-                </div>
+                <ul>
+                  {PublicationInfoData?.ar_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
               </div>
-              <div className="text-start col-span-1 h-auto translate-y-10">
+              <div
+                dir="ltr"
+                className="text-start col-span-1 h-auto translate-y-10"
+              >
                 <label className="font-bold text-xl">Table Of Content</label>
-                <div className="">
-                  {PublicationInfoData?.en_table_of_content.map(
-                    (Item, index) => (
-                      <div key={index} className="">
-                        <p>
-                          {index}. {Item}
-                        </p>
-                      </div>
-                    )
-                  )}
-                </div>
+                <ul>
+                  {PublicationInfoData?.en_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
               </div>
             </div>
+            {/*  */}
+
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  "></div>
 
             {/*  */}
             <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className=" col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">وصف التحليل</label>
+                <label className="font-bold text-xl">وصف التقرير</label>
                 <div className="custom-html-content">
                   {PublicationInfoData?.ar_description && (
                     <div
@@ -262,9 +247,10 @@ export default function ViewAnalysis() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className="text-start col-span-1 h-auto translate-y-10">
                 <label className="font-bold text-xl">Description</label>
+
                 <div className="custom-html-content-en">
                   {PublicationInfoData?.en_description && (
                     <div
@@ -279,11 +265,50 @@ export default function ViewAnalysis() {
             </div>
 
             {/*  */}
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">ملخص تنفيذي</label>
+                <div className="custom-html-content">
+                  {PublicationInfoData?.ar_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.ar_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Executive Summary</label>
+
+                <div className="custom-html-content-en">
+                  {PublicationInfoData?.en_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.en_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            {/*  */}
             <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className=" col-span-1 h-auto translate-y-10">
                 <label className="font-bold text-xl">ملاحظة</label>
-                <div className="break-words whitespace-pre-wrap">
-                  <p>{PublicationInfoData?.ar_Note}</p>
+
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -291,14 +316,13 @@ export default function ViewAnalysis() {
             <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className="text-start col-span-1 h-auto translate-y-10">
                 <label className="font-bold text-xl">Note</label>
-                <div className="break-words whitespace-pre-wrap">
-                  <p>{PublicationInfoData?.en_Note}</p>
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-              <div className="text-end col-span-1 h-auto translate-y-10">
-                <div className="break-words whitespace-pre-wrap"></div>
               </div>
             </div>
           </div>
@@ -309,10 +333,10 @@ export default function ViewAnalysis() {
             <div className="grid   grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[20vh] ">
               <div className="text-start col-span-1 h-auto ">
                 <label htmlFor="" className="float-start font-bold text-xl">
-                  صورة التحليل
+                  صورة التقرير
                 </label>
                 <img
-                  src={PublicationInfoData?.b_image}
+                  src={PublicationInfoData?.img}
                   className="cursor-pointer"
                   onClick={openModal}
                   alt=""
@@ -330,8 +354,8 @@ export default function ViewAnalysis() {
                 >
                   <>
                     <img
-                      src={PublicationInfoData?.b_image!}
-                      className="w-[80%] h-[80%] mx-auto object-contain"
+                      src={PublicationInfoData?.img!}
+                      className="w-[80%] h-[80%] mx-auto object-fill"
                       alt=""
                     />
                     <button
@@ -345,13 +369,14 @@ export default function ViewAnalysis() {
               </div>
             )}
             <div className="h-[2px]  w-[100%] mx-auto bg-black my-3"></div>
+
             <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
               <div className=" col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">عنوان التحيل</label>
+                <label className="font-bold text-xl">عنوان التقرير</label>
                 <p>{PublicationInfoData?.ar_Title}</p>
               </div>
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">Analysis Title</label>
+                <label className="font-bold text-xl">Report Title</label>
                 <p>{PublicationInfoData?.en_Title}</p>
               </div>
               <div className="text-start col-span-1 h-auto translate-y-10">
@@ -365,86 +390,56 @@ export default function ViewAnalysis() {
             {/*  */}
             <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">كتاب</label>
-                <div className="flex flex-wrap gap-4">
-                  {PublicationInfoData?.writers.map((Item, index) => (
-                    <div key={index} className="flex items-end gap-4">
-                      <p>{Item.en_fullName}</p>
-                      <img
-                        src={Item.image}
-                        alt=""
-                        className="w-[100px] h-auto"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">وقت القراءه</label>
-                <p>{PublicationInfoData?.t2read}</p>
+                <label className="font-bold text-xl">تاريخ التقرير</label>
+                <p>
+                  {String(PublicationInfoData?.date_of_report).split("T")[0]}
+                </p>
               </div>
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">مراجع</label>
-                <div className="flex flex-wrap gap-4">
-                  {PublicationInfoData?.references.map((Item, index) => (
-                    <div key={index} className="flex items-end gap-4">
-                      <a href={Item.link}>{Item.en_title}</a>
-                    </div>
-                  ))}
-                </div>
+                <label className="font-bold text-xl">رابط الملف</label>
+                <a
+                  href={PublicationInfoData?.pdfFile}
+                  target="_blank"
+                  className="block"
+                >
+                  اضغط هنا للمشاهدة
+                </a>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">صورة الغلاف للتقرير</label>
+                <img src={PublicationInfoData?.pdfImg} alt="" />
               </div>
             </div>
-
-            {/*  */}
 
             <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className="text-start col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">وسوم</label>
-                <div className="">
-                  {PublicationInfoData?.tags.map((Item, index) => (
-                    <div key={index} className="">
-                      <p>
-                        {index}. {Item}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="text-start col-span-1 h-auto translate-y-10">
                 <label className="font-bold text-xl">جدول محتويات</label>
-                <div className="">
-                  {PublicationInfoData?.ar_table_of_content.map(
-                    (Item, index) => (
-                      <div key={index} className="">
-                        <p>
-                          {index}. {Item}
-                        </p>
-                      </div>
-                    )
-                  )}
-                </div>
+                <ul>
+                  {PublicationInfoData?.ar_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
               </div>
-              <div className="text-start col-span-1 h-auto translate-y-10">
+              <div
+                dir="ltr"
+                className="text-start col-span-1 h-auto translate-y-10"
+              >
                 <label className="font-bold text-xl">Table Of Content</label>
-                <div className="">
-                  {PublicationInfoData?.en_table_of_content.map(
-                    (Item, index) => (
-                      <div key={index} className="">
-                        <p>
-                          {index}. {Item}
-                        </p>
-                      </div>
-                    )
-                  )}
-                </div>
+                <ul>
+                  {PublicationInfoData?.en_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
               </div>
             </div>
+            {/*  */}
+
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  "></div>
 
             {/*  */}
             <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className=" col-span-1 h-auto translate-y-10">
-                <label className="font-bold text-xl">وصف التحليل</label>
+                <label className="font-bold text-xl">وصف التقرير</label>
                 <div className="custom-html-content">
                   {PublicationInfoData?.ar_description && (
                     <div
@@ -461,6 +456,7 @@ export default function ViewAnalysis() {
             <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className="text-end col-span-1 h-auto translate-y-10">
                 <label className="font-bold text-xl">Description</label>
+
                 <div className="custom-html-content-en">
                   {PublicationInfoData?.en_description && (
                     <div
@@ -475,11 +471,50 @@ export default function ViewAnalysis() {
             </div>
 
             {/*  */}
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">ملخص تنفيذي</label>
+                <div className="custom-html-content">
+                  {PublicationInfoData?.ar_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.ar_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-end col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Executive Summary</label>
+
+                <div className="custom-html-content-en">
+                  {PublicationInfoData?.en_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.en_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            {/*  */}
             <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className=" col-span-1 h-auto translate-y-10">
                 <label className="font-bold text-xl">ملاحظة</label>
-                <div className="break-words whitespace-pre-wrap">
-                  <p>{PublicationInfoData?.ar_Note}</p>
+
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -487,14 +522,13 @@ export default function ViewAnalysis() {
             <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
               <div className="text-end col-span-1 h-auto translate-y-10">
                 <label className="font-bold text-xl">Note</label>
-                <div className="break-words whitespace-pre-wrap">
-                  <p>{PublicationInfoData?.en_Note}</p>
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-              <div className="text-end col-span-1 h-auto translate-y-10">
-                <div className="break-words whitespace-pre-wrap"></div>
               </div>
             </div>
           </div>
