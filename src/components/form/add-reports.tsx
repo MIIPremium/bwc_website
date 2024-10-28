@@ -312,19 +312,19 @@ export default function AddReportsForm() {
                 />
               </div>
               <div className="text-start col-span-1 h-auto ">
-                <Label text="Publish Title" />
+                <Label text="Report Title" />
                 <FormField
                   control={form.control}
                   name="En_Title"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-red-900">
-                        {"Publish Title"}
+                        {"Report Title"}
                       </FormLabel>
                       <FormControl>
                         <Input
                           dir="ltr"
-                          placeholder="enter Publish Title..."
+                          placeholder="enter Report Title..."
                           {...field}
                         />
                       </FormControl>
@@ -754,19 +754,19 @@ export default function AddReportsForm() {
                 />
               </div>
               <div className="text-end col-span-1 h-auto ">
-                <Label text="Publish Title" />
+                <Label text="Report Title" />
                 <FormField
                   control={form.control}
                   name="En_Title"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-red-900">
-                        {"Publish Title"}
+                        {"Report Title"}
                       </FormLabel>
                       <FormControl>
                         <Input
                           dir="ltr"
-                          placeholder="enter Publish Title..."
+                          placeholder="enter Report Title..."
                           {...field}
                         />
                       </FormControl>

@@ -89,7 +89,7 @@ export const ReportColumns: ColumnDef<ReportColProp>[] = [
               </Button>
             </Tooltip>
           </Link>
-          <Link to={`/admin-dashboard/view-publishes/${row.original.id}`}>
+          <Link to={`/admin-dashboard/reports/info/${row.original.id}`}>
             <Tooltip text="عرض">
               <Button
                 className="bg-[#d5ae78] text-white ml-3 rounded-lg"
@@ -175,7 +175,7 @@ export const ReportEnColumns: ColumnDef<ReportColProp>[] = [
               </Button>
             </Tooltip>
           </Link>
-          <Link to={`/admin-dashboard/view-publishes/${row.original.id}`}>
+          <Link to={`/admin-dashboard/reports/info/${row.original.id}`}>
             <Tooltip text="view">
               <Button
                 className="bg-[#d5ae78] text-white ml-3 rounded-lg"
