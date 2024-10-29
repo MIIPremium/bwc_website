@@ -180,351 +180,352 @@ const ReportPage = () => {
     );
   }
   return (
-    <>
-      {dir === "ltr" ? (
-        <>
-          <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
-            <Navbar />
-          </div>
-          <main className="px-5">
-            <div className="w-full h-36 flex justify-end items-center ">
-              <div className="flex py-5 ">
-                <h1 className="text-3xl">Publications</h1>
-                <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
-              </div>
-            </div>
-            <div className=" grid grid-cols-3 gap-3">
-              <div dir="ltr" className=" col-span-3 md:col-span-1">
-                <div className="p-3 bg-[#D5AE78] rounded-[8px] text-start">
-                  <h1 className="font-bold">Read also in publications</h1>
-                </div>
+    // <>
+    //   {dir === "ltr" ? (
+    //     <>
+    //       <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
+    //         <Navbar />
+    //       </div>
+    //       <main className="px-5">
+    //         <div className="w-full h-36 flex justify-end items-center ">
+    //           <div className="flex py-5 ">
+    //             <h1 className="text-3xl">Publications</h1>
+    //             <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
+    //           </div>
+    //         </div>
+    //         <div className=" grid grid-cols-3 gap-3">
+    //           <div dir="ltr" className=" col-span-3 md:col-span-1">
+    //             <div className="p-3 bg-[#D5AE78] rounded-[8px] text-start">
+    //               <h1 className="font-bold">Read also in publications</h1>
+    //             </div>
 
-                <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
-                  {SidInfoResp?.data.map((item, index) => (
-                    <Link
-                      to={
-                        item.type === "publish"
-                          ? `/publish-details/${item.id}`
-                          : item.type === "news"
-                          ? `/news-details/${item.id}`
-                          : item.type === "analysis"
-                          ? `/Analysis-details/${item.id}`
-                          : ""
-                      }
-                      className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
-                    >
-                      <img
-                        src={item.b_image}
-                        className="w-[92px] h-[70.18px] object-cover rounded-sm"
-                      />
-                      <div className="flex flex-col">
-                        <span>{item.en_Title}</span>
-                        <span className="flex font-normal text-sm gap-2 mt-2">
-                          <CalendarMinus2Icon size={19} />
-                          {`${getRelativeTime(item.date_of_publish, "en")}`}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div className=" col-span-3 md:col-span-2">
-                <CarouselsReport />
-              </div>
-            </div>
+    //             <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
+    //               {SidInfoResp?.data.map((item, index) => (
+    //                 <Link
+    //                   to={
+    //                     item.type === "publish"
+    //                       ? `/publish-details/${item.id}`
+    //                       : item.type === "news"
+    //                       ? `/news-details/${item.id}`
+    //                       : item.type === "analysis"
+    //                       ? `/Analysis-details/${item.id}`
+    //                       : ""
+    //                   }
+    //                   className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
+    //                 >
+    //                   <img
+    //                     src={item.b_image}
+    //                     className="w-[92px] h-[70.18px] object-cover rounded-sm"
+    //                   />
+    //                   <div className="flex flex-col">
+    //                     <span>{item.en_Title}</span>
+    //                     <span className="flex font-normal text-sm gap-2 mt-2">
+    //                       <CalendarMinus2Icon size={19} />
+    //                       {`${getRelativeTime(item.date_of_publish, "en")}`}
+    //                     </span>
+    //                   </div>
+    //                 </Link>
+    //               ))}
+    //             </div>
+    //           </div>
+    //           <div className=" col-span-3 md:col-span-2">
+    //             <CarouselsReport />
+    //           </div>
+    //         </div>
 
-            <div className="grid grid-cols-4  gap-3 mt-3">
-              <div className="col-span-4 md:col-span-1 flex justify-between gap-4"></div>
+    //         <div className="grid grid-cols-4  gap-3 mt-3">
+    //           <div className="col-span-4 md:col-span-1 flex justify-between gap-4"></div>
 
-              <div className="col-span-4 md:col-span-1"></div>
-              <div className="col-span-4 md:col-span-2">
-                <Input
-                  dir="ltr"
-                  type="text"
-                  id="simple-search"
-                  value={searchQuery}
-                  onChange={handleSearchChange} // Update state as the user types
-                  onKeyDown={handleKeyDown}
-                  className="rounded-[32.5px]"
-                  placeholder="Search by the name of the Report"
-                />
-              </div>
-            </div>
-            {currentItems && currentItems.length > 0 ? (
-              <div className="">
-                {/* Render currentItems */}
-                {currentItems?.map((item, index) => (
-                  <div key={index} dir="ltr" className="mt-6">
-                    <div className="shadow p-6 rounded-lg flex flex-col lg:flex-row gap-6 bg-white">
-                      <div className="w-full h-[300px] md:w-[455px] md:h-[300px] overflow-hidden rounded-md">
-                        <img
-                          src={item.img}
-                          className="object-cover w-full h-full"
-                          alt="Post Image"
-                        />
-                      </div>
+    //           <div className="col-span-4 md:col-span-1"></div>
+    //           <div className="col-span-4 md:col-span-2">
+    //             <Input
+    //               dir="ltr"
+    //               type="text"
+    //               id="simple-search"
+    //               value={searchQuery}
+    //               onChange={handleSearchChange} // Update state as the user types
+    //               onKeyDown={handleKeyDown}
+    //               className="rounded-[32.5px]"
+    //               placeholder="Search by the name of the Report"
+    //             />
+    //           </div>
+    //         </div>
+    //         {currentItems && currentItems.length > 0 ? (
+    //           <div className="">
+    //             {/* Render currentItems */}
+    //             {currentItems?.map((item, index) => (
+    //               <div key={index} dir="ltr" className="mt-6">
+    //                 <div className="shadow p-6 rounded-lg flex flex-col lg:flex-row gap-6 bg-white">
+    //                   <div className="w-full h-[300px] md:w-[455px] md:h-[300px] overflow-hidden rounded-md">
+    //                     <img
+    //                       src={item.img}
+    //                       className="object-cover w-full h-full"
+    //                       alt="Post Image"
+    //                     />
+    //                   </div>
 
-                      <div className="w-full">
-                        <h1 className="text-2xl font-bold text-gray-800">
-                          {item.en_Title}
-                        </h1>
+    //                   <div className="w-full">
+    //                     <h1 className="text-2xl font-bold text-gray-800">
+    //                       {item.en_Title}
+    //                     </h1>
 
-                        <p className="flex items-center gap-2 text-sm text-gray-500 mt-3 md:text-gray-500 sm:text-black sm:py-2 sm:px-2 md:py-0 md:px-0 sm:rounded-lg md:rounded-none  md:bg-white sm:bg-[#E3E3E3]">
-                          <CalendarMinus2Icon size={19} />
-                          {formattedDateEn(new Date(item.date_of_publish))}
-                        </p>
+    //                     <p className="flex items-center gap-2 text-sm text-gray-500 mt-3 md:text-gray-500 sm:text-black sm:py-2 sm:px-2 md:py-0 md:px-0 sm:rounded-lg md:rounded-none  md:bg-white sm:bg-[#E3E3E3]">
+    //                       <CalendarMinus2Icon size={19} />
+    //                       {formattedDateEn(new Date(item.date_of_publish))}
+    //                     </p>
 
-                        <p className="text-gray-600 text-base leading-7 mt-5 reportIndex">
-                          <>{item.en_note}</>
-                        </p>
-                        <Link to={`/report-details/${item.id}`}>
-                          <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
-                            Read More ...
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="bg-[#CCA972] h-1 w-full mt-4"></div>
-                  </div>
-                ))}
+    //                     <p className="text-gray-600 text-base leading-7 mt-5 reportIndex">
+    //                       <>{item.en_note}</>
+    //                     </p>
+    //                     <Link to={`/report-details/${item.id}`}>
+    //                       <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
+    //                         Read More ...
+    //                       </button>
+    //                     </Link>
+    //                   </div>
+    //                 </div>
+    //                 <div className="bg-[#CCA972] h-1 w-full mt-4"></div>
+    //               </div>
+    //             ))}
 
-                {/* Pagination controls */}
-                <div dir="ltr" className="mt-4 flex justify-between space-x-2">
-                  <button
-                    className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 flex items-center border border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    <h6>prev</h6>
-                    <MoveLeft className="ml-2" />
-                  </button>
+    //             {/* Pagination controls */}
+    //             <div dir="ltr" className="mt-4 flex justify-between space-x-2">
+    //               <button
+    //                 className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 flex items-center border border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
+    //                 onClick={() => paginate(currentPage - 1)}
+    //                 disabled={currentPage === 1}
+    //               >
+    //                 <h6>prev</h6>
+    //                 <MoveLeft className="ml-2" />
+    //               </button>
 
-                  <div className="md:pr-0 sm:pr-5">
-                    {getPaginationNumbers().map((page, index) => (
-                      <button
-                        key={index}
-                        className={`px-4 py-2 rounded ml-1 ${
-                          currentPage === page
-                            ? "bg-[#d5ae78] rounded-md  text-white"
-                            : "bg-white border border-black  rounded-md text-black hover:bg-[#d5ae78] hover:text-white"
-                        }`}
-                        onClick={() =>
-                          typeof page === "number" && paginate(page)
-                        }
-                        disabled={typeof page !== "number"}
-                      >
-                        {page}
-                      </button>
-                    ))}
-                  </div>
+    //               <div className="md:pr-0 sm:pr-5">
+    //                 {getPaginationNumbers().map((page, index) => (
+    //                   <button
+    //                     key={index}
+    //                     className={`px-4 py-2 rounded ml-1 ${
+    //                       currentPage === page
+    //                         ? "bg-[#d5ae78] rounded-md  text-white"
+    //                         : "bg-white border border-black  rounded-md text-black hover:bg-[#d5ae78] hover:text-white"
+    //                     }`}
+    //                     onClick={() =>
+    //                       typeof page === "number" && paginate(page)
+    //                     }
+    //                     disabled={typeof page !== "number"}
+    //                   >
+    //                     {page}
+    //                   </button>
+    //                 ))}
+    //               </div>
 
-                  <button
-                    className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 border flex items-center border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
-                    onClick={() => paginate(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    <h6>next</h6>
-                    <MoveRight size={20} className="ml-2" />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className=" h-full w-full flex justify-center items-center">
-                <div className=" text-center">
-                  <JobNotFound />
-                  <p>
-                    There is no result of your search, try another publication
-                    search
-                  </p>
-                </div>
-              </div>
-            )}
-          </main>
-          <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
-            <Footer />
-          </footer>
-        </>
-      ) : (
-        <>
-          <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
-            <Navbar />
-          </div>
-          <main className="px-5">
-            <div className="w-full h-36 flex justify-start items-center ">
-              <div className="flex py-5 ">
-                <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
-                <h1 className="text-3xl">التقارير</h1>
-              </div>
-            </div>
-            <div className=" grid grid-cols-3 gap-3">
-              <div className=" col-span-3 md:col-span-2">
-                <CarouselsReport />
-              </div>
-              <div className=" col-span-3 md:col-span-1">
-                <div className="p-3 bg-[#D5AE78] rounded-[8px]">
-                  <h1 className="font-bold">اقرأ أيضًا في المنشورات</h1>
-                </div>
-                <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
-                  {SidInfoResp?.data.map((item, index) => (
-                    <Link
-                      to={
-                        item.type === "publish"
-                          ? `/publish-details/${item.id}`
-                          : item.type === "news"
-                          ? `/news-details/${item.id}`
-                          : item.type === "analysis"
-                          ? `/Analysis-details/${item.id}`
-                          : ""
-                      }
-                      className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
-                    >
-                      <img
-                        src={item.b_image}
-                        className="w-[92px] h-[70.18px] object-cover rounded-sm"
-                      />
-                      <div className="flex flex-col">
-                        <span>{item.ar_Title}</span>
-                        <span className="flex font-normal text-sm gap-2 mt-2">
-                          <CalendarMinus2Icon size={19} />
-                          {` ${getRelativeTime(item.date_of_publish, "ar")}`}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+    //               <button
+    //                 className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 border flex items-center border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
+    //                 onClick={() => paginate(currentPage + 1)}
+    //                 disabled={currentPage === totalPages}
+    //               >
+    //                 <h6>next</h6>
+    //                 <MoveRight size={20} className="ml-2" />
+    //               </button>
+    //             </div>
+    //           </div>
+    //         ) : (
+    //           <div className=" h-full w-full flex justify-center items-center">
+    //             <div className=" text-center">
+    //               <JobNotFound />
+    //               <p>
+    //                 There is no result of your search, try another publication
+    //                 search
+    //               </p>
+    //             </div>
+    //           </div>
+    //         )}
+    //       </main>
+    //       <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
+    //         <Footer />
+    //       </footer>
+    //     </>
+    //   ) : (
+    //     <>
+    //       <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
+    //         <Navbar />
+    //       </div>
+    //       <main className="px-5">
+    //         <div className="w-full h-36 flex justify-start items-center ">
+    //           <div className="flex py-5 ">
+    //             <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
+    //             <h1 className="text-3xl">التقارير</h1>
+    //           </div>
+    //         </div>
+    //         <div className=" grid grid-cols-3 gap-3">
+    //           <div className=" col-span-3 md:col-span-2">
+    //             <CarouselsReport />
+    //           </div>
+    //           <div className=" col-span-3 md:col-span-1">
+    //             <div className="p-3 bg-[#D5AE78] rounded-[8px]">
+    //               <h1 className="font-bold">اقرأ أيضًا في المنشورات</h1>
+    //             </div>
+    //             <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
+    //               {SidInfoResp?.data.map((item, index) => (
+    //                 <Link
+    //                   to={
+    //                     item.type === "publish"
+    //                       ? `/publish-details/${item.id}`
+    //                       : item.type === "news"
+    //                       ? `/news-details/${item.id}`
+    //                       : item.type === "analysis"
+    //                       ? `/Analysis-details/${item.id}`
+    //                       : ""
+    //                   }
+    //                   className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
+    //                 >
+    //                   <img
+    //                     src={item.b_image}
+    //                     className="w-[92px] h-[70.18px] object-cover rounded-sm"
+    //                   />
+    //                   <div className="flex flex-col">
+    //                     <span>{item.ar_Title}</span>
+    //                     <span className="flex font-normal text-sm gap-2 mt-2">
+    //                       <CalendarMinus2Icon size={19} />
+    //                       {` ${getRelativeTime(item.date_of_publish, "ar")}`}
+    //                     </span>
+    //                   </div>
+    //                 </Link>
+    //               ))}
+    //             </div>
+    //           </div>
+    //         </div>
 
-            <div className="grid grid-cols-4 gap-3 mt-3">
-              <div className=" col-span-4 md:col-span-2">
-                <Input
-                  className=" rounded-[32.5px]"
-                  placeholder="بحث باسم التقرير"
-                  type="text"
-                  id="simple-search"
-                  value={searchQuery}
-                  onChange={handleSearchChange} // Update state as the user types
-                  onKeyDown={handleKeyDown}
-                />
-              </div>
-              <div className="col-span-4 md:col-span-1"></div>
+    //         <div className="grid grid-cols-4 gap-3 mt-3">
+    //           <div className=" col-span-4 md:col-span-2">
+    //             <Input
+    //               className=" rounded-[32.5px]"
+    //               placeholder="بحث باسم التقرير"
+    //               type="text"
+    //               id="simple-search"
+    //               value={searchQuery}
+    //               onChange={handleSearchChange} // Update state as the user types
+    //               onKeyDown={handleKeyDown}
+    //             />
+    //           </div>
+    //           <div className="col-span-4 md:col-span-1"></div>
 
-              <div className="col-span-4 md:col-span-1 flex justify-between gap-4"></div>
-            </div>
-            {currentItems && currentItems.length > 0 ? (
-              <div className="">
-                {/* Render currentItems */}
-                {currentItems?.map((item, index) => (
-                  <div key={index} className="mt-6 ">
-                    <div className="shadow p-6 rounded-lg flex flex-col lg:flex-row gap-6 min-h-80 ">
-                      <div className="w-full h-[300px] md:w-[455px] md:h-[300px] overflow-hidden rounded-md">
-                        <img
-                          src={item.img}
-                          className="object-cover w-full h-full"
-                          alt="Post Image"
-                        />
-                      </div>
+    //           <div className="col-span-4 md:col-span-1 flex justify-between gap-4"></div>
+    //         </div>
+    //         {currentItems && currentItems.length > 0 ? (
+    //           <div className="">
+    //             {/* Render currentItems */}
+    //             {currentItems?.map((item, index) => (
+    //               <div key={index} className="mt-6 ">
+    //                 <div className="shadow p-6 rounded-lg flex flex-col lg:flex-row gap-6 min-h-80 ">
+    //                   <div className="w-full h-[300px] md:w-[455px] md:h-[300px] overflow-hidden rounded-md">
+    //                     <img
+    //                       src={item.img}
+    //                       className="object-cover w-full h-full"
+    //                       alt="Post Image"
+    //                     />
+    //                   </div>
 
-                      <div className="w-full min-h-[300px]  ">
-                        <h1 className="text-2xl font-bold text-gray-800">
-                          {item.ar_Title}
-                        </h1>
+    //                   <div className="w-full min-h-[300px]  ">
+    //                     <h1 className="text-2xl font-bold text-gray-800">
+    //                       {item.ar_Title}
+    //                     </h1>
 
-                        <p className="flex items-center gap-2 text-sm md:text-gray-500 sm:text-black sm:py-2 sm:px-2 md:py-0 md:px-0 sm:rounded-lg md:rounded-none  mt-3 md:bg-white sm:bg-[#E3E3E3]">
-                          <CalendarMinus2Icon size={19} className="" />
-                          {formattedDate(new Date(item.date_of_publish))}
-                        </p>
+    //                     <p className="flex items-center gap-2 text-sm md:text-gray-500 sm:text-black sm:py-2 sm:px-2 md:py-0 md:px-0 sm:rounded-lg md:rounded-none  mt-3 md:bg-white sm:bg-[#E3E3E3]">
+    //                       <CalendarMinus2Icon size={19} className="" />
+    //                       {formattedDate(new Date(item.date_of_publish))}
+    //                     </p>
 
-                        {/* {item.type === "news" ? (
-                          <div className="h-20"></div>
-                        ) : (
-                          <div className="flex flex-wrap">
-                            {item.writers.map((writersPub, index) => (
-                              <div className="flex items-center gap-3 my-4 mr-2">
-                                <img
-                                  src={writersPub.image}
-                                  className="rounded-full object-cover w-[40px] h-[40px]"
-                                  alt="Author"
-                                />
-                                <h1 className="font-medium text-gray-700">
-                                  {writersPub.ar_fullName}
-                                </h1>
-                              </div>
-                            ))}
-                          </div>
-                        )} */}
-                        <p className="text-gray-600 text-base leading-7 reportIndex mt-5">
-                          <>{item.an_note}</>
-                        </p>
-                        <Link
-                          to={`/report-details/${item.id}`}
-                          className="  w-full"
-                        >
-                          <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
-                            إقراء المزيد ...
-                          </button>
-                        </Link>
-                      </div>
-                    </div>
-                    <div className="bg-[#CCA972] h-1 w-full mt-4"></div>
-                  </div>
-                ))}
+    //                     {/* {item.type === "news" ? (
+    //                       <div className="h-20"></div>
+    //                     ) : (
+    //                       <div className="flex flex-wrap">
+    //                         {item.writers.map((writersPub, index) => (
+    //                           <div className="flex items-center gap-3 my-4 mr-2">
+    //                             <img
+    //                               src={writersPub.image}
+    //                               className="rounded-full object-cover w-[40px] h-[40px]"
+    //                               alt="Author"
+    //                             />
+    //                             <h1 className="font-medium text-gray-700">
+    //                               {writersPub.ar_fullName}
+    //                             </h1>
+    //                           </div>
+    //                         ))}
+    //                       </div>
+    //                     )} */}
+    //                     <p className="text-gray-600 text-base leading-7 reportIndex mt-5">
+    //                       <>{item.an_note}</>
+    //                     </p>
+    //                     <Link
+    //                       to={`/report-details/${item.id}`}
+    //                       className="  w-full"
+    //                     >
+    //                       <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
+    //                         إقراء المزيد ...
+    //                       </button>
+    //                     </Link>
+    //                   </div>
+    //                 </div>
+    //                 <div className="bg-[#CCA972] h-1 w-full mt-4"></div>
+    //               </div>
+    //             ))}
 
-                {/* Pagination controls */}
-                <div className="mt-4 flex justify-between space-x-2">
-                  <button
-                    className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 flex items-center border border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
-                    onClick={() => paginate(currentPage - 1)}
-                    disabled={currentPage === 1}
-                  >
-                    <MoveRight size={20} className="ml-2" />
-                    <h6>السابق</h6>
-                  </button>
+    //             {/* Pagination controls */}
+    //             <div className="mt-4 flex justify-between space-x-2">
+    //               <button
+    //                 className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 flex items-center border border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
+    //                 onClick={() => paginate(currentPage - 1)}
+    //                 disabled={currentPage === 1}
+    //               >
+    //                 <MoveRight size={20} className="ml-2" />
+    //                 <h6>السابق</h6>
+    //               </button>
 
-                  <div className="md:pr-0 sm:pr-5">
-                    {getPaginationNumbers().map((page, index) => (
-                      <button
-                        key={index}
-                        className={`px-4 py-2 rounded ml-1 ${
-                          currentPage === page
-                            ? "bg-[#d5ae78] rounded-md  text-white"
-                            : "bg-white border border-black  rounded-md text-black hover:bg-[#d5ae78] hover:text-white"
-                        }`}
-                        onClick={() =>
-                          typeof page === "number" && paginate(page)
-                        }
-                        disabled={typeof page !== "number"}
-                      >
-                        {page}
-                      </button>
-                    ))}
-                  </div>
+    //               <div className="md:pr-0 sm:pr-5">
+    //                 {getPaginationNumbers().map((page, index) => (
+    //                   <button
+    //                     key={index}
+    //                     className={`px-4 py-2 rounded ml-1 ${
+    //                       currentPage === page
+    //                         ? "bg-[#d5ae78] rounded-md  text-white"
+    //                         : "bg-white border border-black  rounded-md text-black hover:bg-[#d5ae78] hover:text-white"
+    //                     }`}
+    //                     onClick={() =>
+    //                       typeof page === "number" && paginate(page)
+    //                     }
+    //                     disabled={typeof page !== "number"}
+    //                   >
+    //                     {page}
+    //                   </button>
+    //                 ))}
+    //               </div>
 
-                  <button
-                    className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 border flex border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
-                    onClick={() => paginate(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                  >
-                    <h6>التالي</h6>
-                    <MoveLeft className="mr-2" />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className=" h-full w-full flex justify-center items-center">
-                <div className=" text-center">
-                  <JobNotFound />
-                  <p>لا توجد نتيجة للبحث، جرب البحث باسم منشور اخرى</p>
-                </div>
-              </div>
-            )}
-          </main>
-          <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
-            <Footer />
-          </footer>
-        </>
-      )}
-    </>
+    //               <button
+    //                 className="md:px-4 md:py-2 sm:px-4 sm:py-2 sm:h-10 border flex border-black text-black rounded-md hover:bg-[#d5ae78] hover:text-white"
+    //                 onClick={() => paginate(currentPage + 1)}
+    //                 disabled={currentPage === totalPages}
+    //               >
+    //                 <h6>التالي</h6>
+    //                 <MoveLeft className="mr-2" />
+    //               </button>
+    //             </div>
+    //           </div>
+    //         ) : (
+    //           <div className=" h-full w-full flex justify-center items-center">
+    //             <div className=" text-center">
+    //               <JobNotFound />
+    //               <p>لا توجد نتيجة للبحث، جرب البحث باسم منشور اخرى</p>
+    //             </div>
+    //           </div>
+    //         )}
+    //       </main>
+    //       <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
+    //         <Footer />
+    //       </footer>
+    //     </>
+    //   )}
+    // </>
+    <></>
   );
 };
 
