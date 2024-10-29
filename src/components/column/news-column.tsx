@@ -62,16 +62,8 @@ export const AddNewsColumns: ColumnDef<AddNewOrder>[] = [
     sortingFn: "datetime",
   },
   {
-    accessorKey: "type",
-    header: "النوع",
-    cell: ({ row }) => {
-      return row.original.type === "News" ? "الاخبار" : "News";
-    },
-  },
-
-  {
     accessorKey: "publish",
-    header: "نشر/الغاء النشر",
+    header: "حالة النشر",
     cell: ({ row }) => {
       return row.original.publish === true ? "منشور" : "غير منشور";
     },
@@ -156,12 +148,8 @@ export const AddENNewsColumns: ColumnDef<AddNewOrder>[] = [
     sortingFn: "datetime",
   },
   {
-    accessorKey: "type",
-    header: "type",
-  },
-  {
     accessorKey: "publish",
-    header: "publishing/unpublication",
+    header: "publish status",
     cell: ({ row }) => {
       return row.original.publish === true ? "publishing" : "unpublication";
     },

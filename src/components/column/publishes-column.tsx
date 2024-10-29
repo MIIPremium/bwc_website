@@ -105,26 +105,8 @@ export const AddOPublishesColumns: ColumnDef<AddPublishesOrder>[] = [
     sortingFn: "datetime",
   },
   {
-    accessorKey: "type",
-    header: "النوع",
-    cell: ({ row }) => {
-      const types = row.original.type;
-      switch (types) {
-        case "News":
-          return "الاخبار";
-        case "Publication":
-          return "المنشورات";
-        case "Analysis":
-          return "تحليل";
-        default:
-          return types;
-      }
-    },
-  },
-
-  {
     accessorKey: "publish",
-    header: "نشر/الغاء النشر",
+    header: "حالة النشر",
     cell: ({ row }) => {
       return row.original.publish === true ? "منشور" : "غير منشور";
     },
@@ -208,14 +190,9 @@ export const AddENPublishesColumns: ColumnDef<AddPublishesOrder>[] = [
     },
     sortingFn: "datetime",
   },
-
-  {
-    accessorKey: "type",
-    header: "types",
-  },
   {
     accessorKey: "publish",
-    header: "publishing/unpublication",
+    header: "publish status",
     cell: ({ row }) => {
       return row.original.publish === true ? "publishing" : "unpublication";
     },

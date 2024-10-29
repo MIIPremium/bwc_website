@@ -95,13 +95,6 @@ export const AddAnalysisColumns: ColumnDef<AddAnalysisOrder>[] = [
     header: "عنوان التحليل",
   },
   {
-    accessorKey: "type",
-    header: "النوع",
-    cell: ({ row }) => {
-      return row.original.type === "Analysis" ? "تحليل" : "Analysisس";
-    },
-  },
-  {
     accessorKey: "date_of_publish",
     header: "تارخ التحليل",
     cell: ({ row }) => {
@@ -112,7 +105,7 @@ export const AddAnalysisColumns: ColumnDef<AddAnalysisOrder>[] = [
 
   {
     accessorKey: "publish",
-    header: "نشر/الغاء النشر",
+    header: "حالة النشر",
     cell: ({ row }) => {
       return row.original.publish === true ? "منشور" : "غير منشور";
     },
@@ -197,12 +190,8 @@ export const AddENAnalysisColumns: ColumnDef<AddAnalysisOrder>[] = [
     sortingFn: "datetime",
   },
   {
-    accessorKey: "type",
-    header: "النوع",
-  },
-  {
-    accessorKey: "publish",
-    header: "publishing/unpublication",
+    accessorKey: "publish state",
+    header: "publish status",
     cell: ({ row }) => {
       return row.original.publish === true ? "publishing" : "unpublication";
     },

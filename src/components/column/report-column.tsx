@@ -99,9 +99,9 @@ export const ReportColumns: ColumnDef<ReportColProp>[] = [
               </Button>
             </Tooltip>
           </Link>
-          <Tooltip text="تغير حالة النشر">
+          {/* <Tooltip text="تغير حالة النشر">
             <ChangePublishesStatusPostDialog id={row.original.id} />
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip text="حذف">
             <DeleteDialog
               url={`/api/Reports/${row.original?.id}`}
@@ -185,9 +185,9 @@ export const ReportEnColumns: ColumnDef<ReportColProp>[] = [
               </Button>
             </Tooltip>
           </Link>
-          <Tooltip text="Change publishing status">
+          {/* <Tooltip text="Change publishing status">
             <ChangePublishesStatusPostDialog id={row.original.id} />
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip text="delete">
             <DeleteDialog
               url={`/api/Reports/${row.original?.id}`}

@@ -33,9 +33,39 @@ export interface WriterProp {
   en_description: string;
   ar_role: string;
   en_role: string;
-  publication: any[];
+  publication: Publication[];
   soicalmedia: Soicalmedia[];
 }
+export interface Publication {
+  id: number;
+  type: string;
+  ar_Title: string;
+  en_Title: string;
+  b_image: string;
+  images: string[];
+  writers: string[];
+  reportId: number;
+  report: Report;
+  publish: boolean;
+  t2read: number;
+  tags: string[];
+  date_of_publish: Date;
+  ar_table_of_content: string[];
+  en_table_of_content: string[];
+  ar_description: string;
+  en_description: string;
+  ar_Note: string;
+  en_Note: string;
+  references: Reference[];
+}
+export interface Reference {
+  id: number;
+  ar_title: string;
+  en_title: string;
+  link: string;
+  publication: string[];
+}
+
 export interface WriterResp {
   id: number;
   ar_fullName: string;
@@ -45,10 +75,28 @@ export interface WriterResp {
   en_description: string;
   ar_role: string;
   en_role: string;
-  publication: any[];
+  publication: Publication[];
   soicalmedia: Soicalmedia[];
 }
-
+export interface Report {
+  id: number;
+  ar_Title: string;
+  en_Title: string;
+  img: string;
+  ar_description: string;
+  en_description: string;
+  ar_executive_summary: string;
+  en_executive_summary: string;
+  ar_table_of_content: string[];
+  en_table_of_content: string[];
+  date_of_report: Date;
+  date_of_publish: Date;
+  pdfImg: string;
+  pdfFile: string;
+  an_note: string;
+  en_note: string;
+  listOfSections: string[];
+}
 export interface Soicalmedia {
   id: number;
   name: string;

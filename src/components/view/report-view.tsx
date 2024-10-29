@@ -77,6 +77,7 @@ export default function ViewReportById() {
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const [modalOpen, setModalOpen] = useState(false);
+  const [pdfOpen, setPdfOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const { id } = useParams<{ id: string }>();
 
@@ -106,435 +107,492 @@ export default function ViewReportById() {
     setModalOpen(false);
   };
 
-  const openArrayModal = (image: any) => {
-    setSelectedImage(image);
+  const openPdfModal = () => {
+    if (PublicationInfoData?.pdfImg) {
+      setPdfOpen(true);
+    }
   };
 
-  // Function to close the modal
-  const closeArrayModal = () => {
-    setSelectedImage(null);
+  const closePdfModal = () => {
+    setPdfOpen(false);
   };
   return (
-    // <>
-    //   {dir === "ltr" ? (
-    //     <div className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9">
-    //       <div className="border-2 border-black w-[100%] rounded-lg my-5 p-2 mx-auto ">
-    //         <div className="grid   grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[20vh] ">
-    //           <div className="text-start col-span-1 h-auto ">
-    //             <label htmlFor="" className="float-start font-bold text-xl">
-    //               Report Image
-    //             </label>
-    //             <img
-    //               src={PublicationInfoData?.img}
-    //               className="cursor-pointer"
-    //               onClick={openModal}
-    //               alt=""
-    //             />
-    //           </div>
-    //         </div>
-    //         {modalOpen && (
-    //           <div
-    //             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
-    //             onClick={closeModal}
-    //           >
-    //             <div
-    //               className="relative w-[100%] h-[100%] overflow-hidden"
-    //               onClick={(e) => e.stopPropagation()}
-    //             >
-    //               <>
-    //                 <img
-    //                   src={PublicationInfoData?.img!}
-    //                   className="w-[80%] h-[80%] mx-auto object-fill"
-    //                   alt=""
-    //                 />
-    //                 <button
-    //                   onClick={closeModal}
-    //                   className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
-    //                 >
-    //                   &times;
-    //                 </button>
-    //               </>
-    //             </div>
-    //           </div>
-    //         )}
-    //         <div className="h-[2px]  w-[100%] mx-auto bg-black my-3"></div>
+    <>
+      {dir === "ltr" ? (
+        <div className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9">
+          <div className="border-2 border-black w-[100%] rounded-lg my-5 p-2 mx-auto ">
+            <div className="grid   grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[20vh] ">
+              <div className="text-start col-span-1 h-auto ">
+                <label htmlFor="" className="float-start font-bold text-xl">
+                  Report Image
+                </label>
+                <img
+                  src={PublicationInfoData?.img}
+                  className="cursor-pointer"
+                  onClick={openModal}
+                  alt=""
+                />
+              </div>
+            </div>
+            {modalOpen && (
+              <div
+                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                onClick={closeModal}
+              >
+                <div
+                  className="relative w-[100%] h-[100%] overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <>
+                    <img
+                      src={PublicationInfoData?.img!}
+                      className="w-[80%] h-[80%] mx-auto object-fill"
+                      alt=""
+                    />
+                    <button
+                      onClick={closeModal}
+                      className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
+                    >
+                      &times;
+                    </button>
+                  </>
+                </div>
+              </div>
+            )}
+            <div className="h-[2px]  w-[100%] mx-auto bg-black my-3"></div>
 
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">عنوان التقرير</label>
-    //             <p>{PublicationInfoData?.ar_Title}</p>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Report Title</label>
-    //             <p>{PublicationInfoData?.en_Title}</p>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Publication Date</label>
-    //             <p>
-    //               {String(PublicationInfoData?.date_of_publish).split("T")[0]}
-    //             </p>
-    //           </div>
-    //         </div>
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">عنوان التقرير</label>
+                <p>{PublicationInfoData?.ar_Title}</p>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Report Title</label>
+                <p>{PublicationInfoData?.en_Title}</p>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Publication Date</label>
+                <p>
+                  {String(PublicationInfoData?.date_of_publish).split("T")[0]}
+                </p>
+              </div>
+            </div>
 
-    //         {/*  */}
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Date Of The Report</label>
-    //             <p>
-    //               {String(PublicationInfoData?.date_of_report).split("T")[0]}
-    //             </p>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">File Link</label>
-    //             <a
-    //               href={PublicationInfoData?.pdfFile}
-    //               target="_blank"
-    //               className="block"
-    //             >
-    //               اضغط هنا للمشاهدة
-    //             </a>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">
-    //               Cover Image Of The Report
-    //             </label>
-    //             <img src={PublicationInfoData?.pdfImg} alt="" />
-    //           </div>
-    //         </div>
+            {/*  */}
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Date Of The Report</label>
+                <p>
+                  {String(PublicationInfoData?.date_of_report).split("T")[0]}
+                </p>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">File Link</label>
+                <a
+                  href={PublicationInfoData?.pdfFile}
+                  target="_blank"
+                  className="block"
+                >
+                  اضغط هنا للمشاهدة
+                </a>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">
+                  Cover Image Of The Report
+                </label>
+                <img
+                  src={PublicationInfoData?.pdfImg}
+                  alt=""
+                  className="cursor-pointer"
+                  onClick={openPdfModal}
+                />
+              </div>
+            </div>
+            {pdfOpen && (
+              <div
+                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                onClick={closePdfModal}
+              >
+                <div
+                  className="relative w-[100%] h-[100%] overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <>
+                    <img
+                      src={PublicationInfoData?.pdfImg!}
+                      className="w-[80%] h-[80%] mx-auto object-fill cursor-pointer"
+                      alt=""
+                    />
+                    <button
+                      onClick={closePdfModal}
+                      className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
+                    >
+                      &times;
+                    </button>
+                  </>
+                </div>
+              </div>
+            )}
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div
+                dir="rtl"
+                className="text-start col-span-1 h-auto translate-y-10"
+              >
+                <label className="font-bold text-xl">جدول محتويات</label>
+                <ul>
+                  {PublicationInfoData?.ar_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
+              </div>
+              <div
+                dir="ltr"
+                className="text-start col-span-1 h-auto translate-y-10"
+              >
+                <label className="font-bold text-xl">Table Of Content</label>
+                <ul>
+                  {PublicationInfoData?.en_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
+              </div>
+            </div>
+            {/*  */}
 
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div
-    //             dir="rtl"
-    //             className="text-start col-span-1 h-auto translate-y-10"
-    //           >
-    //             <label className="font-bold text-xl">جدول محتويات</label>
-    //             <ul>
-    //               {PublicationInfoData?.ar_table_of_content.map((X) => {
-    //                 return <li key={X}>. {X}</li>;
-    //               })}
-    //             </ul>
-    //           </div>
-    //           <div
-    //             dir="ltr"
-    //             className="text-start col-span-1 h-auto translate-y-10"
-    //           >
-    //             <label className="font-bold text-xl">Table Of Content</label>
-    //             <ul>
-    //               {PublicationInfoData?.en_table_of_content.map((X) => {
-    //                 return <li key={X}>. {X}</li>;
-    //               })}
-    //             </ul>
-    //           </div>
-    //         </div>
-    //         {/*  */}
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  "></div>
 
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  "></div>
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">وصف التقرير</label>
+                <div className="custom-html-content">
+                  {PublicationInfoData?.ar_description && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.ar_description,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
 
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">وصف التقرير</label>
-    //             <div className="custom-html-content">
-    //               {PublicationInfoData?.ar_description && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.ar_description,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Description</label>
 
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Description</label>
+                <div className="custom-html-content-en">
+                  {PublicationInfoData?.en_description && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.en_description,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
 
-    //             <div className="custom-html-content-en">
-    //               {PublicationInfoData?.en_description && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.en_description,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
+            {/*  */}
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">ملخص تنفيذي</label>
+                <div className="custom-html-content">
+                  {PublicationInfoData?.ar_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.ar_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
 
-    //         {/*  */}
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">ملخص تنفيذي</label>
-    //             <div className="custom-html-content">
-    //               {PublicationInfoData?.ar_executive_summary && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.ar_executive_summary,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Executive Summary</label>
 
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Executive Summary</label>
+                <div className="custom-html-content-en">
+                  {PublicationInfoData?.en_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.en_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">ملاحظة</label>
 
-    //             <div className="custom-html-content-en">
-    //               {PublicationInfoData?.en_executive_summary && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.en_executive_summary,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">ملاحظة</label>
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Note</label>
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9">
+          <div className="border-2 border-black w-[100%] rounded-lg my-5 p-2 mx-auto ">
+            <div className="grid   grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[20vh] ">
+              <div className="text-start col-span-1 h-auto ">
+                <label htmlFor="" className="float-start font-bold text-xl">
+                  صورة التقرير
+                </label>
+                <img
+                  src={PublicationInfoData?.img}
+                  className="cursor-pointer"
+                  onClick={openModal}
+                  alt=""
+                />
+              </div>
+            </div>
+            {modalOpen && (
+              <div
+                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                onClick={closeModal}
+              >
+                <div
+                  className="relative w-[100%] h-[100%] overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <>
+                    <img
+                      src={PublicationInfoData?.img!}
+                      className="w-[80%] h-[80%] mx-auto object-fill"
+                      alt=""
+                    />
+                    <button
+                      onClick={closeModal}
+                      className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
+                    >
+                      &times;
+                    </button>
+                  </>
+                </div>
+              </div>
+            )}
+            <div className="h-[2px]  w-[100%] mx-auto bg-black my-3"></div>
 
-    //             <div className="">
-    //               <div className="custom-html-content-en">
-    //                 <div className="break-words whitespace-pre-wrap">
-    //                   {PublicationInfoData?.an_note}
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Note</label>
-    //             <div className="">
-    //               <div className="custom-html-content-en">
-    //                 <div className="break-words whitespace-pre-wrap">
-    //                   {PublicationInfoData?.an_note}
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   ) : (
-    //     <div className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9">
-    //       <div className="border-2 border-black w-[100%] rounded-lg my-5 p-2 mx-auto ">
-    //         <div className="grid   grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[20vh] ">
-    //           <div className="text-start col-span-1 h-auto ">
-    //             <label htmlFor="" className="float-start font-bold text-xl">
-    //               صورة التقرير
-    //             </label>
-    //             <img
-    //               src={PublicationInfoData?.img}
-    //               className="cursor-pointer"
-    //               onClick={openModal}
-    //               alt=""
-    //             />
-    //           </div>
-    //         </div>
-    //         {modalOpen && (
-    //           <div
-    //             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
-    //             onClick={closeModal}
-    //           >
-    //             <div
-    //               className="relative w-[100%] h-[100%] overflow-hidden"
-    //               onClick={(e) => e.stopPropagation()}
-    //             >
-    //               <>
-    //                 <img
-    //                   src={PublicationInfoData?.img!}
-    //                   className="w-[80%] h-[80%] mx-auto object-fill"
-    //                   alt=""
-    //                 />
-    //                 <button
-    //                   onClick={closeModal}
-    //                   className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
-    //                 >
-    //                   &times;
-    //                 </button>
-    //               </>
-    //             </div>
-    //           </div>
-    //         )}
-    //         <div className="h-[2px]  w-[100%] mx-auto bg-black my-3"></div>
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">عنوان التقرير</label>
+                <p>{PublicationInfoData?.ar_Title}</p>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Report Title</label>
+                <p>{PublicationInfoData?.en_Title}</p>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">تاريخ النشر</label>
+                <p>
+                  {String(PublicationInfoData?.date_of_publish).split("T")[0]}
+                </p>
+              </div>
+            </div>
 
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">عنوان التقرير</label>
-    //             <p>{PublicationInfoData?.ar_Title}</p>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Report Title</label>
-    //             <p>{PublicationInfoData?.en_Title}</p>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">تاريخ النشر</label>
-    //             <p>
-    //               {String(PublicationInfoData?.date_of_publish).split("T")[0]}
-    //             </p>
-    //           </div>
-    //         </div>
+            {/*  */}
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">تاريخ التقرير</label>
+                <p>
+                  {String(PublicationInfoData?.date_of_report).split("T")[0]}
+                </p>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">رابط الملف</label>
+                <a
+                  href={PublicationInfoData?.pdfFile}
+                  target="_blank"
+                  className="block"
+                >
+                  اضغط هنا للمشاهدة
+                </a>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">صورة الغلاف للتقرير</label>
+                <img
+                  src={PublicationInfoData?.pdfImg}
+                  alt=""
+                  onClick={openPdfModal}
+                />
+              </div>
+            </div>
+            {pdfOpen && (
+              <div
+                className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                onClick={closePdfModal}
+              >
+                <div
+                  className="relative w-[100%] h-[100%] overflow-hidden"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <>
+                    <img
+                      src={PublicationInfoData?.pdfImg!}
+                      className="w-[80%] h-[80%] mx-auto object-fill cursor-pointer"
+                      alt=""
+                    />
+                    <button
+                      onClick={closePdfModal}
+                      className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
+                    >
+                      &times;
+                    </button>
+                  </>
+                </div>
+              </div>
+            )}
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">جدول محتويات</label>
+                <ul>
+                  {PublicationInfoData?.ar_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
+              </div>
+              <div
+                dir="ltr"
+                className="text-start col-span-1 h-auto translate-y-10"
+              >
+                <label className="font-bold text-xl">Table Of Content</label>
+                <ul>
+                  {PublicationInfoData?.en_table_of_content.map((X) => {
+                    return <li key={X}>. {X}</li>;
+                  })}
+                </ul>
+              </div>
+            </div>
+            {/*  */}
 
-    //         {/*  */}
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">تاريخ التقرير</label>
-    //             <p>
-    //               {String(PublicationInfoData?.date_of_report).split("T")[0]}
-    //             </p>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">رابط الملف</label>
-    //             <a
-    //               href={PublicationInfoData?.pdfFile}
-    //               target="_blank"
-    //               className="block"
-    //             >
-    //               اضغط هنا للمشاهدة
-    //             </a>
-    //           </div>
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">صورة الغلاف للتقرير</label>
-    //             <img src={PublicationInfoData?.pdfImg} alt="" />
-    //           </div>
-    //         </div>
+            <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  "></div>
 
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-start col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">جدول محتويات</label>
-    //             <ul>
-    //               {PublicationInfoData?.ar_table_of_content.map((X) => {
-    //                 return <li key={X}>. {X}</li>;
-    //               })}
-    //             </ul>
-    //           </div>
-    //           <div
-    //             dir="ltr"
-    //             className="text-start col-span-1 h-auto translate-y-10"
-    //           >
-    //             <label className="font-bold text-xl">Table Of Content</label>
-    //             <ul>
-    //               {PublicationInfoData?.en_table_of_content.map((X) => {
-    //                 return <li key={X}>. {X}</li>;
-    //               })}
-    //             </ul>
-    //           </div>
-    //         </div>
-    //         {/*  */}
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">وصف التقرير</label>
+                <div className="custom-html-content">
+                  {PublicationInfoData?.ar_description && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.ar_description,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
 
-    //         <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  "></div>
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-end col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Description</label>
 
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">وصف التقرير</label>
-    //             <div className="custom-html-content">
-    //               {PublicationInfoData?.ar_description && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.ar_description,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
+                <div className="custom-html-content-en">
+                  {PublicationInfoData?.en_description && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.en_description,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
 
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-end col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Description</label>
+            {/*  */}
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">ملخص تنفيذي</label>
+                <div className="custom-html-content">
+                  {PublicationInfoData?.ar_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.ar_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
 
-    //             <div className="custom-html-content-en">
-    //               {PublicationInfoData?.en_description && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.en_description,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-end col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Executive Summary</label>
 
-    //         {/*  */}
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">ملخص تنفيذي</label>
-    //             <div className="custom-html-content">
-    //               {PublicationInfoData?.ar_executive_summary && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.ar_executive_summary,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
+                <div className="custom-html-content-en">
+                  {PublicationInfoData?.en_executive_summary && (
+                    <div
+                      className="break-words whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{
+                        __html: PublicationInfoData.en_executive_summary,
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className=" col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">ملاحظة</label>
 
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-end col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Executive Summary</label>
-
-    //             <div className="custom-html-content-en">
-    //               {PublicationInfoData?.en_executive_summary && (
-    //                 <div
-    //                   className="break-words whitespace-pre-wrap"
-    //                   dangerouslySetInnerHTML={{
-    //                     __html: PublicationInfoData.en_executive_summary,
-    //                   }}
-    //                 />
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className=" col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">ملاحظة</label>
-
-    //             <div className="">
-    //               <div className="custom-html-content-en">
-    //                 <div className="break-words whitespace-pre-wrap">
-    //                   {PublicationInfoData?.an_note}
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //         {/*  */}
-    //         <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
-    //           <div className="text-end col-span-1 h-auto translate-y-10">
-    //             <label className="font-bold text-xl">Note</label>
-    //             <div className="">
-    //               <div className="custom-html-content-en">
-    //                 <div className="break-words whitespace-pre-wrap">
-    //                   {PublicationInfoData?.an_note}
-    //                 </div>
-    //               </div>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   )}
-    // </>
-    <></>
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/*  */}
+            <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right min-h-[20vh]  ">
+              <div className="text-end col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Note</label>
+                <div className="">
+                  <div className="custom-html-content-en">
+                    <div className="break-words whitespace-pre-wrap">
+                      {PublicationInfoData?.an_note}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
