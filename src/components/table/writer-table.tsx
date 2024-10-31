@@ -29,12 +29,7 @@ export interface WriterProp {
   ar_fullName: string;
   en_fullName: string;
   image: string;
-  ar_description: string;
-  en_description: string;
-  ar_role: string;
-  en_role: string;
-  publication: Publication[];
-  soicalmedia: Soicalmedia[];
+  no_of_publication: number;
 }
 export interface Publication {
   id: number;
@@ -71,12 +66,7 @@ export interface WriterResp {
   ar_fullName: string;
   en_fullName: string;
   image: string;
-  ar_description: string;
-  en_description: string;
-  ar_role: string;
-  en_role: string;
-  publication: Publication[];
-  soicalmedia: Soicalmedia[];
+  no_of_publication: number;
 }
 export interface Report {
   id: number;
@@ -131,6 +121,7 @@ export default function WriterTable() {
     getData();
   }, []);
 
+  // console.log("data", data);
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({

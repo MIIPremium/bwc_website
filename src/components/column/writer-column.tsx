@@ -12,12 +12,7 @@ export type AddWriterOrder = {
   ar_fullName: string;
   en_fullName: string;
   image: string;
-  ar_description: string;
-  en_description: string;
-  ar_role: string;
-  en_role: string;
-  publication: any[];
-  soicalmedia: Soicalmedia[];
+  no_of_publication: number;
 };
 
 export interface Soicalmedia {
@@ -59,14 +54,11 @@ export const AddWriterColumns: ColumnDef<AddWriterOrder>[] = [
   //   sortingFn: "datetime", // Built-in datetime sorting function
   // },
   {
-    accessorKey: "",
+    accessorKey: "no_of_publication",
     header: "عدد المنشورات",
-    cell: ({ row }) => {
-      return <p>0</p>;
-    },
   },
   {
-    accessorKey: "ar_fullName",
+    accessorKey: "ar_role",
     header: "المسمى الوظيفي",
   },
 
@@ -143,11 +135,8 @@ export const AddEnWriterColumns: ColumnDef<AddWriterOrder>[] = [
   //   sortingFn: "datetime", // Built-in datetime sorting function
   // },
   {
-    accessorKey: "",
+    accessorKey: "no_of_publication",
     header: "number of publishes",
-    cell: ({ row }) => {
-      return <p>0</p>;
-    },
   },
   {
     accessorKey: "en_role",
