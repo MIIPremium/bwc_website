@@ -78,12 +78,7 @@ export interface WriterProp {
   ar_fullName: string;
   en_fullName: string;
   image: string;
-  ar_description: string;
-  en_description: string;
-  ar_role: string;
-  en_role: string;
-  publication: any[];
-  soicalmedia: Soicalmedia[];
+  no_of_publication: number;
 }
 interface MutationData {
   id: number;
@@ -450,7 +445,7 @@ export default function AddPublications() {
                         <p key={x.name}>{x.name}</p>
                       ))}
                     </div>
-                  
+
                     <div className=" col-span-1 h-auto ">
                       <Label text="عنوان المنشور" />
                       <FormField
@@ -935,7 +930,7 @@ export default function AddPublications() {
                         <p key={x.name}>{x.name}</p>
                       ))}
                     </div>
-                    
+
                     <div className=" col-span-1 h-auto ">
                       <Label text="عنوان المنشور" />
                       <FormField

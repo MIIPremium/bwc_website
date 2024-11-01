@@ -56,7 +56,7 @@ export default function ReferenceInfo() {
       form.reset({
         ar_title: complaintData.ar_title,
         en_title: complaintData.en_title,
-        link: complaintData.link,
+        // link: complaintData.link,
       });
     }
   }, [complaintData]);
@@ -126,9 +126,9 @@ export default function ReferenceInfo() {
             <div className="grid grid-cols-4 w-[100%] px-10 items-start gap-4 text-left h-[20vh]">
               <div className=" col-span-1 h-auto translate-y-10">
                 <Label text="Link" />
-                <a href={complaintData?.link} target="_blank">
+                {/* <a href={complaintData?.link} target="_blank">
                   {complaintData?.link}
-                </a>
+                </a> */}
               </div>
             </div>
             <div className="h-[2px]  w-[95%] mx-auto bg-black"></div>
@@ -157,9 +157,9 @@ export default function ReferenceInfo() {
             <div className="grid grid-cols-4 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
               <div className=" col-span-1 h-auto translate-y-10">
                 <Label text="الرابط" />
-                <a href={complaintData?.link} target="_blank">
+                {/* <a href={complaintData?.link} target="_blank">
                   {complaintData?.link}
-                </a>
+                </a> */}
               </div>
             </div>
             <div className="h-[2px]  w-[95%] mx-auto bg-black"></div>

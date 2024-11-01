@@ -19,11 +19,16 @@ import { axiosInstance, postApi, putApi } from "src/lib/http";
 import { useToast } from "src/ui/use-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { ReferenceResp } from "../table/referencesTable";
+// import { ReferenceResp } from "../table/referencesTable";
 import { useTranslation } from "react-i18next";
 
 type ReferenceFormValue = z.infer<typeof addReferenceSchema>;
-
+export type ReferenceResp = {
+  id: number;
+  ar_title: string;
+  en_title: string;
+  link: string;
+};
 export default function UpdateReferenceForm() {
   // const { toast } = useToast();
   const { t, i18n } = useTranslation();

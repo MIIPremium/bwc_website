@@ -34,23 +34,23 @@ export interface ReferenceProp {
   id: number;
   ar_title: string;
   en_title: string;
-  link: string;
+  noOfPublications: number;
 }
 
 export type ReferenceResp = {
   id: number;
   ar_title: string;
   en_title: string;
-  link: string;
+  noOfPublications: number;
 };
 
-const reference: ReferenceProp[] = [
-  { id: 1, ar_title: "sss1", en_title: "dfgdf", link: "asdasdasd1" },
-  { id: 1, ar_title: "sss2", en_title: "dfgdf", link: "asdasdasd2" },
-  { id: 1, ar_title: "sss3", en_title: "dfgdf", link: "asdasdasd3" },
-  { id: 1, ar_title: "sss4", en_title: "dfgdf", link: "asdasdasd4" },
-  { id: 1, ar_title: "sss5", en_title: "dfgdf", link: "asdasdasd5" },
-];
+// const reference: ReferenceProp[] = [
+//   { id: 1, ar_title: "sss1", en_title: "dfgdf", link: "asdasdasd1" },
+//   { id: 1, ar_title: "sss2", en_title: "dfgdf", link: "asdasdasd2" },
+//   { id: 1, ar_title: "sss3", en_title: "dfgdf", link: "asdasdasd3" },
+//   { id: 1, ar_title: "sss4", en_title: "dfgdf", link: "asdasdasd4" },
+//   { id: 1, ar_title: "sss5", en_title: "dfgdf", link: "asdasdasd5" },
+// ];
 export default function ReferencesTable() {
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
