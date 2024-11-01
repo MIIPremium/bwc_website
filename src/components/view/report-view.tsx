@@ -441,6 +441,7 @@ export default function ViewReportById() {
                 <img
                   src={PublicationInfoData?.pdfImg}
                   alt=""
+                  className="cursor-pointer"
                   onClick={openPdfModal}
                 />
               </div>

@@ -70,6 +70,7 @@ import NewsDetails from "./page/(User)/new-page";
 import ReportIndex from "./page/(Admin)/Reports";
 import ViewReportById from "./components/view/report-view";
 import ReportPage from "./page/(User)/reportPage";
+import UpdateReportsForm from "./components/form/update-reports";
 
 const router = createBrowserRouter([
   {
@@ -176,6 +177,10 @@ const router = createBrowserRouter([
       {
         path: "/admin-dashboard/reports/info/:id",
         element: <ViewReportById />,
+      },
+      {
+        path: "/admin-dashboard/reports/update/:id",
+        element: <UpdateReportsForm />,
       },
       {
         path: "/admin-dashboard/publications",
