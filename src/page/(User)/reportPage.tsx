@@ -56,12 +56,10 @@ const publishes: publish[] = [
 ];
 
 export interface sidInfo {
-  id: number;
   ar_Title: string;
   en_Title: string;
-  b_image: string;
+  img: string;
   date_of_publish: Date;
-  type: string;
 }
 
 export interface ReportsRespons {
@@ -120,9 +118,9 @@ const ReportPage = () => {
       getApi<ReportsRespons[]>(`/api/website/Reports?query=${submittedQuery}`),
   });
 
-  const { data: SidInfoResp } = useQuery({
-    queryKey: ["ReadMore"],
-    queryFn: () => getApi<sidInfo[]>(`/api/website/Publications/ReadMore/5`),
+  const { data: SidInfoRespReport } = useQuery({
+    queryKey: ["ReadMoreReport"],
+    queryFn: () => getApi<sidInfo[]>(`/api/website/Reports/ReadMore/5`),
   });
   console.log("ReportResp", ReportResp?.data);
   const itemsPerPage = 3; // Display 3 posts per page
@@ -200,21 +198,13 @@ const ReportPage = () => {
                 </div>
 
                 <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
-                  {SidInfoResp?.data.map((item, index) => (
+                  {SidInfoRespReport?.data.map((item, index) => (
                     <Link
-                      to={
-                        item.type === "publish"
-                          ? `/publish-details/${item.id}`
-                          : item.type === "news"
-                          ? `/news-details/${item.id}`
-                          : item.type === "analysis"
-                          ? `/Analysis-details/${item.id}`
-                          : ""
-                      }
+                      to={""}
                       className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
                     >
                       <img
-                        src={item.b_image}
+                        src={item.img}
                         className="w-[92px] h-[70.18px] object-cover rounded-sm"
                       />
                       <div className="flex flex-col">
@@ -365,21 +355,13 @@ const ReportPage = () => {
                   <h1 className="font-bold">اقرأ أيضًا في المنشورات</h1>
                 </div>
                 <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
-                  {SidInfoResp?.data.map((item, index) => (
+                  {SidInfoRespReport?.data.map((item, index) => (
                     <Link
-                      to={
-                        item.type === "publish"
-                          ? `/publish-details/${item.id}`
-                          : item.type === "news"
-                          ? `/news-details/${item.id}`
-                          : item.type === "analysis"
-                          ? `/Analysis-details/${item.id}`
-                          : ""
-                      }
+                      to={""}
                       className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
                     >
                       <img
-                        src={item.b_image}
+                        src={item.img}
                         className="w-[92px] h-[70.18px] object-cover rounded-sm"
                       />
                       <div className="flex flex-col">

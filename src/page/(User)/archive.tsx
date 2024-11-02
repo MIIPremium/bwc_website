@@ -9,8 +9,16 @@ interface YearItem {
 }
 
 const data: YearItem[] = [
-  { year: "2024", date: "3 مايو", content: "دراﺴﺔ أهمية خصوصية البيانات الشخصية..." },
-  { year: "2023", date: "3 مايو", content: "دراﺴﺔ أهمية خصوصية البيانات الشخصية..." },
+  {
+    year: "2024",
+    date: "3 مايو",
+    content: "دراﺴﺔ أهمية خصوصية البيانات الشخصية...",
+  },
+  {
+    year: "2023",
+    date: "3 مايو",
+    content: "دراﺴﺔ أهمية خصوصية البيانات الشخصية...",
+  },
   // Add more items to make it 30 objects
   ...Array.from({ length: 28 }).map((_, index) => ({
     year: index % 2 === 0 ? "2024" : "2023",
@@ -46,13 +54,16 @@ export default function ArchiveIndex() {
   const sortedData = filteredData.sort((a, b) => b.year.localeCompare(a.year));
 
   // Group data by year
-  const groupedData = sortedData.reduce((acc: { [key: string]: YearItem[] }, item) => {
-    if (!acc[item.year]) {
-      acc[item.year] = [];
-    }
-    acc[item.year].push(item);
-    return acc;
-  }, {});
+  const groupedData = sortedData.reduce(
+    (acc: { [key: string]: YearItem[] }, item) => {
+      if (!acc[item.year]) {
+        acc[item.year] = [];
+      }
+      acc[item.year].push(item);
+      return acc;
+    },
+    {}
+  );
 
   const displayedData = Object.entries(groupedData).map(([year, items]) => ({
     year,
@@ -64,7 +75,7 @@ export default function ArchiveIndex() {
       <div className="w-full lg:h-[8vh] md:h-[8vh] sm:h-[11vh]">
         <Navbar />
       </div>
-      <div className="min-h-screen bg-gray-100 mt-10 p-6">
+      <div className="min-h-[150vh] bg-gray-100 mt-10 p-6">
         <div className="bg-white rounded-lg shadow-md p-4 mb-6">
           <div className="flex flex-col md:flex-row items-center">
             <select
@@ -103,22 +114,25 @@ export default function ArchiveIndex() {
         <div className="bg-white rounded-lg shadow-md">
           {displayedData.map(({ year, items }) => (
             <div key={year} className="mb-6">
-              <div className="flex flex-row justify-between bg-blue-100 p-4 rounded-t-lg">
-                <div className="text-lg font-semibold">{year}</div>
-                <div className="text-lg font-semibold">{items.length}</div>
+              <div className="flex flex-row justify-between items-center bg-white p-4 ">
+                <div className=" font-semibold text-5xl text-[#D5AE78]">
+                  {year}
+                </div>
+                <div className="text-lg  h-8 font-semibold bg-gray-100 rounded-lg px-3 ">
+                  {items.length}
+                </div>
               </div>
               {items.map((item, index) => (
                 <div
                   key={index}
-                  className="flex flex-row justify-between border-b p-4"
+                  className="flex flex-row items-center justify-center bg-[#E5E5E5] hover:bg-white min-h-[15vh] mt-[1px] p-6 cursor-pointer border-b"
                 >
-                  <div className="flex flex-col w-32 border-l-2 border-black">
-                    <div className="font-semibold text-blue-600 text-xl">
+                  <div className="flex flex-col items-center justify-center w-32 border-l-2 border-black">
+                    <div className="font-semibold text-[#D5AE78] text-2xl">
                       {item.year} {item.date}
                     </div>
-                    <div className="text-gray-600 mt-1"></div>
                   </div>
-                  <div className="text-gray-800 text-right w-full mr-2 font-medium mt-1">
+                  <div className="text-gray-800 text-start mr-1 text-2xl w-full font-medium">
                     {item.content}
                   </div>
                 </div>
