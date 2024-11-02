@@ -16,6 +16,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { getApi } from "src/lib/http";
 import { LoaderIcon } from "react-hot-toast";
+import MoreREports from "src/components/(user)/moreReports";
 
 export interface ReportDetailsResponse {
   id: number;
@@ -314,7 +315,7 @@ export default function ReportDetials() {
               </div>
             </main>
           </div>
-          <MorePublish />
+          <MoreREports />
           <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
             <Footer />
           </footer>
@@ -477,7 +478,7 @@ export default function ReportDetials() {
               </div>
             </main>
           </div>
-          <MorePublish />
+          <MoreREports />
           <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
             <Footer />
           </footer>

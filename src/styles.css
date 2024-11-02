@@ -629,6 +629,21 @@ opacity: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.archiveTitle {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.archiveTitleResponsive {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .job {
   text-align: start;
 }

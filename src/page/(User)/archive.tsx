@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "src/ui/select";
 
 interface YearItem {
   year: string;
@@ -12,22 +20,28 @@ const data: YearItem[] = [
   {
     year: "2024",
     date: "3 مايو",
-    content: "دراﺴﺔ أهمية خصوصية البيانات الشخصية...",
+    content:
+      "دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... ",
   },
   {
     year: "2023",
     date: "3 مايو",
-    content: "دراﺴﺔ أهمية خصوصية البيانات الشخصية...",
+    content:
+      "دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... ",
   },
   // Add more items to make it 30 objects
   ...Array.from({ length: 28 }).map((_, index) => ({
     year: index % 2 === 0 ? "2024" : "2023",
     date: `3 مايو`,
-    content: `دراﺴﺔ أهمية خصوصية البيانات الشخصية... - ${index + 3}`,
+    content: `دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية...  دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... دراﺴﺔ أهمية خصوصية البيانات الشخصية... - ${
+      index + 3
+    }`,
   })),
 ];
 
 export default function ArchiveIndex() {
+  const { t, i18n } = useTranslation();
+  const dir = i18n.dir();
   const [filterYear, setFilterYear] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [displayedCount, setDisplayedCount] = useState(10);
@@ -75,83 +89,181 @@ export default function ArchiveIndex() {
       <div className="w-full lg:h-[8vh] md:h-[8vh] sm:h-[11vh]">
         <Navbar />
       </div>
-      <div className="min-h-[150vh] bg-gray-100 mt-10 p-6">
-        <div className="bg-white rounded-lg shadow-md p-4 mb-6">
-          <div className="flex flex-col md:flex-row items-center">
-            <select
-              onChange={(e) => handleYearFilterChange(e.target.value)}
-              className="bg-white border border-gray-300 rounded-md p-2 md:mr-4 mb-4 md:mb-0"
-            >
-              <option value="">فلتر بالسنة</option>
-              <option value="2024">2024</option>
-              <option value="2023">2023</option>
-            </select>
-            <div className="relative w-full md:w-auto">
-              <input
-                type="text"
-                placeholder="بحث باسم الكاتب"
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="p-2 rounded-md border border-gray-300 w-full md:w-auto pr-10"
-              />
-              <span className="absolute inset-y-0 right-0 flex items-center pr-3">
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.9 14.32a8 8 0 111.414-1.414l4.384 4.384a1 1 0 01-1.415 1.415l-4.384-4.384zM8 14a6 6 0 100-12 6 6 0 000 12z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
+      {dir === "ltr" ? (
+        <div className="min-h-[150vh]  mt-10 p-6 ">
+          <div className="bg-white rounded-lg  p-4 mb-6">
+            <div className="grid grid-cols-4  gap-3 mt-3">
+              <div className="col-span-4 md:col-span-1 flex justify-between gap-4">
+                {/* <Select dir="ltr" onValueChange={handleAscendingChange}>
+                  <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    <SelectValue placeholder="select Publication order" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="oldest">oldest</SelectItem>
+                    <SelectItem value="newest">newest</SelectItem>
+                  </SelectContent>
+                </Select> */}
+                <Select dir="ltr">
+                  <SelectTrigger className="w-[48%] float-start rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    <SelectValue placeholder="Filter by Year" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="publish">publish</SelectItem>
+                    <SelectItem value="news">news</SelectItem>
+                    <SelectItem value="analysis">analysis</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="col-span-4 md:col-span-2">
+                {/* <Input
+                  dir="ltr"
+                  type="text"
+                  id="simple-search"
+                  // value={searchQuery}
+                  // onChange={handleSearchChange} // Update state as the user types
+                  // onKeyDown={handleKeyDown}
+                  className="rounded-[32.5px]"
+                  placeholder="Search by the name of the publication"
+                /> */}
+              </div>
+
+              <div className="col-span-4 md:col-span-1"></div>
             </div>
           </div>
-        </div>
 
-        <div className="bg-white rounded-lg shadow-md">
-          {displayedData.map(({ year, items }) => (
-            <div key={year} className="mb-6">
-              <div className="flex flex-row justify-between items-center bg-white p-4 ">
-                <div className=" font-semibold text-5xl text-[#D5AE78]">
-                  {year}
+          <div
+            dir="ltr"
+            className="bg-white rounded-lg shadow-md border-[1px] border-[#E5E5E5]"
+          >
+            {displayedData.map(({ year, items }) => (
+              <div key={year} className="mb-6">
+                <div className="flex flex-row justify-between items-center bg-white p-4 ">
+                  <div className=" font-semibold text-5xl text-[#D5AE78]">
+                    {year}
+                  </div>
+                  <div className="text-lg  h-8 font-semibold bg-[#757575] text-white rounded-lg px-3 ">
+                    {items.length}
+                  </div>
                 </div>
-                <div className="text-lg  h-8 font-semibold bg-gray-100 rounded-lg px-3 ">
-                  {items.length}
-                </div>
-              </div>
-              {items.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex flex-row items-center justify-center bg-[#E5E5E5] hover:bg-white min-h-[15vh] mt-[1px] p-6 cursor-pointer border-b"
-                >
-                  <div className="flex flex-col items-center justify-center w-32 border-l-2 border-black">
-                    <div className="font-semibold text-[#D5AE78] text-2xl">
-                      {item.year} {item.date}
+                {items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-row items-center justify-center border-[1px] border-[#E5E5E5] bg-[#F2F2F2] hover:bg-white min-h-[15vh] p-6 cursor-pointer border-b"
+                  >
+                    <div className="flex flex-col items-center justify-center w-32 border-r-2 border-[#C7C7C7]">
+                      <div className="font-black text-[#D5AE78] text-xl">
+                        {item.year} {item.date}
+                      </div>
+                    </div>
+                    <div className="text-gray-800 sm:line-clamp-2 md:line-clamp-1 text-start mr-1 text-xl w-full font-medium">
+                      {item.content}
                     </div>
                   </div>
-                  <div className="text-gray-800 text-start mr-1 text-2xl w-full font-medium">
-                    {item.content}
+                ))}
+              </div>
+            ))}
+          </div>
+
+          {displayedCount < filteredData.length && (
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={handleShowMore}
+                className="bg-[#D5AE78] text-white text-lg font-black px-4 py-2 rounded-md"
+              >
+                show more
+              </button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className="min-h-[150vh]  mt-10 p-6 ">
+          <div className="bg-white rounded-lg  p-4 mb-6">
+            <div className="grid grid-cols-4  gap-3 mt-3">
+              <div className="col-span-4 md:col-span-1 flex justify-between gap-4">
+                {/* <Select dir="ltr" onValueChange={handleAscendingChange}>
+                  <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    <SelectValue placeholder="select Publication order" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="oldest">oldest</SelectItem>
+                    <SelectItem value="newest">newest</SelectItem>
+                  </SelectContent>
+                </Select> */}
+              </div>
+
+              <div className="col-span-4 md:col-span-2">
+                {/* <Input
+                  dir="ltr"
+                  type="text"
+                  id="simple-search"
+                  // value={searchQuery}
+                  // onChange={handleSearchChange} // Update state as the user types
+                  // onKeyDown={handleKeyDown}
+                  className="rounded-[32.5px]"
+                  placeholder="Search by the name of the publication"
+                /> */}
+              </div>
+
+              <div className="col-span-4 md:col-span-1">
+                <Select dir="rtl">
+                  <SelectTrigger className="w-[48%] float-end rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    <SelectValue placeholder="فلتر السنة" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-white">
+                    <SelectItem value="all">All</SelectItem>
+                    <SelectItem value="publish">publish</SelectItem>
+                    <SelectItem value="news">news</SelectItem>
+                    <SelectItem value="analysis">analysis</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white rounded-lg shadow-md border-[1px] border-[#E5E5E5]">
+            {displayedData.map(({ year, items }) => (
+              <div key={year} className="mb-6">
+                <div className="flex flex-row justify-between items-center bg-white p-4 ">
+                  <div className=" font-semibold text-5xl text-[#D5AE78]">
+                    {year}
+                  </div>
+                  <div className="text-lg  h-8 font-semibold bg-[#757575] text-white rounded-lg px-3 ">
+                    {items.length}
                   </div>
                 </div>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        {displayedCount < filteredData.length && (
-          <div className="flex justify-center mt-6">
-            <button
-              onClick={handleShowMore}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md"
-            >
-              عرض المزيد
-            </button>
+                {items.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-row items-center justify-center border-[1px] border-[#E5E5E5] bg-[#F2F2F2] hover:bg-white min-h-[15vh] p-6 cursor-pointer border-b"
+                  >
+                    <div className="flex flex-col items-center justify-center w-32 border-l-2 border-[#C7C7C7]">
+                      <div className="font-black text-[#D5AE78] text-xl">
+                        {item.year} {item.date}
+                      </div>
+                    </div>
+                    <div className="text-gray-800 sm:line-clamp-2 md:line-clamp-1 text-start mr-1 text-xl w-full font-medium">
+                      {item.content}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
-        )}
-      </div>
+
+          {displayedCount < filteredData.length && (
+            <div className="flex justify-center mt-6">
+              <button
+                onClick={handleShowMore}
+                className="bg-[#D5AE78] text-white text-lg font-black px-4 py-2 rounded-md"
+              >
+                عرض المزيد
+              </button>
+            </div>
+          )}
+        </div>
+      )}
       <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
         <Footer />
       </footer>
