@@ -29,6 +29,8 @@ export interface WriterProp {
   ar_fullName: string;
   en_fullName: string;
   image: string;
+  ar_role: string;
+  en_role: string;
   no_of_publication: number;
 }
 export interface Publication {
@@ -66,6 +68,8 @@ export interface WriterResp {
   ar_fullName: string;
   en_fullName: string;
   image: string;
+  ar_role: string;
+  en_role: string;
   no_of_publication: number;
 }
 export interface Report {

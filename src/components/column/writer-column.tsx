@@ -13,6 +13,8 @@ export type AddWriterOrder = {
   en_fullName: string;
   image: string;
   no_of_publication: number;
+  ar_role: string;
+  en_role: string;
 };
 
 export interface Soicalmedia {

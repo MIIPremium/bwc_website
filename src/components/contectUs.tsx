@@ -15,7 +15,27 @@ export default function ContectUs() {
       winHight: window.innerHeight,
     });
   };
+  const [formData, setFormData] = useState({
+    name: "",
+    title: "",
+    email: "",
+    details: "",
+  });
 
+  const handleChange = (e: any) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+    const { name, title, email, details } = formData;
+    const mailtoLink = `mailto:hamod2131.a@gmail.com?subject=${encodeURIComponent(
+      title
+    )}&body=${encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nDetails:\n${details}`
+    )}`;
+    window.location.href = mailtoLink;
+  };
   useEffect(() => {
     window.addEventListener("resize", detectSize);
     return () => {
@@ -28,15 +48,20 @@ export default function ContectUs() {
         <div className=" w-full h-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
           <div className="flex-1 w-[100%] h-[100vh]">
             {dir === "ltr" ? (
-              <form action="" className="lg:px-10 sm:px-1 text-end">
+              <form
+                onSubmit={handleSubmit}
+                className="lg:px-10 sm:px-1 text-end"
+              >
                 <div>
                   <label className="block text-balck font-black text-lg mb-2 mt-1">
                     Name
                   </label>
                   <input
                     type="text"
-                    name=""
+                    name="name"
                     id=""
+                    value={formData.name}
+                    onChange={handleChange}
                     dir="ltr"
                     placeholder="Enter Name ... "
                     className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white placeholder:text-start focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
@@ -49,7 +74,9 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
                       id=""
                       dir="ltr"
                       placeholder="Enter Title ..."
@@ -64,7 +91,9 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       id=""
                       dir="ltr"
                       placeholder="Email Address ..."
@@ -78,7 +107,9 @@ export default function ContectUs() {
                   </label>
 
                   <textarea
-                    name=""
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
                     id=""
                     rows={10}
                     cols={40}
@@ -88,7 +119,7 @@ export default function ContectUs() {
                   />
                 </div>
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full block mt-3 shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                 >
                   <div className="flex items-center justify-center">
@@ -104,7 +135,9 @@ export default function ContectUs() {
                   </label>
                   <input
                     type="text"
-                    name=""
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     id=""
                     dir="rtl"
                     placeholder="ادخل الاسم ..."
@@ -118,7 +151,9 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
                       id=""
                       dir="rtl"
                       placeholder="ادخل الموضوع ..."
@@ -133,7 +168,9 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       id=""
                       dir="rtl"
                       placeholder="البريد الإلكتروني ..."
@@ -147,7 +184,9 @@ export default function ContectUs() {
                   </label>
 
                   <textarea
-                    name=""
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
                     id=""
                     rows={10}
                     cols={40}
@@ -157,7 +196,7 @@ export default function ContectUs() {
                   />
                 </div>
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full mt-3 block shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                 >
                   <div className="flex items-center justify-center">
@@ -215,7 +254,9 @@ export default function ContectUs() {
                         </label>
                         <input
                           type="text"
-                          name=""
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           id=""
                           dir="ltr"
                           placeholder="Enter Name ..."
@@ -229,7 +270,9 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
                             id=""
                             dir="ltr"
                             placeholder="Enter Title ..."
@@ -244,7 +287,9 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             id=""
                             dir="ltr"
                             placeholder="Email Address ... "
@@ -258,7 +303,9 @@ export default function ContectUs() {
                         </label>
 
                         <textarea
-                          name=""
+                          name="details"
+                          value={formData.details}
+                          onChange={handleChange}
                           id=""
                           rows={10}
                           cols={40}
@@ -268,7 +315,7 @@ export default function ContectUs() {
                         />
                       </div>
                       <button
-                        type="button"
+                        type="submit"
                         className="w-full block mt-3 shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                       >
                         <div className="flex items-center justify-center">
@@ -284,7 +331,9 @@ export default function ContectUs() {
                         </label>
                         <input
                           type="text"
-                          name=""
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           id=""
                           dir="rtl"
                           placeholder="ادخل الاسم ..."
@@ -298,7 +347,9 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
                             id=""
                             dir="rtl"
                             placeholder="ادخل الموضوع ..."
@@ -313,7 +364,9 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             id=""
                             dir="rtl"
                             placeholder="البريد الإلكتروني ..."
@@ -327,7 +380,9 @@ export default function ContectUs() {
                         </label>
 
                         <textarea
-                          name=""
+                          name="details"
+                          value={formData.details}
+                          onChange={handleChange}
                           id=""
                           rows={10}
                           cols={40}
@@ -337,7 +392,7 @@ export default function ContectUs() {
                         />
                       </div>
                       <button
-                        type="button"
+                        type="submit"
                         className="w-full block shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                       >
                         <div className="flex items-center justify-center">
@@ -360,7 +415,9 @@ export default function ContectUs() {
                       </label>
                       <input
                         type="text"
-                        name=""
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         id=""
                         dir="lrt"
                         placeholder="ادخل الاسم ..."
@@ -374,7 +431,9 @@ export default function ContectUs() {
 
                         <input
                           type="text"
-                          name=""
+                          name="title"
+                          value={formData.title}
+                          onChange={handleChange}
                           id=""
                           dir="lrt"
                           placeholder="ادخل الموضوع ..."
@@ -389,7 +448,9 @@ export default function ContectUs() {
 
                         <input
                           type="text"
-                          name=""
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
                           id=""
                           dir="lrt"
                           placeholder="البريد الإلكتروني ... "
@@ -403,7 +464,9 @@ export default function ContectUs() {
                       </label>
 
                       <textarea
-                        name=""
+                        name="details"
+                        value={formData.details}
+                        onChange={handleChange}
                         id=""
                         rows={10}
                         cols={40}
@@ -413,7 +476,7 @@ export default function ContectUs() {
                       />
                     </div>
                     <button
-                      type="button"
+                      type="submit"
                       className="w-full block mt-3 shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                     >
                       <div className="flex items-center justify-center">

@@ -269,7 +269,7 @@ export default function AddOrgForm() {
                   )}
                 />
               </div>
-              <div className=" col-span-1 h-auto translate-y-10">
+              <div className="text-end col-span-1 h-auto translate-y-10">
                 <Label text="organization name" />
                 <FormField
                   control={form.control}
@@ -281,6 +281,7 @@ export default function AddOrgForm() {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          dir="ltr"
                           placeholder="enter organization name..."
                           {...field}
                         />
