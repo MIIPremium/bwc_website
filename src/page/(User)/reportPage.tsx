@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CarouselsReport from "src/components/carouselsReport";
+import CarousealReportDeatials from "src/components/carouseal-report-deatials";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
 import sliderImagePlaceholder from "../../assets/img/news_1.jpg";
@@ -56,6 +56,7 @@ const publishes: publish[] = [
 ];
 
 export interface sidInfo {
+  id: number;
   ar_Title: string;
   en_Title: string;
   img: string;
@@ -200,7 +201,7 @@ const ReportPage = () => {
                 <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
                   {SidInfoRespReport?.data.map((item, index) => (
                     <Link
-                      to={""}
+                      to={`/report-details/${item.id}`}
                       className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
                     >
                       <img
@@ -219,7 +220,7 @@ const ReportPage = () => {
                 </div>
               </div>
               <div className=" col-span-3 md:col-span-2">
-                <CarouselsReport />
+                <CarousealReportDeatials />
               </div>
             </div>
 
@@ -348,7 +349,7 @@ const ReportPage = () => {
             </div>
             <div className=" grid grid-cols-3 gap-3">
               <div className=" col-span-3 md:col-span-2">
-                <CarouselsReport />
+                <CarousealReportDeatials />
               </div>
               <div className=" col-span-3 md:col-span-1">
                 <div className="p-3 bg-[#D5AE78] rounded-[8px]">
@@ -357,7 +358,7 @@ const ReportPage = () => {
                 <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
                   {SidInfoRespReport?.data.map((item, index) => (
                     <Link
-                      to={""}
+                      to={`/report-details/${item.id}`}
                       className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
                     >
                       <img
