@@ -76,9 +76,6 @@ interface WriterResponse {
 export interface WriterProp {
   id: number;
   ar_fullName: string;
-  en_fullName: string;
-  image: string;
-  no_of_publication: number;
 }
 interface MutationData {
   id: number;
@@ -152,7 +149,7 @@ export default function AddFormAnalysis() {
   };
   const { data } = useQuery({
     queryKey: ["writer"],
-    queryFn: () => getApi<WriterProp[]>("/api/Writers"),
+    queryFn: () => getApi<WriterProp[]>("/api/writers/writers"),
   });
 
   const { data: referenceData } = useQuery({
