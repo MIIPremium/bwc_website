@@ -204,9 +204,9 @@ export default function Navbar() {
                   : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
               }
             >
-              <a className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
+              <NavLink to={"/archives"} className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
                 {t("archive")}
-              </a>
+              </NavLink>
             </li>
             {dir === "ltr" ? (
               <>
@@ -313,9 +313,9 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md">
-              <a className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
+              <NavLink to={"/archives"} className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
                 {t("archive")}
-              </a>
+              </NavLink>
             </li>
             <li className="lg:hidden md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md">
               <Link

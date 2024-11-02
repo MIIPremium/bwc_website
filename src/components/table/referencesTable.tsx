@@ -34,6 +34,7 @@ export interface ReferenceProp {
   id: number;
   ar_title: string;
   en_title: string;
+  link:string;
   noOfPublications: number;
 }
 
@@ -41,6 +42,7 @@ export type ReferenceResp = {
   id: number;
   ar_title: string;
   en_title: string;
+  link:string;
   noOfPublications: number;
 };
 

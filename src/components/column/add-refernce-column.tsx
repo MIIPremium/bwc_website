@@ -12,6 +12,7 @@ export type AddReferenceOrder = {
   id: string;
   ar_title: string;
   en_title: string;
+  link: string;
   noOfPublications: number;
 };
 
@@ -23,9 +24,9 @@ export const AddReferenceColumns: ColumnDef<AddReferenceOrder>[] = [
     cell: ({ row }) => (
       <div className="flex">
         <p className="ml-2">{row.original.ar_title}</p>
-        {/* <a href={row.original.link} target="_blank">
+        <a href={row.original.link} target="_blank">
           <LinkIcon />
-        </a> */}
+        </a>
       </div>
     ),
   },
@@ -86,9 +87,9 @@ export const EnAddReferenceColumns: ColumnDef<AddReferenceOrder>[] = [
     cell: ({ row }) => (
       <div className="flex">
         <p className="mr-2">{row.original.en_title}</p>
-        {/* <a href={row.original.link} target="_blank">
+        <a href={row.original.link} target="_blank">
           <LinkIcon />
-        </a> */}
+        </a>
       </div>
     ),
   },

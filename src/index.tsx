@@ -71,6 +71,7 @@ import ReportIndex from "./page/(Admin)/Reports";
 import ViewReportById from "./components/view/report-view";
 import ReportPage from "./page/(User)/reportPage";
 import UpdateReportsForm from "./components/form/update-reports";
+import ArchiveIndex from "./page/(User)/archive";
 
 const router = createBrowserRouter([
   {
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
   {
     path: "/departments",
     element: <Departments />,
+  },
+  {
+    path: "/archives",
+    element: <ArchiveIndex />,
   },
   {
     path: "/login",
