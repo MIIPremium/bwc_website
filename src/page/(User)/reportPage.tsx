@@ -200,8 +200,8 @@ const ReportPage = () => {
 
                 <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
                   {SidInfoRespReport?.data.map((item, index) => (
-                    <Link
-                      to={`/report-details/${item.id}`}
+                    <a
+                      href={`/report-details/${item.id}`}
                       className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
                     >
                       <img
@@ -215,7 +215,7 @@ const ReportPage = () => {
                           {`${getRelativeTime(item.date_of_publish, "en")}`}
                         </span>
                       </div>
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </div>
@@ -357,8 +357,8 @@ const ReportPage = () => {
                 </div>
                 <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
                   {SidInfoRespReport?.data.map((item, index) => (
-                    <Link
-                      to={`/report-details/${item.id}`}
+                    <a
+                      href={`/report-details/${item.id}`}
                       className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
                     >
                       <img
@@ -372,7 +372,7 @@ const ReportPage = () => {
                           {` ${getRelativeTime(item.date_of_publish, "ar")}`}
                         </span>
                       </div>
-                    </Link>
+                    </a>
                   ))}
                 </div>
               </div>

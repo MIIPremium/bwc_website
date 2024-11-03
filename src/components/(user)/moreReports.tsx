@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export interface sidInfo {
+  id: number;
   ar_Title: string;
   en_Title: string;
   img: string;
@@ -44,8 +45,7 @@ export default function MoreREports() {
             }`}
           >
             {sideInfos?.data.map((img, index) => (
-              <Link
-                to={""}
+              <a href={`/report-details/${img.id}`}
                 key={index}
                 className={`${
                   sideInfos?.data.length >= 3 ? "" : "w-1/4"
@@ -69,14 +69,17 @@ export default function MoreREports() {
                     )}`}</p>
                   </span>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
 
           {/* Mobile Version */}
           <div className="flex md:hidden flex-col space-y-4 mt-8 w-full ">
             {sideInfos?.data.map((img, index) => (
-              <Link to={""} key={index} className={`w-1/ mb-4 relative h-96`}>
+              <a href={`/report-details/${img.id}`}
+                key={index}
+                className={`w-1/ mb-4 relative h-96`}
+              >
                 <img
                   className="rounded-lg object-cover h-full w-full"
                   src={img.img}
@@ -95,7 +98,7 @@ export default function MoreREports() {
                     )}`}</p>
                   </span>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
 
@@ -117,8 +120,7 @@ export default function MoreREports() {
             }`}
           >
             {sideInfos?.data.map((img, index) => (
-              <Link
-                to={""}
+              <a href={`/report-details/${img.id}`}
                 key={index}
                 className={`${
                   sideInfos?.data.length >= 3 ? "" : "w-1/4"
@@ -142,14 +144,17 @@ export default function MoreREports() {
                     )}`}</p>
                   </span>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
 
           {/* Mobile Version */}
           <div className="flex md:hidden flex-col space-y-4 mt-8 w-full">
             {sideInfos?.data.map((img, index) => (
-              <Link to={""} key={index} className={`w-1/ mb-4 relative h-96`}>
+              <a href={`/report-details/${img.id}`}
+                key={index}
+                className={`w-1/ mb-4 relative h-96`}
+              >
                 <img
                   className="rounded-lg object-cover h-full w-full"
                   src={img.img}
@@ -168,7 +173,7 @@ export default function MoreREports() {
                     )}`}</p>
                   </span>
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
 

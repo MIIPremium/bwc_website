@@ -6,7 +6,7 @@ import { ReactComponent as TranslateIcon } from "../../assets/icons/translate-ic
 import CalendarIcon from "../../assets/icons/calendar-icon";
 import ClockCircle from "../../assets/icons/clock-circle";
 import Author from "../../components/(user)/author";
-import NewsList from "../../components/(user)/news-list";
+import NewsListReport from "../../components/(user)/new-list-report";
 import MorePublish from "src/components/(user)/more-publish";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
@@ -310,7 +310,7 @@ export default function ReportDetials() {
                   <div className="md:h-[70px] bg-[#D5AE78] rounded-lg flex items-center ps-4">
                     <h2 className="text-2xl font-bold">Read more</h2>
                   </div>
-                  <NewsList />
+                  <NewsListReport />
                 </div>
               </div>
             </main>
@@ -473,7 +473,7 @@ export default function ReportDetials() {
                   <div className="md:h-[70px] bg-[#D5AE78] rounded-lg flex items-center ps-4">
                     <h2 className="text-2xl font-bold">اقرأ أيضًا</h2>
                   </div>
-                  <NewsList />
+                  <NewsListReport />
                 </div>
               </div>
             </main>
