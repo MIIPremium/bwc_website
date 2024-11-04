@@ -76,3 +76,9 @@ details > summary::-webkit-details-marker /* Safari */ {
 ::-webkit-scrollbar-thumb:hover {
   background: #450a0a;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-fedaup {
+    @apply animate-fade-up;
+  }
+}

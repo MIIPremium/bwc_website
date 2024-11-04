@@ -35,10 +35,10 @@ export default function AboutUs() {
       <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
         <Navbar />
       </div>
-      <div className="w-full lg:h-[80vh] md:h-[150vh] sm:h-[150vh] md:mt-11 sm:mt-8">
+      <div className="w-full lg:h-[80vh] md:h-[150vh] sm:h-[150vh] md:mt-11 sm:mt-8 ">
         <AboutUsHeader />
       </div>
-      <div className="lg:w-[98%] lg:min-h-[80vh] md:min-h-[80vh] md:pb-4 m-auto mb-16  lg:mt-16 sm:mt-40 ">
+      <div className="lg:w-[98%] lg:min-h-[80vh] md:min-h-[80vh] md:pb-4 m-auto mb-16  lg:mt-16 sm:mt-40 fedaup animate-fedaup">
         <OutMission />
       </div>
 
@@ -62,33 +62,33 @@ export default function AboutUs() {
       {widthScreen.winWidth <= 980 ? (
         <>
           {dir === "ltr" ? (
-             <div className="w-full h-36 flex justify-around items-center ">
-             <div className="w-[20%] ">
-               <Button>
-                 <Link to={"/join-us"}>Join Us</Link>
-               </Button>
-             </div>
-             <div className="w-[80%] ">
-               <div className="flex p-5 justify-end">
-                 <h1 className="text-3xl">{t("team-force")}</h1>
-                 <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
-               </div>
-             </div>
-           </div>
-          ) : (
             <div className="w-full h-36 flex justify-around items-center ">
-            <div className="w-[80%]">
-              <div className="flex p-5">
-                <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
-                <h1 className="text-3xl">{t("team-force")}</h1>
+              <div className="w-[20%] ">
+                <Button>
+                  <Link to={"/join-us"}>Join Us</Link>
+                </Button>
+              </div>
+              <div className="w-[80%] ">
+                <div className="flex p-5 justify-end">
+                  <h1 className="text-3xl">{t("team-force")}</h1>
+                  <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
+                </div>
               </div>
             </div>
-            <div className="w-[20%] ">
-              <Button>
-                <Link to={"/join-us"}>أنظم الينا</Link>
-              </Button>
+          ) : (
+            <div className="w-full h-36 flex justify-around items-center ">
+              <div className="w-[80%]">
+                <div className="flex p-5">
+                  <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
+                  <h1 className="text-3xl">{t("team-force")}</h1>
+                </div>
+              </div>
+              <div className="w-[20%] ">
+                <Button>
+                  <Link to={"/join-us"}>أنظم الينا</Link>
+                </Button>
+              </div>
             </div>
-          </div>
           )}
         </>
       ) : (
@@ -125,7 +125,7 @@ export default function AboutUs() {
         </>
       )}
 
-      <div className="w-full lg:h-[80vh] sm:h-[100vh] p-2 overflow-hidden relative ">
+      <div className="w-full lg:h-[80vh] sm:h-[100vh] p-2 overflow-hidden relative fedaup animate-fedaup">
         <TaskForce />
       </div>
       <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">

@@ -66,19 +66,20 @@ export default function AboutUsHeader() {
                       </h1>
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                     </div>
-                    <div className="text-start">
-                      <p className="text-justify  text-[#5B5B5B] leading-7">
-                        شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
-                        الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت
-                        في مارس 2021م تحمل سجل تجاري رقم(21/2831).
+                    <div className="text-end">
+                      <p className="  text-[#5B5B5B] leading-7">
+                        Business World is a national limited liability company.
+                        It was founded by Dr. Rabi Ben Ali al-Awabthani in the
+                        city of Mukalla and Hadramawt in March 2021 with a
+                        commercial record number (21/2831).
                       </p>
-                      <p className="text-justify  mt-8 text-[#5B5B5B] leading-8">
-                        تعمل على إدارة وتشغيل المشاريع الاستثمارية وتقديم
-                        الدراسات الاقتصادية والاستشارات الادارية والمالية
-                        والتسويقية وحلول تكنولوجيا المعلومات وتقدم خدماتها من
-                        خلال مجموعة من الخبراء والاستشاريين المتخصصين الذين
-                        يعملون في الشركة ومجموعة اخرى من الخبراء والاستشاريين
-                        المتعاقدين.
+                      <p className="  mt-8 text-[#5B5B5B] leading-8">
+                        It manages and operates investment projects and provides
+                        economic studies, administrative, financial and
+                        marketing consulting and IT solutions and provides its
+                        services through a group of specialized experts and
+                        consultants who work in the company and another group of
+                        contracting experts and consultants.
                       </p>
                     </div>
                     <div className="grid grid-cols-3 gap-2 mt-6">
@@ -220,17 +221,18 @@ export default function AboutUsHeader() {
                     </div>
                     <div>
                       <p className="text-start  text-[#5B5B5B] leading-7">
-                        شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
-                        الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت
-                        في مارس 2021م تحمل سجل تجاري رقم(21/2831).
+                        Business World is a national limited liability company.
+                        It was founded by Dr. Rabi Ben Ali al-Awabthani in the
+                        city of Mukalla and Hadramawt in March 2021 with a
+                        commercial record number (21/2831).
                       </p>
                       <p className="text-start  mt-8 text-[#5B5B5B] leading-8">
-                        تعمل على إدارة وتشغيل المشاريع الاستثمارية وتقديم
-                        الدراسات الاقتصادية والاستشارات الادارية والمالية
-                        والتسويقية وحلول تكنولوجيا المعلومات وتقدم خدماتها من
-                        خلال مجموعة من الخبراء والاستشاريين المتخصصين الذين
-                        يعملون في الشركة ومجموعة اخرى من الخبراء والاستشاريين
-                        المتعاقدين.
+                        It manages and operates investment projects and provides
+                        economic studies, administrative, financial and
+                        marketing consulting and IT solutions and provides its
+                        services through a group of specialized experts and
+                        consultants who work in the company and another group of
+                        contracting experts and consultants.
                       </p>
                     </div>
                     <div className="grid grid-cols-3 mt-6">
@@ -355,18 +357,18 @@ export default function AboutUsHeader() {
                       </div>
                       <div>
                         <p className="text-end  text-[#5B5B5B] leading-7">
-                          شركه عالم الاعمال هي شركه وطنية ذات مسؤولية
-                          محدودة.أسسها الدكتور ربيع بن علي العوبثاني في مدينة
-                          المكلا و حضرموت في مارس 2021م تحمل سجل تجاري
-                          رقم(21/2831).
+                          Business World is a national limited liability
+                          company. It was founded by Dr. Rabi Ben Ali
+                          al-Awabthani in the city of Mukalla and Hadramawt in
+                          March 2021 with a commercial record number (21/2831).
                         </p>
                         <p className="text-end  mt-8 text-[#5B5B5B] leading-8">
-                          تعمل على إدارة وتشغيل المشاريع الاستثمارية وتقديم
-                          الدراسات الاقتصادية والاستشارات الادارية والمالية
-                          والتسويقية وحلول تكنولوجيا المعلومات وتقدم خدماتها من
-                          خلال مجموعة من الخبراء والاستشاريين المتخصصين الذين
-                          يعملون في الشركة ومجموعة اخرى من الخبراء والاستشاريين
-                          المتعاقدين.
+                          It manages and operates investment projects and
+                          provides economic studies, administrative, financial
+                          and marketing consulting and IT solutions and provides
+                          its services through a group of specialized experts
+                          and consultants who work in the company and another
+                          group of contracting experts and consultants.
                         </p>
                       </div>
                       <div className="grid grid-cols-3 mt-6">
@@ -499,8 +501,6 @@ export default function AboutUsHeader() {
             )}
           </>
         )}
-
-
       </div>
     </>
   );

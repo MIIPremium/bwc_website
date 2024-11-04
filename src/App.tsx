@@ -720,7 +720,7 @@ function App() {
           </div>
         )}
 
-        <div className="h-full p-2 overflow-hidden relative ">
+        <div className="h-full p-2 overflow-hidden relative fedaup">
           <ContectUs />
         </div>
       </div>
