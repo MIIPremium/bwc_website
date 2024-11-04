@@ -153,7 +153,7 @@ function App() {
         </>
       )}
       {/*  */}
-      <div className="w-full h-screen p-2 overflow-hidden relative">
+      <div className="w-full h-screen p-2 overflow-hidden relative fedain">
         <PublishesCards />
         <div className="w-full h-8 mt-16 flex justify-center items-center ">
           <h1 className="text-3xl text-[#CCA972]">
@@ -181,7 +181,7 @@ function App() {
         )}
       </div>
       {/* about us */}
-      <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 px-4 relative">
+      <div className=" grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4 px-4 relative fedaup">
         {widthScreen.winWidth <= 980 ? (
           <>
             {dir === "ltr" ? (

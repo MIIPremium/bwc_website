@@ -799,12 +799,13 @@ opacity: 1;
   text-align: right; /* Ensure the text aligns correctly on the right */
   direction: rtl;
 }
-.custom-html-content , .custom-html-content-view {
+.custom-html-content,
+.custom-html-content-view {
   background-color: transparent; /* Ensure a white background for better readability */
   border-radius: 8px; /* Smooth rounded edges */
 }
 
-.custom-html-content  {
+.custom-html-content {
   padding: 8px; /* Space around the editor content */
 }
 /* ------------- */
@@ -830,6 +831,40 @@ opacity: 1;
   border-radius: 8px; /* Smooth rounded edges */
 }
 
-.custom-html-content  {
+.custom-html-content {
   padding: 8px; /* Space around the editor content */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fedain {
+    scale: 0.8;
+    opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view(200px);
+    animation-range: entry 200px;
+  }
+  @keyframes fade-in {
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fedaup {
+    animation: fade-up 5s linear forwards;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
