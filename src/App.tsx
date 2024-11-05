@@ -157,7 +157,7 @@ function App() {
         <PublishesCards />
         <div className="w-full h-8 mt-16 flex justify-center items-center ">
           <h1 className="text-3xl text-[#CCA972]">
-            <Link target="_blank" to={"https://www.facebook.com/bwiscompltd/"}>
+            <Link target="_blank" to={"/all-publishes"}>
               {t("showMore")}
             </Link>
           </h1>
@@ -205,36 +205,38 @@ function App() {
 
             <div className=" px-4">
               <div className="text-end">
-                <p className="text-justify text-[#5B5B5B] leading-7">
-                  شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
-                  الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت في مارس
-                  2021م تحمل سجل تجاري رقم(21/2831).
+                <p dir="ltr" className="text-start text-[#5B5B5B] leading-7">
+                  Business World is a national limited liability company. It was
+                  founded by Dr. Rabi Ben Ali al-Awabthani in the city of
+                  Mukalla and Hadramawt in March 2021 with a commercial record
+                  number (21/2831).
                 </p>
-                <p className="text-justify mt-6 text-[#5B5B5B] leading-8">
-                  تعمل على إدارة وتشغيل المشاريع الاستثمارية وتقديم الدراسات
-                  الاقتصادية والاستشارات الادارية والمالية والتسويقية وحلول
-                  تكنولوجيا المعلومات وتقدم خدماتها من خلال مجموعة من الخبراء
-                  والاستشاريين المتخصصين الذين يعملون في الشركة ومجموعة اخرى من
-                  الخبراء والاستشاريين المتعاقدين.
+                <p dir="ltr" className="text-start mt-6 text-[#5B5B5B] leading-8">
+                  It manages and operates investment projects and provides
+                  economic studies, administrative, financial and marketing
+                  consulting and IT solutions and provides its services through
+                  a group of specialized experts and consultants who work in the
+                  company and another group of contracting experts and
+                  consultants.
                 </p>
               </div>
-              <div className="w-[100%] h-[50vh] rounded-[2rem] backdrop-blur-md p-10 bg-white/30 border border-black mt-8">
+              <div className="w-[100%] h-[50vh] rounded-[2rem] backdrop-blur-md p-[15px] bg-white/30 border border-black mt-8">
                 <div className="flex items-center h-[30%] m-auto mt-2 rounded-[2rem] justify-between ">
                   {" "}
-                  <Link to={"InProucation"} className="translate-y-4">
+                  <Link to={"InProucation"} >
                     <div
                       className={
                         dir === "ltr"
-                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-8"
+                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-6"
                           : "h-[60px] w-[58px] -translate-y-4 -translate-x-2"
                       }
                     >
                       <img src={enterpnure} alt="" className="w-full h-full" />
                     </div>
 
-                    <p className="text-black">{t("entrepreneurship")}</p>
+                    <p className="text-black text-sm">{t("entrepreneurship")}</p>
                   </Link>
-                  <Link to={"InProucation"} className="translate-y-4">
+                  <Link to={"InProucation"} >
                     <div
                       className={
                         dir === "ltr"
@@ -249,7 +251,7 @@ function App() {
                       />
                     </div>
 
-                    <p className="text-black">{t("project_management")}</p>
+                    <p className="text-black text-sm  ">{t("project_management")}</p>
                   </Link>
                 </div>
                 <Link
@@ -261,7 +263,7 @@ function App() {
                       <img src={anlyisit} alt="" className="w-full h-full" />
                     </div>
 
-                    <p className="text-black">{t("studies")}</p>
+                    <p className="text-black text-sm">{t("studies")}</p>
                   </div>
                 </Link>
                 <Link
@@ -283,7 +285,7 @@ function App() {
                       />
                     </div>
 
-                    <p className="text-black">{t("Education_and_Training")}</p>
+                    <p className="text-black text-sm">{t("Education_and_Training")}</p>
                   </div>
 
                   <div className="translate-y-4">
@@ -297,14 +299,15 @@ function App() {
                       <img src={tech} alt="" className="w-full h-full" />
                     </div>
 
-                    <p className="text-black">{t("software_development")}</p>
+                    <p className="text-black text-sm">{t("software_development")}</p>
                   </div>
                 </Link>
               </div>
               <div className="flex justify-center mt-10">
                 <div className="outline outline-offset-1 outline-1 outline-[#ccc]/60 rounded-full w-[9rem] h-[3.8rem] flex justify-center items-center">
                   <Link
-                    to={"InProucation"}
+                    target="_blank"
+                    to={"/about-us"}
                     className="inline-flex w-[9rem] h-[3.8rem] outline outline-1 outline-[#CCA972]/80 bg-black text-white items-center justify-center whitespace-nowrap rounded-full text-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                   >
                     {t("knowMoreAboutUs")}
@@ -328,23 +331,32 @@ function App() {
                     <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                   </div>
                   <div>
-                    <p className="text-end  text-[#5B5B5B] leading-7">
-                      شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
-                      الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت في
-                      مارس 2021م تحمل سجل تجاري رقم(21/2831).
+                    <p
+                      dir="ltr"
+                      className="text-start  text-[#5B5B5B] leading-7"
+                    >
+                      Business World is a national limited liability company. It
+                      was founded by Dr. Rabi Ben Ali al-Awabthani in the city
+                      of Mukalla and Hadramawt in March 2021 with a commercial
+                      record number (21/2831).
                     </p>
-                    <p className="text-end  mt-6 text-[#5B5B5B] leading-8">
-                      تعمل على إدارة وتشغيل المشاريع الاستثمارية وتقديم الدراسات
-                      الاقتصادية والاستشارات الادارية والمالية والتسويقية وحلول
-                      تكنولوجيا المعلومات وتقدم خدماتها من خلال مجموعة من
-                      الخبراء والاستشاريين المتخصصين الذين يعملون في الشركة
-                      ومجموعة اخرى من الخبراء والاستشاريين المتعاقدين.
+                    <p
+                      dir="ltr"
+                      className="text-start  mt-6 text-[#5B5B5B] leading-8"
+                    >
+                      It manages and operates investment projects and provides
+                      economic studies, administrative, financial and marketing
+                      consulting and IT solutions and provides its services
+                      through a group of specialized experts and consultants who
+                      work in the company and another group of contracting
+                      experts and consultants.
                     </p>
                   </div>
                   <div className="flex justify-end mt-10">
                     <div className="outline outline-offset-1 outline-1 outline-[#ccc]/60 rounded-full w-[9rem] h-[3.8rem] flex justify-center items-center">
                       <Link
-                        to={"InProucation"}
+                        target="_blank"
+                        to={"/about-us"}
                         className="inline-flex w-[9rem] h-[3.8rem] outline outline-1 outline-[#CCA972]/80 bg-black text-white items-center justify-center whitespace-nowrap rounded-full text-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                       >
                         {t("knowMoreAboutUs")}
@@ -376,7 +388,7 @@ function App() {
                           className="w-full h-full"
                         />
                       </div>
-  
+
                       <p className="text-black">
                         {t("Education_and_Training")}
                       </p>
@@ -483,7 +495,8 @@ function App() {
                   <div className="flex justify-start mt-10">
                     <div className="outline outline-offset-1 outline-1 outline-[#ccc]/60 rounded-full w-[9rem] h-[3.8rem] flex justify-center items-center">
                       <Link
-                        to={"InProucation"}
+                        target="_blank"
+                        to={"/about-us"}
                         className="inline-flex w-[9rem] h-[3.8rem] outline outline-1 outline-[#CCA972]/80 bg-black text-white items-center justify-center whitespace-nowrap rounded-full text-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                       >
                         {t("knowMoreAboutUs")}
@@ -502,7 +515,7 @@ function App() {
                           className="w-full h-full"
                         />
                       </div>
-  
+
                       <p className="text-black">
                         {t("Education_and_Training")}
                       </p>
