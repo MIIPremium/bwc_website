@@ -4,9 +4,9 @@ import { TbDeviceAnalytics } from "react-icons/tb";
 import { PiHandshakeThin } from "react-icons/pi";
 import { useTranslation } from "react-i18next";
 import Image1 from "../../assets/img/اعلان خدمة الفايبر.jpg";
-import partnership from "../../assets/img/partnership 1.png";
+import partnership from "../../assets/img/ريادة الاعمال.jpg";
 import golas from "../../assets/img/golas.png";
-import chartBullish from "../../assets/img/chart-bullish.png";
+import reportDetails from "../../assets/img/report-details-image.png";
 import { useMediaQuery } from "react-responsive";
 export default function AboutUsHeader() {
   const { t, i18n } = useTranslation();
@@ -45,15 +45,15 @@ export default function AboutUsHeader() {
                   <div className="absolute sm:w-[25%] sm:h-[55%] bg-[#E4C189] -z-[10] sm:top-[30px]  sm:left-0"></div>
                   <div className="w-[90%] h-[80%] bg-white relative">
                     <img
-                      src={Image1}
+                      src={reportDetails}
                       className="object-cover w-full h-[80%]"
                       alt=""
                     />
                   </div>
-                  <div className="absolute flex justify-center  md:rounded-md items-center w-[65%] h-[30%] bg-[#fff] z-[10]  bottom-[80px] -right-3">
+                  <div className="absolute flex justify-center  md:rounded-md items-center w-[55%] h-[35%] bg-[#fff] z-[10]  bottom-[80px] right-0">
                     <img
-                      src={Image1}
-                      className=" w-[92%] h-[88%] round"
+                      src={partnership}
+                      className=" w-[92%] h-[88%] object-cover"
                       alt=""
                     />
                   </div>
@@ -119,15 +119,15 @@ export default function AboutUsHeader() {
                   <div className="absolute sm:w-[25%] sm:h-[55%] bg-[#E4C189] -z-[10] sm:top-[20px]  sm:right-0"></div>
                   <div className="w-[80%] h-[80%] bg-white relative">
                     <img
-                      src={Image1}
+                      src={reportDetails}
                       className="object-cover w-full h-[80%]"
                       alt=""
                     />
                   </div>
                   <div className="absolute flex justify-center  md:rounded-md items-center w-[55%] h-[35%] bg-[#fff] z-[10]  bottom-[80px] left-0">
                     <img
-                      src={Image1}
-                      className=" w-[92%] h-[88%] round"
+                      src={partnership}
+                      className=" w-[92%] h-[88%] object-cover"
                       alt=""
                     />
                   </div>
@@ -198,14 +198,14 @@ export default function AboutUsHeader() {
                   <div className="absolute md:w-[25%] md:h-[55%] bg-[#E4C189] -z-[10] md:top-[25px]  md:left-[40px]"></div>
                   <div className="w-[80%] h-[80%] bg-white relative">
                     <img
-                      src={Image1}
+                      src={reportDetails}
                       className="object-cover w-full h-[80%]"
                       alt=""
                     />
                   </div>
                   <div className="absolute flex justify-center  md:rounded-md items-center w-[55%] h-[35%] bg-[#fff] z-[10]  bottom-[80px] right-0">
                     <img
-                      src={Image1}
+                      src={partnership}
                       className=" w-[92%] h-[88%] round"
                       alt=""
                     />
@@ -213,20 +213,20 @@ export default function AboutUsHeader() {
                 </div>
                 <div className="h-full w-full">
                   <div className=" pl-4 ">
-                    <div className="flex items-start justify-start py-16">
-                      <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
+                    <div className="flex items-start justify-end py-16">
                       <h1 className="text-3xl font-extrabold">
                         {t("homePage2")}
                       </h1>
+                      <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                     </div>
                     <div>
-                      <p className="text-start  text-[#5B5B5B] leading-7">
+                      <p className="text-end  text-[#5B5B5B] leading-7">
                         Business World is a national limited liability company.
                         It was founded by Dr. Rabi Ben Ali al-Awabthani in the
                         city of Mukalla and Hadramawt in March 2021 with a
                         commercial record number (21/2831).
                       </p>
-                      <p className="text-start  mt-8 text-[#5B5B5B] leading-8">
+                      <p className="text-end  mt-8 text-[#5B5B5B] leading-8">
                         It manages and operates investment projects and provides
                         economic studies, administrative, financial and
                         marketing consulting and IT solutions and provides its
@@ -237,6 +237,7 @@ export default function AboutUsHeader() {
                     </div>
                     <div className="grid grid-cols-3 mt-6">
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
+                      <p className="text-3xl">{t("our_mission")}</p>
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                           <TbDeviceAnalytics
                             color="white"
@@ -244,15 +245,17 @@ export default function AboutUsHeader() {
                             className="p-1"
                           />
                         </span>
-                        <p className="text-3xl">{t("our_mission")}</p>
+
                       </div>
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
+                      <p className="text-3xl">{t("our_goals")}</p>
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                           <img src={golas} alt="" />
                         </span>
-                        <p className="text-3xl">{t("our_goals")}</p>
+                        
                       </div>
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
+                      <p className="text-3xl">{t("our_message")}</p>
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                           <PiHandshakeThin
                             color="white"
@@ -260,7 +263,7 @@ export default function AboutUsHeader() {
                             className="p-1"
                           />
                         </span>
-                        <p className="text-3xl">{t("our_message")}</p>
+                       
                       </div>
                     </div>
                   </div>
@@ -272,14 +275,14 @@ export default function AboutUsHeader() {
                   <div className="absolute md:w-[25%] md:h-[55%] bg-[#E4C189] -z-[10] md:top-[25px]  md:right-[40px]"></div>
                   <div className="w-[80%] h-[80%] bg-white relative">
                     <img
-                      src={Image1}
+                      src={reportDetails}
                       className="object-cover w-[100%] h-[80%]"
                       alt=""
                     />
                   </div>
                   <div className="absolute flex justify-center  md:rounded-md items-center w-[55%] h-[35%] bg-[#fff] z-[10]  bottom-[80px] left-0">
                     <img
-                      src={Image1}
+                      src={partnership}
                       className=" w-[92%] h-[88%] round"
                       alt=""
                     />
@@ -407,14 +410,14 @@ export default function AboutUsHeader() {
                     <div className="absolute lg:w-[25%] lg:h-[45%] bg-[#E4C189] -z-[10] lg:top-[-15px]  lg:left-[4px]"></div>
                     <div className=" px-4 relative flex justify-end ">
                       <img
-                        src={Image1}
+                        src={reportDetails}
                         className=" object-cover  z-[1] w-[70%] h-[80%]"
                         alt=""
                       />
                     </div>
                     <div className="absolute flex justify-center  lg:rounded-md items-center w-[45%] h-[35%] bg-[#fff] z-[10]  bottom-[300px] right-24">
                       <img
-                        src={Image1}
+                        src={partnership}
                         className=" w-[92%] h-[88%] round"
                         alt=""
                       />
@@ -429,14 +432,14 @@ export default function AboutUsHeader() {
                     <div className="absolute lg:w-[25%] lg:h-[45%] bg-[#E4C189] -z-[10] lg:top-[-15px]  lg:right-[4px]"></div>
                     <div className=" px-4 relative">
                       <img
-                        src={Image1}
+                        src={reportDetails}
                         className=" object-cover  z-[1] w-[70%] h-[80%]"
                         alt=""
                       />
                     </div>
                     <div className="absolute flex justify-center lg:rounded-md items-center w-[45%] h-[35%] bg-[#fff] z-[10]  bottom-[300px] left-24">
                       <img
-                        src={Image1}
+                        src={partnership}
                         className=" w-[92%] h-[85%] round"
                         alt=""
                       />
