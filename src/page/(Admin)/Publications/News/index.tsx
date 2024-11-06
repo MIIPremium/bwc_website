@@ -14,16 +14,16 @@ export default function NewsIndex() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Publications"
-                path1="/attendance"
+                path1="/admin-dashboard/news"
                 tilte2="news"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/news"
               />
             ) : (
               <Breadcrumb
                 tilte1="المنشورات"
-                path1="/attendance"
+                path1="/admin-dashboard/news"
                 tilte2="الاخبار"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/news"
               />
             )}
           </div>

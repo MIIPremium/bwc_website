@@ -15,20 +15,20 @@ export default function AddRefernces() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="publications"
-                path1="/attendance"
+                path1="/admin-dashboard/references"
                 tilte2=" references"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/references"
                 tilte3="add a reference"
-                path3="/attendance/add-Attendance"
+                path3="/admin-dashboard/references/add"
               />
             ) : (
               <Breadcrumb
                 tilte1="المنشورات"
-                path1="/attendance"
+                path1="/admin-dashboard/references"
                 tilte2=" المراجع"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/references"
                 tilte3="إضافة مرجع"
-                path3="/attendance/add-Attendance"
+                path3="/admin-dashboard/references/add"
               />
             )}
 

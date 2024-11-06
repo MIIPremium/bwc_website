@@ -200,7 +200,7 @@ const router = createBrowserRouter([
         element: <NewsIndex />,
       },
       {
-        path: "/admin-dashboard/Add-news/:id",
+        path: "/admin-dashboard/Add-news",
         element: <AddNews />,
       },
       {
@@ -232,7 +232,7 @@ const router = createBrowserRouter([
         element: <ViewPublications />,
       },
       {
-        path: "/admin-dashboard/add-publications/:id",
+        path: "/admin-dashboard/add-publications",
         element: <AddPublications />,
       },
 

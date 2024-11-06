@@ -14,16 +14,16 @@ export default function PublicationIndex() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Publications"
-                path1="/attendance"
+                path1="/admin-dashboard/publications"
                 tilte2=" publications"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/publications"
               />
             ) : (
               <Breadcrumb
                 tilte1="المنشورات"
-                path1="/attendance"
+                path1="/admin-dashboard/publications"
                 tilte2=" منشورات"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/publications"
               />
             )}
           </div>

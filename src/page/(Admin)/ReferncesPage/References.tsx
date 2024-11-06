@@ -14,18 +14,18 @@ export default function References() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="publications"
-                path1="/attendance"
+                path1="/admin-dashboard/references"
                 tilte2=" references"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/references"
                 tilte3=""
                 path3=""
               />
             ) : (
               <Breadcrumb
                 tilte1="المنشورات"
-                path1="/attendance"
+                path1="/admin-dashboard/references"
                 tilte2=" المراجع"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/references"
                 tilte3=""
                 path3=""
               />

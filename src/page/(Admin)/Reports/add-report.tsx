@@ -14,20 +14,20 @@ export default function AddReport() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Publications"
-                path1="/attendance"
+                path1="/admin-dashboard/reports"
                 tilte2="Reports"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/reports"
                 tilte3="Add Reports"
-                path3=""
+                path3="/admin-dashboard/reports/add-report"
               />
             ) : (
               <Breadcrumb
                 tilte1="المنشورات"
-                path1="/attendance"
+                path1="/admin-dashboard/reports"
                 tilte2=" التقارير"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/reports"
                 tilte3="إضافة تقرير"
-                path3=""
+                path3="/admin-dashboard/reports/add-report"
               />
             )}
           </div>
