@@ -40,6 +40,8 @@ import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
 import { CircleX } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import EnBreadcrumb from "src/ui/en-breadcrumb";
+import Breadcrumb from "src/ui/breadcrumb";
 
 type WriterOption = {
   value: number;
@@ -107,7 +109,6 @@ const kindOfCase = [
 export default function AddFormAnalysis() {
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
-  const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const [preview, setPreview] = useState<string | null>(null);
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
@@ -178,11 +179,7 @@ export default function AddFormAnalysis() {
   useEffect(() => {
     form.setValue("writersIdes", selectedWriters);
     form.setValue("referencesIdes", selectedReference);
-    if (id) {
-      const numericId = parseInt(id, 10);
-      setSelectedValue(numericId);
-    }
-  }, [id]);
+  }, []);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -298,1256 +295,1176 @@ export default function AddFormAnalysis() {
 
   return (
     <>
-      {selectedValue !== null ? (
-        selectedValue === 1 ? (
-          <>{dir === "ltr" ? <></> : <></>}</>
-        ) : selectedValue === 2 ? (
-          <></>
-        ) : (
-          <>
-            {dir === "ltr" ? (
-              <Form {...form}>
-                {process.env.NODE_ENV === "development" && (
-                  <>
-                    <p>Ignore it, it just in dev mode</p>
-                    <div>{JSON.stringify(form.formState.errors)}</div>
-                  </>
-                )}
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
-                >
-                  <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    {/* <div className="col-span-2 h-[50px] mt-7">
-                  <FormField
-                    control={form.control}
-                    name="type"
-                    render={({ field }) => (
-                      <FormItem className="col-span-2 flex">
-                        {kindOfCase.map((caseType) => (
-                          <label
-                            key={caseType.value}
-                            className="flex items-center w-full space-x-2"
-                          >
-                            <FormControl>
-                              <div className="relative">
+      {dir === "ltr" ? (
+        <main>
+          <div className="min-h-screen  w-full text-right bg-[#f2f2f2]">
+            <div className="grid grid-cols-1">
+              <div className="col-span-1 mb-2 mt-4 h-auto  rounded-lg">
+                <EnBreadcrumb
+                  tilte1="Publications"
+                  path1="/admin-dashboard/analysis"
+                  tilte2="analysis"
+                  path2="/admin-dashboard/analysis"
+                  tilte3="add analysis"
+                  path3="/admin-dashboard/add-analysis"
+                />
+
+                <Form {...form}>
+                  {process.env.NODE_ENV === "development" && (
+                    <>
+                      <p>Ignore it, it just in dev mode</p>
+                      <div>{JSON.stringify(form.formState.errors)}</div>
+                    </>
+                  )}
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
+                  >
+                    <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right "></div>
+                    <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className="text-start col-span-1 h-auto ">
+                        <label htmlFor="">Analysis Photo</label>
+                        <FormField
+                          control={form.control}
+                          name="ImageFile"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Upload Image</FormLabel>
+                              <FormControl>
                                 <input
-                                  type="checkbox"
-                                  value={caseType.value}
-                                  checked={selectedValue === caseType.value}
-                                  onChange={() => {
-                                    const newValue =
-                                      selectedValue === caseType.value
-                                        ? null
-                                        : caseType.value;
-                                    setSelectedValue(newValue);
-                                    field.onChange(newValue);
+                                  type="file"
+                                  className="float-start"
+                                  accept="image/*"
+                                  onChange={(e) => {
+                                    field.onChange(e.target.files);
+                                    handleFileChange(e); // Set the preview and form data
                                   }}
-                                  className="appearance-none w-6 h-6 border border-gray-300 rounded-full checked:bg-[#D5AE78] checked:border-transparent focus:outline-none"
                                 />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1 h-auto ">
+                        <Label text="عنوان التحليل" />
+                        <FormField
+                          control={form.control}
+                          name="Ar_Title"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"عنوان التحليل"}
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  dir="rtl"
+                                  placeholder="ادخل عنوان التحليل..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="text-start col-span-1 h-auto ">
+                        <Label text="Analysis Title" />
+                        <FormField
+                          control={form.control}
+                          name="En_Title"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"Analysis Title"}
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  dir="ltr"
+                                  placeholder="enter Analysis Title..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="text-start col-span-1  ">
+                        <label htmlFor="">Reference</label>
+                        <div className="card flex justify-center items-center">
+                          <MultiSelect
+                            dir="ltr"
+                            value={selectedReference}
+                            onChange={(e) => setSelectedReference(e.value)} // This will store only the selected writer IDs
+                            options={referenceOptions} // writerOptions is an array of { label, value }
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="select references"
+                            maxSelectedLabels={0}
+                            className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
+                            panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
+                            itemTemplate={(option) => {
+                              if (!option) return null;
 
-                                <svg
-                                  className={`w-4 h-4 text-white absolute top-1 left-1 pointer-events-none ${
-                                    selectedValue === caseType.value
-                                      ? "block"
-                                      : "hidden"
+                              // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
+                              const isItemSelected = selectedReference.includes(
+                                option.value
+                              );
+
+                              return (
+                                <div
+                                  className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
+                                    isItemSelected
+                                      ? "bg-gray-200"
+                                      : "hover:bg-gray-100"
                                   }`}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 20 20"
-                                  fill="currentColor"
                                 >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              </div>
-                            </FormControl>
-                            <h1 className="ml-2">{caseType.label}</h1>
-                          </label>
-                        ))}
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div> */}
-                  </div>
-                  <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className="text-start col-span-1 h-auto ">
-                      <label htmlFor="">Analysis Photo</label>
-                      <FormField
-                        control={form.control}
-                        name="ImageFile"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Upload Image</FormLabel>
-                            <FormControl>
-                              <input
-                                type="file"
-                                className="float-start"
-                                accept="image/*"
-                                onChange={(e) => {
-                                  field.onChange(e.target.files);
-                                  handleFileChange(e); // Set the preview and form data
-                                }}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1 h-auto ">
-                      <Label text="عنوان التحليل" />
-                      <FormField
-                        control={form.control}
-                        name="Ar_Title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"عنوان التحليل"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                dir="rtl"
-                                placeholder="ادخل عنوان التحليل..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="text-start col-span-1 h-auto ">
-                      <Label text="Analysis Title" />
-                      <FormField
-                        control={form.control}
-                        name="En_Title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"Analysis Title"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                dir="ltr"
-                                placeholder="enter Analysis Title..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="text-start col-span-1  ">
-                      <label htmlFor="">Reference</label>
-                      <div className="card flex justify-center items-center">
-                        <MultiSelect
-                          dir="ltr"
-                          value={selectedReference}
-                          onChange={(e) => setSelectedReference(e.value)} // This will store only the selected writer IDs
-                          options={referenceOptions} // writerOptions is an array of { label, value }
-                          optionLabel="label"
-                          optionValue="value"
-                          placeholder="select references"
-                          maxSelectedLabels={0}
-                          className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
-                          panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
-                          itemTemplate={(option) => {
-                            if (!option) return null;
+                                  <span className="text-lg">
+                                    {option.label}
+                                  </span>
+                                </div>
+                              );
+                            }}
+                            selectedItemTemplate={(option) => {
+                              if (!option) return null;
 
-                            // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
-                            const isItemSelected = selectedReference.includes(
-                              option.value
-                            );
-
-                            return (
-                              <div
-                                className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
-                                  isItemSelected
-                                    ? "bg-gray-200"
-                                    : "hover:bg-gray-100"
-                                }`}
-                              >
-                                <span className="text-lg">{option.label}</span>
-                              </div>
-                            );
-                          }}
-                          selectedItemTemplate={(option) => {
-                            if (!option) return null;
-
-                            return (
-                              <div className="flex items-center gap-2">
-                                <span>{option.label}</span>
-                              </div>
-                            );
-                          }}
-                        />
+                              return (
+                                <div className="flex items-center gap-2">
+                                  <span>{option.label}</span>
+                                </div>
+                              );
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className="text-start col-span-1  ">
-                      <label htmlFor="">writers</label>
-                      <div className="card flex justify-center items-center">
-                        <MultiSelect
-                          dir="ltr"
-                          value={selectedWriters}
-                          onChange={(e) => setSelectedWriters(e.value)} // This will store only the selected writer IDs
-                          options={writerOptions} // writerOptions is an array of { label, value }
-                          optionLabel="label"
-                          optionValue="value"
-                          placeholder="select writers"
-                          maxSelectedLabels={0}
-                          className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
-                          panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
-                          itemTemplate={(option) => {
-                            if (!option) return null;
+                    <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className="text-start col-span-1  ">
+                        <label htmlFor="">writers</label>
+                        <div className="card flex justify-center items-center">
+                          <MultiSelect
+                            dir="ltr"
+                            value={selectedWriters}
+                            onChange={(e) => setSelectedWriters(e.value)} // This will store only the selected writer IDs
+                            options={writerOptions} // writerOptions is an array of { label, value }
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="select writers"
+                            maxSelectedLabels={0}
+                            className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
+                            panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
+                            itemTemplate={(option) => {
+                              if (!option) return null;
 
-                            // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
-                            const isItemSelected = selectedWriters.includes(
-                              option.value
-                            );
+                              // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
+                              const isItemSelected = selectedWriters.includes(
+                                option.value
+                              );
 
-                            return (
-                              <div
-                                className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
-                                  isItemSelected
-                                    ? "bg-gray-200"
-                                    : "hover:bg-gray-100"
-                                }`}
-                              >
-                                <span className="text-lg">{option.label}</span>
-                              </div>
-                            );
-                          }}
-                          selectedItemTemplate={(option) => {
-                            if (!option) return null;
-
-                            return (
-                              <div className="flex items-center gap-2">
-                                <span>{option.label}</span>
-                              </div>
-                            );
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="text-start col-span-1 h-auto ">
-                      <Label text="Time to read" />
-                      <FormField
-                        control={form.control}
-                        name="t2read"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"Time to read"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                dir="ltr"
-                                type="text"
-                                placeholder="Enter Time to read..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="text-start col-span-1 h-auto ">
-                      <Label text="Date Of Publish" />
-                      <FormField
-                        control={form.control}
-                        name="date_of_publish"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"Date Of Publish"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                dir="ltr"
-                                type="date"
-                                placeholder="Enter Date Of Publish..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid  min-h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className="text-start col-span-1 h-auto ">
-                      <Label text="Tags" />
-                      <FormField
-                        control={form.control}
-                        name="tags"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900"></FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Input
-                                  dir="ltr"
-                                  placeholder="Enter Tags ..."
-                                  value={inputValue}
-                                  onChange={(e) => {
-                                    setInputValue(e.target.value);
-                                  }}
-                                  onKeyDown={(e) => {
-                                    if (
-                                      e.key === "Enter" &&
-                                      inputValue.trim()
-                                    ) {
-                                      const newValues = Array.isArray(
-                                        field.value
-                                      )
-                                        ? [...field.value, inputValue]
-                                        : [inputValue];
-                                      field.onChange(newValues);
-                                      setTexts(newValues);
-                                      setInputValue("");
-                                      e.preventDefault();
-                                    }
-                                  }}
-                                  name={field.name}
-                                  ref={field.ref}
-                                  onBlur={field.onBlur}
-                                  className="pr-20"
-                                />
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 && (
-                                    <Badge className="absolute right-2 top-2">
-                                      {`تم تحديد ${field.value.length}`}
-                                    </Badge>
-                                  )}
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 &&
-                                  field.value.map(
-                                    (item: string, index: number) => (
-                                      <div
-                                        key={index}
-                                        className="flex items-center  "
-                                      >
-                                        <span>{item}</span>
-                                        <button
-                                          type="button"
-                                          className="ml-2 text-red-500"
-                                          onClick={() =>
-                                            handleDelete(index, field)
-                                          }
-                                        >
-                                          <CircleX />
-                                        </button>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="col-span-1 h-auto ">
-                      <Label text="جدول محتويات" />
-                      <FormField
-                        control={form.control}
-                        name="ar_table_of_content"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900"></FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Input
-                                  dir="rtl"
-                                  placeholder="ادخل جدول محتويات..."
-                                  value={inputValueTableOfContentAr}
-                                  onChange={(e) => {
-                                    setInputValueTableOfContentAr(
-                                      e.target.value
-                                    );
-                                  }}
-                                  onKeyDown={(e) => {
-                                    if (
-                                      e.key === "Enter" &&
-                                      inputValueTableOfContentAr.trim()
-                                    ) {
-                                      const newValues = Array.isArray(
-                                        field.value
-                                      )
-                                        ? [
-                                            ...field.value,
-                                            inputValueTableOfContentAr,
-                                          ]
-                                        : [inputValueTableOfContentAr];
-                                      field.onChange(newValues);
-                                      setTableOfContentAr(newValues);
-                                      setInputValueTableOfContentAr("");
-                                      e.preventDefault();
-                                    }
-                                  }}
-                                  name={field.name}
-                                  ref={field.ref}
-                                  onBlur={field.onBlur}
-                                  className="pr-20"
-                                />
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 && (
-                                    <Badge className="absolute right-2 top-2">
-                                      {`تم تحديد ${field.value.length}`}
-                                    </Badge>
-                                  )}
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 &&
-                                  field.value.map(
-                                    (item: string, index: number) => (
-                                      <div
-                                        key={index}
-                                        className="flex items-center  "
-                                      >
-                                        <span>{item}</span>
-                                        <button
-                                          type="button"
-                                          className="ml-2 text-red-500"
-                                          onClick={() =>
-                                            handleTableOfContentArDelete(
-                                              index,
-                                              field
-                                            )
-                                          }
-                                        >
-                                          <CircleX />
-                                        </button>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <div className="text-start col-span-1 h-auto ">
-                      <Label text="Table Of Content" />
-                      <FormField
-                        control={form.control}
-                        name="en_table_of_content"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900"></FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Input
-                                  dir="ltr"
-                                  placeholder="Enter Table Of Content ..."
-                                  value={inputValueTableOfContentEn}
-                                  onChange={(e) => {
-                                    setInputValueTableOfContentEn(
-                                      e.target.value
-                                    );
-                                  }}
-                                  onKeyDown={(e) => {
-                                    if (
-                                      e.key === "Enter" &&
-                                      inputValueTableOfContentEn.trim()
-                                    ) {
-                                      const newValues = Array.isArray(
-                                        field.value
-                                      )
-                                        ? [
-                                            ...field.value,
-                                            inputValueTableOfContentEn,
-                                          ]
-                                        : [inputValueTableOfContentEn];
-                                      field.onChange(newValues);
-                                      setTableOfContentEn(newValues);
-                                      setInputValueTableOfContentEn("");
-                                      e.preventDefault();
-                                    }
-                                  }}
-                                  name={field.name}
-                                  ref={field.ref}
-                                  onBlur={field.onBlur}
-                                  className="pr-20"
-                                />
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 && (
-                                    <Badge className="absolute right-2 top-2">
-                                      {`تم تحديد ${field.value.length}`}
-                                    </Badge>
-                                  )}
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 &&
-                                  field.value.map(
-                                    (item: string, index: number) => (
-                                      <div
-                                        key={index}
-                                        className="flex items-center  "
-                                      >
-                                        <span>{item}</span>
-                                        <button
-                                          type="button"
-                                          className="ml-2 text-red-500"
-                                          onClick={() =>
-                                            handleTableOfContentEnDelete(
-                                              index,
-                                              field
-                                            )
-                                          }
-                                        >
-                                          <CircleX />
-                                        </button>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1 h-auto ">
-                      <label htmlFor="">وصف التحليل</label>
-                      <FormField
-                        control={form.control}
-                        name="Ar_description"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>sadasd</FormLabel>
-                            <FormControl>
-                              <Tiptap
-                                description={"ادخل الوصف"}
-                                onChange={field.onChange}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1 h-auto ">
-                      <label htmlFor="">Description </label>
-                      <FormField
-                        control={form.control}
-                        name="En_description"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>sadasd</FormLabel>
-                            <FormControl>
-                              <EngTiptap
-                                description={"Enter the Description "}
-                                onChange={field.onChange}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
-                    <div className=" col-span-3 h-auto translate-y-10">
-                      <Label text="ملاحظة" />
-                      <FormField
-                        control={form.control}
-                        name="Ar_note"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"ملاحظة"}
-                            </FormLabel>
-                            <FormControl>
-                              <Textarea
-                                dir="rtl"
-                                className="bg-white border-2 border-[#d1d5db] rounded-xl"
-                                rows={5}
-                                {...field}
-                                placeholder="ادخل ملاحظة ..."
-                              ></Textarea>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
-                    <div className="text-start col-span-3 h-auto translate-y-10">
-                      <Label text="Note" />
-                      <FormField
-                        control={form.control}
-                        name="En_note"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"Note"}
-                            </FormLabel>
-                            <FormControl>
-                              <Textarea
-                                dir="ltr"
-                                className="bg-white border-2 border-[#d1d5db] rounded-xl"
-                                rows={5}
-                                {...field}
-                                placeholder="Enter Note ..."
-                              ></Textarea>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="w-full -translate-x-10 flex justify-end mt-20 ">
-                    <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                      Add
-                    </Button>
-                  </div>
-                </form>
-              </Form>
-            ) : (
-              <Form {...form}>
-                {process.env.NODE_ENV === "development" && (
-                  <>
-                    <p>Ignore it, it just in dev mode</p>
-                    <div>{JSON.stringify(form.formState.errors)}</div>
-                  </>
-                )}
-                <form
-                  onSubmit={form.handleSubmit(onSubmit)}
-                  className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
-                >
-                  <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    {/* <div className="col-span-2 h-[50px] mt-7">
-                  <FormField
-                    control={form.control}
-                    name="type"
-                    render={({ field }) => (
-                      <FormItem className="col-span-2 flex">
-                        {kindOfCase.map((caseType) => (
-                          <label
-                            key={caseType.value}
-                            className="flex items-center w-full space-x-2"
-                          >
-                            <FormControl>
-                              <div className="relative">
-                                <input
-                                  type="checkbox"
-                                  value={caseType.value}
-                                  checked={selectedValue === caseType.value}
-                                  onChange={() => {
-                                    const newValue =
-                                      selectedValue === caseType.value
-                                        ? null
-                                        : caseType.value;
-                                    setSelectedValue(newValue);
-                                    field.onChange(newValue);
-                                  }}
-                                  className="appearance-none w-6 h-6 border border-gray-300 rounded-full checked:bg-[#D5AE78] checked:border-transparent focus:outline-none"
-                                />
-
-                                <svg
-                                  className={`w-4 h-4 text-white absolute top-1 left-1 pointer-events-none ${
-                                    selectedValue === caseType.value
-                                      ? "block"
-                                      : "hidden"
+                              return (
+                                <div
+                                  className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
+                                    isItemSelected
+                                      ? "bg-gray-200"
+                                      : "hover:bg-gray-100"
                                   }`}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 20 20"
-                                  fill="currentColor"
                                 >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              </div>
-                            </FormControl>
-                            <h1 className="ml-2">{caseType.label}</h1>
-                          </label>
-                        ))}
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div> */}
-                  </div>
-                  <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1 h-auto ">
-                      <label htmlFor="">صورة التحليل</label>
-                      <FormField
-                        control={form.control}
-                        name="ImageFile"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Upload Image</FormLabel>
-                            <FormControl>
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={(e) => {
-                                  field.onChange(e.target.files);
-                                  handleFileChange(e); // Set the preview and form data
-                                }}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1 h-auto ">
-                      <Label text="عنوان التحليل" />
-                      <FormField
-                        control={form.control}
-                        name="Ar_Title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"عنوان التحليل"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                placeholder="ادخل عنوان التحليل..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="text-end col-span-1 h-auto ">
-                      <Label text="Analysis Title" />
-                      <FormField
-                        control={form.control}
-                        name="En_Title"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"Analysis Title"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                dir="ltr"
-                                placeholder="enter Analysis Title..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className=" col-span-1  ">
-                      <label htmlFor="">المرجع</label>
-                      <div className="card flex justify-center items-center">
-                        <MultiSelect
-                          dir="rtl"
-                          value={selectedReference}
-                          onChange={(e) => setSelectedReference(e.value)} // This will store only the selected writer IDs
-                          options={referenceOptions} // writerOptions is an array of { label, value }
-                          optionLabel="label"
-                          optionValue="value"
-                          placeholder="اختار مرجع"
-                          maxSelectedLabels={0}
-                          className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
-                          panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
-                          itemTemplate={(option) => {
-                            if (!option) return null;
+                                  <span className="text-lg">
+                                    {option.label}
+                                  </span>
+                                </div>
+                              );
+                            }}
+                            selectedItemTemplate={(option) => {
+                              if (!option) return null;
 
-                            // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
-                            const isItemSelected = selectedReference.includes(
-                              option.value
-                            );
-
-                            return (
-                              <div
-                                className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
-                                  isItemSelected
-                                    ? "bg-gray-200"
-                                    : "hover:bg-gray-100"
-                                }`}
-                              >
-                                <span className="text-lg">{option.label}</span>
-                              </div>
-                            );
-                          }}
-                          selectedItemTemplate={(option) => {
-                            if (!option) return null;
-
-                            return (
-                              <div className="flex items-center gap-2">
-                                <span>{option.label}</span>
-                              </div>
-                            );
-                          }}
-                        />
+                              return (
+                                <div className="flex items-center gap-2">
+                                  <span>{option.label}</span>
+                                </div>
+                              );
+                            }}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1  ">
-                      <label htmlFor="">الكاتب</label>
-                      <div className="card flex justify-center items-center">
-                        <MultiSelect
-                          dir="rtl"
-                          value={selectedWriters}
-                          onChange={(e) => setSelectedWriters(e.value)} // This will store only the selected writer IDs
-                          options={writerOptions} // writerOptions is an array of { label, value }
-                          optionLabel="label"
-                          optionValue="value"
-                          placeholder="اختار الكاتب"
-                          maxSelectedLabels={0}
-                          className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
-                          panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
-                          itemTemplate={(option) => {
-                            if (!option) return null;
-
-                            // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
-                            const isItemSelected = selectedWriters.includes(
-                              option.value
-                            );
-
-                            return (
-                              <div
-                                className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
-                                  isItemSelected
-                                    ? "bg-gray-200"
-                                    : "hover:bg-gray-100"
-                                }`}
-                              >
-                                <span className="text-lg">{option.label}</span>
-                              </div>
-                            );
-                          }}
-                          selectedItemTemplate={(option) => {
-                            if (!option) return null;
-
-                            return (
-                              <div className="flex items-center gap-2">
-                                <span>{option.label}</span>
-                              </div>
-                            );
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className=" col-span-1 h-auto ">
-                      <Label text="وقت القراءه" />
-                      <FormField
-                        control={form.control}
-                        name="t2read"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"وقت القراءه"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                type="text"
-                                placeholder="ادخل وقت القراءه..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className=" col-span-1 h-auto ">
-                      <Label text="تاريخ النشر" />
-                      <FormField
-                        control={form.control}
-                        name="date_of_publish"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"تاريخ النشر"}
-                            </FormLabel>
-                            <FormControl>
-                              <Input
-                                type="date"
-                                placeholder="ادخل تاريخ النشر..."
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[10vh]">
-                    <div className="col-span-1 h-auto ">
-                      <Label text="وسوم" />
-                      <FormField
-                        control={form.control}
-                        name="tags"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900"></FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Input
-                                  dir="rtl"
-                                  placeholder="ادخل الوسوم..."
-                                  value={inputValue}
-                                  onChange={(e) => {
-                                    setInputValue(e.target.value);
-                                  }}
-                                  onKeyDown={(e) => {
-                                    if (
-                                      e.key === "Enter" &&
-                                      inputValue.trim()
-                                    ) {
-                                      const newValues = Array.isArray(
-                                        field.value
-                                      )
-                                        ? [...field.value, inputValue]
-                                        : [inputValue];
-                                      field.onChange(newValues);
-                                      setTexts(newValues);
-                                      setInputValue("");
-                                      e.preventDefault();
-                                    }
-                                  }}
-                                  name={field.name}
-                                  ref={field.ref}
-                                  onBlur={field.onBlur}
-                                  className="pr-20"
-                                />
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 && (
-                                    <Badge className="absolute right-2 top-2">
-                                      {`تم تحديد ${field.value.length}`}
-                                    </Badge>
-                                  )}
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 &&
-                                  field.value.map(
-                                    (item: string, index: number) => (
-                                      <div
-                                        key={index}
-                                        className="flex items-center  "
-                                      >
-                                        <span>{item}</span>
-                                        <button
-                                          type="button"
-                                          className="ml-2 text-red-500"
-                                          onClick={() =>
-                                            handleDelete(index, field)
-                                          }
-                                        >
-                                          <CircleX />
-                                        </button>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                    <div className="col-span-1 h-auto ">
-                      <Label text="جدول محتويات" />
-                      <FormField
-                        control={form.control}
-                        name="ar_table_of_content"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900"></FormLabel>
-                            <FormControl>
-                              <div className="relative">
-                                <Input
-                                  dir="rtl"
-                                  placeholder="ادخل جدول محتويات..."
-                                  value={inputValueTableOfContentAr}
-                                  onChange={(e) => {
-                                    setInputValueTableOfContentAr(
-                                      e.target.value
-                                    );
-                                  }}
-                                  onKeyDown={(e) => {
-                                    if (
-                                      e.key === "Enter" &&
-                                      inputValueTableOfContentAr.trim()
-                                    ) {
-                                      const newValues = Array.isArray(
-                                        field.value
-                                      )
-                                        ? [
-                                            ...field.value,
-                                            inputValueTableOfContentAr,
-                                          ]
-                                        : [inputValueTableOfContentAr];
-                                      field.onChange(newValues);
-                                      setTableOfContentAr(newValues);
-                                      setInputValueTableOfContentAr("");
-                                      e.preventDefault();
-                                    }
-                                  }}
-                                  name={field.name}
-                                  ref={field.ref}
-                                  onBlur={field.onBlur}
-                                  className="pr-20"
-                                />
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 && (
-                                    <Badge className="absolute right-2 top-2">
-                                      {`تم تحديد ${field.value.length}`}
-                                    </Badge>
-                                  )}
-
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 &&
-                                  field.value.map(
-                                    (item: string, index: number) => (
-                                      <div
-                                        key={index}
-                                        className="flex items-center  "
-                                      >
-                                        <span>{item}</span>
-                                        <button
-                                          type="button"
-                                          className="ml-2 text-red-500"
-                                          onClick={() =>
-                                            handleTableOfContentArDelete(
-                                              index,
-                                              field
-                                            )
-                                          }
-                                        >
-                                          <CircleX />
-                                        </button>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-
-                    <div className="text-end col-span-1 h-auto ">
-                      <Label text="Table Of Content" />
-                      <FormField
-                        control={form.control}
-                        name="en_table_of_content"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900"></FormLabel>
-                            <FormControl>
-                              <div className="relative">
+                      <div className="text-start col-span-1 h-auto ">
+                        <Label text="Time to read" />
+                        <FormField
+                          control={form.control}
+                          name="t2read"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"Time to read"}
+                              </FormLabel>
+                              <FormControl>
                                 <Input
                                   dir="ltr"
-                                  placeholder="Enter Table Of Content ..."
-                                  value={inputValueTableOfContentEn}
-                                  onChange={(e) => {
-                                    setInputValueTableOfContentEn(
-                                      e.target.value
-                                    );
-                                  }}
-                                  onKeyDown={(e) => {
-                                    if (
-                                      e.key === "Enter" &&
-                                      inputValueTableOfContentEn.trim()
-                                    ) {
-                                      const newValues = Array.isArray(
-                                        field.value
-                                      )
-                                        ? [
-                                            ...field.value,
-                                            inputValueTableOfContentEn,
-                                          ]
-                                        : [inputValueTableOfContentEn];
-                                      field.onChange(newValues);
-                                      setTableOfContentEn(newValues);
-                                      setInputValueTableOfContentEn("");
-                                      e.preventDefault();
-                                    }
-                                  }}
-                                  name={field.name}
-                                  ref={field.ref}
-                                  onBlur={field.onBlur}
-                                  className="pr-20"
+                                  type="text"
+                                  placeholder="Enter Time to read..."
+                                  {...field}
                                 />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="text-start col-span-1 h-auto ">
+                        <Label text="Date Of Publish" />
+                        <FormField
+                          control={form.control}
+                          name="date_of_publish"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"Date Of Publish"}
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  dir="ltr"
+                                  type="date"
+                                  placeholder="Enter Date Of Publish..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid  min-h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className="text-start col-span-1 h-auto ">
+                        <Label text="Tags" />
+                        <FormField
+                          control={form.control}
+                          name="tags"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900"></FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    dir="ltr"
+                                    placeholder="Enter Tags ..."
+                                    value={inputValue}
+                                    onChange={(e) => {
+                                      setInputValue(e.target.value);
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (
+                                        e.key === "Enter" &&
+                                        inputValue.trim()
+                                      ) {
+                                        const newValues = Array.isArray(
+                                          field.value
+                                        )
+                                          ? [...field.value, inputValue]
+                                          : [inputValue];
+                                        field.onChange(newValues);
+                                        setTexts(newValues);
+                                        setInputValue("");
+                                        e.preventDefault();
+                                      }
+                                    }}
+                                    name={field.name}
+                                    ref={field.ref}
+                                    onBlur={field.onBlur}
+                                    className="pr-20"
+                                  />
 
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 && (
-                                    <Badge className="absolute right-2 top-2">
-                                      {`تم تحديد ${field.value.length}`}
-                                    </Badge>
-                                  )}
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 && (
+                                      <Badge className="absolute right-2 top-2">
+                                        {`تم تحديد ${field.value.length}`}
+                                      </Badge>
+                                    )}
 
-                                {Array.isArray(field.value) &&
-                                  field.value.length > 0 &&
-                                  field.value.map(
-                                    (item: string, index: number) => (
-                                      <div
-                                        key={index}
-                                        className="flex items-center  "
-                                      >
-                                        <span>{item}</span>
-                                        <button
-                                          type="button"
-                                          className="ml-2 text-red-500"
-                                          onClick={() =>
-                                            handleTableOfContentEnDelete(
-                                              index,
-                                              field
-                                            )
-                                          }
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 &&
+                                    field.value.map(
+                                      (item: string, index: number) => (
+                                        <div
+                                          key={index}
+                                          className="flex items-center  "
                                         >
-                                          <CircleX />
-                                        </button>
-                                      </div>
-                                    )
-                                  )}
-                              </div>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
+                                          <span>{item}</span>
+                                          <button
+                                            type="button"
+                                            className="ml-2 text-red-500"
+                                            onClick={() =>
+                                              handleDelete(index, field)
+                                            }
+                                          >
+                                            <CircleX />
+                                          </button>
+                                        </div>
+                                      )
+                                    )}
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-1 h-auto ">
+                        <Label text="جدول محتويات" />
+                        <FormField
+                          control={form.control}
+                          name="ar_table_of_content"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900"></FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    dir="rtl"
+                                    placeholder="ادخل جدول محتويات..."
+                                    value={inputValueTableOfContentAr}
+                                    onChange={(e) => {
+                                      setInputValueTableOfContentAr(
+                                        e.target.value
+                                      );
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (
+                                        e.key === "Enter" &&
+                                        inputValueTableOfContentAr.trim()
+                                      ) {
+                                        const newValues = Array.isArray(
+                                          field.value
+                                        )
+                                          ? [
+                                              ...field.value,
+                                              inputValueTableOfContentAr,
+                                            ]
+                                          : [inputValueTableOfContentAr];
+                                        field.onChange(newValues);
+                                        setTableOfContentAr(newValues);
+                                        setInputValueTableOfContentAr("");
+                                        e.preventDefault();
+                                      }
+                                    }}
+                                    name={field.name}
+                                    ref={field.ref}
+                                    onBlur={field.onBlur}
+                                    className="pr-20"
+                                  />
 
-                  <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1 h-auto ">
-                      <label htmlFor="">وصف التحليل</label>
-                      <FormField
-                        control={form.control}
-                        name="Ar_description"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>sadasd</FormLabel>
-                            <FormControl>
-                              <Tiptap
-                                description={"ادخل الوصف"}
-                                onChange={field.onChange}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
-                  <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                    <div className=" col-span-1 h-auto ">
-                      <label htmlFor="">Description </label>
-                      <FormField
-                        control={form.control}
-                        name="En_description"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>sadasd</FormLabel>
-                            <FormControl>
-                              <EngTiptap
-                                description={"Enter the Description "}
-                                onChange={field.onChange}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </div>
-                  </div>
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 && (
+                                      <Badge className="absolute right-2 top-2">
+                                        {`تم تحديد ${field.value.length}`}
+                                      </Badge>
+                                    )}
 
-                  <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
-                    <div className=" col-span-3 h-auto translate-y-10">
-                      <Label text="ملاحظة" />
-                      <FormField
-                        control={form.control}
-                        name="Ar_note"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"ملاحظة"}
-                            </FormLabel>
-                            <FormControl>
-                              <Textarea
-                                className="bg-white border-2 border-[#d1d5db] rounded-xl"
-                                rows={5}
-                                {...field}
-                                placeholder="ادخل ملاحظة ..."
-                              ></Textarea>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 &&
+                                    field.value.map(
+                                      (item: string, index: number) => (
+                                        <div
+                                          key={index}
+                                          className="flex items-center  "
+                                        >
+                                          <span>{item}</span>
+                                          <button
+                                            type="button"
+                                            className="ml-2 text-red-500"
+                                            onClick={() =>
+                                              handleTableOfContentArDelete(
+                                                index,
+                                                field
+                                              )
+                                            }
+                                          >
+                                            <CircleX />
+                                          </button>
+                                        </div>
+                                      )
+                                    )}
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="text-start col-span-1 h-auto ">
+                        <Label text="Table Of Content" />
+                        <FormField
+                          control={form.control}
+                          name="en_table_of_content"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900"></FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    dir="ltr"
+                                    placeholder="Enter Table Of Content ..."
+                                    value={inputValueTableOfContentEn}
+                                    onChange={(e) => {
+                                      setInputValueTableOfContentEn(
+                                        e.target.value
+                                      );
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (
+                                        e.key === "Enter" &&
+                                        inputValueTableOfContentEn.trim()
+                                      ) {
+                                        const newValues = Array.isArray(
+                                          field.value
+                                        )
+                                          ? [
+                                              ...field.value,
+                                              inputValueTableOfContentEn,
+                                            ]
+                                          : [inputValueTableOfContentEn];
+                                        field.onChange(newValues);
+                                        setTableOfContentEn(newValues);
+                                        setInputValueTableOfContentEn("");
+                                        e.preventDefault();
+                                      }
+                                    }}
+                                    name={field.name}
+                                    ref={field.ref}
+                                    onBlur={field.onBlur}
+                                    className="pr-20"
+                                  />
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 && (
+                                      <Badge className="absolute right-2 top-2">
+                                        {`تم تحديد ${field.value.length}`}
+                                      </Badge>
+                                    )}
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 &&
+                                    field.value.map(
+                                      (item: string, index: number) => (
+                                        <div
+                                          key={index}
+                                          className="flex items-center  "
+                                        >
+                                          <span>{item}</span>
+                                          <button
+                                            type="button"
+                                            className="ml-2 text-red-500"
+                                            onClick={() =>
+                                              handleTableOfContentEnDelete(
+                                                index,
+                                                field
+                                              )
+                                            }
+                                          >
+                                            <CircleX />
+                                          </button>
+                                        </div>
+                                      )
+                                    )}
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
-                    <div className="text-end col-span-3 h-auto translate-y-10">
-                      <Label text="Note" />
-                      <FormField
-                        control={form.control}
-                        name="En_note"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className="text-red-900">
-                              {"Note"}
-                            </FormLabel>
-                            <FormControl>
-                              <Textarea
-                                dir="ltr"
-                                className="bg-white border-2 border-[#d1d5db] rounded-xl"
-                                rows={5}
-                                {...field}
-                                placeholder="Enter Note ..."
-                              ></Textarea>
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
+                    <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1 h-auto ">
+                        <label htmlFor="">وصف التحليل</label>
+                        <FormField
+                          control={form.control}
+                          name="Ar_description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>sadasd</FormLabel>
+                              <FormControl>
+                                <Tiptap
+                                  description={"ادخل الوصف"}
+                                  onChange={field.onChange}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="w-full translate-x-10 flex justify-end mt-20 ">
-                    <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                      إضافة
-                    </Button>
-                  </div>
-                </form>
-              </Form>
-            )}
-          </>
-        )
+                    <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1 h-auto ">
+                        <label htmlFor="">Description </label>
+                        <FormField
+                          control={form.control}
+                          name="En_description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>sadasd</FormLabel>
+                              <FormControl>
+                                <EngTiptap
+                                  description={"Enter the Description "}
+                                  onChange={field.onChange}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
+                      <div className=" col-span-3 h-auto translate-y-10">
+                        <Label text="ملاحظة" />
+                        <FormField
+                          control={form.control}
+                          name="Ar_note"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"ملاحظة"}
+                              </FormLabel>
+                              <FormControl>
+                                <Textarea
+                                  dir="rtl"
+                                  className="bg-white border-2 border-[#d1d5db] rounded-xl"
+                                  rows={5}
+                                  {...field}
+                                  placeholder="ادخل ملاحظة ..."
+                                ></Textarea>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
+                      <div className="text-start col-span-3 h-auto translate-y-10">
+                        <Label text="Note" />
+                        <FormField
+                          control={form.control}
+                          name="En_note"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"Note"}
+                              </FormLabel>
+                              <FormControl>
+                                <Textarea
+                                  dir="ltr"
+                                  className="bg-white border-2 border-[#d1d5db] rounded-xl"
+                                  rows={5}
+                                  {...field}
+                                  placeholder="Enter Note ..."
+                                ></Textarea>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full -translate-x-10 flex justify-end mt-20 ">
+                      <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                        Add
+                      </Button>
+                    </div>
+                  </form>
+                </Form>
+              </div>
+            </div>
+          </div>
+        </main>
       ) : (
-        <p>No value selected</p>
+        <main>
+          <div className=" min-h-screen  w-full text-right bg-[#f2f2f2]">
+            <div className="grid grid-cols-1">
+              <div className="col-span-1 mb-2 mt-4 h-auto  rounded-lg">
+                <Breadcrumb
+                  tilte1="المنشورات"
+                  path1="/admin-dashboard/analysis"
+                  tilte2="التحاليل"
+                  path2="/admin-dashboard/analysis"
+                  tilte3="إضافة  تحليل"
+                  path3="/admin-dashboard/add-analysis"
+                />
+
+                <Form {...form}>
+                  {process.env.NODE_ENV === "development" && (
+                    <>
+                      <p>Ignore it, it just in dev mode</p>
+                      <div>{JSON.stringify(form.formState.errors)}</div>
+                    </>
+                  )}
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
+                  >
+                    <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right "></div>
+                    <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1 h-auto ">
+                        <label htmlFor="">صورة التحليل</label>
+                        <FormField
+                          control={form.control}
+                          name="ImageFile"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Upload Image</FormLabel>
+                              <FormControl>
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  onChange={(e) => {
+                                    field.onChange(e.target.files);
+                                    handleFileChange(e); // Set the preview and form data
+                                  }}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1 h-auto ">
+                        <Label text="عنوان التحليل" />
+                        <FormField
+                          control={form.control}
+                          name="Ar_Title"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"عنوان التحليل"}
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  placeholder="ادخل عنوان التحليل..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="text-end col-span-1 h-auto ">
+                        <Label text="Analysis Title" />
+                        <FormField
+                          control={form.control}
+                          name="En_Title"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"Analysis Title"}
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  dir="ltr"
+                                  placeholder="enter Analysis Title..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className=" col-span-1  ">
+                        <label htmlFor="">المرجع</label>
+                        <div className="card flex justify-center items-center">
+                          <MultiSelect
+                            dir="rtl"
+                            value={selectedReference}
+                            onChange={(e) => setSelectedReference(e.value)} // This will store only the selected writer IDs
+                            options={referenceOptions} // writerOptions is an array of { label, value }
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="اختار مرجع"
+                            maxSelectedLabels={0}
+                            className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
+                            panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
+                            itemTemplate={(option) => {
+                              if (!option) return null;
+
+                              // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
+                              const isItemSelected = selectedReference.includes(
+                                option.value
+                              );
+
+                              return (
+                                <div
+                                  className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
+                                    isItemSelected
+                                      ? "bg-gray-200"
+                                      : "hover:bg-gray-100"
+                                  }`}
+                                >
+                                  <span className="text-lg">
+                                    {option.label}
+                                  </span>
+                                </div>
+                              );
+                            }}
+                            selectedItemTemplate={(option) => {
+                              if (!option) return null;
+
+                              return (
+                                <div className="flex items-center gap-2">
+                                  <span>{option.label}</span>
+                                </div>
+                              );
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1  ">
+                        <label htmlFor="">الكاتب</label>
+                        <div className="card flex justify-center items-center">
+                          <MultiSelect
+                            dir="rtl"
+                            value={selectedWriters}
+                            onChange={(e) => setSelectedWriters(e.value)} // This will store only the selected writer IDs
+                            options={writerOptions} // writerOptions is an array of { label, value }
+                            optionLabel="label"
+                            optionValue="value"
+                            placeholder="اختار الكاتب"
+                            maxSelectedLabels={0}
+                            className="w-full rounded-md border border-gray-300 bg-white shadow-sm py-[6px] translate-y-[3px] px-2 focus:ring focus:ring-indigo-500"
+                            panelClassName="rounded-md bg-white px-2 py-2 shadow-lg border border-gray-300"
+                            itemTemplate={(option) => {
+                              if (!option) return null;
+
+                              // Check if the current item's value (ID) is in the selectedWriters array (which only holds IDs)
+                              const isItemSelected = selectedWriters.includes(
+                                option.value
+                              );
+
+                              return (
+                                <div
+                                  className={`flex items-center justify-between gap-2 w-[370px] shadow-inner mb-1 p-2 rounded-lg cursor-pointer transition-all ${
+                                    isItemSelected
+                                      ? "bg-gray-200"
+                                      : "hover:bg-gray-100"
+                                  }`}
+                                >
+                                  <span className="text-lg">
+                                    {option.label}
+                                  </span>
+                                </div>
+                              );
+                            }}
+                            selectedItemTemplate={(option) => {
+                              if (!option) return null;
+
+                              return (
+                                <div className="flex items-center gap-2">
+                                  <span>{option.label}</span>
+                                </div>
+                              );
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <div className=" col-span-1 h-auto ">
+                        <Label text="وقت القراءه" />
+                        <FormField
+                          control={form.control}
+                          name="t2read"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"وقت القراءه"}
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="text"
+                                  placeholder="ادخل وقت القراءه..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className=" col-span-1 h-auto ">
+                        <Label text="تاريخ النشر" />
+                        <FormField
+                          control={form.control}
+                          name="date_of_publish"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"تاريخ النشر"}
+                              </FormLabel>
+                              <FormControl>
+                                <Input
+                                  type="date"
+                                  placeholder="ادخل تاريخ النشر..."
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right min-h-[10vh]">
+                      <div className="col-span-1 h-auto ">
+                        <Label text="وسوم" />
+                        <FormField
+                          control={form.control}
+                          name="tags"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900"></FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    dir="rtl"
+                                    placeholder="ادخل الوسوم..."
+                                    value={inputValue}
+                                    onChange={(e) => {
+                                      setInputValue(e.target.value);
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (
+                                        e.key === "Enter" &&
+                                        inputValue.trim()
+                                      ) {
+                                        const newValues = Array.isArray(
+                                          field.value
+                                        )
+                                          ? [...field.value, inputValue]
+                                          : [inputValue];
+                                        field.onChange(newValues);
+                                        setTexts(newValues);
+                                        setInputValue("");
+                                        e.preventDefault();
+                                      }
+                                    }}
+                                    name={field.name}
+                                    ref={field.ref}
+                                    onBlur={field.onBlur}
+                                    className="pr-20"
+                                  />
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 && (
+                                      <Badge className="absolute right-2 top-2">
+                                        {`تم تحديد ${field.value.length}`}
+                                      </Badge>
+                                    )}
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 &&
+                                    field.value.map(
+                                      (item: string, index: number) => (
+                                        <div
+                                          key={index}
+                                          className="flex items-center  "
+                                        >
+                                          <span>{item}</span>
+                                          <button
+                                            type="button"
+                                            className="ml-2 text-red-500"
+                                            onClick={() =>
+                                              handleDelete(index, field)
+                                            }
+                                          >
+                                            <CircleX />
+                                          </button>
+                                        </div>
+                                      )
+                                    )}
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-1 h-auto ">
+                        <Label text="جدول محتويات" />
+                        <FormField
+                          control={form.control}
+                          name="ar_table_of_content"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900"></FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    dir="rtl"
+                                    placeholder="ادخل جدول محتويات..."
+                                    value={inputValueTableOfContentAr}
+                                    onChange={(e) => {
+                                      setInputValueTableOfContentAr(
+                                        e.target.value
+                                      );
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (
+                                        e.key === "Enter" &&
+                                        inputValueTableOfContentAr.trim()
+                                      ) {
+                                        const newValues = Array.isArray(
+                                          field.value
+                                        )
+                                          ? [
+                                              ...field.value,
+                                              inputValueTableOfContentAr,
+                                            ]
+                                          : [inputValueTableOfContentAr];
+                                        field.onChange(newValues);
+                                        setTableOfContentAr(newValues);
+                                        setInputValueTableOfContentAr("");
+                                        e.preventDefault();
+                                      }
+                                    }}
+                                    name={field.name}
+                                    ref={field.ref}
+                                    onBlur={field.onBlur}
+                                    className="pr-20"
+                                  />
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 && (
+                                      <Badge className="absolute right-2 top-2">
+                                        {`تم تحديد ${field.value.length}`}
+                                      </Badge>
+                                    )}
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 &&
+                                    field.value.map(
+                                      (item: string, index: number) => (
+                                        <div
+                                          key={index}
+                                          className="flex items-center  "
+                                        >
+                                          <span>{item}</span>
+                                          <button
+                                            type="button"
+                                            className="ml-2 text-red-500"
+                                            onClick={() =>
+                                              handleTableOfContentArDelete(
+                                                index,
+                                                field
+                                              )
+                                            }
+                                          >
+                                            <CircleX />
+                                          </button>
+                                        </div>
+                                      )
+                                    )}
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="text-end col-span-1 h-auto ">
+                        <Label text="Table Of Content" />
+                        <FormField
+                          control={form.control}
+                          name="en_table_of_content"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900"></FormLabel>
+                              <FormControl>
+                                <div className="relative">
+                                  <Input
+                                    dir="ltr"
+                                    placeholder="Enter Table Of Content ..."
+                                    value={inputValueTableOfContentEn}
+                                    onChange={(e) => {
+                                      setInputValueTableOfContentEn(
+                                        e.target.value
+                                      );
+                                    }}
+                                    onKeyDown={(e) => {
+                                      if (
+                                        e.key === "Enter" &&
+                                        inputValueTableOfContentEn.trim()
+                                      ) {
+                                        const newValues = Array.isArray(
+                                          field.value
+                                        )
+                                          ? [
+                                              ...field.value,
+                                              inputValueTableOfContentEn,
+                                            ]
+                                          : [inputValueTableOfContentEn];
+                                        field.onChange(newValues);
+                                        setTableOfContentEn(newValues);
+                                        setInputValueTableOfContentEn("");
+                                        e.preventDefault();
+                                      }
+                                    }}
+                                    name={field.name}
+                                    ref={field.ref}
+                                    onBlur={field.onBlur}
+                                    className="pr-20"
+                                  />
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 && (
+                                      <Badge className="absolute right-2 top-2">
+                                        {`تم تحديد ${field.value.length}`}
+                                      </Badge>
+                                    )}
+
+                                  {Array.isArray(field.value) &&
+                                    field.value.length > 0 &&
+                                    field.value.map(
+                                      (item: string, index: number) => (
+                                        <div
+                                          key={index}
+                                          className="flex items-center  "
+                                        >
+                                          <span>{item}</span>
+                                          <button
+                                            type="button"
+                                            className="ml-2 text-red-500"
+                                            onClick={() =>
+                                              handleTableOfContentEnDelete(
+                                                index,
+                                                field
+                                              )
+                                            }
+                                          >
+                                            <CircleX />
+                                          </button>
+                                        </div>
+                                      )
+                                    )}
+                                </div>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1 h-auto ">
+                        <label htmlFor="">وصف التحليل</label>
+                        <FormField
+                          control={form.control}
+                          name="Ar_description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>sadasd</FormLabel>
+                              <FormControl>
+                                <Tiptap
+                                  description={"ادخل الوصف"}
+                                  onChange={field.onChange}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
+                      <div className=" col-span-1 h-auto ">
+                        <label htmlFor="">Description </label>
+                        <FormField
+                          control={form.control}
+                          name="En_description"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>sadasd</FormLabel>
+                              <FormControl>
+                                <EngTiptap
+                                  description={"Enter the Description "}
+                                  onChange={field.onChange}
+                                />
+                              </FormControl>
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
+                      <div className=" col-span-3 h-auto translate-y-10">
+                        <Label text="ملاحظة" />
+                        <FormField
+                          control={form.control}
+                          name="Ar_note"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"ملاحظة"}
+                              </FormLabel>
+                              <FormControl>
+                                <Textarea
+                                  className="bg-white border-2 border-[#d1d5db] rounded-xl"
+                                  rows={5}
+                                  {...field}
+                                  placeholder="ادخل ملاحظة ..."
+                                ></Textarea>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-3 w-[100%]  items-start gap-4 text-right h-[20vh]  ">
+                      <div className="text-end col-span-3 h-auto translate-y-10">
+                        <Label text="Note" />
+                        <FormField
+                          control={form.control}
+                          name="En_note"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel className="text-red-900">
+                                {"Note"}
+                              </FormLabel>
+                              <FormControl>
+                                <Textarea
+                                  dir="ltr"
+                                  className="bg-white border-2 border-[#d1d5db] rounded-xl"
+                                  rows={5}
+                                  {...field}
+                                  placeholder="Enter Note ..."
+                                ></Textarea>
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </div>
+                    <div className="w-full translate-x-10 flex justify-end mt-20 ">
+                      <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                        إضافة
+                      </Button>
+                    </div>
+                  </form>
+                </Form>
+              </div>
+            </div>
+          </div>
+        </main>
       )}
     </>
   );

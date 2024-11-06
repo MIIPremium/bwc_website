@@ -277,7 +277,7 @@ export default function AnalysisTable() {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  <Link to={`/admin-dashboard/add-analysis/${3}`}>
+                  <Link to={`/admin-dashboard/add-analysis`}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                       <Plus className="ml-2" />
                       add analysis
@@ -388,7 +388,7 @@ export default function AnalysisTable() {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  <Link to={`/admin-dashboard/add-analysis/${3}`}>
+                  <Link to={`/admin-dashboard/add-analysis`}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                       <Plus className="ml-2" />
                       اضافة التحليل

@@ -216,7 +216,7 @@ const router = createBrowserRouter([
         element: <AnalysisIndex />,
       },
       {
-        path: "/admin-dashboard/add-analysis/:id",
+        path: "/admin-dashboard/add-analysis",
         element: <AddFormAnalysis />,
       },
       {

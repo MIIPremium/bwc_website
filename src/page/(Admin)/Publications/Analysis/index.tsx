@@ -15,20 +15,16 @@ export default function AnalysisIndex() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Publications"
-                path1="/attendance"
-                tilte2=" publications"
-                path2="/attendance/add-Attendance"
-                tilte3="analysis"
-                path3=""
+                path1="/admin-dashboard/analysis"
+                tilte2=" analysis"
+                path2="/admin-dashboard/analysis"
               />
             ) : (
               <Breadcrumb
                 tilte1="المنشورات"
-                path1="/attendance"
-                tilte2=" منشورات"
-                path2="/attendance/add-Attendance"
-                tilte3="التحاليل"
-                path3=""
+                path1="/admin-dashboard/analysis"
+                tilte2=" التحاليل"
+                path2="/admin-dashboard/analysis"
               />
             )}
           </div>
