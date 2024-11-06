@@ -23,18 +23,18 @@ export default function TaskForceIndex() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Organizations and Employees"
-                path1="/attendance"
+                path1="/admin-dashboard/taskforce"
                 tilte2="Task Force"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/taskforce"
                 tilte3=""
                 path3=""
               />
             ) : (
               <Breadcrumb
                 tilte1="المؤسسات و الموظفين"
-                path1="/attendance"
+                path1="/admin-dashboard/taskforce"
                 tilte2=" فريق العمل"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/taskforce"
                 tilte3=""
                 path3=""
               />

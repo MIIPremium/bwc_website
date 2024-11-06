@@ -111,7 +111,7 @@ export default function Profile() {
               <div className="col-span-1 h-0 mt-4 rounded-lg">
                 <EnBreadcrumb
                   tilte1="Features"
-                  path1="/attendance"
+                  path1="/admin-dashboard/profile"
                   tilte2="Profile"
                   path2="/admin-dashboard/profile"
                   tilte3=""
@@ -264,7 +264,7 @@ export default function Profile() {
               <div className="col-span-1 h-0 mt-4 rounded-lg">
                 <Breadcrumb
                   tilte1="المزايا"
-                  path1="/attendance"
+                  path1="/admin-dashboard/profile"
                   tilte2="الملف الشخصي"
                   path2="/admin-dashboard/profile"
                   tilte3=""

@@ -15,20 +15,20 @@ export default function AddEmployee() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Organizations and Employees"
-                path1="/attendance"
+                path1="/admin-dashboard/taskforce"
                 tilte2=" Task Force"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/taskforce"
                 tilte3="Add Task Force"
-                path3="/attendance/add-Attendance"
+                path3="/admin-dashboard/taskforce/add-employee"
               />
             ) : (
               <Breadcrumb
                 tilte1="المؤسسات و الموظفين"
-                path1="/attendance"
+                path1="/admin-dashboard/taskforce"
                 tilte2=" فريق العمل"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/taskforce"
                 tilte3="إضافة فريق العمل"
-                path3="/attendance/add-Attendance"
+                path3="/admin-dashboard/taskforce/add-employee"
               />
             )}
             <AddTaskForce />

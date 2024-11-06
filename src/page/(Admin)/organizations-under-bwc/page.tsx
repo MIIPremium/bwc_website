@@ -15,18 +15,18 @@ export default function Page() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Organizations and Employees"
-                path1="/attendance"
+                path1="/admin-dashboard/organization"
                 tilte2="The institutions we manage"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/organization"
                 tilte3=""
                 path3=""
               />
             ) : (
               <Breadcrumb
                 tilte1="المؤسسات و الموظفين"
-                path1="/attendance"
+                path1="/admin-dashboard/organization"
                 tilte2=" المؤسسات التي نديرها"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/organization"
                 tilte3=""
                 path3=""
               />

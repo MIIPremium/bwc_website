@@ -15,18 +15,18 @@ export default function ServicesIndex() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Features"
-                path1="/attendance"
+                path1="/admin-dashboard/services"
                 tilte2=" Services"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/services"
                 tilte3=""
                 path3=""
               />
             ) : (
               <Breadcrumb
                 tilte1="المزايا"
-                path1="/attendance"
+                path1="/admin-dashboard/services"
                 tilte2=" خدماتنا"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/services"
                 tilte3=""
                 path3=""
               />

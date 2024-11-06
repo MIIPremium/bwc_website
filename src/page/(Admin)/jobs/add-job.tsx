@@ -15,20 +15,20 @@ export default function AddJob() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Features"
-                path1="/attendance"
+                path1="/admin-dashboard/jobs"
                 tilte2=" Jobs"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/jobs"
                 tilte3="Add Job"
-                path3=""
+                path3="/admin-dashboard/jobs/add-job"
               />
             ) : (
               <Breadcrumb
                 tilte1="المزايا"
-                path1="/attendance"
+                path1="/admin-dashboard/jobs"
                 tilte2=" الوظائف"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/jobs"
                 tilte3="إضافة وظيفة"
-                path3=""
+                path3="/admin-dashboard/jobs/add-job"
               />
             )}
           </div>

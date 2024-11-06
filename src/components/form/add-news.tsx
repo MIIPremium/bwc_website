@@ -611,7 +611,7 @@ export default function AddNews() {
                   path1="/admin-dashboard/news"
                   tilte2="  الاخبار"
                   path2="/admin-dashboard/news"
-                  tilte3="إضافة  منشور"
+                  tilte3="إضافة خبر"
                   path3="/admin-dashboard/Add-news"
                 />
 

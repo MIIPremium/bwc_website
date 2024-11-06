@@ -15,20 +15,20 @@ export default function AddWriter() {
             {dir === "ltr" ? (
               <EnBreadcrumb
                 tilte1="Organizations and Employees"
-                path1="/attendance"
+                path1="/admin-dashboard/writer"
                 tilte2=" Writers"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/writer"
                 tilte3="Add a Writer"
-                path3=""
+                path3="/admin-dashboard/writer/add-writer"
               />
             ) : (
               <Breadcrumb
                 tilte1="المؤسسات و الموظفين"
-                path1="/attendance"
+                path1="/admin-dashboard/writer"
                 tilte2=" الكُتَّاب"
-                path2="/attendance/add-Attendance"
+                path2="/admin-dashboard/writer"
                 tilte3="إضافة كاتب"
-                path3=""
+                path3="/admin-dashboard/writer/add-writer"
               />
             )}
           </div>
