@@ -34,7 +34,7 @@ export interface ReferenceProp {
   id: number;
   ar_title: string;
   en_title: string;
-  link:string;
+  link: string;
   noOfPublications: number;
 }
 
@@ -42,17 +42,10 @@ export type ReferenceResp = {
   id: number;
   ar_title: string;
   en_title: string;
-  link:string;
+  link: string;
   noOfPublications: number;
 };
 
-// const reference: ReferenceProp[] = [
-//   { id: 1, ar_title: "sss1", en_title: "dfgdf", link: "asdasdasd1" },
-//   { id: 1, ar_title: "sss2", en_title: "dfgdf", link: "asdasdasd2" },
-//   { id: 1, ar_title: "sss3", en_title: "dfgdf", link: "asdasdasd3" },
-//   { id: 1, ar_title: "sss4", en_title: "dfgdf", link: "asdasdasd4" },
-//   { id: 1, ar_title: "sss5", en_title: "dfgdf", link: "asdasdasd5" },
-// ];
 export default function ReferencesTable() {
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
@@ -136,11 +129,10 @@ export default function ReferencesTable() {
               </div>
               <div className="col-span-3">
                 <div className="flex flex-row-reverse gap-4 ">
-                  
                   <Link to={"/admin-dashboard/references/add"}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                      <Plus className="mr-2" />
                       add a reference
-                      <Plus className="ml-2" />
                     </Button>
                   </Link>
                 </div>
@@ -184,7 +176,6 @@ export default function ReferencesTable() {
               </div>
               <div className="col-span-3">
                 <div className="flex flex-row-reverse gap-4 ">
-                 
                   <Link to={"/admin-dashboard/references/add"}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                       <Plus className="ml-2" />
