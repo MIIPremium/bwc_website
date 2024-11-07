@@ -43,29 +43,29 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks1")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks2")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks3")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks4")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -75,35 +75,35 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline ">
+                    <a href="all-publishes" className="hover:underline ">
                       {t("Publications1")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications2")}
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications3")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink3")}
+                  <a href="/about-us">{t("footerLink3")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink4")}
+                  <a href="/all-Reports">{t("footerLink4")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink5")}
+                  <a href="/archives">{t("footerLink5")}</a>
                 </h2>
               </div>
             </div>
@@ -231,17 +231,17 @@ export default function Footer() {
             <div className="grid grid-cols-2 gap-1 sm:gap-6 text-end sm:grid-cols-5 h-[35vh]">
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink5")}
+                  <a href="/archives">{t("footerLink5")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink4")}
+                  <a href="/all-Reports">{t("footerLink4")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink3")}
+                  <a href="/about-us">{t("footerLink3")}</a>
                 </h2>
               </div>
               <div>
@@ -250,19 +250,19 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline ">
+                    <a href="all-publishes" className="hover:underline ">
                       {t("Publications1")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications2")}
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications3")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -272,29 +272,29 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks1")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks2")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks3")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks4")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
