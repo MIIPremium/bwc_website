@@ -85,6 +85,7 @@ interface MutationData {
   t2read: number;
   writersIdes: number[];
   referencesIdes: number[];
+  reportId: string;
 }
 export interface Soicalmedia {
   id: number;
@@ -99,6 +100,11 @@ export type ReferenceResp = {
   en_title: string;
   link: string;
 };
+export interface ReportPubResp {
+  id: number;
+  ar_Title: string;
+  en_Title: string;
+}
 const kindOfCase = [
   { label: "منشورات", value: 1 },
   { label: "الاخبار", value: 2 },
@@ -131,6 +137,11 @@ export default function AddPublications() {
     queryKey: ["reference"],
     queryFn: () => getApi<ReferenceResp[]>("/api/References"),
   });
+  const { data: ReportPub } = useQuery({
+    queryKey: ["ReportPub"],
+    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+  });
+
 
   const [selectedWriters, setSelectedWriters] = useState<number[]>([]);
 
@@ -206,6 +217,7 @@ export default function AddPublications() {
         t2read: +variables.t2read,
         writersIdes: selectedWriters,
         referencesIdes: selectedReference,
+        reportId: variables.reportId ?? "",
       });
     },
     onError: (error) => {
@@ -229,6 +241,7 @@ export default function AddPublications() {
         t2read: datas.t2read,
         writersIdes: datas.writersIdes, // Corrected
         referencesIdes: datas.referencesIdes, // Corrected
+        reportId: +datas.reportId,
       });
     },
     onSuccess: (data) => {
@@ -660,6 +673,39 @@ export default function AddPublications() {
                           )}
                         />
                       </div>
+                      <div className="text-start col-span-1 h-auto ">
+                        <label htmlFor="">Reports</label>
+                        <FormField
+                          control={form.control}
+                          name="reportId"
+                          render={({ field }) => (
+                            <FormItem>
+                              <Select
+                                dir="ltr"
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="select Report" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent className="bg-white">
+                                  {ReportPub?.data.map((report) => (
+                                    <SelectItem
+                                      key={report.id}
+                                      value={String(report.id)}
+                                    >
+                                      {report.ar_Title}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
                     </div>
                     <div className="grid  h-[250px] grid-cols-1 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
                       <div className=" col-span-1 h-auto ">
@@ -790,62 +836,7 @@ export default function AddPublications() {
                     onSubmit={form.handleSubmit(onSubmit)}
                     className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
                   >
-                    <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-                      {/* <div className="col-span-2 h-[50px] mt-7">
-                <FormField
-                  control={form.control}
-                  name="type"
-                  render={({ field }) => (
-                    <FormItem className="col-span-2 flex">
-                      {kindOfCase.map((caseType) => (
-                        <label
-                          key={caseType.value}
-                          className="flex items-center w-full space-x-2"
-                        >
-                          <FormControl>
-                            <div className="relative">
-                              <input
-                                type="checkbox"
-                                value={caseType.value}
-                                checked={selectedValue === caseType.value}
-                                onChange={() => {
-                                  const newValue =
-                                    selectedValue === caseType.value
-                                      ? null
-                                      : caseType.value;
-                                  setSelectedValue(newValue);
-                                  field.onChange(newValue);
-                                }}
-                                className="appearance-none w-6 h-6 border border-gray-300 rounded-full checked:bg-[#D5AE78] checked:border-transparent focus:outline-none"
-                              />
-
-                              <svg
-                                className={`w-4 h-4 text-white absolute top-1 left-1 pointer-events-none ${
-                                  selectedValue === caseType.value
-                                    ? "block"
-                                    : "hidden"
-                                }`}
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20"
-                                fill="currentColor"
-                              >
-                                <path
-                                  fillRule="evenodd"
-                                  d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"
-                                  clipRule="evenodd"
-                                />
-                              </svg>
-                            </div>
-                          </FormControl>
-                          <h1 className="ml-2">{caseType.label}</h1>
-                        </label>
-                      ))}
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div> */}
-                    </div>
+                    <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right "></div>
                     <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
                       <div className=" col-span-1 h-auto ">
                         <label htmlFor="">صورة المنشور</label>
@@ -1158,6 +1149,39 @@ export default function AddPublications() {
                                     )}
                                 </div>
                               </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                      <div className="col-span-1 h-auto ">
+                        <label htmlFor="">التقارير</label>
+                        <FormField
+                          control={form.control}
+                          name="reportId"
+                          render={({ field }) => (
+                            <FormItem>
+                              <Select
+                                dir="rtl"
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                              >
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="اختار تقرير" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent className="bg-white">
+                                  {ReportPub?.data.map((report) => (
+                                    <SelectItem
+                                      key={report.id}
+                                      value={String(report.id)}
+                                    >
+                                      {report.ar_Title}
+                                    </SelectItem>
+                                  ))}
+                                </SelectContent>
+                              </Select>
                               <FormMessage />
                             </FormItem>
                           )}

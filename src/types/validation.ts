@@ -296,6 +296,7 @@ export const addPublishes = z.object({
   t2read: z.string(),
   writersIdes: z.array(z.number()),
   referencesIdes: z.array(z.number()),
+  reportId: z.string().optional(),
 });
 
 export const updatePublishes = z.object({
@@ -331,6 +332,7 @@ export const updatePublishes = z.object({
   t2read: z.string(),
   writersIdes: z.array(z.number()),
   referencesIdes: z.array(z.number()),
+  reportId: z.string().optional(),
 });
 export const addNews = z.object({
   Ar_Title: z.string(),

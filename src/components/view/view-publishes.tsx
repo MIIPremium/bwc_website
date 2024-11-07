@@ -3,7 +3,7 @@ import { addPublishes } from "src/types/validation";
 import { z } from "zod";
 import Label from "src/ui/label";
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance, postApi } from "src/lib/http";
+import { axiosInstance, getApi, postApi } from "src/lib/http";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +15,7 @@ export interface publicationView {
   b_image: string;
   images: string[];
   writers: Writer[];
-  reportId: null;
+  reportId: number;
   report: null;
   publish: boolean;
   t2read: number;
@@ -73,7 +73,11 @@ export interface Writer {
   publication: null[];
   soicalmedia: any[];
 }
-
+export interface ReportPubResp {
+  id: number;
+  ar_Title: string;
+  en_Title: string;
+}
 type ReferenceFormValue = z.infer<typeof addPublishes>;
 
 export default function ViewPublications() {
@@ -99,6 +103,24 @@ export default function ViewPublications() {
     queryFn: fetchData,
     enabled: !!id,
   });
+
+  const { data: ReportPub } = useQuery({
+    queryKey: ["ReportPubView"],
+    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+  });
+
+  // Assuming this is your data structure
+  // ReportPub?.data = [{ reportId: 1, ar_Title: 'Title 1' }, { reportId: 2, ar_Title: 'Title 2' }];
+  // PublicationInfoData?.reportId = 1;
+
+  const ar_Title = ReportPub?.data?.find(
+    (item) => item.id === PublicationInfoData?.reportId
+  )?.ar_Title;
+
+  const en_Title = ReportPub?.data?.find(
+    (item) => item.id === PublicationInfoData?.reportId
+  )?.en_Title;
+
   const openModal = () => {
     if (PublicationInfoData?.b_image) {
       setModalOpen(true);
@@ -267,6 +289,13 @@ export default function ViewPublications() {
                       <p>{Item}</p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">Report Name</label>
+                <div className="">
+                  {en_Title}
                 </div>
               </div>
             </div>
@@ -470,6 +499,12 @@ export default function ViewPublications() {
                       <p>{Item}</p>
                     </div>
                   ))}
+                </div>
+              </div>
+              <div className="text-start col-span-1 h-auto translate-y-10">
+                <label className="font-bold text-xl">اسم التقرير</label>
+                <div className="">
+                  {ar_Title}
                 </div>
               </div>
             </div>

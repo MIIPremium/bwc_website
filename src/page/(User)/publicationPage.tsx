@@ -386,6 +386,7 @@ const PublicationPage = () => {
                               ? `/Analysis-details/${item.id}`
                               : ""
                           }
+                          target="_blank"
                         >
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
                             Read More ...
@@ -630,6 +631,7 @@ const PublicationPage = () => {
                               ? `/Analysis-details/${item.id}`
                               : ""
                           }
+                          target="_blank"
                           className="  w-full"
                         >
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
