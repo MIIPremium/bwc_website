@@ -66,7 +66,12 @@ export default function ArchiveIndex() {
     },
     staleTime: 5 * 60 * 1000, // Cache data for 5 minutes to reduce redundant requests
   });
-
+  const yearOptions = data
+    ?.map((item) => ({
+      label: item.year.toString(),
+      value: item.year.toString(),
+    }))
+    .reverse();
   // console.log("data",data)
   const {
     data: byYear,
@@ -142,10 +147,11 @@ export default function ArchiveIndex() {
                       </SelectTrigger>
 
                       <SelectContent className="bg-white">
-                        <SelectItem value="2024">2024</SelectItem>
-                        <SelectItem value="2023">2023</SelectItem>
-                        <SelectItem value="2022">2022</SelectItem>
-                        <SelectItem value="2021">2021</SelectItem>
+                        {yearOptions?.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
@@ -230,17 +236,18 @@ export default function ArchiveIndex() {
                     <Select
                       dir="ltr"
                       value={selectedYear}
-                      onValueChange={(value) => setSelectedYear(value)} // Updated for clarity
+                      onValueChange={(value) => setSelectedYear(value)}
                     >
                       <SelectTrigger className="w-[48%] float-end rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
                         <SelectValue placeholder="Filter by Year" />
                       </SelectTrigger>
 
                       <SelectContent className="bg-white">
-                        <SelectItem value="2024">2024</SelectItem>
-                        <SelectItem value="2023">2023</SelectItem>
-                        <SelectItem value="2022">2022</SelectItem>
-                        <SelectItem value="2021">2021</SelectItem>
+                        {yearOptions?.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
@@ -331,14 +338,15 @@ export default function ArchiveIndex() {
                       onValueChange={(value) => setSelectedYear(value)}
                     >
                       <SelectTrigger className="w-[48%] float-end rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                        <SelectValue placeholder="Filter by Year" />
+                        <SelectValue placeholder="اختار السنة" />
                       </SelectTrigger>
 
                       <SelectContent className="bg-white">
-                        <SelectItem value="2024">2024</SelectItem>
-                        <SelectItem value="2023">2023</SelectItem>
-                        <SelectItem value="2022">2022</SelectItem>
-                        <SelectItem value="2021">2021</SelectItem>
+                        {yearOptions?.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>
@@ -429,17 +437,18 @@ export default function ArchiveIndex() {
                     <Select
                       dir="rtl"
                       value={selectedYear}
-                      onValueChange={(value) => setSelectedYear(value)} // Updated for clarity
+                      onValueChange={(value) => setSelectedYear(value)}
                     >
                       <SelectTrigger className="w-[48%] float-end rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
                         <SelectValue placeholder="اختار السنة" />
                       </SelectTrigger>
 
                       <SelectContent className="bg-white">
-                        <SelectItem value="2024">2024</SelectItem>
-                        <SelectItem value="2023">2023</SelectItem>
-                        <SelectItem value="2022">2022</SelectItem>
-                        <SelectItem value="2021">2021</SelectItem>
+                        {yearOptions?.map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
                       </SelectContent>
                     </Select>
                   </div>

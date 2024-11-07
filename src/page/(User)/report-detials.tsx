@@ -105,48 +105,54 @@ export default function ReportDetials() {
   //   document.body.removeChild(link);
   // };
 
-  const handleDownload = async () => {
-    if (ReportHomeDetails && ReportHomeDetails?.data.pdfFile) {
-      console.log("PDF URL:", ReportHomeDetails?.data.pdfFile); // Debugging line
+  // const handleDownload = async () => {
+  //   if (ReportHomeDetails && ReportHomeDetails?.data.pdfFile) {
+  //     console.log("PDF URL:", ReportHomeDetails?.data.pdfFile); // Debugging line
 
-      try {
-        // Fetch the file from the URL
-        const response = await fetch(ReportHomeDetails?.data.pdfFile, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/pdf",
-          },
-        });
+  //     try {
+  //       // Fetch the file from the URL
+  //       const response = await fetch(ReportHomeDetails?.data.pdfFile, {
+  //         method: "GET",
+  //         headers: {
+  //           "Content-Type": "application/pdf",
+  //         },
+  //       });
 
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
+  //       if (!response.ok) {
+  //         throw new Error("Network response was not ok");
+  //       }
 
-        // Convert the response to a Blob
-        const blob = await response.blob();
+  //       // Convert the response to a Blob
+  //       const blob = await response.blob();
 
-        // Create a temporary URL for the Blob
-        const url = window.URL.createObjectURL(blob);
+  //       // Create a temporary URL for the Blob
+  //       const url = window.URL.createObjectURL(blob);
 
-        // Create an anchor element and trigger download
-        const link = document.createElement("a");
-        link.href = url;
-        link.download = "ReportDetails.pdf"; // Specify the file name for download
-        link.style.display = "none"; // Hide the element
-        document.body.appendChild(link);
-        link.click();
+  //       // Create an anchor element and trigger download
+  //       const link = document.createElement("a");
+  //       link.href = url;
+  //       link.download = "ReportDetails.pdf"; // Specify the file name for download
+  //       link.style.display = "none"; // Hide the element
+  //       document.body.appendChild(link);
+  //       link.click();
 
-        // Clean up the URL object and remove the link element
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(url);
-      } catch (error) {
-        console.error("Error downloading the file", error);
-      }
-    } else {
-      console.log("PDF URL not available");
-    }
+  //       // Clean up the URL object and remove the link element
+  //       document.body.removeChild(link);
+  //       window.URL.revokeObjectURL(url);
+  //     } catch (error) {
+  //       console.error("Error downloading the file", error);
+  //     }
+  //   } else {
+  //     console.log("PDF URL not available");
+  //   }
+  // };
+
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = `${ReportHomeDetails?.data.pdfFile}`;
+    link.download = "Business World Company Profile 2024.pdf";
+    link.click();
   };
-
   if (isLoading)
     return (
       <div className="flex justify-center items-center w-full ">
