@@ -25,6 +25,7 @@ import Services from "./components/(user)/Services";
 import ServicesArb from "./components/(user)/ServicesArb";
 import { ServicesHomeProp, ServicesHomeResp } from "./types/validation";
 import { useQuery } from "@tanstack/react-query";
+import { LoaderIcon } from "react-hot-toast";
 
 function App() {
   const serversRef = useRef<HTMLDivElement>(null);
@@ -33,7 +34,11 @@ function App() {
   const [bottomPosition, setBottomPosition] = useState<number>(0);
   const [scrollPosition, setScrollPosition] = useState(window.scrollY);
 
-  const { data: services } = useQuery<ServicesHomeProp[]>({
+  const {
+    data: services,
+    isPending,
+    error,
+  } = useQuery<ServicesHomeProp[]>({
     queryFn: () =>
       fetch(
         "https://bwc-api-testing.runasp.net/api/website/Home/Services"
@@ -96,7 +101,13 @@ function App() {
       setScrolls(false);
     }
   }
-
+  if (isPending)
+    return (
+      <div className="flex justify-center items-center w-full ">
+        <LoaderIcon className="mt-12 flex animate-spin items-center justify-end duration-1000" />
+      </div>
+    );
+  if (error) return <div>Error loading report details.</div>;
   return (
     <div className="App">
       {/*  */}
@@ -211,7 +222,10 @@ function App() {
                   Mukalla and Hadramawt in March 2021 with a commercial record
                   number (21/2831).
                 </p>
-                <p dir="ltr" className="text-start mt-6 text-[#5B5B5B] leading-8">
+                <p
+                  dir="ltr"
+                  className="text-start mt-6 text-[#5B5B5B] leading-8"
+                >
                   It manages and operates investment projects and provides
                   economic studies, administrative, financial and marketing
                   consulting and IT solutions and provides its services through
@@ -223,7 +237,7 @@ function App() {
               <div className="w-[100%] h-[50vh] rounded-[2rem] backdrop-blur-md p-[15px] bg-white/30 border border-black mt-8">
                 <div className="flex items-center h-[30%] m-auto mt-2 rounded-[2rem] justify-between ">
                   {" "}
-                  <Link to={"InProucation"} >
+                  <Link to={"InProucation"}>
                     <div
                       className={
                         dir === "ltr"
@@ -234,9 +248,11 @@ function App() {
                       <img src={enterpnure} alt="" className="w-full h-full" />
                     </div>
 
-                    <p className="text-black text-sm">{t("entrepreneurship")}</p>
+                    <p className="text-black text-sm">
+                      {t("entrepreneurship")}
+                    </p>
                   </Link>
-                  <Link to={"InProucation"} >
+                  <Link to={"InProucation"}>
                     <div
                       className={
                         dir === "ltr"
@@ -251,7 +267,9 @@ function App() {
                       />
                     </div>
 
-                    <p className="text-black text-sm  ">{t("project_management")}</p>
+                    <p className="text-black text-sm  ">
+                      {t("project_management")}
+                    </p>
                   </Link>
                 </div>
                 <Link
@@ -285,7 +303,9 @@ function App() {
                       />
                     </div>
 
-                    <p className="text-black text-sm">{t("Education_and_Training")}</p>
+                    <p className="text-black text-sm">
+                      {t("Education_and_Training")}
+                    </p>
                   </div>
 
                   <div className="translate-y-4">
@@ -299,7 +319,9 @@ function App() {
                       <img src={tech} alt="" className="w-full h-full" />
                     </div>
 
-                    <p className="text-black text-sm">{t("software_development")}</p>
+                    <p className="text-black text-sm">
+                      {t("software_development")}
+                    </p>
                   </div>
                 </Link>
               </div>
