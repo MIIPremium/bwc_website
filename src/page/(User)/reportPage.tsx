@@ -268,7 +268,7 @@ const ReportPage = () => {
                         <p className="text-gray-600 text-base leading-7 mt-5 reportIndex">
                           <>{item.en_note}</>
                         </p>
-                        <Link to={`/report-details/${item.id}`}>
+                        <Link to={`/report-details/${item.id}`} target="_blank">
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
                             Read More ...
                           </button>
@@ -441,6 +441,7 @@ const ReportPage = () => {
                         </p>
                         <Link
                           to={`/report-details/${item.id}`}
+                          target="_blank"
                           className="  w-full"
                         >
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">

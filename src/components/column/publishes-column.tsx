@@ -7,6 +7,8 @@ import EditIcon from "src/assets/icons/edit-icon";
 import Tooltip from "src/ui/tooltap";
 
 import ChangePublishesStatusPostDialog from "../dailog/change-publish-publishes";
+import { useQuery } from "@tanstack/react-query";
+import { getApi } from "src/lib/http";
 
 export interface Reference {
   id: number;
@@ -60,7 +62,7 @@ export type AddPublishesOrder = {
   b_image: string;
   images: string[];
   writers: Writer[];
-  reportId: null;
+  reportId: number;
   report: null;
   publish: boolean;
   t2read: number;
@@ -74,6 +76,11 @@ export type AddPublishesOrder = {
   en_Note: string;
   references: null[];
 };
+export interface ReportPubResp {
+  id: number;
+  ar_Title: string;
+  en_Title: string;
+}
 
 export const AddOPublishesColumns: ColumnDef<AddPublishesOrder>[] = [
   {
@@ -95,6 +102,27 @@ export const AddOPublishesColumns: ColumnDef<AddPublishesOrder>[] = [
   {
     accessorKey: "ar_Title",
     header: "عنوان المنشور",
+  },
+  {
+    accessorKey: "reportId",
+    header: "اسم التقرير",
+    cell: ({ row }) => {
+      // const { data: ReportPub } = useQuery({
+      //   queryKey: ["ReportPub"],
+      //   queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+      // });
+      // // Function to get report title based on reportId
+      // const getReportTitle = (reportId: number) => {
+      //   const report = ReportPub?.data.find(
+      //     (report) => report.id === reportId
+      //   );
+      //   // Return Arabic title if it exists, otherwise English title
+      //   return report ? report.ar_Title || report.en_Title : "Title not found";
+      // };
+
+      // Usage example
+      // const reportTitle = getReportTitle(row.original.reportId);
+    },
   },
   {
     accessorKey: "date_of_publish",
@@ -181,6 +209,10 @@ export const AddENPublishesColumns: ColumnDef<AddPublishesOrder>[] = [
   {
     accessorKey: "en_Title",
     header: "post title",
+  },
+  {
+    accessorKey: "reportId",
+    header: "report Name",
   },
   {
     accessorKey: "date_of_publish",

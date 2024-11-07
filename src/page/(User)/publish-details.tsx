@@ -8,7 +8,7 @@ import ClockCircle from "../../assets/icons/clock-circle";
 import Author from "../../components/(user)/author";
 import NewsList from "../../components/(user)/news-list";
 import MorePublish from "src/components/(user)/more-publish";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
@@ -24,7 +24,7 @@ export interface PubblicationResp {
   b_image: string;
   images: string[];
   writers: Writer[];
-  reportId: null;
+  reportId: number;
   report: null;
   publish: boolean;
   t2read: number;
@@ -59,7 +59,11 @@ export interface Writer {
   publication: null[];
   soicalmedia: any[];
 }
-
+export interface ReportPubResp {
+  id: number;
+  ar_Title: string;
+  en_Title: string;
+}
 export default function PublishDetails() {
   const { id } = useParams<{ id: string }>();
   const [language, setLanguage] = useState<string>("");
@@ -80,6 +84,20 @@ export default function PublishDetails() {
     dayjs.locale(language);
     return dayjs().to(dayjs(date));
   };
+
+  const { data: ReportPub } = useQuery({
+    queryKey: ["ReportPubInViewPage"],
+    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+  });
+
+  const matchingItem = ReportPub?.data?.find(
+    (item) => item.id === PPublicDetails?.data.reportId
+  );
+
+  const { id: matchingId, ar_Title } = matchingItem || {};
+
+  console.log("matchingId", matchingId);
+  console.log("ar_Title", ar_Title);
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDiv = () => {
@@ -292,6 +310,20 @@ export default function PublishDetails() {
                       {PPublicDetails?.data.en_Note}
                     </div>
                   </div>
+
+                  {matchingId ? (
+                    <div className="mb-[47px]">
+                      <h2 className="text-xl font-bold mb-5">
+                        ✅ Associated report
+                      </h2>
+                      <Link
+                        to={`/report-details/${matchingId}`}
+                        target="_blank"
+                      >
+                        {ar_Title}
+                      </Link>
+                    </div>
+                  ) : null}
                   {/* <div className="w-full max-w-md mx-auto">
  
 
@@ -556,6 +588,20 @@ export default function PublishDetails() {
                     <h2 className="text-xl font-bold mb-5"> ✅ ملاحظة</h2>
                     <p>{PPublicDetails?.data.ar_Note}</p>
                   </div>
+
+                  {matchingId ? (
+                    <div className="mb-[47px]">
+                      <h2 className="text-xl font-bold mb-5">
+                        ✅ التقرير المرتبط به
+                      </h2>
+                      <Link
+                        to={`/report-details/${matchingId}`}
+                        target="_blank"
+                      >
+                        {ar_Title}
+                      </Link>
+                    </div>
+                  ) : null}
                   {/* <div className="w-full max-w-md mx-auto">
    
 
