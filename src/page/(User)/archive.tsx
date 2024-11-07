@@ -246,7 +246,7 @@ export default function ArchiveIndex() {
                   </div>
                 </div>
               </div>
-              <div className="bg-white rounded-lg shadow-md shadow-md border-2 border-[#E5E5E5]">
+              <div className="bg-white rounded-lg shadow-md  border-2 border-[#E5E5E5]">
                 <div className="mb-6">
                   <div className="flex flex-row justify-between items-center bg-white p-4">
                     <div className="text-5xl font-semibold text-[#D5AE78]">
