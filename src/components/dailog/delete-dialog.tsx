@@ -49,6 +49,7 @@ export default function DeleteDialog({
     },
   });
 
+
   useEffect(() => {
     if (isSuccess) {
       toast.success("تمت الحذف بنجاح.", {
@@ -67,7 +68,8 @@ export default function DeleteDialog({
 
   useEffect(() => {
     if (isError) {
-      toast.error("لم تتم العملية.", {
+      const backendMessage = (error as any)?.response?.data || "لم تتم العملية.";
+      toast.error(`${backendMessage}`, {
         style: {
           border: "1px solid #FF5733",
           padding: "16px",
