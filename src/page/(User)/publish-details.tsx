@@ -95,9 +95,7 @@ export default function PublishDetails() {
   );
 
   const { id: matchingId, ar_Title } = matchingItem || {};
-
-  console.log("matchingId", matchingId);
-  console.log("ar_Title", ar_Title);
+  const { id: matchingIEn, en_Title } = matchingItem || {};
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDiv = () => {
@@ -311,16 +309,16 @@ export default function PublishDetails() {
                     </div>
                   </div>
 
-                  {matchingId ? (
+                  {matchingIEn ? (
                     <div className="mb-[47px]">
                       <h2 className="text-xl font-bold mb-5">
                         ✅ Associated report
                       </h2>
                       <Link
-                        to={`/report-details/${matchingId}`}
+                        to={`/report-details/${matchingIEn}`}
                         target="_blank"
                       >
-                        {ar_Title}
+                        {en_Title}
                       </Link>
                     </div>
                   ) : null}
