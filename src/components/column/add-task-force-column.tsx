@@ -38,14 +38,44 @@ export const AddTaskForceColumns: ColumnDef<AddTaskForceOrder>[] = [
     id: "ar_name",
     accessorKey: "ar_name",
     header: "الاسم الكامل ",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_name}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "ar_degree",
     header: "الدرجة ",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_degree}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "ar_role",
     header: "المسمى الوظيفي ",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_role}
+        </p>
+      );
+    },
   },
 
   {
@@ -109,14 +139,44 @@ export const AddEnTaskForceColumns: ColumnDef<AddTaskForceOrder>[] = [
     id: "en_name",
     accessorKey: "en_name",
     header: "full name ",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_name}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "en_degree",
     header: "degree",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_degree}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "en_role",
     header: "role",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_role}
+        </p>
+      );
+    },
   },
 
   {

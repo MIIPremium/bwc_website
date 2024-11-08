@@ -93,6 +93,16 @@ export const AddAnalysisColumns: ColumnDef<AddAnalysisOrder>[] = [
   {
     accessorKey: "ar_Title",
     header: "عنوان التحليل",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "date_of_publish",
@@ -180,6 +190,16 @@ export const AddENAnalysisColumns: ColumnDef<AddAnalysisOrder>[] = [
   {
     accessorKey: "en_Title",
     header: "analysis title",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "date_of_publish",

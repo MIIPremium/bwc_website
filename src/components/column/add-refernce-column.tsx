@@ -22,9 +22,13 @@ export const AddReferenceColumns: ColumnDef<AddReferenceOrder>[] = [
     accessorKey: "ar_title",
     header: "العنوان",
     cell: ({ row }) => (
-      <div className="flex">
+      <div className="flex ">
         <p className="ml-2">{row.original.ar_title}</p>
-        <a href={row.original.link} target="_blank">
+        <a
+          href={row.original.link}
+          target="_blank"
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+        >
           <LinkIcon />
         </a>
       </div>
@@ -87,7 +91,11 @@ export const EnAddReferenceColumns: ColumnDef<AddReferenceOrder>[] = [
     cell: ({ row }) => (
       <div className="flex">
         <p className="mr-2">{row.original.en_title}</p>
-        <a href={row.original.link} target="_blank">
+        <a
+          href={row.original.link}
+          target="_blank"
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+        >
           <LinkIcon />
         </a>
       </div>

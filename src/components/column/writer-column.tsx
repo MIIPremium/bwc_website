@@ -44,17 +44,18 @@ export const AddWriterColumns: ColumnDef<AddWriterOrder>[] = [
     id: "ar_fullName",
     accessorKey: "ar_fullName",
     header: "الاسم الكامل",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_fullName}
+        </p>
+      );
+    },
   },
-  // {
-  //   id: "Nopub",
-  //   accessorKey: "Nopub",
-  //   sortingFn: "basic",
-  // },
-  // {
-  //   header: "dob", // New Date of Birth column
-  //   accessorKey: "dob",
-  //   sortingFn: "datetime", // Built-in datetime sorting function
-  // },
+
   {
     accessorKey: "no_of_publication",
     header: "عدد المنشورات",
@@ -62,14 +63,22 @@ export const AddWriterColumns: ColumnDef<AddWriterOrder>[] = [
   {
     accessorKey: "ar_role",
     header: "المسمى الوظيفي",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_role}
+        </p>
+      );
+    },
   },
 
   {
     id: "actions",
     header: "الإعدادات",
     cell: ({ row }) => {
-      //   const { data: session } = useSession();
-
       return (
         <div className="flex justify-start ">
           <Link
@@ -125,17 +134,17 @@ export const AddEnWriterColumns: ColumnDef<AddWriterOrder>[] = [
     id: "en_fullName",
     accessorKey: "en_fullName",
     header: "full name",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_fullName}
+        </p>
+      );
+    },
   },
-  // {
-  //   id: "Nopub",
-  //   accessorKey: "Nopub",
-  //   sortingFn: "basic",
-  // },
-  // {
-  //   header: "dob", // New Date of Birth column
-  //   accessorKey: "dob",
-  //   sortingFn: "datetime", // Built-in datetime sorting function
-  // },
   {
     accessorKey: "no_of_publication",
     header: "number of publishes",
@@ -143,6 +152,16 @@ export const AddEnWriterColumns: ColumnDef<AddWriterOrder>[] = [
   {
     accessorKey: "en_role",
     header: "role",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_role}
+        </p>
+      );
+    },
   },
 
   {

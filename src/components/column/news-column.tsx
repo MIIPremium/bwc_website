@@ -52,6 +52,16 @@ export const AddNewsColumns: ColumnDef<AddNewOrder>[] = [
   {
     accessorKey: "ar_Title",
     header: "عنوان الخبر",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "date_of_publish",
@@ -138,6 +148,16 @@ export const AddENNewsColumns: ColumnDef<AddNewOrder>[] = [
   {
     accessorKey: "en_Title",
     header: "news title",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "date_of_publish",
