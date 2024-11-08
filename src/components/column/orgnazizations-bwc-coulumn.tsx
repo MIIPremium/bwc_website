@@ -35,12 +35,27 @@ export const AddOrganizationsColumns: ColumnDef<AddOrganizationsOrder>[] = [
     id: "ar_name",
     accessorKey: "ar_name",
     header: "اسم المؤسسة",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_name}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "link",
     header: "رابط موقع المؤسسة",
     cell: ({ row }) => (
-      <a href={row.original.link} target="_blank">
+      <a
+        href={row.original.link}
+        target="_blank"
+        className="whitespace-nowrap overflow-hidden text-ellipsis"
+        style={{ maxWidth: "20ch" }}
+      >
         {row.original.link}
       </a>
     ),
@@ -105,12 +120,27 @@ export const AddEnOrganizationsColumns: ColumnDef<AddOrganizationsOrder>[] = [
     id: "en_name",
     accessorKey: "en_name",
     header: "institution name",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_name}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "link",
     header: "Link",
     cell: ({ row }) => (
-      <a href={row.original.link} target="_blank">
+      <a
+        href={row.original.link}
+        target="_blank"
+        className="whitespace-nowrap overflow-hidden text-ellipsis"
+        style={{ maxWidth: "20ch" }}
+      >
         {row.original.link}
       </a>
     ),

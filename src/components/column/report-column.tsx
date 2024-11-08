@@ -48,6 +48,16 @@ export const ReportColumns: ColumnDef<ReportColProp>[] = [
   {
     accessorKey: "ar_Title",
     header: "العنوان",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "date_of_report",
@@ -134,6 +144,16 @@ export const ReportEnColumns: ColumnDef<ReportColProp>[] = [
   {
     accessorKey: "en_Title",
     header: "report title",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "date_of_report",

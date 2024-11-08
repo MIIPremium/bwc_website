@@ -102,6 +102,16 @@ export const AddOPublishesColumns: ColumnDef<AddPublishesOrder>[] = [
   {
     accessorKey: "ar_Title",
     header: "عنوان المنشور",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "reportId",
@@ -209,6 +219,16 @@ export const AddENPublishesColumns: ColumnDef<AddPublishesOrder>[] = [
   {
     accessorKey: "en_Title",
     header: "post title",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_Title}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "reportId",

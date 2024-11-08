@@ -35,6 +35,16 @@ export const AddJobColumns: ColumnDef<AddJobOrder>[] = [
     id: "ar_jobTitle",
     accessorKey: "ar_jobTitle",
     header: "عنوان الوظيفة",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_jobTitle}
+        </p>
+      );
+    },
   },
   {
     accessorKey: "endDate",
@@ -122,6 +132,16 @@ export const AddEnJobColumns: ColumnDef<AddJobOrder>[] = [
     id: "en_jobTitle",
     accessorKey: "en_jobTitle",
     header: "Job Title",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_jobTitle}
+        </p>
+      );
+    },
   },
 
   {

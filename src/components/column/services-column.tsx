@@ -24,6 +24,16 @@ export const AddServicesColumns: ColumnDef<AddServicesOrder>[] = [
   {
     accessorKey: "ar_Description",
     header: "وصف الخدمة ",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_Description}
+        </p>
+      );
+    },
   },
 
   {
@@ -76,6 +86,16 @@ export const AddEnServicesColumns: ColumnDef<AddServicesOrder>[] = [
   {
     accessorKey: "en_Description",
     header: "Description ",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_Description}
+        </p>
+      );
+    },
   },
 
   {
