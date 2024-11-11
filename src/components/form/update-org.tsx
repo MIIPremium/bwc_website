@@ -15,10 +15,9 @@ import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { axiosInstance, postApi, putApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
+import { axiosInstance, putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
 export type OrgResp = {
@@ -31,7 +30,7 @@ export type OrgResp = {
 type OrgFormValue = z.infer<typeof updateOrgSchema>;
 
 export default function UpdateOrg() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -51,7 +50,7 @@ export default function UpdateOrg() {
   const {
     data: OrgData,
     error: OrgError,
-    isLoading: OrgIsLoading,
+    isPending: OrgIsPending,
   } = useQuery({
     queryKey: ["UpdateOrg", id],
     queryFn: fetchData,
@@ -116,11 +115,6 @@ export default function UpdateOrg() {
       });
     },
     onSuccess: () => {
-      // toast({
-      //   title: "اشعار",
-      //   variant: "success",
-      //   description: "تمت الاضافة بنجاح",
-      // });
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -135,29 +129,30 @@ export default function UpdateOrg() {
       navigate("/admin-dashboard/organization");
     },
     onError: (error) => {
-      // toast({
-      //   title: "لم تتم العملية",
-      //   description: error.message,
-      //   variant: "destructive",
-      // });
+      toast.error("لم تتم العميله.", {
+        style: {
+          border: "1px solid  #FF5733 ",
+          padding: "16px",
+          color: " #FF5733 ",
+        },
+        iconTheme: {
+          primary: " #FF5733 ",
+          secondary: "#FFFAEE",
+        },
+      });
     },
   });
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const file = event.target.files?.[0];
 
-  //   if (file) {
-  //     const reader = new FileReader();
-
-  //     reader.onloadend = () => {
-  //       setPreview(reader.result as string);
-  //     };
-
-  //     reader.readAsDataURL(file);
-  //   } else {
-  //     setPreview(null);
-  //   }
-  // };
-
+  if (OrgIsPending) {
+    return (
+      <div className="flex w-full items-center justify-center ">
+        <LoaderIcon className="mt-12 flex animate-spin items-center justify-end duration-1000" />
+      </div>
+    );
+  }
+  if (OrgError) {
+    return <div>Error: {OrgError.message}</div>;
+  }
   const onSubmit = (datas: OrgFormValue) => {
     mutate(datas);
   };

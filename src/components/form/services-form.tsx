@@ -16,16 +16,14 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Textarea } from "src/ui/textarea";
 import { useTranslation } from "react-i18next";
 type ServicesFormValue = z.infer<typeof addServicesSchema>;
 
 export default function AddServicesForm() {
-  // const { toast } = useToast();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof addServicesSchema>>({
@@ -57,11 +55,17 @@ export default function AddServicesForm() {
       navigate("/admin-dashboard/services");
     },
     onError: (error) => {
-      // toast({
-      //   title: "لم تتم العملية",
-      //   description: error.message,
-      //   variant: "destructive",
-      // });
+      toast.error("لم تتم العميله.", {
+        style: {
+          border: "1px solid  #FF5733 ",
+          padding: "16px",
+          color: " #FF5733 ",
+        },
+        iconTheme: {
+          primary: " #FF5733 ",
+          secondary: "#FFFAEE",
+        },
+      });
     },
   });
 
