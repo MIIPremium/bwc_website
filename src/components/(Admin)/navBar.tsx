@@ -3,7 +3,7 @@ import adminLogo from "../../assets/img/admin_admin.png";
 import Avter from "../../assets/img/avtar.png";
 import { useTranslation } from "react-i18next";
 import LanguageWorld from "../../assets/icons/language-world";
-import DropDownLang from "./../dropDownLang";
+import Cookies from "js-cookie";
 import ArrowDowm from "../../assets/icons/arrow-dowm";
 import { useNavigate } from "react-router-dom";
 import nav from "react-router-dom";
@@ -17,10 +17,11 @@ export default function NavBar() {
   const [isdropDownOpen, setIsdropDownOpen] = useState(false);
   const [isLogoutDropDown, setLogoutDropDown] = useState(false);
   //
-  const isLoggedIn = localStorage.getItem("accessToken");
+  const isLoggedIn = Cookies.get("accessToken");
   const onLogOut = () => {
     if (isLoggedIn) {
-      localStorage.removeItem("accessToken");
+      Cookies.remove("accessToken");
+      Cookies.remove("refreshToken");
       navigate("/login");
     } else {
       navigate("/login");
@@ -34,9 +35,7 @@ export default function NavBar() {
   const changeLanguage = (code: string) => {
     i18n.changeLanguage(code);
   };
-  function handleDeleteRefresh() {
-    localStorage.removeItem("refreshToken");
-  }
+ 
   useEffect(() => {
     changeLanguage(language);
     document.body.dir = i18n.dir();
@@ -92,7 +91,7 @@ export default function NavBar() {
             <div className="w-[1px] h-[70%] bg-[#D4D4D4] float-end"></div>
             <div
               className="w-[80%] mr-7 cursor-pointer "
-              onClick={handleDeleteRefresh}
+              
             >
               <img src={adminLogo} alt="" className="w-[60%] h-[80%]" />
             </div>

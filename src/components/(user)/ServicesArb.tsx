@@ -71,11 +71,13 @@ const Card = ({ card }: any) => {
         }}
         className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
       ></div>
-      <div className="absolute inset-0 z-10 grid place-content-center">
-        <div className=" text-start w-[100%] h-[50%] p-4">
-          <h1 className="text-3xl mb-6">{card.ar_name}</h1>
-          <p className="text-xl text-[#525252]">{card.ar_Description}</p>
-        </div>
+      <div className=" text-start w-[100%] min-h-[50%] p-4">
+        <h1 className="text-3xl mb-4  mt-14 break-words whitespace-pre-wrap">
+          {card.ar_name}
+        </h1>
+        <p className="text-xl text-[#525252] break-words whitespace-normal">
+          {card.ar_Description}
+        </p>
       </div>
     </div>
   );

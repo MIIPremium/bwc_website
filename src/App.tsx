@@ -638,9 +638,11 @@ function App() {
               <div className="max-h-[100vh] mb-4 w-[45%] ">
                 {services?.map((item) => (
                   <div className="services mx-auto mt-3 mb-10 min-h-60 w-[70%] rounded-lg flex justify-center items-center shadow-[0_05px_20px_0px_rgba(0,0,0,0.3)] relative z-10  bg-white">
-                    <div className=" text-end w-[100%] h-[50%] p-4">
-                      <h1 className="text-3xl mb-6">{item.en_name}</h1>
-                      <p className="text-xl text-[#525252]">
+                    <div className=" text-end w-[100%] min-h-[50%] p-4">
+                      <h1 className="text-3xl mb-4 mt-8 break-words whitespace-pre-wrap">
+                        {item.en_name}
+                      </h1>
+                      <p className="text-xl text-[#525252] break-words whitespace-normal">
                         {item.en_Description}
                       </p>
                     </div>
@@ -666,10 +668,12 @@ function App() {
               </div>
               <div className="max-h-[100vh] mb-4 w-[45%] ">
                 {services?.map((item) => (
-                  <div className="services-ar mx-auto mt-3 mb-10 min-h-60 w-[70%] rounded-lg flex justify-center items-center shadow-[0_05px_20px_0px_rgba(0,0,0,0.3)] relative z-10  bg-white">
-                    <div className=" text-start w-[100%] h-[50%] p-4">
-                      <h1 className="text-3xl mb-6">{item.ar_name}</h1>
-                      <p className="text-xl text-[#525252]">
+                  <div className="services-ar mx-auto mt-3 mb-10 min-h-60 w-[70%] rounded-lg flex justify-center items-center shadow-[0_05px_20px_0px_rgba(0,0,0,0.3)] relative z-10 bg-white">
+                    <div className="text-start w-[100%] min-h-[50%] p-4">
+                      <h1 className="text-3xl mb-4 mt-8 break-words whitespace-pre-wrap">
+                        {item.ar_name}
+                      </h1>
+                      <p className="text-xl text-[#525252] break-words whitespace-normal">
                         {item.ar_Description}
                       </p>
                     </div>
