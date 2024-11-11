@@ -4,7 +4,6 @@ import BulletList from "@tiptap/extension-bullet-list";
 import OrderedList from "@tiptap/extension-ordered-list";
 import ListItem from "@tiptap/extension-list-item";
 import Toolbar from "./Toolbar";
-import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 
 export default function Tiptap({
@@ -14,8 +13,6 @@ export default function Tiptap({
   description: string;
   onChange: (richText: string) => void;
 }) {
-  const { i18n } = useTranslation();
-  const dir = i18n.dir();
   const editor = useEditor({
     extensions: [StarterKit.configure(), BulletList, OrderedList, ListItem],
     content: description,
