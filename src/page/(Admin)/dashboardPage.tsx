@@ -4,40 +4,38 @@ import NavBar from "../../components/(Admin)/navBar";
 import SideNab from "../../components/(Admin)/sideNab";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 export default function DashboardPage() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
 
-  const isLoggedIn = localStorage.getItem("accessToken");
-  const isRefreshToken = localStorage.getItem("refreshToken");
+  const isLoggedIn = Cookies.get("accessToken");
+  const isRefreshToken = Cookies.get("refreshToken");
   const [isRefreshTokenDeleted, setIsRefreshTokenDeleted] = useState(false);
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     toast.success("You are logged in successfully!");
-  //   }
-  //   if (!isLoggedIn) {
-  //     navigate("/NoAccess");
-  //   }
-  //   // if (!isRefreshToken) {
-  //   //   navigate("/RefreshToken");
-  //   // }
-  //   // const checkAndDeleteRefreshToken = async () => {
-  //   //   const localStorageRefreshToken = localStorage.getItem("refreshToken");
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/RefreshToken");
+    }
+    // if (!isRefreshToken) {
+    //   navigate("/RefreshToken");
+    // }
+    // const checkAndDeleteRefreshToken = async () => {
+    //   const localStorageRefreshToken = Cookies.getItem("refreshToken");
 
-  //   //   if (localStorageRefreshToken) {
-  //   //     const timeoutId = setTimeout(() => {
-  //   //       setIsRefreshTokenDeleted(true);
-  //   //       navigate("/RefreshToken");
-  //   //     }, 3000);
+    //   if (localStorageRefreshToken) {
+    //     const timeoutId = setTimeout(() => {
+    //       setIsRefreshTokenDeleted(true);
+    //       navigate("/RefreshToken");
+    //     }, 3000);
 
-  //   //     return () => clearTimeout(timeoutId);
-  //   //   }
-  //   // };
+    //     return () => clearTimeout(timeoutId);
+    //   }
+    // };
 
-  //   // checkAndDeleteRefreshToken();
-  // }, []);
+    // checkAndDeleteRefreshToken();
+  }, []);
   return (
     <>
       {dir === "ltr" ? (

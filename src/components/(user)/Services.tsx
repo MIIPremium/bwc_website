@@ -57,57 +57,6 @@ const HorizontalScrollCarousel = () => {
     </section>
   );
 };
-// const cards = [
-//   {
-//     url: "/imgs/abstract/1.jpg",
-//     title: "design strategies",
-//     subTitle:
-//       "Design effective strategies and develop business plans for businesses and business enterprises",
-//     id: 1,
-//   },
-//   {
-//     url: "/imgs/abstract/2.jpg",
-//     title: "design strategies",
-//     subTitle:
-//       "Design effective strategies and develop business plans for businesses and business enterprises",
-//     id: 2,
-//   },
-//   {
-//     url: "/imgs/abstract/3.jpg",
-//     title: "design strategies",
-//     subTitle:
-//       "Design effective strategies and develop business plans for businesses and business enterprises",
-//     id: 3,
-//   },
-//   {
-//     url: "/imgs/abstract/4.jpg",
-//     title: "design strategies",
-//     subTitle:
-//       "Design effective strategies and develop business plans for businesses and business enterprises",
-//     id: 4,
-//   },
-//   {
-//     url: "/imgs/abstract/5.jpg",
-//     title: "design strategies",
-//     subTitle:
-//       "Design effective strategies and develop business plans for businesses and business enterprises",
-//     id: 5,
-//   },
-//   {
-//     url: "/imgs/abstract/6.jpg",
-//     title: "design strategies",
-//     subTitle:
-//       "Design effective strategies and develop business plans for businesses and business enterprises",
-//     id: 6,
-//   },
-//   {
-//     url: "/imgs/abstract/7.jpg",
-//     title: "design strategies",
-//     subTitle:
-//       "Design effective strategies and develop business plans for businesses and business enterprises",
-//     id: 7,
-//   },
-// ];
 
 const Card = ({ card }: any) => {
   return (
@@ -123,11 +72,13 @@ const Card = ({ card }: any) => {
         }}
         className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
       ></div>
-      <div className="absolute inset-0 z-10 grid place-content-center">
-        <div className=" text-start w-[100%] h-[50%] p-4">
-          <h1 className="text-3xl mb-6">{card.en_name}</h1>
-          <p className="text-xl text-[#525252]">{card.en_Description}</p>
-        </div>
+      <div className=" text-end w-[100%] min-h-[50%] p-4">
+        <h1 className="text-3xl mb-4  mt-14 break-words whitespace-pre-wrap">
+          {card.en_name}
+        </h1>
+        <p className="text-xl text-[#525252] break-words whitespace-normal">
+          {card.en_Description}
+        </p>
       </div>
     </div>
   );

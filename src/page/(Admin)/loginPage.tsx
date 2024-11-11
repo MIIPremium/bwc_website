@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import login from "../../assets/img/8H4A08688.jpg(1).jpg";
 import login1 from "../../assets/img/عالم الأعمال خلفية أبيض 21.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-
+import Cookies from "js-cookie";
 interface RefreshToken {
   token: string;
 }
@@ -13,58 +13,72 @@ interface RefreshToken {
 export default function LoginPage() {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const location = useLocation();
   const dir = i18n.dir();
 
   const [loginPassword, setLoginPassword] = useState<string>("");
-  const [refreshToken, setRefreshToken] = useState<RefreshToken | null>(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  function handlePasswoed(value: string) {
-    setLoginPassword(value);
-  }
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const usernameServer = "11183953";
-  const password = "60-dayfreetrial";
-  const email = "";
-  const handleSubmit = async (event: any) => {
+  const handlePassword = (value: string) => {
+    setLoginPassword(value);
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const encodedCredentials = btoa("11183953:60-dayfreetrial");
+    if (isSubmitting) return; // لمنع إرسال نفس الطلب عدة مرات
+
+    setIsSubmitting(true);
 
     try {
-      const response = await axios({
-        url: "/login",
-        method: "post",
-        baseURL: "https://mahfoudsabbah-001-site1.jtempurl.com/",
-        data: {
+      // إرسال طلب تسجيل الدخول
+      const response = await axios.post(
+        "https://bwc-api-testing.runasp.net/login",
+        {
           email: "hamoud@gmail.com",
           password: loginPassword,
         },
-        // auth: {
-        //   username: usernameServer,
-        //   password: password,
-        // },
-        headers: { "X-Requested-With": "XMLHttpRequest" },
-      });
-      console.log("Login successful:", response.data);
+        { headers: { "X-Requested-With": "XMLHttpRequest" } }
+      );
 
-      if (response.data.accessToken) {
-        localStorage.setItem("accessToken", response.data.accessToken);
-      }
-      if (response.data.refreshToken) {
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-      }
-      if (response?.status === 200) {
-        navigate("/admin-dashboard");
+      if (response?.status === 200 && response.data.accessToken) {
+        // حفظ الـ accessToken في الكوكيز
+        Cookies.set("accessToken", response.data.accessToken, {
+          expires: new Date(new Date().getTime() + 3600 * 1000),
+        });
+
+        // حفظ الـ refreshToken في الكوكيز
+        if (response.data.refreshToken) {
+          Cookies.set("refreshToken", response.data.refreshToken, {
+            expires: 7, // صلاحية لـ 7 أيام
+          });
+        }
+
+        toast.success("مرحبا بك مجدداً.", {
+          style: {
+            border: "1px solid #4FFFB0",
+            padding: "16px",
+            color: "#4FFFB0",
+          },
+          iconTheme: {
+            primary: "#4FFFB0",
+            secondary: "#FFFAEE",
+          },
+        });
+
+        // إعادة توجيه المستخدم إلى صفحة الـ admin-dashboard بعد النجاح
+        setTimeout(() => {
+          navigate("/admin-dashboard");
+        }, 1000);
       } else {
-        toast.error("wrong Password");
+        toast.error("كلمة المرور غير صحيحة.");
       }
-    } catch (error) {
-      const errors = error;
-      console.error(error);
-      toast.error("An error occurred during login.");
+    } catch (error: any) {
+      toast.error("تاكد من ادخال كلمة المرور الصحيحة");
+    } finally {
+      setIsSubmitting(false);
     }
   };
-
   return (
     <div className="h-[100vh] w-full flex">
       <div className="w-[60%] h-full flex justify-center items-center">
@@ -99,7 +113,7 @@ export default function LoginPage() {
                   placeholder="ادخل كلمة المرور ..."
                   required
                   value={loginPassword}
-                  onChange={(e) => handlePasswoed(e.target.value)}
+                  onChange={(e) => handlePassword(e.target.value)}
                   className="w-full px-4 py-2 rounded-xl bg-white mt-2 border-2 border-[#797B7D] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
                 />
               </div>
@@ -107,15 +121,12 @@ export default function LoginPage() {
                 type="button"
                 className=" mt-10 w-full block shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
               >
-                <Link
-                  to={"/admin-dashboard"}
-                  className="flex items-center justify-center"
-                >
-                  <Link to={"/admin-dashboard"} className="ml-4 text-white">
-                    تسجيل دخول
-                  </Link>
+                <div className="flex items-center justify-center">
+                  <button type="submit" className="ml-4 text-white">
+                    {isSubmitting ? "جاري تسجيل الدخول..." : "تسجيل دخول"}
+                  </button>
                   <Toaster />
-                </Link>
+                </div>
               </button>
             </form>
           </div>
@@ -124,3 +135,62 @@ export default function LoginPage() {
     </div>
   );
 }
+
+// const navigate = useNavigate();
+//   const { t, i18n } = useTranslation();
+//   const dir = i18n.dir();
+
+//   const [loginPassword, setLoginPassword] = useState<string>("");
+//   const [errorMessage, setErrorMessage] = useState("");
+
+//   function handlePassword(value: string) {
+//     setLoginPassword(value);
+//   }
+
+//   const handleSubmit = async (event: any) => {
+//     event.preventDefault();
+
+//     try {
+//       const response = await axios({
+//         url: "/login",
+//         method: "post",
+//         baseURL: "https://bwc-api-testing.runasp.net/",
+//         data: {
+//           email: "hamoud@gmail.com",
+//           password: loginPassword,
+//         },
+//         headers: { "X-Requested-With": "XMLHttpRequest" },
+//       });
+
+//       console.log("Login successful:", response.data);
+
+//       if (response.data.accessToken) {
+//         // Set the accessToken cookie with expiresIn from the response
+//         const accessTokenExpiration = new Date(
+//           new Date().getTime() + response.data.expiresIn * 1000
+//         );
+//         Cookies.set("accessToken", response.data.accessToken, {
+//           expires: accessTokenExpiration,
+//         });
+//       }
+
+//       if (response.data.refreshToken) {
+//         // Set the refreshToken cookie (assuming a default expiry of 7 days)
+//         const refreshTokenExpiration = new Date(
+//           new Date().getTime() + 7 * 24 * 60 * 60 * 1000
+//         );
+//         Cookies.set("refreshToken", response.data.refreshToken, {
+//           expires: refreshTokenExpiration,
+//         });
+//       }
+
+//       if (response?.status === 200) {
+//         navigate("/admin-dashboard");
+//       } else {
+//         toast.error("Wrong Password");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       toast.error("An error occurred during login.");
+//     }
+//   };
