@@ -16,17 +16,17 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
-import EnBreadcrumb from "src/ui/en-breadcrumb";
+import Cookies from "js-cookie";
 
 type ReferenceFormValue = z.infer<typeof addReferenceSchema>;
 
 export default function AddReferenceForm() {
-  // const { toast } = useToast();
-  const { t, i18n } = useTranslation();
+  const AccessToken = Cookies.get("refreshToken");
+  
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof addReferenceSchema>>({
@@ -36,11 +36,19 @@ export default function AddReferenceForm() {
   const { mutate } = useMutation({
     mutationKey: ["AddReferences"],
     mutationFn: (datas: ReferenceFormValue) =>
-      postApi("/api/References", {
-        ar_title: datas.ar_title,
-        en_title: datas.en_title,
-        link: datas.link,
-      }),
+      postApi(
+        "/api/References",
+        {
+          ar_title: datas.ar_title,
+          en_title: datas.en_title,
+          link: datas.link,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      ),
     onSuccess: () => {
       toast.success("تمت الاضافة بنجاح.", {
         style: {

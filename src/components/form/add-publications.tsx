@@ -8,10 +8,7 @@ import {
   FormMessage,
 } from "../../ui/form";
 import {
-  MAX_FILE_SIZE,
   ACCEPTED_IMAGE_TYPES,
-  MAX_FILES,
-  publishes,
   Writer,
 } from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,9 +20,8 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getApi, patchApi, postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
-import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
 import { Textarea } from "src/ui/textarea";
 import {
@@ -43,13 +39,7 @@ import { useTranslation } from "react-i18next";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 import Breadcrumb from "src/ui/breadcrumb";
 
-type WriterOption = {
-  value: number;
-};
-type ReferenceOption = {
-  label: string;
-  value: number;
-};
+
 type PublishesFormValue = z.infer<typeof addPublishes>;
 interface WriterResponse {
   data: {
@@ -105,18 +95,14 @@ export interface ReportPubResp {
   ar_Title: string;
   en_Title: string;
 }
-const kindOfCase = [
-  { label: "منشورات", value: 1 },
-  { label: "الاخبار", value: 2 },
-  { label: "تحليلات", value: 3 },
-] as const;
+
+
 export default function AddPublications() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
 
   const navigate = useNavigate();
-  const [preview, setPreview] = useState<string | null>(null);
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+  const [_preview, setPreview] = useState<string | null>(null);
   const form = useForm<z.infer<typeof addPublishes>>({
     resolver: zodResolver(addPublishes),
   });
@@ -159,7 +145,7 @@ export default function AddPublications() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-  const [error, setError] = useState<string>("");
+  const [_error, setError] = useState<string>("");
 
   useEffect(() => {
     form.setValue("writersIdes", selectedWriters);
@@ -228,9 +214,9 @@ export default function AddPublications() {
   // Second Mutation: Patching Publications
   const {
     mutate: secondMutate,
-    isError: secondIsError,
-    isSuccess: secondIsSuccess,
-    isPending: secondIsPending,
+    isError: _secondIsError,
+    isSuccess: _secondIsSuccess,
+    isPending: _secondIsPending,
   } = useMutation({
     mutationKey: ["publishesPatch"],
     mutationFn: (datas: MutationData) => {
@@ -274,50 +260,6 @@ export default function AddPublications() {
       });
     },
   });
-
-  const handleMultiFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setError("");
-    const files = e.target.files;
-    if (files) {
-      const fileArray = Array.from(files);
-
-      // Validate files using Zod schema
-      const validation = addPublishes.safeParse({ images: fileArray });
-      if (!validation.success) {
-        setSelectedFiles([]);
-        setPreviewUrls([]);
-        setError(validation.error.errors[0].message);
-        return;
-      }
-
-      setSelectedFiles(fileArray);
-
-      // Generate preview URLs
-      const urls = fileArray.map((file) => URL.createObjectURL(file));
-      setPreviewUrls(urls);
-
-      // Update form state with File[]
-      form.setValue("images", fileArray);
-    }
-  };
-
-  const handleDeleteImage = (index: number) => {
-    const updatedFiles = [...selectedFiles];
-    const updatedUrls = [...previewUrls];
-
-    // Revoke the object URL to free memory
-    URL.revokeObjectURL(updatedUrls[index]);
-
-    // Remove the file and URL from the arrays
-    updatedFiles.splice(index, 1);
-    updatedUrls.splice(index, 1);
-
-    setSelectedFiles(updatedFiles);
-    setPreviewUrls(updatedUrls);
-
-    // Update form state
-    form.setValue("images", updatedFiles);
-  };
 
   const onSubmit = (datas: PublishesFormValue) => {
     mutate(datas);
