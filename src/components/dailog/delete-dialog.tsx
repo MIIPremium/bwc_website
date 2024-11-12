@@ -11,9 +11,7 @@ import {
 } from "../../ui/alert-dialog";
 import { deleteApi } from "../../lib/http";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Trash } from "lucide-react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "src/ui/button";
@@ -33,7 +31,7 @@ export default function DeleteDialog({
   path,
 }: DeleteDialogProps) {
   const queryClient = useQueryClient();
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
 
   const { mutate, isSuccess, isError, error } = useMutation({

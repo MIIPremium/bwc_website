@@ -3,15 +3,11 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
 } from "../../ui/form";
-import { axiosInstance, deleteApi, patchApi } from "../../lib/http";
-import { useToast } from "../../ui/use-toast";
-// import { useAuthHeader } from "react-auth-kit";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Repeat2, Trash } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
+import { axiosInstance, patchApi } from "../../lib/http";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Repeat2 } from "lucide-react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -27,7 +23,6 @@ import { Button } from "src/ui/button";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import publishIcon from "../../assets/img/publishes-icon.png";
 import {
   Select,
   SelectContent,
@@ -62,17 +57,12 @@ export type JobResp = {
 };
 type UpdateAvailable = z.infer<typeof formSchema>;
 export default function ChangePublishesDialog({ id }: DeleteDialogProps) {
-  const availabilityOptions = [
-    { label: "نشر", value: "true" },
-    { label: "غير منشور", value: "false" },
-  ];
   const [publish, _setPublish] = useState([
     { label: "مشنور", enLable: "publish", value: true },
     { label: "غير منشور", enLable: "unpublished", value: false },
   ]);
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -84,8 +74,8 @@ export default function ChangePublishesDialog({ id }: DeleteDialogProps) {
   };
   const {
     data: JobInfoData,
-    error: JobInfoError,
-    isLoading: JobInfoIsLoading,
+    error: _JobInfoError,
+    isLoading: _JobInfoIsLoading,
   } = useQuery({
     queryKey: ["getByIdJob", id],
     queryFn: fetchData,

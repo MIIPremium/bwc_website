@@ -70,7 +70,7 @@ export const AddJobColumns: ColumnDef<AddJobOrder>[] = [
 
   {
     accessorKey: "publish",
-    header: "نشر/إلغاء النشر",
+    header: "حالة النشر",
     cell: ({ row }) => {
       const publish = row.original.publish;
       return publish === true ? "نشر" : "غير منشور";
@@ -167,7 +167,7 @@ export const AddEnJobColumns: ColumnDef<AddJobOrder>[] = [
 
   {
     accessorKey: "publish",
-    header: "publish/unpublished",
+    header: "publication Status",
     cell: ({ row }) => {
       const publish = row.original.publish;
       return publish === true ? "publish" : "unpublished";
