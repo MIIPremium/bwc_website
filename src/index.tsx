@@ -11,7 +11,6 @@ import TermsOfUse from "./page/(User)/termsOfUse";
 import PrivacyPolicy from "./page/(User)/privacyPolicy";
 import LoginPage from "./page/(Admin)/loginPage";
 import DashboardPage from "./page/(Admin)/dashboardPage";
-import Try from "./page/try";
 import NoAccess from "./page/(Admin)/noaccess";
 import InProucation from "./page/(User)/in-proucation";
 import AboutUs from "./page/(User)/aboutUs";
@@ -318,10 +317,7 @@ const router = createBrowserRouter([
     path: "/RefreshToken",
     element: <RefreshTokenPage />,
   },
-  {
-    path: "/try",
-    element: <Try />,
-  },
+
   {
     path: "*",
     element: <NotFoundPage />,

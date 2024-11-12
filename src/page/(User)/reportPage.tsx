@@ -6,16 +6,7 @@ import sliderImagePlaceholder from "../../assets/img/news_1.jpg";
 import sliderImagePlaceholder1 from "../../assets/img/news_2.jpg";
 import { CalendarMinus2Icon, MoveLeft, MoveRight } from "lucide-react";
 import { Input } from "src/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "src/ui/select";
 import { Link } from "react-router-dom";
-
-import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import { getApi } from "src/lib/http";
 import { useTranslation } from "react-i18next";
@@ -38,22 +29,7 @@ interface publish {
     | undefined;
 }
 
-const publishes: publish[] = [
-  {
-    imgs: sliderImagePlaceholder,
-    title:
-      "تعمل شركة عالم الأعمال للاستثمار والدراسات على تمكين المستثمرين وأصحاب الأعمال لإدارة وتشغيل مشاريعهم الاستثمارية في حضرموت وفق أحدث النظم والأساليب الإدارية الحديثة والمبتكرة",
-    publish_date: new Date("2024-03-9"),
-    // writers: { name: "حمود احمد سيف العطاس", img: writerImagePlaceholder },
-  },
-  {
-    imgs: sliderImagePlaceholder1,
-    title:
-      "مدير عام بنك بن دول للتمويل الأصغر الإسلامي يزور شركة عالم الأعمال للاستثمار والدراسات وأكاديمية بريميوم للقيادة والإدارة. ",
-    publish_date: new Date("2024-03-1"),
-    // writers: { name: "حمود احمد سيف العطاس", img: writerImagePlaceholder },
-  },
-];
+
 
 export interface sidInfo {
   id: number;
@@ -86,11 +62,10 @@ export interface ReportsRespons {
 const ReportPage = () => {
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const [searchQuery, setSearchQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
   const [isAscending, setIsAscending] = useState(false);
   // const [date, setDate] = React.useState<Date>();
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -109,10 +84,7 @@ const ReportPage = () => {
       setSubmittedQuery(searchQuery); // Update submitted value to trigger search
     }
   };
-  const handleAscendingChange = (value: string) => {
-    setIsAscending(value === "oldest");
-  };
-  console.log("submittedQuery", submittedQuery);
+  
   const { data: ReportResp, isPending } = useQuery({
     queryKey: ["ManagingReports", submittedQuery],
     queryFn: () =>

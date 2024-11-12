@@ -8,10 +8,6 @@ import {
   FormMessage,
 } from "../../ui/form";
 import {
-  MAX_FILE_SIZE,
-  ACCEPTED_IMAGE_TYPES,
-  MAX_FILES,
-  publishes,
   Writer,
 } from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,18 +19,10 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getApi, patchApi, postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
-import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
 import { Textarea } from "src/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "src/ui/select";
 import EngTiptap from "src/ui/EngTiptap";
 import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
@@ -43,13 +31,7 @@ import { useTranslation } from "react-i18next";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 import Breadcrumb from "src/ui/breadcrumb";
 
-type WriterOption = {
-  value: number;
-};
-type ReferenceOption = {
-  label: string;
-  value: number;
-};
+
 type AnalysisFormValue = z.infer<typeof addAnalysis>;
 interface WriterResponse {
   data: {
@@ -101,17 +83,14 @@ export type ReferenceResp = {
   en_title: string;
   link: string;
 };
-const kindOfCase = [
-  { label: "منشورات", value: 1 },
-  { label: "الاخبار", value: 2 },
-  { label: "تحليلات", value: 3 },
-] as const;
+
+
 export default function AddFormAnalysis() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
-  const [preview, setPreview] = useState<string | null>(null);
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+  const [_preview, setPreview] = useState<string | null>(null);
+  
   const form = useForm<z.infer<typeof addAnalysis>>({
     resolver: zodResolver(addAnalysis),
   });
@@ -171,10 +150,7 @@ export default function AddFormAnalysis() {
     label: writer.ar_title,
     value: writer.id,
   }));
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-
-  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-  const [error, setError] = useState<string>("");
+  
 
   useEffect(() => {
     form.setValue("writersIdes", selectedWriters);
@@ -241,9 +217,9 @@ export default function AddFormAnalysis() {
   // Second Mutation: Patching Publications
   const {
     mutate: secondMutate,
-    isError: secondIsError,
-    isSuccess: secondIsSuccess,
-    isPending: secondIsPending,
+    isError: _secondIsError,
+    isSuccess: _secondIsSuccess,
+    isPending: _secondIsPending,
   } = useMutation({
     mutationKey: ["AnalysisPatch"],
     mutationFn: (datas: MutationData) => {

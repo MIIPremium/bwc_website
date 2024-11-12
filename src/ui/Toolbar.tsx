@@ -9,13 +9,10 @@ import {
 } from "lucide-react";
 
 import { Toggle } from "./Toggle";
-import { useTranslation } from "react-i18next";
 type Props = {
   editor: Editor | null;
 };
 export default function Toolbar({ editor }: Props) {
-  const { i18n } = useTranslation();
-  const dir = i18n.dir();
   if (!editor) {
     return null;
   }

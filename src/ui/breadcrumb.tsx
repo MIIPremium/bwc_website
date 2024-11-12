@@ -5,8 +5,8 @@ const Breadcrumb = (props: any) => {
   const text2 = props.tilte2;
   const text3 = props.tilte3;
 
-  const [fillText1, _setFillText1] = useState(text2 === "");
-  const [fillText2, _setFillText2] = useState(text3 === "");
+  const [fillText1] = useState(text2 === "");
+  const [fillText2] = useState(text3 === "");
 
   return (
     <div className="max-w-screen-3xl mx-auto px-4">

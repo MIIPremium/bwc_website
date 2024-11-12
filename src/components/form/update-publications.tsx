@@ -7,13 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import {
-  MAX_FILE_SIZE,
-  ACCEPTED_IMAGE_TYPES,
-  MAX_FILES,
-  publishes,
-  Writer,
-} from "../../types/validation";
+import { ACCEPTED_IMAGE_TYPES, Writer } from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { updatePublishes } from "src/types/validation";
@@ -22,10 +16,9 @@ import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { axiosInstance, getApi, patchApi, postApi, putApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
+import { axiosInstance, getApi, patchApi, putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
 import { Textarea } from "src/ui/textarea";
 import {
@@ -181,9 +174,6 @@ export default function UpdatePublications() {
   }));
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
-  const [previewUrls, setPreviewUrls] = useState<string[]>([]);
-  const [error, setError] = useState<string>("");
-
   useEffect(() => {
     if (id) {
       const numericId = parseInt(id, 10);
@@ -316,7 +306,6 @@ export default function UpdatePublications() {
     enabled: !!id,
   });
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
-  const [isNewFileSelected, setIsNewFileSelected] = useState(false); // Track if new image is selected
   const [selectedWriters, setSelectedWriters] = useState<number[]>([]);
   console.log("selectedWriters", selectedWriters);
   console.log("selectedReference", selectedReference);
@@ -359,49 +348,6 @@ export default function UpdatePublications() {
       shouldValidate: true,
     });
   }, [selectedReference]);
-  const handleMultiFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setError("");
-    const files = e.target.files;
-    if (files) {
-      const fileArray = Array.from(files);
-
-      // Validate files using Zod schema
-      const validation = updatePublishes.safeParse({ images: fileArray });
-      if (!validation.success) {
-        setSelectedFiles([]);
-        setPreviewUrls([]);
-        setError(validation.error.errors[0].message);
-        return;
-      }
-
-      setSelectedFiles(fileArray);
-
-      // Generate preview URLs
-      const urls = fileArray.map((file) => URL.createObjectURL(file));
-      setPreviewUrls(urls);
-
-      // Update form state with File[]
-      form.setValue("images", fileArray);
-    }
-  };
-
-  const handleDeleteImage = (index: number) => {
-    const updatedFiles = [...selectedFiles];
-    const updatedUrls = [...previewUrls];
-
-    // Revoke the object URL to free memory
-    URL.revokeObjectURL(updatedUrls[index]);
-
-    // Remove the file and URL from the arrays
-    updatedFiles.splice(index, 1);
-    updatedUrls.splice(index, 1);
-
-    setSelectedFiles(updatedFiles);
-    setPreviewUrls(updatedUrls);
-
-    // Update form state
-    form.setValue("images", updatedFiles);
-  };
 
   const onSubmit = (datas: PublishesFormValue) => {
     mutate(datas);

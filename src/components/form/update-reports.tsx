@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   FormControl,
@@ -7,13 +7,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import {
-  MAX_FILE_SIZE,
-  ACCEPTED_IMAGE_TYPES,
-  MAX_FILES,
-  publishes,
-  Writer,
-} from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { updateReportsScheme } from "src/types/validation";
@@ -22,32 +15,16 @@ import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { axiosInstance, getApi, patchApi, postApi, putApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
+import { axiosInstance, putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast, { LoaderIcon } from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
 import { Textarea } from "src/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "src/ui/select";
 import EngTiptap from "src/ui/EngTiptap";
-import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
 import { CircleX } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-type WriterOption = {
-  value: number;
-};
-type ReferenceOption = {
-  label: string;
-  value: number;
-};
 type AddReportsFormValue = z.infer<typeof updateReportsScheme>;
 interface ReportByIdResponse {
   id: number;
@@ -100,19 +77,14 @@ export type ReferenceResp = {
   en_title: string;
   link: string;
 };
-const kindOfCase = [
-  { label: "منشورات", value: 1 },
-  { label: "الاخبار", value: 2 },
-  { label: "تحليلات", value: 3 },
-] as const;
+
 export default function UpdateReportsForm() {
   const { id } = useParams<{ id: string }>();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
   const [preview, setPreview] = useState<string | null>(null);
   const [prePDfview, setPrePdfview] = useState<string | null>(null);
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const [existingPdfImage, setExistingPdfImage] = useState<string | null>(null);
   const form = useForm<z.infer<typeof updateReportsScheme>>({
@@ -155,7 +127,7 @@ export default function UpdateReportsForm() {
   const {
     data: ReportByIdData,
     error: ReportByIdError,
-    isLoading: ReportByIdIsLoading,
+    isPending: ReportByIdIsPending,
   } = useQuery({
     queryKey: ["ReportById", id],
     queryFn: fetchData,
@@ -291,7 +263,16 @@ export default function UpdateReportsForm() {
       });
     },
   });
-
+  if (ReportByIdIsPending) {
+    return (
+      <div className="flex w-full items-center justify-center ">
+        <LoaderIcon className="mt-12 flex animate-spin items-center justify-end duration-1000" />
+      </div>
+    );
+  }
+  if (ReportByIdError) {
+    return <div>Error: {ReportByIdError.message}</div>;
+  }
   const onSubmit = (datas: AddReportsFormValue) => {
     mutate(datas);
   };
@@ -1252,7 +1233,7 @@ export default function UpdateReportsForm() {
             </div>
             <div className="w-full translate-x-10 flex justify-end mt-20 ">
               <Button className=" mb-10 inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                إضافة
+                تعديل
               </Button>
             </div>
           </form>

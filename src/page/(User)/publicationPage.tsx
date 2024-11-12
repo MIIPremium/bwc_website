@@ -14,8 +14,6 @@ import {
   SelectValue,
 } from "src/ui/select";
 import { Link } from "react-router-dom";
-
-import { useForm } from "react-hook-form";
 import { useQuery } from "@tanstack/react-query";
 import { getApi } from "src/lib/http";
 import { useTranslation } from "react-i18next";
@@ -38,23 +36,6 @@ interface publish {
     | undefined;
 }
 
-const publishes: publish[] = [
-  {
-    imgs: sliderImagePlaceholder,
-    title:
-      "تعمل شركة عالم الأعمال للاستثمار والدراسات على تمكين المستثمرين وأصحاب الأعمال لإدارة وتشغيل مشاريعهم الاستثمارية في حضرموت وفق أحدث النظم والأساليب الإدارية الحديثة والمبتكرة",
-    publish_date: new Date("2024-03-9"),
-    // writers: { name: "حمود احمد سيف العطاس", img: writerImagePlaceholder },
-  },
-  {
-    imgs: sliderImagePlaceholder1,
-    title:
-      "مدير عام بنك بن دول للتمويل الأصغر الإسلامي يزور شركة عالم الأعمال للاستثمار والدراسات وأكاديمية بريميوم للقيادة والإدارة. ",
-    publish_date: new Date("2024-03-1"),
-    // writers: { name: "حمود احمد سيف العطاس", img: writerImagePlaceholder },
-  },
-];
-
 export interface sidInfo {
   id: number;
   ar_Title: string;
@@ -64,13 +45,6 @@ export interface sidInfo {
   type: string;
 }
 
-interface PostCardProps {
-  image: string;
-  title: string;
-  timeAgo: string;
-  author: string;
-  description: string;
-}
 export interface PublicationResp {
   id: number;
   type: Type;
@@ -114,7 +88,7 @@ export enum Type {
 const PublicationPage = () => {
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const [searchQuery, setSearchQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
@@ -246,6 +220,7 @@ const PublicationPage = () => {
                     >
                       <img
                         src={item.b_image}
+                        alt="publicationImage"
                         className="w-[92px] h-[70.18px] object-cover rounded-sm"
                       />
                       <div className="flex flex-col">
@@ -490,6 +465,7 @@ const PublicationPage = () => {
                     >
                       <img
                         src={item.b_image}
+                        alt="publication Image"
                         className="w-[92px] h-[70.18px] object-cover rounded-sm"
                       />
                       <div className="flex flex-col">
