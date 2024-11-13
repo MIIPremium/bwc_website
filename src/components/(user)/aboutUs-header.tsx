@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../../components/navbar";
 import { TbDeviceAnalytics } from "react-icons/tb";
 import { PiHandshakeThin } from "react-icons/pi";
 import { useTranslation } from "react-i18next";
-import Image1 from "../../assets/img/اعلان خدمة الفايبر.jpg";
 import partnership from "../../assets/img/ريادة الاعمال.jpg";
-import golas from "../../assets/img/golas.png";
 import reportDetails from "../../assets/img/report-details-image.png";
 import { useMediaQuery } from "react-responsive";
 import { Target } from "lucide-react";
@@ -251,7 +248,7 @@ export default function AboutUsHeader() {
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
                         <p className="text-3xl">{t("our_goals")}</p>
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
-                          <img src={golas} alt="" />
+                          <Target size={80} color="white" />
                         </span>
                       </div>
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
@@ -323,7 +320,7 @@ export default function AboutUsHeader() {
                       </div>
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
-                          <img src={golas} alt="" />
+                          <Target size={80} color="white" />
                         </span>
                         <p className="text-3xl">{t("our_goals")}</p>
                       </div>
@@ -388,7 +385,7 @@ export default function AboutUsHeader() {
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
                           <p className="text-3xl">{t("our_goals")}</p>
                           <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
-                            <img src={golas} alt="" />
+                            <Target size={80} color="white" />
                           </span>
                         </div>
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
@@ -481,7 +478,7 @@ export default function AboutUsHeader() {
                         </div>
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
                           <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
-                            <img src={golas} alt="" />
+                            <Target size={80} color="white" />
                           </span>
                           <p className="text-3xl">{t("our_goals")}</p>
                         </div>
