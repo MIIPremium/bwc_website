@@ -13,7 +13,6 @@ import {
 } from "@tanstack/react-table";
 import Label from "src/ui/label";
 import { Input } from "src/ui/input";
-import image4 from "../../assets/img/1724086550980.jpg";
 import {
   AddOPublishesColumns,
   AddENPublishesColumns,
@@ -123,7 +122,7 @@ export type publishesResp = {
 };
 
 export default function PublishesTable() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddPublishesOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddOPublishesColumns, []);

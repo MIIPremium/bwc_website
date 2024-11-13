@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import imga from "../assets/img/1706714290731.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import formattedDate from "../utilities/formattedDate";
 import Slider from "react-slick";
-import PublishesImage from "../assets/img/PublishesImage.jpg";
 import PublishesImage1 from "../assets/img/publish_1.jpg";
 import PublishesImage2 from "../assets/img/publish_2.jpg";
 import PublishesImage3 from "../assets/img/publish_3.jpg";
@@ -165,7 +163,7 @@ export enum Type {
   Publish = "publish",
 }
 export default function PublishesCards() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const [data, setData] = useState<LastPubRespHome[]>([]);
   const fetchIssueById = async () => {
@@ -179,8 +177,7 @@ export default function PublishesCards() {
       throw error;
     }
   };
-  
-  
+
   useEffect(() => {
     const getData = async () => {
       const result = await fetchIssueById();

@@ -4,7 +4,7 @@ import JobsTable from "src/components/table/jobs-table";
 import Breadcrumb from "src/ui/breadcrumb";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 export default function JobsIndex() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   return (
     <main>

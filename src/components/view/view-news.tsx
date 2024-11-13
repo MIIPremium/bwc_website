@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import { axiosInstance } from "src/lib/http";
-import Label from "src/ui/label";
+
 export interface publicationView {
   id: number;
   type: string;

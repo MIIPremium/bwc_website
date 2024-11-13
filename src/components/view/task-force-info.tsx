@@ -10,7 +10,7 @@ import { z } from "zod";
 import { useTranslation } from "react-i18next";
 
 export default function TaskForceInfo() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);

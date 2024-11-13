@@ -68,7 +68,7 @@ export type JobResp = {
 };
 
 export default function JobsTable() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddJobOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddJobColumns, []);

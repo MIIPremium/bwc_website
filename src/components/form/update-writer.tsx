@@ -103,8 +103,8 @@ export default function UpdateWriterForm() {
   };
   const {
     data: WriterData,
-    error: WriterError,
-    isLoading: WriterIsLoading,
+    error: _WriterError,
+    isLoading: _WriterIsLoading,
   } = useQuery({
     queryKey: ["Writer", id],
     queryFn: fetchData,

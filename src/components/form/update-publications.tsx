@@ -34,13 +34,7 @@ import { Badge } from "src/ui/badge";
 import { CircleX } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-type WriterOption = {
-  value: number;
-};
-type ReferenceOption = {
-  label: string;
-  value: number;
-};
+
 type PublishesFormValue = z.infer<typeof updatePublishes>;
 interface WriterResponse {
   data: {
@@ -131,7 +125,7 @@ const kindOfCase = [
   { label: "تحليلات", value: 3 },
 ] as const;
 export default function UpdatePublications() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();

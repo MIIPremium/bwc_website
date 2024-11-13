@@ -8,10 +8,6 @@ import {
   FormMessage,
 } from "../../ui/form";
 import {
-  MAX_FILE_SIZE,
-  ACCEPTED_IMAGE_TYPES,
-  MAX_FILES,
-  publishes,
   Writer,
 } from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,32 +18,18 @@ import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { axiosInstance, getApi, patchApi, postApi, putApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
+import { axiosInstance, getApi, patchApi,  putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
 import { Textarea } from "src/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "src/ui/select";
 import EngTiptap from "src/ui/EngTiptap";
 import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
 import { CircleX } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-type WriterOption = {
-  value: number;
-};
-type ReferenceOption = {
-  label: string;
-  value: number;
-};
+
 type AnalysisFormValue = z.infer<typeof updateAnalysis>;
 interface WriterResponse {
   data: {
@@ -930,60 +912,7 @@ export default function UpdateFormAnalysis() {
             className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
           >
             <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-              {/* <div className="col-span-2 h-[50px] mt-7">
-                  <FormField
-                    control={form.control}
-                    name="type"
-                    render={({ field }) => (
-                      <FormItem className="col-span-2 flex">
-                        {kindOfCase.map((caseType) => (
-                          <label
-                            key={caseType.value}
-                            className="flex items-center w-full space-x-2"
-                          >
-                            <FormControl>
-                              <div className="relative">
-                                <input
-                                  type="checkbox"
-                                  value={caseType.value}
-                                  checked={selectedValue === caseType.value}
-                                  onChange={() => {
-                                    const newValue =
-                                      selectedValue === caseType.value
-                                        ? null
-                                        : caseType.value;
-                                    setSelectedValue(newValue);
-                                    field.onChange(newValue);
-                                  }}
-                                  className="appearance-none w-6 h-6 border border-gray-300 rounded-full checked:bg-[#D5AE78] checked:border-transparent focus:outline-none"
-                                />
-
-                                <svg
-                                  className={`w-4 h-4 text-white absolute top-1 left-1 pointer-events-none ${
-                                    selectedValue === caseType.value
-                                      ? "block"
-                                      : "hidden"
-                                  }`}
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 20 20"
-                                  fill="currentColor"
-                                >
-                                  <path
-                                    fillRule="evenodd"
-                                    d="M16.707 5.293a1 1 0 00-1.414 0L8 12.586 4.707 9.293a1 1 0 00-1.414 1.414l4 4a1 1 0 001.414 0l8-8a1 1 0 000-1.414z"
-                                    clipRule="evenodd"
-                                  />
-                                </svg>
-                              </div>
-                            </FormControl>
-                            <h1 className="ml-2">{caseType.label}</h1>
-                          </label>
-                        ))}
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div> */}
+              
             </div>
             <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
               <div className=" col-span-1 h-auto ">

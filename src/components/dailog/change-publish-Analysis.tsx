@@ -3,15 +3,11 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
-  FormMessage,
 } from "../../ui/form";
-import { axiosInstance, deleteApi, patchApi } from "../../lib/http";
-import { useToast } from "../../ui/use-toast";
-// import { useAuthHeader } from "react-auth-kit";
+import { axiosInstance,  patchApi } from "../../lib/http";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Repeat2, Trash } from "lucide-react";
-import toast, { Toaster } from "react-hot-toast";
+import { Repeat2 } from "lucide-react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -27,7 +23,6 @@ import { Button } from "src/ui/button";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import publishIcon from "../../assets/img/publishes-icon.png";
 import {
   Select,
   SelectContent,

@@ -80,7 +80,7 @@ export type newsResp = {
 };
 
 export default function NewsTable() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddNewOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddNewsColumns, []);

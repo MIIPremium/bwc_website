@@ -40,7 +40,7 @@ export type OrgResp = {
 };
 
 export default function OrganizationsUnderBwcTable() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddOrganizationsOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddOrganizationsColumns, []);

@@ -16,15 +16,14 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 
 type OrgFormValue = z.infer<typeof addOrgSchema>;
 
 export default function AddOrgForm() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
   const [preview, setPreview] = useState<string | null>(null);
@@ -51,11 +50,6 @@ export default function AddOrgForm() {
       });
     },
     onSuccess: () => {
-      // toast({
-      //   title: "اشعار",
-      //   variant: "success",
-      //   description: "تمت الاضافة بنجاح",
-      // });
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",

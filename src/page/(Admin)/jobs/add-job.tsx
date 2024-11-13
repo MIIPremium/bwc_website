@@ -5,7 +5,7 @@ import Breadcrumb from "src/ui/breadcrumb";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 
 export default function AddJob() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   return (
     <main>

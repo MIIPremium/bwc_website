@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { addPublishes } from "src/types/validation";
 import { z } from "zod";
-import Label from "src/ui/label";
 import { useQuery } from "@tanstack/react-query";
-import { axiosInstance, postApi } from "src/lib/http";
+import { axiosInstance } from "src/lib/http";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 

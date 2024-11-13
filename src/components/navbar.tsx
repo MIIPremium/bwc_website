@@ -5,11 +5,9 @@ import logo3 from "../assets/img/logo3.png";
 import job1 from "../assets/img/jobs-2.png";
 import LanguageWorld from "../assets/icons/language-world";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
 import { Link, NavLink } from "react-router-dom";
 import DropDownLang from "./dropDownLang";
 import { CgMenuLeft } from "react-icons/cg";
-import Button from "../components/button";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { axiosInstance } from "src/lib/http";
 

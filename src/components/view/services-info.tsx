@@ -1,25 +1,12 @@
 import React, { useEffect } from "react";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "../../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { addReferenceSchema, addServicesSchema } from "src/types/validation";
+import { addServicesSchema } from "src/types/validation";
 import { z } from "zod";
 import Label from "src/ui/label";
-import { Input } from "src/ui/input";
-import { Button } from "../../ui/button";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { axiosInstance, postApi, putApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
+import {  useQuery } from "@tanstack/react-query";
+import { axiosInstance } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-import { ReferenceResp } from "../table/referencesTable";
 import { ServicesProp } from "../table/services-table";
 import { useTranslation } from "react-i18next";
 type ReferenceFormValue = z.infer<typeof addServicesSchema>;
