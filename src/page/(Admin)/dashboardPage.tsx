@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import React, { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import NavBar from "../../components/(Admin)/navBar";
 import SideNab from "../../components/(Admin)/sideNab";
 import { Outlet, useNavigate } from "react-router-dom";
@@ -8,33 +8,14 @@ import Cookies from "js-cookie";
 
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
 
   const isLoggedIn = Cookies.get("accessToken");
-  const isRefreshToken = Cookies.get("refreshToken");
-  const [isRefreshTokenDeleted, setIsRefreshTokenDeleted] = useState(false);
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/RefreshToken");
     }
-    // if (!isRefreshToken) {
-    //   navigate("/RefreshToken");
-    // }
-    // const checkAndDeleteRefreshToken = async () => {
-    //   const localStorageRefreshToken = Cookies.getItem("refreshToken");
-
-    //   if (localStorageRefreshToken) {
-    //     const timeoutId = setTimeout(() => {
-    //       setIsRefreshTokenDeleted(true);
-    //       navigate("/RefreshToken");
-    //     }, 3000);
-
-    //     return () => clearTimeout(timeoutId);
-    //   }
-    // };
-
-    // checkAndDeleteRefreshToken();
   }, []);
   return (
     <>

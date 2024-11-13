@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import mainImgUrl from "../../assets/img/report-details-image.png";
 import { ReactComponent as TranslateIcon } from "../../assets/icons/translate-icon.svg";
 import CalendarIcon from "../../assets/icons/calendar-icon";
 import ClockCircle from "../../assets/icons/clock-circle";
-import Author from "../../components/(user)/author";
 import NewsList from "../../components/(user)/news-list";
 import MorePublish from "src/components/(user)/more-publish";
 import { Link, useParams } from "react-router-dom";
@@ -71,7 +69,7 @@ export default function PublishDetails() {
   const [selectedImage, setSelectedImage] = useState(null);
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
 
   const { data: PPublicDetails } = useQuery({
@@ -79,7 +77,8 @@ export default function PublishDetails() {
     queryFn: () =>
       getApi<PubblicationResp>(`/api/website/Publications/Details/${id}`),
   });
-  console.log("PPublicDetails", PPublicDetails?.data);
+  
+  
   const getRelativeTime = (date: string | Date, language: string): string => {
     dayjs.locale(language);
     return dayjs().to(dayjs(date));

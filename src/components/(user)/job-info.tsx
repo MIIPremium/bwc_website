@@ -35,7 +35,8 @@ export default function JobInfo() {
     queryFn: () => getApi<joinUsRespon>(`/api/website/JoinUs/${id}`),
   });
 
-  console.log("يبسيبسيب", joinUs?.data);
+  
+  
   return (
     <>
       {dir === "ltr" ? (

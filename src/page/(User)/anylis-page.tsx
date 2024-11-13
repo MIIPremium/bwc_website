@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import mainImgUrl from "../../assets/img/report-details-image.png";
 import { ReactComponent as TranslateIcon } from "../../assets/icons/translate-icon.svg";
 import CalendarIcon from "../../assets/icons/calendar-icon";
 import ClockCircle from "../../assets/icons/clock-circle";
-import Author from "../../components/(user)/author";
 import NewsList from "../../components/(user)/news-list";
 import MorePublish from "src/components/(user)/more-publish";
 import { useParams } from "react-router-dom";
@@ -71,7 +69,7 @@ export default function AnalysisDetails() {
   };
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const [modalOpen, setModalOpen] = useState(false);

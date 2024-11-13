@@ -49,7 +49,7 @@ export interface Publication {
   date_of_publish: Date;
 }
 export default function ArchiveIndex() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const [selectedYear, setSelectedYear] = useState("");
   const selectYearNumber = Number(selectedYear);
@@ -72,7 +72,7 @@ export default function ArchiveIndex() {
       value: item.year.toString(),
     }))
     .reverse();
-  // console.log("data",data)
+  
   const {
     data: byYear,
     isLoading: isLoadingByYear,
@@ -91,8 +91,7 @@ export default function ArchiveIndex() {
     staleTime: 5 * 60 * 1000, // Cache data for 5 minutes if data is not highly dynamic
   });
 
-  // console.log("selectedYear", selectedYear);
-  // console.log("byYear", byYear);
+  
   const [filterYear, setFilterYear] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [displayedCount, setDisplayedCount] = useState(10);
@@ -111,7 +110,7 @@ export default function ArchiveIndex() {
   // Filtered data to show only up to the current displayed count
   const displayedData = data?.slice(0, displayedCount);
 
-  // console.log("displayedData", displayedData);
+  
   const displayedByYearData = byYear?.archive.slice(0, displayedCount);
 
   if (isPending) {

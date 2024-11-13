@@ -129,23 +129,7 @@ export default function AddJobForm() {
       });
     },
     onSuccess: (data, variables) => {
-      // toast({
-      //   title: "اشعار",
-      //   variant: "success",
-      //   description: "تمت الاضافة بنجاح",
-      // });
-      // console.log("first mutiaition", );
-      // toast.success("تمت الاضافة بنجاح.", {
-      //   style: {
-      //     border: "1px solid #4FFFB0",
-      //     padding: "16px",
-      //     color: "#4FFFB0",
-      //   },
-      //   iconTheme: {
-      //     primary: "#4FFFB0",
-      //     secondary: "#FFFAEE",
-      //   },
-      // });
+
 
       const jobId = data.data.id;
       secondMutate({
@@ -189,8 +173,7 @@ export default function AddJobForm() {
       ar_advances: string[];
       en_advances: string[];
     }) => {
-      // Patch request to update the job with boolean values and additional fields
-      console.log("Data passed to mutation:", datas);
+      
       return patchApi(
         `/api/Jobs/${datas.id}`,
         {
@@ -209,7 +192,7 @@ export default function AddJobForm() {
       );
     },
     onSuccess: (data) => {
-      console.log("data mution two", data);
+      
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -225,7 +208,7 @@ export default function AddJobForm() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

@@ -197,7 +197,7 @@ export default function AddFormAnalysis() {
       });
     },
     onSuccess: (data, variables) => {
-      console.log("data.data.id", data.data.id);
+      
       const publishesID = data.data.id;
       secondMutate({
         id: publishesID,
@@ -223,8 +223,7 @@ export default function AddFormAnalysis() {
   } = useMutation({
     mutationKey: ["AnalysisPatch"],
     mutationFn: (datas: MutationData) => {
-      console.log("id:", datas.id);
-      console.log("Payload:", datas);
+      
       return patchApi(`/api/Analysis/${datas.id}`, {
         tags: datas.tags,
         ar_table_of_content: datas.ar_table_of_content,
@@ -250,7 +249,7 @@ export default function AddFormAnalysis() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

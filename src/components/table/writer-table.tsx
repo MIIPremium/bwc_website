@@ -100,7 +100,7 @@ export interface Soicalmedia {
 }
 
 export default function WriterTable() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddWriterOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddWriterColumns, []);
@@ -125,7 +125,7 @@ export default function WriterTable() {
     getData();
   }, []);
 
-  // console.log("data", data);
+  
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
@@ -187,19 +187,9 @@ export default function WriterTable() {
             </div>
             <div className=" grid grid-cols-4 w-full  items-start gap-4 ">
               <div className="col-span-1 ">
-                {/* <p className="">اجمالي نتائج البحث : {orders?.length ?? 0}</p> */}
               </div>
               <div className="col-span-3">
                 <div className="flex flex-row-reverse gap-4 ">
-                  {/* <Button
-                    className="mr-2 bg-[#d4d4d4] hover:bg-white"
-                    type="submit"
-                    form="searchEmployee"
-                  >
-                    {" "}
-                    Filter Number{" "}
-                  </Button> */}
-
                   <Link to={"/admin-dashboard/writer/add-writer"}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                       <Plus className="mr-2" />
@@ -243,54 +233,10 @@ export default function WriterTable() {
             </div>
             <div className=" grid grid-cols-4 w-full  items-start gap-4 ">
               <div className="col-span-1 ">
-                {/* <p className="">اجمالي نتائج البحث : {orders?.length ?? 0}</p> */}
               </div>
               <div className="col-span-3">
                 <div className="flex flex-row-reverse gap-4 ">
-                  {/* <Select
-                    dir="rtl"
-                    onValueChange={(value) => {
-                      table.setSorting([
-                        {
-                          id: "Nopub",
-                          desc: value === "الاكثر",
-                        },
-                      ]);
-                    }}
-                  >
-                    <SelectTrigger className="w-[180px] bg-[#d4d4d4]">
-                      <SelectValue placeholder="فلتر بعدد" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#d4d4d4]">
-                      <SelectGroup>
-                        <SelectLabel>فلتر بعدد</SelectLabel>
-                        <SelectItem value="الاكثر">الاكثر</SelectItem>
-                        <SelectItem value="الاقل">الاقل</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select> */}
-                  {/* <Select
-                    dir="rtl"
-                    onValueChange={(value) => {
-                      table.setSorting([
-                        {
-                          id: "dob",
-                          desc: value === "الاحدث",
-                        },
-                      ]);
-                    }}
-                  >
-                    <SelectTrigger className="w-[180px] bg-[#d4d4d4]">
-                      <SelectValue placeholder="فلتر بالتاريخ" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#d4d4d4]">
-                      <SelectGroup>
-                        <SelectLabel>فلتر بالتاريخ</SelectLabel>
-                        <SelectItem value="الاقدم">الاقدم</SelectItem>
-                        <SelectItem value="الاحدث">الاحدث</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select> */}
+                  
 
                   <Link to={"/admin-dashboard/writer/add-writer"}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">

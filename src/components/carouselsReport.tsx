@@ -78,7 +78,8 @@ export default function CarouselsReport() {
     queryKey: ["Slider"],
     queryFn: () => getApi<sliderRes[]>(`/api/website/Publications/Slider/5`),
   });
-  console.log("SliderResp", SliderResp?.data);
+  
+  
   const nextSlide = () => {
     const newSlide = SliderResp?.data.length ?? 0;
 

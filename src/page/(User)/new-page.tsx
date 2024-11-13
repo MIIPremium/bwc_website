@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import mainImgUrl from "../../assets/img/report-details-image.png";
 import { ReactComponent as TranslateIcon } from "../../assets/icons/translate-icon.svg";
 import CalendarIcon from "../../assets/icons/calendar-icon";
 import ClockCircle from "../../assets/icons/clock-circle";
-import Author from "../../components/(user)/author";
 import NewsList from "../../components/(user)/news-list";
 import MorePublish from "src/components/(user)/more-publish";
 import { useParams } from "react-router-dom";
@@ -46,22 +44,19 @@ export default function NewsDetails() {
   const [selectedImage, setSelectedImage] = useState(null);
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const { data: NewssDetails } = useQuery({
     queryKey: ["NewssDetails"],
     queryFn: () => getApi<NewssResp>(`/api/website/Publications/Details/${id}`),
   });
-  console.log("NewssDetails", NewssDetails?.data);
+  
+  
   const getRelativeTime = (date: string | Date, language: string): string => {
     dayjs.locale(language);
     return dayjs().to(dayjs(date));
   };
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleDiv = () => {
-    setIsOpen(!isOpen);
-  };
+ 
   const onChangeLanguage = () => {
     language === "ar" ? setLanguage("en") : setLanguage("ar");
   };

@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import mainImgUrl from "../../assets/img/report-details-image.png";
 import { ReactComponent as TranslateIcon } from "../../assets/icons/translate-icon.svg";
 import CalendarIcon from "../../assets/icons/calendar-icon";
-import ClockCircle from "../../assets/icons/clock-circle";
-import Author from "../../components/(user)/author";
 import NewsListReport from "../../components/(user)/new-list-report";
-import MorePublish from "src/components/(user)/more-publish";
 import { useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -42,7 +38,6 @@ export default function ReportDetials() {
   const { id } = useParams<{ id: string }>();
   const [language, setLanguage] = useState<string>("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
   const { t, i18n } = useTranslation();
@@ -57,7 +52,8 @@ export default function ReportDetials() {
     queryFn: () =>
       getApi<ReportDetailsResponse>(`/api/website/Reports/Details/${id}`),
   });
-  console.log("ReportHomeDetails", ReportHomeDetails?.data);
+  
+  
   const getRelativeTime = (date: string | Date, language: string): string => {
     dayjs.locale(language);
     return dayjs().to(dayjs(date));
@@ -88,64 +84,7 @@ export default function ReportDetials() {
     setModalOpen(false);
   };
 
-  // const handleDownload = () => {
-  //   const pdfFile = ReportHomeDetails?.data.pdfFile;
-
-  //   if (!pdfFile) {
-  //     // Inform the user that the PDF is unavailable
-  //     alert("The PDF file is currently unavailable for download.");
-  //     return;
-  //   }
-
-  //   const link = document.createElement("a");
-  //   link.href = pdfFile;
-  //   link.setAttribute("download", "Report.pdf"); // Optional: specify a filename
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // };
-
-  // const handleDownload = async () => {
-  //   if (ReportHomeDetails && ReportHomeDetails?.data.pdfFile) {
-  //     console.log("PDF URL:", ReportHomeDetails?.data.pdfFile); // Debugging line
-
-  //     try {
-  //       // Fetch the file from the URL
-  //       const response = await fetch(ReportHomeDetails?.data.pdfFile, {
-  //         method: "GET",
-  //         headers: {
-  //           "Content-Type": "application/pdf",
-  //         },
-  //       });
-
-  //       if (!response.ok) {
-  //         throw new Error("Network response was not ok");
-  //       }
-
-  //       // Convert the response to a Blob
-  //       const blob = await response.blob();
-
-  //       // Create a temporary URL for the Blob
-  //       const url = window.URL.createObjectURL(blob);
-
-  //       // Create an anchor element and trigger download
-  //       const link = document.createElement("a");
-  //       link.href = url;
-  //       link.download = "ReportDetails.pdf"; // Specify the file name for download
-  //       link.style.display = "none"; // Hide the element
-  //       document.body.appendChild(link);
-  //       link.click();
-
-  //       // Clean up the URL object and remove the link element
-  //       document.body.removeChild(link);
-  //       window.URL.revokeObjectURL(url);
-  //     } catch (error) {
-  //       console.error("Error downloading the file", error);
-  //     }
-  //   } else {
-  //     console.log("PDF URL not available");
-  //   }
-  // };
+  
 
   const handleDownload = () => {
     const link = document.createElement("a");

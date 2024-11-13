@@ -191,10 +191,7 @@ export default function UpdateJobForm() {
     onSuccess: (data, variables) => {
       const jobId = data.data.id;
 
-      console.log("Texts (ar_skiles):", texts);
-      console.log("SkillsEn (en_skiles):", skillsEn);
-      console.log("AdvancesAr (ar_advances):", advancesAr);
-      console.log("AdvancesEn (en_advances):", advancesEn);
+     
       secondMutate({
         id: jobId,
         avaliable: variables.avaliable,
@@ -236,8 +233,8 @@ export default function UpdateJobForm() {
       ar_advances: string[];
       en_advances: string[];
     }) => {
-      // Patch request to update the job with boolean values and additional fields
-      console.log("Data passed to mutation:", datas);
+      
+      
       return patchApi(
         `/api/Jobs/${id}`,
         {
@@ -256,7 +253,7 @@ export default function UpdateJobForm() {
       );
     },
     onSuccess: (data) => {
-      console.log("data mution two", data);
+      
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -272,7 +269,7 @@ export default function UpdateJobForm() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

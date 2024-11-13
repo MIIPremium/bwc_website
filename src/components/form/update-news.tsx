@@ -232,7 +232,7 @@ export default function UpdateNews() {
       });
     },
     onSuccess: (data, variables) => {
-      console.log("data.data.id", data.data.id);
+      
       const publishesID = data.data.id;
       secondMutate({
         id: publishesID,
@@ -258,7 +258,7 @@ export default function UpdateNews() {
       });
     },
     onSuccess: (data) => {
-      console.log("Second mutation success:", data);
+      
       toast.success("تمت التعديل بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -274,7 +274,7 @@ export default function UpdateNews() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

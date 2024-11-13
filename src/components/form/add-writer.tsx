@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,9 +23,8 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { patchApi, postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { Textarea } from "src/ui/textarea";
 import { useTranslation } from "react-i18next";
 
@@ -81,15 +79,15 @@ export default function AddWriterForm() {
   const isSelected = (code: string): boolean => {
     return selectedCities.some((city) => city.code === code);
   };
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
-  const [preview, setPreview] = useState<string | null>(null);
+  const [_preview, setPreview] = useState<string | null>(null);
 
   const [socialMediaFields, setSocialMediaFields] = useState<
     { name: string; url: string }[]
   >([]);
-  console.log("socialMediaFields", socialMediaFields);
+ 
   const handleSocialMediaChange = (name: string, url: string) => {
     setSocialMediaFields((prev) => {
       const updatedFields = prev.map((item) =>
@@ -107,9 +105,9 @@ export default function AddWriterForm() {
 
   const {
     mutate: firstMutate,
-    isError: firstIsError,
-    isSuccess: firstIsSuccess,
-    isPending: firstIsPending,
+    isError: _firstIsError,
+    isSuccess: _firstIsSuccess,
+    isPending: _firstIsPending,
   } = useMutation<WriterResponse, Error, WriterFormValue>({
     mutationKey: ["AddWriter"],
     mutationFn: async (datas: WriterFormValue) => {
@@ -134,10 +132,10 @@ export default function AddWriterForm() {
     },
     onSuccess: (data) => {
       const writerId = data.data.id;
-      console.log("Writer ID:", writerId);
+      
 
       if (writerId && socialMediaFields.length > 0) {
-        console.log("socialMediaFields:", socialMediaFields);
+        
         secondMutate({
           id: writerId,
           Soicalmedia: socialMediaFields,
@@ -163,23 +161,22 @@ export default function AddWriterForm() {
 
   const {
     mutate: secondMutate,
-    isError: secondIsError,
-    isSuccess: secondIsSuccess,
-    isPending: secondIsPending,
+    isError: _secondIsError,
+    isSuccess: _secondIsSuccess,
+    isPending: _secondIsPending,
   } = useMutation({
     mutationKey: ["SocialMedia"],
     mutationFn: (datas: {
       id: number;
       Soicalmedia: { name: string; url: string }[];
     }) => {
-      console.log("Sending PATCH request to:", `/api/Writers/${datas.id}`);
-      console.log("Request body:", datas.Soicalmedia);
+      
 
       // Send the array of social media objects directly as the body
       return patchApi(`/api/Writers/${datas.id}`, datas.Soicalmedia);
     },
     onSuccess: (data) => {
-      console.log("Second mutation success:", data);
+     
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -195,7 +192,7 @@ export default function AddWriterForm() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",
