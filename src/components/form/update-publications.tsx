@@ -224,7 +224,6 @@ export default function UpdatePublications() {
       });
     },
     onSuccess: (data, variables) => {
-      
       const publishesID = data.data.id;
       secondMutate({
         id: publishesID,
@@ -236,7 +235,17 @@ export default function UpdatePublications() {
       });
     },
     onError: (error) => {
-      // Handle error
+      toast.error("لم تتم العميله.", {
+        style: {
+          border: "1px solid  #FF5733 ",
+          padding: "16px",
+          color: " #FF5733 ",
+        },
+        iconTheme: {
+          primary: " #FF5733 ",
+          secondary: "#FFFAEE",
+        },
+      });
     },
   });
 
@@ -258,7 +267,6 @@ export default function UpdatePublications() {
       });
     },
     onSuccess: (data) => {
-      
       toast.success("تمت التعديل بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -274,7 +282,6 @@ export default function UpdatePublications() {
       window.location.reload();
     },
     onError: (error) => {
-      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",
@@ -307,8 +314,7 @@ export default function UpdatePublications() {
   });
   const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
   const [selectedWriters, setSelectedWriters] = useState<number[]>([]);
- 
-  
+
   useEffect(() => {
     if (PublishesData) {
       form.reset({

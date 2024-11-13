@@ -12,13 +12,6 @@ import {
 } from "@tanstack/react-table";
 import Label from "src/ui/label";
 import { Input } from "src/ui/input";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../../ui/sheet";
 import { useTranslation } from "react-i18next";
 import {
   AddReferenceColumns,

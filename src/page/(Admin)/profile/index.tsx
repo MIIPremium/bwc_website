@@ -96,7 +96,19 @@ export default function Profile() {
         window.location.href = path.startsWith("/") ? path : `/${path}`;
       }, 1000);
     },
-    onError: (error) => {},
+    onError: (error) => {
+      toast.error("لم تتم العميله.", {
+        style: {
+          border: "1px solid  #FF5733 ",
+          padding: "16px",
+          color: " #FF5733 ",
+        },
+        iconTheme: {
+          primary: " #FF5733 ",
+          secondary: "#FFFAEE",
+        },
+      });
+    },
   });
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     mutate(values);

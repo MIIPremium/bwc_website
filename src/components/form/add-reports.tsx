@@ -7,9 +7,6 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import {
-  Writer,
-} from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { addReportsScheme } from "src/types/validation";
@@ -17,8 +14,8 @@ import { z } from "zod";
 import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getApi, postApi } from "src/lib/http";
+import { useMutation } from "@tanstack/react-query";
+import { postApi } from "src/lib/http";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
@@ -27,7 +24,6 @@ import EngTiptap from "src/ui/EngTiptap";
 import { Badge } from "src/ui/badge";
 import { CircleX } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
 
 type AddReportsFormValue = z.infer<typeof addReportsScheme>;
 
@@ -58,9 +54,8 @@ export type ReferenceResp = {
   link: string;
 };
 
-
 export default function AddReportsForm() {
-  const {  i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
   const [_preview, setPreview] = useState<string | null>(null);
@@ -93,7 +88,7 @@ export default function AddReportsForm() {
     setTableOfContentEn(updatedTableOfContentEn);
     field.onChange(updatedTableOfContentEn);
   };
-  
+
   const [_selectedFile, setSelectedFile] = useState<File | null>(null);
   const handleFilePdfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || undefined;
@@ -169,7 +164,6 @@ export default function AddReportsForm() {
       window.location.reload();
     },
     onError: (error) => {
-      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

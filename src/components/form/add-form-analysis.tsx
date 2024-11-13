@@ -210,7 +210,17 @@ export default function AddFormAnalysis() {
       });
     },
     onError: (error) => {
-      // Handle error
+      toast.error("لم تتم العميله.", {
+        style: {
+          border: "1px solid  #FF5733 ",
+          padding: "16px",
+          color: " #FF5733 ",
+        },
+        iconTheme: {
+          primary: " #FF5733 ",
+          secondary: "#FFFAEE",
+        },
+      });
     },
   });
 

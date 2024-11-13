@@ -10,8 +10,6 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
 } from "@tanstack/react-table";
-import Label from "src/ui/label";
-import { Input } from "src/ui/input";
 
 import {
   AddServicesColumns,
@@ -39,15 +37,9 @@ export type ServicesResp = {
   en_Description: string;
 };
 
-// const reference: ServicesProp[] = [
-//   { id: 1, ar_title: "sss1", en_title: "dfgdf", link: "asdasdasd1" },
-//   { id: 1, ar_title: "sss2", en_title: "dfgdf", link: "asdasdasd2" },
-//   { id: 1, ar_title: "sss3", en_title: "dfgdf", link: "asdasdasd3" },
-//   { id: 1, ar_title: "sss4", en_title: "dfgdf", link: "asdasdasd4" },
-//   { id: 1, ar_title: "sss5", en_title: "dfgdf", link: "asdasdasd5" },
-// ];
+
 export default function ServicesTable() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddServicesOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddServicesColumns, []);
