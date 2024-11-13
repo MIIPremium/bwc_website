@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import CarousealReportDeatials from "src/components/carouseal-report-deatials";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import sliderImagePlaceholder from "../../assets/img/news_1.jpg";
-import sliderImagePlaceholder1 from "../../assets/img/news_2.jpg";
 import { CalendarMinus2Icon, MoveLeft, MoveRight } from "lucide-react";
 import { Input } from "src/ui/input";
 import { Link } from "react-router-dom";
@@ -17,19 +15,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
 import { LoaderIcon } from "react-hot-toast";
 import JobNotFound from "src/assets/icons/job-not-found";
-interface publish {
-  imgs: string;
-  title: string;
-  publish_date: Date;
-  writers?:
-    | {
-        name?: string | undefined;
-        img?: string | undefined;
-      }
-    | undefined;
-}
-
-
 
 export interface sidInfo {
   id: number;
@@ -66,8 +51,8 @@ const ReportPage = () => {
   const dir = i18n.dir();
   const [searchQuery, setSearchQuery] = useState("");
   const [submittedQuery, setSubmittedQuery] = useState("");
-  const [isAscending, setIsAscending] = useState(false);
-  // const [date, setDate] = React.useState<Date>();
+
+  
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
@@ -178,6 +163,7 @@ const ReportPage = () => {
                     >
                       <img
                         src={item.img}
+                        alt=""
                         className="w-[92px] h-[70.18px] object-cover rounded-sm"
                       />
                       <div className="flex flex-col">
@@ -335,6 +321,7 @@ const ReportPage = () => {
                     >
                       <img
                         src={item.img}
+                        alt=""
                         className="w-[92px] h-[70.18px] object-cover rounded-sm"
                       />
                       <div className="flex flex-col">
@@ -390,24 +377,7 @@ const ReportPage = () => {
                           {formattedDate(new Date(item.date_of_publish))}
                         </p>
 
-                        {/* {item.type === "news" ? (
-                          <div className="h-20"></div>
-                        ) : (
-                          <div className="flex flex-wrap">
-                            {item.writers.map((writersPub, index) => (
-                              <div className="flex items-center gap-3 my-4 mr-2">
-                                <img
-                                  src={writersPub.image}
-                                  className="rounded-full object-cover w-[40px] h-[40px]"
-                                  alt="Author"
-                                />
-                                <h1 className="font-medium text-gray-700">
-                                  {writersPub.ar_fullName}
-                                </h1>
-                              </div>
-                            ))}
-                          </div>
-                        )} */}
+
                         <p className="text-gray-600 text-base leading-7 reportIndex mt-5">
                           <>{item.an_note}</>
                         </p>

@@ -16,18 +16,17 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 type TaskForceFormValue = z.infer<typeof addTaskForceSchema>;
 
 export default function AddTaskForce() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const queryClient = useQueryClient();
   const dir = i18n.dir();
   const navigate = useNavigate();
-  const [preview, setPreview] = useState<string | null>(null);
+  const [_preview, setPreview] = useState<string | null>(null);
   const form = useForm<z.infer<typeof addTaskForceSchema>>({
     resolver: zodResolver(addTaskForceSchema),
   });

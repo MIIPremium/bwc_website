@@ -59,7 +59,7 @@ export default function Carousel({ items, itemsToShow }: CarouselProps) {
       {dir === "ltr" ? (
         <>
           <div className="w-full h-36 flex justify-around items-center ">
-            <div className="w-[20%] ">
+            <div className="w-[20%] lg:-translate-x-0 md:-translate-x-0 sm:-translate-x-7">
               <Button>{t("See-All")}</Button>
             </div>
             <div className="w-[80%] ">
@@ -120,11 +120,11 @@ export default function Carousel({ items, itemsToShow }: CarouselProps) {
           <div className="w-full h-36 flex justify-around items-center ">
             <div className="w-[80%]">
               <div className="flex p-5">
-                <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
+                <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                 <h1 className="text-3xl">{t("Talk-about-us")}</h1>
               </div>
             </div>
-            <div className="w-[20%] ">
+            <div className="w-[20%] lg:translate-x-0 md:translate-x-0 sm:translate-x-7">
               <Button>{t("See-All")}</Button>
             </div>
           </div>

@@ -213,7 +213,7 @@ export default function TaskForce() {
           <Slider {...settings}>
             {data.map((item, idx) => (
               <div
-                className="max-w-sm rounded h-[500px] ml-[5rem] overflow-hidden shadow-lg cursor-pointer hover:bg-[#FFDAA0]/[.35]  relative"
+                className="max-w-sm rounded h-[500px]  overflow-hidden shadow-lg cursor-pointer hover:bg-[#FFDAA0]/[.35]  relative"
                 key={idx}
               >
                 <img

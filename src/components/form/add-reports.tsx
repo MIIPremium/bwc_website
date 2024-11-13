@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import {
   Form,
   FormControl,
@@ -8,10 +8,6 @@ import {
   FormMessage,
 } from "../../ui/form";
 import {
-  MAX_FILE_SIZE,
-  ACCEPTED_IMAGE_TYPES,
-  MAX_FILES,
-  publishes,
   Writer,
 } from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -22,57 +18,19 @@ import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getApi, patchApi, postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
-import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import { getApi, postApi } from "src/lib/http";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
 import { Textarea } from "src/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "src/ui/select";
 import EngTiptap from "src/ui/EngTiptap";
-import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
 import { CircleX } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-type WriterOption = {
-  value: number;
-};
-type ReferenceOption = {
-  label: string;
-  value: number;
-};
+
 type AddReportsFormValue = z.infer<typeof addReportsScheme>;
-interface WriterResponse {
-  data: {
-    id: number;
-    type: string;
-    ar_Title: string;
-    en_Title: string;
-    b_image: string;
-    images: string[];
-    writers: Writer[];
-    reportId: null;
-    report: null;
-    publish: boolean;
-    t2read: number;
-    tags: string[] | null;
-    date_of_publish: Date;
-    ar_table_of_content: null;
-    en_table_of_content: null;
-    ar_description: string;
-    en_description: string;
-    ar_Note: null;
-    en_Note: string;
-    references: any[];
-  };
-}
+
 export interface WriterProp {
   id: number;
   ar_fullName: string;
@@ -85,13 +43,7 @@ export interface WriterProp {
   publication: any[];
   soicalmedia: Soicalmedia[];
 }
-interface MutationData {
-  id: number;
-  tags: string[];
-  t2read: number;
-  writersIdes: number[];
-  referencesIdes: number[];
-}
+
 export interface Soicalmedia {
   id: number;
   name: string;
@@ -105,17 +57,13 @@ export type ReferenceResp = {
   en_title: string;
   link: string;
 };
-const kindOfCase = [
-  { label: "منشورات", value: 1 },
-  { label: "الاخبار", value: 2 },
-  { label: "تحليلات", value: 3 },
-] as const;
+
+
 export default function AddReportsForm() {
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
-  const [preview, setPreview] = useState<string | null>(null);
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+  const [_preview, setPreview] = useState<string | null>(null);
   const form = useForm<z.infer<typeof addReportsScheme>>({
     resolver: zodResolver(addReportsScheme),
   });
@@ -145,16 +93,8 @@ export default function AddReportsForm() {
     setTableOfContentEn(updatedTableOfContentEn);
     field.onChange(updatedTableOfContentEn);
   };
-  const { data } = useQuery({
-    queryKey: ["writer"],
-    queryFn: () => getApi<WriterProp[]>("/api/Writers"),
-  });
-
-  const { data: referenceData } = useQuery({
-    queryKey: ["reference"],
-    queryFn: () => getApi<ReferenceResp[]>("/api/References"),
-  });
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  
+  const [_selectedFile, setSelectedFile] = useState<File | null>(null);
   const handleFilePdfChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || undefined;
     if (file) {
