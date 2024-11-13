@@ -13,7 +13,6 @@ import {
 } from "@tanstack/react-table";
 import Label from "src/ui/label";
 import { Input } from "src/ui/input";
-import image4 from "../../assets/img/1724086550980.jpg";
 import {
   ReportColumns,
   ReportEnColumns,
@@ -188,45 +187,6 @@ export default function ReportTable() {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  {/* <Select
-                    dir="ltr"
-                    onValueChange={(value) => {
-                      table.setColumnFilters((prevFilters) => {
-                        // Remove existing 'avaliable' filter
-                        const filters = prevFilters.filter(
-                          (filter) => filter.id !== "publish"
-                        );
-
-                        if (value === "all") {
-                          // Return filters without 'publish' filter
-                          return filters;
-                        } else {
-                          // Add the 'publish' filter based on the selected value
-                          return [
-                            ...filters,
-                            {
-                              id: "publish",
-                              value: value === "publishing" ? true : false,
-                            },
-                          ];
-                        }
-                      });
-                    }}
-                  >
-                    <SelectTrigger className="w-[180px] bg-[#d4d4d4]">
-                      <SelectValue placeholder="Publication Status" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#d4d4d4]">
-                      <SelectGroup>
-                        <SelectLabel>Publication Status</SelectLabel>
-                        <SelectItem value="all">All</SelectItem>
-                        <SelectItem value="publishing">publishing</SelectItem>
-                        <SelectItem value="unpublication">
-                          unpublication
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select> */}
 
                   <Link to={`/admin-dashboard/reports/add-report`}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
@@ -303,43 +263,7 @@ export default function ReportTable() {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  {/* <Select
-                    dir="rtl"
-                    onValueChange={(value) => {
-                      table.setColumnFilters((prevFilters) => {
-                        // Remove existing 'avaliable' filter
-                        const filters = prevFilters.filter(
-                          (filter) => filter.id !== "publish"
-                        );
 
-                        if (value === "الجميع") {
-                          // Return filters without 'publish' filter
-                          return filters;
-                        } else {
-                          // Add the 'publish' filter based on the selected value
-                          return [
-                            ...filters,
-                            {
-                              id: "publish",
-                              value: value === "منشور" ? true : false,
-                            },
-                          ];
-                        }
-                      });
-                    }}
-                  >
-                    <SelectTrigger className="w-[180px] bg-[#d4d4d4]">
-                      <SelectValue placeholder="فلتر بالحالة" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-[#d4d4d4]">
-                      <SelectGroup>
-                        <SelectLabel>فلتر يحالة النشر</SelectLabel>
-                        <SelectItem value="الجميع">الجميع</SelectItem>
-                        <SelectItem value="منشور">منشور</SelectItem>
-                        <SelectItem value="غير منشور">غير منشور</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select> */}
                   <Link to={`/admin-dashboard/reports/add-report`}>
                     <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
                       <Plus className="ml-2" />

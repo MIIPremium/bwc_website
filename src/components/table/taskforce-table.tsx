@@ -20,8 +20,6 @@ import {
 } from "../../components/column/add-task-force-column";
 import { useTranslation } from "react-i18next";
 import { OrderDataTable } from "src/ui/order-data-table";
-import { axiosInstance, getApi } from "src/lib/http";
-import { useQuery } from "@tanstack/react-query";
 // import { ReferenceResp } from "src/types/validation";
 
 export interface ReferenceProp {
@@ -56,26 +54,7 @@ export default function TaskForceTable({ data }: Taskforce) {
   const defaultData = useMemo<AddTaskForceOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddTaskForceColumns, []);
   const columnsMemos = useMemo(() => AddEnTaskForceColumns, []);
-  // const [data, setData] = useState<ReferenceProp[]>([]);
-
-  // const fetchIssueById = async () => {
-  //   try {
-  //     const response = await axiosInstance.get<ReferenceResp>(`/api/Taskforce`);
-  //     return [response.data];
-  //   } catch (error) {
-  //     console.error("Error fetching issue:", error);
-  //     throw error;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const data = await fetchIssueById();
-  //     setData(data);
-  //   };
-
-  //   getData();
-  // }, []);
+  
 
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 
 export default function AddRefernces() {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   return (
     <main>
