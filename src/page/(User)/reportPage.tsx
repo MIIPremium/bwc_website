@@ -80,7 +80,8 @@ const ReportPage = () => {
     queryKey: ["ReadMoreReport"],
     queryFn: () => getApi<sidInfo[]>(`/api/website/Reports/ReadMore/5`),
   });
-  console.log("ReportResp", ReportResp?.data);
+  
+  
   const itemsPerPage = 3; // Display 3 posts per page
   const totalItems = ReportResp?.data.length || 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);

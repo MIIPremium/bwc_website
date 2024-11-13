@@ -179,7 +179,8 @@ export default function PublishesCards() {
       throw error;
     }
   };
-  console.log("data", data);
+  
+  
   useEffect(() => {
     const getData = async () => {
       const result = await fetchIssueById();

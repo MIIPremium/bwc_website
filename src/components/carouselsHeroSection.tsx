@@ -91,7 +91,8 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
     queryKey: ["HomeSlider"],
     queryFn: () => getApi<HomePageCaesuralResp[]>(`/api/website/Home/Slider`),
   });
-  console.log("HomeSlider", HomeSlider?.data);
+  
+  
   const nextSlide = () => {
     const data = HomeSlider?.data.length ?? 0;
     setSlide(slide === data - 1 ? 0 : slide + 1);

@@ -249,7 +249,7 @@ export default function UpdateReportsForm() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

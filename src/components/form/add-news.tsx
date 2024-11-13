@@ -196,7 +196,6 @@ export default function AddNews() {
       });
     },
     onSuccess: (data, variables) => {
-      console.log("data.data.id", data.data.id);
       const publishesID = data.data.id;
       secondMutate({
         id: publishesID,
@@ -217,8 +216,6 @@ export default function AddNews() {
   } = useMutation({
     mutationKey: ["publishesPatch"],
     mutationFn: (datas: MutationData) => {
-      console.log("id:", datas.id);
-      console.log("Payload:", datas);
       return patchApi(`/api/News/${datas.id}`, {
         tags: datas.tags,
       });
@@ -239,7 +236,7 @@ export default function AddNews() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

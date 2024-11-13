@@ -107,7 +107,8 @@ export default function ChangePublishesNewsDialog({ id }: DeleteDialogProps) {
       );
     },
     onSuccess: (data) => {
-      console.log("data", data);
+      
+      
       toast.success("تمت العملية بنجاح.");
       navigate("/admin-dashboard/news");
       window.location.reload();

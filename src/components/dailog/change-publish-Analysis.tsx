@@ -109,7 +109,8 @@ export default function ChangePublishesStatusAnalysisDialog({
       );
     },
     onSuccess: (data) => {
-      console.log("data", data);
+      
+      
       toast.success("تمت العملية بنجاح.");
       navigate("/admin-dashboard/analysis");
       window.location.reload();

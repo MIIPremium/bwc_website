@@ -89,7 +89,7 @@ export default function ChangePublishesDialog({ id }: DeleteDialogProps) {
       return patchApi(`/api/Jobs/Publish/${id}?publish=${data.publish}`, {});
     },
     onSuccess: (data) => {
-      console.log("data", data);
+      
       toast.success("تمت العملية بنجاح.");
       navigate("/admin-dashboard/jobs");
       window.location.reload();

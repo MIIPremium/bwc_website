@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import login from "../../assets/img/8H4A08688.jpg(1).jpg";
 import login1 from "../../assets/img/عالم الأعمال خلفية أبيض 21.png";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Cookies from "js-cookie";
-interface RefreshToken {
-  token: string;
-}
+
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-  const location = useLocation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
 
   const [loginPassword, setLoginPassword] = useState<string>("");

@@ -92,7 +92,7 @@ export default function JobsTable() {
 
     getData();
   }, []);
-  console.log("data[0]", data[0]);
+  
 
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);

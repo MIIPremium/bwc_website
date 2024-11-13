@@ -86,7 +86,8 @@ export default function ChangeAvailabilityDialog({ id }: DeleteDialogProps) {
       );
     },
     onSuccess: (data) => {
-      console.log("data", data);
+      
+      
       toast.success("تمت العملية بنجاح.");
       navigate("/admin-dashboard/jobs");
       window.location.reload();

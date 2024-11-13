@@ -195,7 +195,7 @@ export default function AddPublications() {
       });
     },
     onSuccess: (data, variables) => {
-      console.log("data.data.id", data.data.id);
+      
       const publishesID = data.data.id;
       secondMutate({
         id: publishesID,
@@ -220,8 +220,7 @@ export default function AddPublications() {
   } = useMutation({
     mutationKey: ["publishesPatch"],
     mutationFn: (datas: MutationData) => {
-      console.log("id:", datas.id);
-      console.log("Payload:", datas);
+      
       return patchApi(`/api/Publications/${datas.id}`, {
         tags: datas.tags,
         t2read: datas.t2read,
@@ -246,7 +245,7 @@ export default function AddPublications() {
       window.location.reload();
     },
     onError: (error) => {
-      console.log("Second mutation error:", error);
+     
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",

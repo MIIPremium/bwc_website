@@ -109,7 +109,6 @@ export default function ChangePublishesStatusPostDialog({
       );
     },
     onSuccess: (data) => {
-      console.log("data", data);
       toast.success("تمت العملية بنجاح.");
       navigate("/admin-dashboard/publications");
       window.location.reload();

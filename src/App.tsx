@@ -29,10 +29,9 @@ import { LoaderIcon } from "react-hot-toast";
 
 function App() {
   const serversRef = useRef<HTMLDivElement>(null);
-  const [scrolls, setScrolls] = useState(false);
-  const [topPosition, setTopPosition] = useState<number>(0);
-  const [bottomPosition, setBottomPosition] = useState<number>(0);
-  const [scrollPosition, setScrollPosition] = useState(window.scrollY);
+  const [_topPosition, setTopPosition] = useState<number>(0);
+  const [_bottomPosition, setBottomPosition] = useState<number>(0);
+  const [_scrollPosition, setScrollPosition] = useState(window.scrollY);
 
   const {
     data: services,
@@ -53,7 +52,6 @@ function App() {
 
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
-  // window.addEventListener("scroll", setScrollDiv);
   const [widthScreen, setWidthScreen] = useState({
     winWidth: window.innerWidth,
     winHight: window.innerHeight,
@@ -88,19 +86,9 @@ function App() {
     };
   }, [widthScreen, serversRef]);
 
-  const bottomY = bottomPosition - window.innerHeight;
+  
 
-  const isWithinRange =
-    scrollPosition >= topPosition &&
-    scrollPosition <= bottomPosition - window.innerHeight;
-
-  function setScrollDiv() {
-    if (window.scrollY >= topPosition && window.scrollY <= bottomPosition) {
-      setScrolls(true);
-    } else {
-      setScrolls(false);
-    }
-  }
+ 
   if (isPending)
     return (
       <div className="flex justify-center items-center w-full ">

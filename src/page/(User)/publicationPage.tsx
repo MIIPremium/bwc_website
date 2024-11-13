@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import CarouselsReport from "src/components/carouselsReport";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import sliderImagePlaceholder from "../../assets/img/news_1.jpg";
-import sliderImagePlaceholder1 from "../../assets/img/news_2.jpg";
 import { CalendarMinus2Icon, MoveLeft, MoveRight } from "lucide-react";
 import { Input } from "src/ui/input";
 import {
@@ -24,17 +22,6 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
 import { LoaderIcon } from "react-hot-toast";
 import JobNotFound from "src/assets/icons/job-not-found";
-interface publish {
-  imgs: string;
-  title: string;
-  publish_date: Date;
-  writers?:
-    | {
-        name?: string | undefined;
-        img?: string | undefined;
-      }
-    | undefined;
-}
 
 export interface sidInfo {
   id: number;
@@ -132,7 +119,8 @@ const PublicationPage = () => {
     queryKey: ["ReadMore"],
     queryFn: () => getApi<sidInfo[]>(`/api/website/Publications/ReadMore/5`),
   });
-  console.log("SidInfoResp", SidInfoResp?.data);
+  
+  
   const itemsPerPage = 3; // Display 3 posts per page
   const totalItems = PubResp?.data.length || 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
