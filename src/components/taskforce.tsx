@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import imga from "../assets/img/1706714290731.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import formattedDate from "../utilities/formattedDate";
 import Slider from "react-slick";
 import PublishesImage from "../assets/img/PublishesImage.jpg";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { axiosInstance } from "src/lib/http";
-import { OgResp, TaskForceResp } from "src/types/validation";
+import { TaskForceResp } from "src/types/validation";
 interface publishesDataCard {
   img: string;
   writer?:

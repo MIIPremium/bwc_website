@@ -16,9 +16,8 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import AddPersonalImageDialog from "../dailog/add-personal-image-dialog";
 import { Textarea } from "src/ui/textarea";
 

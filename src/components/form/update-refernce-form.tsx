@@ -15,10 +15,9 @@ import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { axiosInstance, postApi, putApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
+import { axiosInstance, putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 // import { ReferenceResp } from "../table/referencesTable";
 import { useTranslation } from "react-i18next";
 
@@ -31,7 +30,7 @@ export type ReferenceResp = {
 };
 export default function UpdateReferenceForm() {
   // const { toast } = useToast();
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();

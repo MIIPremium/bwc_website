@@ -1,13 +1,9 @@
 import React from "react";
-import imga from "../assets/img/1706714290731.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import formattedDate from "../utilities/formattedDate";
 import Slider from "react-slick";
 import image1 from "../assets/img/1724086551072.jpg";
 import image2 from "../assets/img/1724086551025.jpg";
-import image3 from "../assets/img/IMG_9024.jpg";
-import image4 from "../assets/img/logo.png";
 interface publishesDataCard {
   img: string;
   title: string;

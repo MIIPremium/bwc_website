@@ -1,79 +1,15 @@
 import React, { useEffect, useState } from "react";
-import imga from "../assets/img/1724086550980.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import formattedDate from "../utilities/formattedDate";
 import Slider from "react-slick";
 import image4 from "../assets/img/1724086550980.jpg";
 import { axiosInstance } from "src/lib/http";
 import { OgResp } from "src/types/validation";
-import { Link } from "react-router-dom";
 interface publishesDataCard {
   img: string;
 }
 
-const Cards: publishesDataCard[] = [
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-  {
-    img: image4,
-  },
-];
+
 
 export interface OrgProp {
   id: number;

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import imga from "../assets/img/1706714290731.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import image1 from "../assets/img/ourpartines/haramoutCh_brand.png";
 import image2 from "../assets/img/ourpartines/hadramoutUniversty_brand.png";
@@ -35,7 +33,7 @@ export default function SecondOurPartners() {
     { number: 4 },
     { number: 5 },
   ];
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const [widthScreen, setWidthScreen] = useState({
     winWidth: window.innerWidth,

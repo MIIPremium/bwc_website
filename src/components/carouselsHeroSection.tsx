@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ArrowRight from "../assets/icons/arrow-right";
-import ArrowLeft from "../assets/icons/arrow-left";
 import formattedDate from "../utilities/formattedDate";
 import formattedDateEn from "../utilities/formattedDateEn";
 import { useTranslation } from "react-i18next";

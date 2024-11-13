@@ -16,7 +16,6 @@ import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { patchApi, postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Textarea } from "src/ui/textarea";
@@ -53,7 +52,7 @@ interface JobResponse {
 }
 export default function AddJobForm() {
   // const { toast } = useToast();
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const [states, _setStates] = useState([
     { label: "متاحة", enLable: "available", value: true },
@@ -104,9 +103,9 @@ export default function AddJobForm() {
 
   const {
     mutate: firstMutate,
-    isError: firstIsError,
-    isSuccess: firstIsSuccess,
-    isPending: firstIsPending,
+    isError: _firstIsError,
+    isSuccess: _firstIsSuccess,
+    isPending: _firstIsPending,
   } = useMutation<JobResponse, Error, AddJobFormValue>({
     mutationKey: ["AddOrg"],
     mutationFn: (datas: AddJobFormValue) => {
@@ -159,9 +158,9 @@ export default function AddJobForm() {
 
   const {
     mutate: secondMutate,
-    isError: secondIsError,
-    isSuccess: secondIsSuccess,
-    isPending: secondIsPending,
+    isError: _secondIsError,
+    isSuccess: _secondIsSuccess,
+    isPending: _secondIsPending,
   } = useMutation({
     mutationKey: ["JobInfo"],
     mutationFn: (datas: {

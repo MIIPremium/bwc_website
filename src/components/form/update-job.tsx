@@ -71,7 +71,7 @@ export type JobResp = {
 export default function UpdateJobForm() {
   // const { toast } = useToast();
   const { id } = useParams<{ id: string }>();
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const [states, _setStates] = useState([
     { label: "متاحة", enLable: "available", value: true },
@@ -127,8 +127,8 @@ export default function UpdateJobForm() {
   };
   const {
     data: JobInfoData,
-    error: JobInfoError,
-    isLoading: JobInfoIsLoading,
+    error: _JobInfoError,
+    isLoading: _JobInfoIsLoading,
   } = useQuery({
     queryKey: ["getByIdJob", id],
     queryFn: fetchData,
@@ -164,9 +164,9 @@ export default function UpdateJobForm() {
 
   const {
     mutate: firstMutate,
-    isError: firstIsError,
-    isSuccess: firstIsSuccess,
-    isPending: firstIsPending,
+    isError: _firstIsError,
+    isSuccess: _firstIsSuccess,
+    isPending: _firstIsPending,
   } = useMutation<JobResponse, Error, AddJobFormValue>({
     mutationKey: ["AddOrg"],
     mutationFn: (datas: AddJobFormValue) => {
@@ -219,9 +219,9 @@ export default function UpdateJobForm() {
 
   const {
     mutate: secondMutate,
-    isError: secondIsError,
-    isSuccess: secondIsSuccess,
-    isPending: secondIsPending,
+    isError: _secondIsError,
+    isSuccess: _secondIsSuccess,
+    isPending: _secondIsPending,
   } = useMutation({
     mutationKey: ["JobInfo"],
     mutationFn: (datas: {

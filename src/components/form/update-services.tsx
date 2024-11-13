@@ -9,17 +9,15 @@ import {
 } from "../../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { addReferenceSchema, addServicesSchema } from "src/types/validation";
+import { addServicesSchema } from "src/types/validation";
 import { z } from "zod";
 import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { axiosInstance, postApi, putApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
+import { axiosInstance, putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
-import { ReferenceResp } from "../table/referencesTable";
+import toast from "react-hot-toast";
 import { ServicesProp } from "../table/services-table";
 import { Textarea } from "src/ui/textarea";
 import { useTranslation } from "react-i18next";
@@ -28,7 +26,7 @@ type ReferenceFormValue = z.infer<typeof addServicesSchema>;
 
 export default function UpdateServicesIndex() {
   // const { toast } = useToast();
-  const { t, i18n } = useTranslation();
+  const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
