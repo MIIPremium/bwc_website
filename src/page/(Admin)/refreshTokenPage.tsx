@@ -109,7 +109,7 @@ export default function RefreshTokenPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-10 w-full block shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
+                className="mt-10 w-full text-white block shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
               >
                 {isSubmitting ? "جاري تحديث الجلسة..." : "تحديث الجلسة"}
               </button>

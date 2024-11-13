@@ -8,6 +8,7 @@ import partnership from "../../assets/img/ريادة الاعمال.jpg";
 import golas from "../../assets/img/golas.png";
 import reportDetails from "../../assets/img/report-details-image.png";
 import { useMediaQuery } from "react-responsive";
+import { Target } from "lucide-react";
 export default function AboutUsHeader() {
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
@@ -83,26 +84,27 @@ export default function AboutUsHeader() {
                       </p>
                     </div>
                     <div className="grid grid-cols-3 gap-2 mt-6">
-                      <div className=" flex justify-start items-center">
-                        <p className="text-xl">{t("our_mission")}</p>
-                        <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
-                          <PiHandshakeThin
+                      <div className=" flex justify-start items-center translate-x-1">
+                        <p className="text-lg">{t("our_mission")}</p>
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
+                          <TbDeviceAnalytics
                             color="white"
                             size={60}
                             className="p-1"
                           />
                         </span>
                       </div>
-                      <div className=" flex justify-start items-center">
-                        <p className="text-xl">{t("our_goals")}</p>
-                        <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
-                          <img src={golas} className="w-[80%] h-[80%]" alt="" />
+
+                      <div className=" flex justify-start items-center -translate-x-1">
+                        <p className="text-lg">{t("our_goals")}</p>
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
+                          <Target color="white" size={50} className="p-1" />
                         </span>
                       </div>
-                      <div className=" flex justify-start items-center">
-                        <p className="text-xl">{t("our_message")}</p>
-                        <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
-                          <TbDeviceAnalytics
+                      <div className=" flex justify-start items-center translate-x-2">
+                        <p className="text-lg">{t("our_message")}</p>
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
+                          <PiHandshakeThin
                             color="white"
                             size={60}
                             className="p-1"
@@ -157,31 +159,31 @@ export default function AboutUsHeader() {
                     </div>
                     <div className="grid grid-cols-3 gap-2 mt-6">
                       <div className=" flex justify-start items-center ">
-                        <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-2">
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-2">
                           <TbDeviceAnalytics
                             color="white"
                             size={60}
                             className="p-1"
                           />
                         </span>
-                        <p className="text-xl">{t("our_mission")}</p>
+                        <p className="text-lg">{t("our_mission")}</p>
                       </div>
 
                       <div className=" flex justify-start items-center">
-                        <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-2">
-                          <img src={golas} className="p-1" />
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-2">
+                          <Target color="white" size={50} className="p-1" />
                         </span>
-                        <p className="text-xl">{t("our_goals")}</p>
+                        <p className="text-lg">{t("our_goals")}</p>
                       </div>
                       <div className=" flex justify-start items-center ">
-                        <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-2">
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-2">
                           <PiHandshakeThin
                             color="white"
                             size={60}
                             className="p-1"
                           />
                         </span>
-                        <p className="text-xl">{t("our_message")}</p>
+                        <p className="text-lg">{t("our_message")}</p>
                       </div>
                     </div>
                   </div>
@@ -237,7 +239,7 @@ export default function AboutUsHeader() {
                     </div>
                     <div className="grid grid-cols-3 mt-6">
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
-                      <p className="text-3xl">{t("our_mission")}</p>
+                        <p className="text-3xl">{t("our_mission")}</p>
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                           <TbDeviceAnalytics
                             color="white"
@@ -245,17 +247,15 @@ export default function AboutUsHeader() {
                             className="p-1"
                           />
                         </span>
-
                       </div>
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
-                      <p className="text-3xl">{t("our_goals")}</p>
+                        <p className="text-3xl">{t("our_goals")}</p>
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                           <img src={golas} alt="" />
                         </span>
-                        
                       </div>
                       <div className="w-[95%] h-[100px] flex justify-center items-center">
-                      <p className="text-3xl">{t("our_message")}</p>
+                        <p className="text-3xl">{t("our_message")}</p>
                         <span className=" w-[40%] h-[90%] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                           <PiHandshakeThin
                             color="white"
@@ -263,7 +263,6 @@ export default function AboutUsHeader() {
                             className="p-1"
                           />
                         </span>
-                       
                       </div>
                     </div>
                   </div>

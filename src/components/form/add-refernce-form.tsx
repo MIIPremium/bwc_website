@@ -24,8 +24,7 @@ import Cookies from "js-cookie";
 type ReferenceFormValue = z.infer<typeof addReferenceSchema>;
 
 export default function AddReferenceForm() {
-  const AccessToken = Cookies.get("refreshToken");
-  
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();

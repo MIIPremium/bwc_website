@@ -31,7 +31,7 @@ export default function AboutUs() {
     };
   }, [widthScreen]);
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
         <Navbar />
       </div>
@@ -63,7 +63,7 @@ export default function AboutUs() {
         <>
           {dir === "ltr" ? (
             <div className="w-full h-36 flex justify-around items-center ">
-              <div className="w-[20%] ">
+              <div className="w-[20%] sm:-translate-x-7">
                 <Button>
                   <Link to={"/join-us"}>Join Us</Link>
                 </Button>
@@ -83,7 +83,7 @@ export default function AboutUs() {
                   <h1 className="text-3xl">{t("team-force")}</h1>
                 </div>
               </div>
-              <div className="w-[20%] ">
+              <div className="w-[20%] sm:translate-x-7">
                 <Button>
                   <Link to={"/join-us"}>أنظم الينا</Link>
                 </Button>
