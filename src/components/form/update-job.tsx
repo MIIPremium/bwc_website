@@ -30,7 +30,8 @@ import {
 } from "src/ui/select";
 import { Badge } from "src/ui/badge";
 import { useTranslation } from "react-i18next";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
+import Cookies from "js-cookie";
 
 type AddJobFormValue = z.infer<typeof updateJobSchema>;
 interface JobResponse {
@@ -69,7 +70,7 @@ export type JobResp = {
   endDate: Date;
 };
 export default function UpdateJobForm() {
-  // const { toast } = useToast();
+  const AccessToken = Cookies.get("accessToken");
   const { id } = useParams<{ id: string }>();
   const {  i18n } = useTranslation();
   const dir = i18n.dir();
@@ -122,7 +123,12 @@ export default function UpdateJobForm() {
   });
 
   const fetchData = async () => {
-    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`, {});
+    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      });
     return response.data;
   };
   const {
@@ -166,7 +172,7 @@ export default function UpdateJobForm() {
     mutate: firstMutate,
     isError: _firstIsError,
     isSuccess: _firstIsSuccess,
-    isPending: _firstIsPending,
+    isPending: firstIsPending,
   } = useMutation<JobResponse, Error, AddJobFormValue>({
     mutationKey: ["AddOrg"],
     mutationFn: (datas: AddJobFormValue) => {
@@ -185,6 +191,7 @@ export default function UpdateJobForm() {
       return putApi(`/api/Jobs/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -221,7 +228,7 @@ export default function UpdateJobForm() {
     mutate: secondMutate,
     isError: _secondIsError,
     isSuccess: _secondIsSuccess,
-    isPending: _secondIsPending,
+    isPending: secondIsPending,
   } = useMutation({
     mutationKey: ["JobInfo"],
     mutationFn: (datas: {
@@ -248,6 +255,7 @@ export default function UpdateJobForm() {
         {
           headers: {
             "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
           },
         }
       );
@@ -856,7 +864,13 @@ export default function UpdateJobForm() {
 
             <div className="w-full -translate-x-10 flex justify-end mt-20">
               <Button className="text-lg mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                update
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  update
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -1404,7 +1418,14 @@ export default function UpdateJobForm() {
 
             <div className="w-full translate-x-10 flex justify-end mt-20">
               <Button className="text-md mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  تعديل
+                  
+                  </>
+                )}
               </Button>
             </div>
           </form>

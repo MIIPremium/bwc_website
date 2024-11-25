@@ -6,13 +6,20 @@ import EnBreadcrumb from "src/ui/en-breadcrumb";
 import { useQuery } from "@tanstack/react-query";
 import { TaskForceRespTable } from "src/types/validation";
 import { getApi } from "src/lib/http";
+import Cookies from "js-cookie";
 
 export default function TaskForceIndex() {
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const { data } = useQuery({
     queryKey: ["Taskforce"],
-    queryFn: () => getApi<TaskForceRespTable[]>("/api/Taskforce"),
+    queryFn: () =>
+      getApi<TaskForceRespTable[]>("/api/Taskforce", {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   return (

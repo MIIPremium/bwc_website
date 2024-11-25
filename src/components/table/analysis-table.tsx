@@ -30,6 +30,7 @@ import {
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
 
 export interface Reference {
@@ -122,7 +123,8 @@ export type AnalysisResp = {
 };
 
 export default function AnalysisTable() {
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddAnalysisOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddAnalysisColumns, []);
@@ -131,7 +133,12 @@ export default function AnalysisTable() {
   const fetchIssueById = async () => {
     try {
       const response = await axiosInstance.get<AnalysisResp>(
-        `/api/ManagingPublications?type=analysis&ascending=false&publish=true`
+        `/api/ManagingPublications?type=analysis&ascending=false&publish=true`,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
       );
       return [response.data];
     } catch (error) {

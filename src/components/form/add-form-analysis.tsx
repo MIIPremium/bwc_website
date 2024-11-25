@@ -26,10 +26,11 @@ import { Textarea } from "src/ui/textarea";
 import EngTiptap from "src/ui/EngTiptap";
 import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 import Breadcrumb from "src/ui/breadcrumb";
+import Cookies from "js-cookie";
 
 
 type AnalysisFormValue = z.infer<typeof addAnalysis>;
@@ -86,6 +87,7 @@ export type ReferenceResp = {
 
 
 export default function AddFormAnalysis() {
+  const AccessToken = Cookies.get("accessToken");
   const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
@@ -129,12 +131,22 @@ export default function AddFormAnalysis() {
   };
   const { data } = useQuery({
     queryKey: ["writer"],
-    queryFn: () => getApi<WriterProp[]>("/api/writers/writers"),
+    queryFn: () => getApi<WriterProp[]>("/api/writers/writers",{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const { data: referenceData } = useQuery({
     queryKey: ["reference"],
-    queryFn: () => getApi<ReferenceResp[]>("/api/References"),
+    queryFn: () => getApi<ReferenceResp[]>("/api/References",{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const [selectedWriters, setSelectedWriters] = useState<number[]>([]);
@@ -174,7 +186,7 @@ export default function AddFormAnalysis() {
   };
 
   // First Mutation: Adding Publications
-  const { mutate } = useMutation<WriterResponse, Error, AnalysisFormValue>({
+  const { mutate,isPending } = useMutation<WriterResponse, Error, AnalysisFormValue>({
     mutationKey: ["AddAnalysis"],
     mutationFn: (datas: AnalysisFormValue) => {
       const formData = new FormData();
@@ -193,6 +205,7 @@ export default function AddFormAnalysis() {
       return postApi("/api/Analysis", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -241,6 +254,11 @@ export default function AddFormAnalysis() {
         t2read: datas.t2read,
         writersIdes: datas.writersIdes, // Corrected
         referencesIdes: datas.referencesIdes, // Corrected
+      },{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
       });
     },
     onSuccess: (data) => {
@@ -858,7 +876,13 @@ export default function AddFormAnalysis() {
                     </div>
                     <div className="w-full -translate-x-10 flex justify-end mt-20 ">
                       <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                        Add
+                        {isPending ? (
+                          <LoaderIcon className="animate-spin duration-1000" />
+                        ) : (
+                          <>
+                          Add
+                  </>
+                )}
                       </Button>
                     </div>
                   </form>
@@ -1441,7 +1465,13 @@ export default function AddFormAnalysis() {
                     </div>
                     <div className="w-full translate-x-10 flex justify-end mt-20 ">
                       <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                        إضافة
+                        {isPending ? (
+                          <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  إضافة
+                  </>
+                )}
                       </Button>
                     </div>
                   </form>

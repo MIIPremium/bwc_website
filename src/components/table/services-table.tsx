@@ -19,6 +19,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
 
 export interface ServicesProp {
@@ -39,6 +40,7 @@ export type ServicesResp = {
 
 
 export default function ServicesTable() {
+  const AccessToken = Cookies.get("accessToken");
   const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddServicesOrder[]>(() => [], []);
@@ -47,7 +49,13 @@ export default function ServicesTable() {
   const [data, setData] = useState<ServicesProp[]>([]);
   const fetchIssueById = async () => {
     try {
-      const response = await axiosInstance.get<ServicesResp>(`/api/Services`);
+      const response = await axiosInstance.get<ServicesResp>(`/api/Services`,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      );
       return [response.data];
     } catch (error) {
       console.error("Error fetching issue:", error);

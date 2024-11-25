@@ -23,6 +23,7 @@ import {
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 export interface WriterProp {
   id: number;
@@ -100,6 +101,7 @@ export interface Soicalmedia {
 }
 
 export default function WriterTable() {
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddWriterOrder[]>(() => [], []);
@@ -108,7 +110,13 @@ export default function WriterTable() {
   const [data, setData] = useState<WriterProp[]>([]);
   const fetchIssueById = async () => {
     try {
-      const response = await axiosInstance.get<WriterResp>(`/api/Writers`);
+      const response = await axiosInstance.get<WriterResp>(`/api/Writers`,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      );
       return [response.data];
     } catch (error) {
       console.error("Error fetching issue:", error);

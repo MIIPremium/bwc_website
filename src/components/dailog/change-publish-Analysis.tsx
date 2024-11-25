@@ -31,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "src/ui/select";
+import Cookies from "js-cookie";
 
 interface DeleteDialogProps {
   id: number;
@@ -65,6 +66,7 @@ type UpdateAvailable = z.infer<typeof formSchema>;
 export default function ChangePublishesStatusAnalysisDialog({
   id,
 }: DeleteDialogProps) {
+  const AccessToken = Cookies.get("accessToken");
   const [publish, _setPublish] = useState([
     { label: "مشنور", enLable: "publish", value: true },
     { label: "غير منشور", enLable: "unpublished", value: false },
@@ -79,8 +81,12 @@ export default function ChangePublishesStatusAnalysisDialog({
 
   const fetchData = async () => {
     const response = await axiosInstance.get<PubNewsResp>(
-      `/api/ManagingPublications/${id}`,
-      {}
+      `/api/ManagingPublications/${id}`,{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -100,7 +106,12 @@ export default function ChangePublishesStatusAnalysisDialog({
     mutationFn: (data: UpdateAvailable) => {
       return patchApi(
         `/api/ManagingPublications/Publish/${id}?publish=${data.publish}`,
-        {}
+        {},{
+          headers: {
+            "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
       );
     },
     onSuccess: (data) => {

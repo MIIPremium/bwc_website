@@ -19,10 +19,13 @@ import { postApi } from "src/lib/http";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 
 type OrgFormValue = z.infer<typeof addOrgSchema>;
 
 export default function AddOrgForm() {
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
@@ -31,7 +34,7 @@ export default function AddOrgForm() {
     resolver: zodResolver(addOrgSchema),
   });
 
-  const { mutate } = useMutation({
+  const { mutate , isPending } = useMutation({
     mutationKey: ["AddOrg"],
     mutationFn: (datas: OrgFormValue) => {
       const formData = new FormData();
@@ -46,6 +49,7 @@ export default function AddOrgForm() {
       return postApi("/api/OrgUndBWC", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -209,7 +213,13 @@ export default function AddOrgForm() {
             </div>
             <div className="w-full -translate-x-10 flex justify-end">
               <Button className="text-lg inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Add
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  Add
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -317,7 +327,13 @@ export default function AddOrgForm() {
             </div>
             <div className="w-full translate-x-10 flex justify-end">
               <Button className="text-md inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                إضافة
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  إضافة
+                  </>
+                )}
               </Button>
             </div>
           </form>

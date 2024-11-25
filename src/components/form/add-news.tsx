@@ -25,10 +25,11 @@ import toast from "react-hot-toast";
 import Tiptap from "src/ui/Tiptap";
 import EngTiptap from "src/ui/EngTiptap";
 import { Badge } from "src/ui/badge";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 import Breadcrumb from "src/ui/breadcrumb";
+import Cookies from "js-cookie";
 
 type NewsFormValue = z.infer<typeof addNews>;
 interface WriterResponse {
@@ -87,6 +88,7 @@ export type ReferenceResp = {
 
 
 export default function AddNews() {
+  const AccessToken = Cookies.get("accessToken");
   const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
@@ -104,12 +106,22 @@ export default function AddNews() {
   };
   const { data } = useQuery({
     queryKey: ["writer"],
-    queryFn: () => getApi<WriterProp[]>("/api/Writers"),
+    queryFn: () => getApi<WriterProp[]>("/api/Writers",{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const { data: referenceData } = useQuery({
     queryKey: ["reference"],
-    queryFn: () => getApi<ReferenceResp[]>("/api/References"),
+    queryFn: () => getApi<ReferenceResp[]>("/api/References",{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const [selectedWriters, setSelectedWriters] = useState<number[]>([]);
@@ -147,7 +159,7 @@ export default function AddNews() {
   };
 
   // First Mutation: Adding Publications
-  const { mutate } = useMutation<WriterResponse, Error, NewsFormValue>({
+  const { mutate,isPending } = useMutation<WriterResponse, Error, NewsFormValue>({
     mutationKey: ["AddNews"],
     mutationFn: (datas: NewsFormValue) => {
       const formData = new FormData();
@@ -168,6 +180,7 @@ export default function AddNews() {
       return postApi("/api/News", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -204,6 +217,11 @@ export default function AddNews() {
     mutationFn: (datas: MutationData) => {
       return patchApi(`/api/News/${datas.id}`, {
         tags: datas.tags,
+      },{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
       });
     },
     onSuccess: (data) => {
@@ -575,7 +593,13 @@ export default function AddNews() {
 
                     <div className="w-full -translate-x-10 flex justify-end mt-20 ">
                       <Button className=" mb-10 text-md inline-flex h-10 px-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000]  py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                        Add
+                        {isPending ? (
+                          <LoaderIcon className="animate-spin duration-1000" />
+                        ) : (
+                          <>
+                          Add
+                  </>
+                )}
                       </Button>
                     </div>
                   </form>
@@ -875,7 +899,13 @@ export default function AddNews() {
 
                     <div className="w-full translate-x-10 flex justify-end mt-20 ">
                       <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                        إضافة
+                        {isPending ? (
+                          <LoaderIcon className="animate-spin duration-1000" />
+                        ) : (
+                  <>
+                  إضافة
+                  </>
+                )}
                       </Button>
                     </div>
                   </form>

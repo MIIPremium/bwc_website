@@ -7,10 +7,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../../ui/form";
-import {
-  ACCEPTED_IMAGE_TYPES,
-  Writer,
-} from "../../types/validation";
+import { ACCEPTED_IMAGE_TYPES, Writer } from "../../types/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { addPublishes } from "src/types/validation";
@@ -34,11 +31,11 @@ import {
 import EngTiptap from "src/ui/EngTiptap";
 import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
 import Breadcrumb from "src/ui/breadcrumb";
-
+import Cookies from "js-cookie";
 
 type PublishesFormValue = z.infer<typeof addPublishes>;
 interface WriterResponse {
@@ -96,11 +93,10 @@ export interface ReportPubResp {
   en_Title: string;
 }
 
-
 export default function AddPublications() {
-  const {  i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
-
+  const AccessToken = Cookies.get("accessToken");
   const navigate = useNavigate();
   const [_preview, setPreview] = useState<string | null>(null);
   const form = useForm<z.infer<typeof addPublishes>>({
@@ -116,18 +112,35 @@ export default function AddPublications() {
   };
   const { data } = useQuery({
     queryKey: ["writer"],
-    queryFn: () => getApi<WriterProp[]>("/api/writers/writers"),
+    queryFn: () =>
+      getApi<WriterProp[]>("/api/writers/writers", {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const { data: referenceData } = useQuery({
     queryKey: ["reference"],
-    queryFn: () => getApi<ReferenceResp[]>("/api/References"),
+    queryFn: () =>
+      getApi<ReferenceResp[]>("/api/References", {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
   const { data: ReportPub } = useQuery({
     queryKey: ["ReportPub"],
-    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+    queryFn: () =>
+      getApi<ReportPubResp[]>("/api/reports/pub", {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
-
 
   const [selectedWriters, setSelectedWriters] = useState<number[]>([]);
 
@@ -169,7 +182,11 @@ export default function AddPublications() {
   };
 
   // First Mutation: Adding Publications
-  const { mutate } = useMutation<WriterResponse, Error, PublishesFormValue>({
+  const { mutate, isPending } = useMutation<
+    WriterResponse,
+    Error,
+    PublishesFormValue
+  >({
     mutationKey: ["AddPublishes"],
     mutationFn: (datas: PublishesFormValue) => {
       const formData = new FormData();
@@ -191,11 +208,11 @@ export default function AddPublications() {
       return postApi("/api/Publications", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
     onSuccess: (data, variables) => {
-      
       const publishesID = data.data.id;
       secondMutate({
         id: publishesID,
@@ -230,14 +247,22 @@ export default function AddPublications() {
   } = useMutation({
     mutationKey: ["publishesPatch"],
     mutationFn: (datas: MutationData) => {
-      
-      return patchApi(`/api/Publications/${datas.id}`, {
-        tags: datas.tags,
-        t2read: datas.t2read,
-        writersIdes: datas.writersIdes, // Corrected
-        referencesIdes: datas.referencesIdes, // Corrected
-        reportId: +datas.reportId,
-      });
+      return patchApi(
+        `/api/Publications/${datas.id}`,
+        {
+          tags: datas.tags,
+          t2read: datas.t2read,
+          writersIdes: datas.writersIdes, // Corrected
+          referencesIdes: datas.referencesIdes, // Corrected
+          reportId: +datas.reportId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      );
     },
     onSuccess: (data) => {
       toast.success("تمت الاضافة بنجاح.", {
@@ -255,7 +280,6 @@ export default function AddPublications() {
       window.location.reload();
     },
     onError: (error) => {
-     
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",
@@ -753,7 +777,11 @@ export default function AddPublications() {
                     </div>
                     <div className="w-full -translate-x-10 flex justify-end mt-20 ">
                       <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                        Add
+                        {isPending ? (
+                          <LoaderIcon className="animate-spin duration-1000" />
+                        ) : (
+                          <>Add</>
+                        )}
                       </Button>
                     </div>
                   </form>
@@ -1233,7 +1261,11 @@ export default function AddPublications() {
                     </div>
                     <div className="w-full translate-x-10 flex justify-end mt-20 ">
                       <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                        إضافة
+                        {isPending ? (
+                          <LoaderIcon className="animate-spin duration-1000" />
+                        ) : (
+                          <>إضافة</>
+                        )}
                       </Button>
                     </div>
                   </form>

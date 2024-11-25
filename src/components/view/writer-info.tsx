@@ -9,6 +9,7 @@ import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import { WriterResp } from "src/types/validation";
 import Label from "src/ui/label";
 import { IconType } from "react-icons";
+import Cookies from "js-cookie";
 
 const socialIcons: { [key: string]: IconType } = {
   Instagram: CgInstagram,
@@ -18,6 +19,7 @@ const socialIcons: { [key: string]: IconType } = {
   Facebook: FaFacebookF, // Add Facebook if needed
 };
 export default function WriterInfo() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
@@ -25,7 +27,12 @@ export default function WriterInfo() {
   const fetchData = async () => {
     const response = await axiosInstance.get<WriterResp>(
       `/api/Writers/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };

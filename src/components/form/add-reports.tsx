@@ -22,8 +22,9 @@ import Tiptap from "src/ui/Tiptap";
 import { Textarea } from "src/ui/textarea";
 import EngTiptap from "src/ui/EngTiptap";
 import { Badge } from "src/ui/badge";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 type AddReportsFormValue = z.infer<typeof addReportsScheme>;
 
@@ -55,6 +56,7 @@ export type ReferenceResp = {
 };
 
 export default function AddReportsForm() {
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
@@ -115,7 +117,7 @@ export default function AddReportsForm() {
   };
 
   // First Mutation: Adding Publications
-  const { mutate } = useMutation({
+  const { mutate,isPending } = useMutation({
     mutationKey: ["addReportsScheme"],
     mutationFn: (datas: AddReportsFormValue) => {
       const formData = new FormData();
@@ -145,6 +147,7 @@ export default function AddReportsForm() {
       return postApi("/api/Reports", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -625,7 +628,13 @@ export default function AddReportsForm() {
             </div>
             <div className="w-full -translate-x-10 flex justify-end mt-20 ">
               <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Add
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  Add
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -1066,7 +1075,13 @@ export default function AddReportsForm() {
             </div>
             <div className="w-full translate-x-10 flex justify-end mt-20 ">
               <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                إضافة
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  إضافة
+                  </>
+                )}
               </Button>
             </div>
           </form>

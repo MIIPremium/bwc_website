@@ -31,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "src/ui/select";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
 
 export interface JobProp {
@@ -68,7 +69,8 @@ export type JobResp = {
 };
 
 export default function JobsTable() {
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddJobOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddJobColumns, []);
@@ -76,7 +78,11 @@ export default function JobsTable() {
   const [data, setData] = useState<JobProp[]>([]);
   const fetchJob = async () => {
     try {
-      const response = await axiosInstance.get<JobResp>(`/api/Jobs`);
+      const response = await axiosInstance.get<JobResp>(`/api/Jobs`, {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      });
       return [response.data];
     } catch (error) {
       console.error("Error fetching issue:", error);
@@ -92,7 +98,6 @@ export default function JobsTable() {
 
     getData();
   }, []);
-  
 
   const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);

@@ -20,9 +20,12 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { Textarea } from "src/ui/textarea";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 type ServicesFormValue = z.infer<typeof addServicesSchema>;
 
 export default function AddServicesForm() {
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
@@ -30,15 +33,23 @@ export default function AddServicesForm() {
     resolver: zodResolver(addServicesSchema),
   });
 
-  const { mutate } = useMutation({
+  const { mutate,isPending } = useMutation({
     mutationKey: ["AddServices"],
     mutationFn: (datas: ServicesFormValue) =>
-      postApi("/api/Services", {
-        ar_name: datas.ar_name,
-        en_name: datas.en_name,
-        ar_Description: datas.ar_Description,
-        en_Description: datas.en_Description,
-      }),
+      postApi(
+        "/api/Services",
+        {
+          ar_name: datas.ar_name,
+          en_name: datas.en_name,
+          ar_Description: datas.ar_Description,
+          en_Description: datas.en_Description,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      ),
     onSuccess: () => {
       toast.success("تمت الاضافة بنجاح.", {
         style: {
@@ -185,7 +196,13 @@ export default function AddServicesForm() {
             </div>
             <div className="w-full -translate-x-10 flex justify-end mt-20">
               <Button className="text-lg inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Add
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  Add
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -296,7 +313,13 @@ export default function AddServicesForm() {
             </div>
             <div className="w-full translate-x-10 flex justify-end mt-20">
               <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-7 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                إضافة
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  إضافة
+                  </>
+                )}
               </Button>
             </div>
           </form>

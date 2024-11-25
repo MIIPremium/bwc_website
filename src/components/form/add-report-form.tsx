@@ -20,11 +20,12 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import AddPersonalImageDialog from "../dailog/add-personal-image-dialog";
 import { Textarea } from "src/ui/textarea";
+import Cookies from "js-cookie";
 
 type ReportFormValue = z.infer<typeof addReportSchema>;
 
 export default function AddReportForm() {
-  // const { toast } = useToast();
+  const AccessToken = Cookies.get("accessToken");
   const navigate = useNavigate();
   const form = useForm<z.infer<typeof addReportSchema>>({
     resolver: zodResolver(addReportSchema),
@@ -33,29 +34,33 @@ export default function AddReportForm() {
   const { mutate } = useMutation({
     mutationKey: ["AddReferences"],
     mutationFn: (datas: ReportFormValue) =>
-      postApi("/api/References", {
-        Ar_Title: datas.Ar_Title,
-        En_Title: datas.En_Title,
-        Img: datas.Img,
-        Ar_description: datas.Ar_description,
-        En_description: datas.En_description,
-        Ar_executive_summary: datas.Ar_executive_summary,
-        En_executive_summary: datas.En_executive_summary,
-        Ar_table_of_content: datas.Ar_table_of_content,
-        Er_table_of_content: datas.Er_table_of_content,
-        date_of_report: datas.date_of_report,
-        date_of_publish: datas.date_of_publish,
-        PdfImg: datas.PdfImg,
-        pdf_link: datas.pdf_link,
-        An_note: datas.An_note,
-        En_note: datas.En_note,
-      }),
+      postApi(
+        "/api/References",
+        {
+          Ar_Title: datas.Ar_Title,
+          En_Title: datas.En_Title,
+          Img: datas.Img,
+          Ar_description: datas.Ar_description,
+          En_description: datas.En_description,
+          Ar_executive_summary: datas.Ar_executive_summary,
+          En_executive_summary: datas.En_executive_summary,
+          Ar_table_of_content: datas.Ar_table_of_content,
+          Er_table_of_content: datas.Er_table_of_content,
+          date_of_report: datas.date_of_report,
+          date_of_publish: datas.date_of_publish,
+          PdfImg: datas.PdfImg,
+          pdf_link: datas.pdf_link,
+          An_note: datas.An_note,
+          En_note: datas.En_note,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      ),
     onSuccess: () => {
-      // toast({
-      //   title: "اشعار",
-      //   variant: "success",
-      //   description: "تمت الاضافة بنجاح",
-      // });
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",

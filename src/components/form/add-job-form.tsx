@@ -29,7 +29,8 @@ import {
 } from "src/ui/select";
 import { Badge } from "src/ui/badge";
 import { useTranslation } from "react-i18next";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
+import Cookies from "js-cookie";
 
 type AddJobFormValue = z.infer<typeof addJobSchema>;
 interface JobResponse {
@@ -51,8 +52,8 @@ interface JobResponse {
   };
 }
 export default function AddJobForm() {
-  // const { toast } = useToast();
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const [states, _setStates] = useState([
     { label: "متاحة", enLable: "available", value: true },
@@ -105,7 +106,7 @@ export default function AddJobForm() {
     mutate: firstMutate,
     isError: _firstIsError,
     isSuccess: _firstIsSuccess,
-    isPending: _firstIsPending,
+    isPending: firstIsPending,
   } = useMutation<JobResponse, Error, AddJobFormValue>({
     mutationKey: ["AddOrg"],
     mutationFn: (datas: AddJobFormValue) => {
@@ -124,12 +125,11 @@ export default function AddJobForm() {
       return postApi("/api/Jobs", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
     onSuccess: (data, variables) => {
-
-
       const jobId = data.data.id;
       secondMutate({
         id: jobId,
@@ -160,7 +160,7 @@ export default function AddJobForm() {
     mutate: secondMutate,
     isError: _secondIsError,
     isSuccess: _secondIsSuccess,
-    isPending: _secondIsPending,
+    isPending: secondIsPending,
   } = useMutation({
     mutationKey: ["JobInfo"],
     mutationFn: (datas: {
@@ -172,7 +172,6 @@ export default function AddJobForm() {
       ar_advances: string[];
       en_advances: string[];
     }) => {
-      
       return patchApi(
         `/api/Jobs/${datas.id}`,
         {
@@ -186,12 +185,12 @@ export default function AddJobForm() {
         {
           headers: {
             "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
           },
         }
       );
     },
     onSuccess: (data) => {
-      
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -207,7 +206,6 @@ export default function AddJobForm() {
       window.location.reload();
     },
     onError: (error) => {
-      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",
@@ -767,7 +765,13 @@ export default function AddJobForm() {
 
             <div className="w-full -translate-x-10 flex justify-end mt-20">
               <Button className="text-lg mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Add
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  Add
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -1288,7 +1292,14 @@ export default function AddJobForm() {
 
             <div className="w-full translate-x-10 flex justify-end mt-20">
               <Button className="text-md mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                إضافة
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  إضافة
+                  
+                  </>
+                )}
               </Button>
             </div>
           </form>

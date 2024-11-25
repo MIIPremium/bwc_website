@@ -1,9 +1,4 @@
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-} from "../../ui/form";
+import { Form, FormControl, FormField, FormItem } from "../../ui/form";
 import { axiosInstance, patchApi } from "../../lib/http";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Repeat2 } from "lucide-react";
@@ -31,6 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "src/ui/select";
+import Cookies from "js-cookie";
 
 interface DeleteDialogProps {
   id: number;
@@ -57,19 +53,24 @@ export type JobResp = {
 };
 type UpdateAvailable = z.infer<typeof formSchema>;
 export default function ChangePublishesDialog({ id }: DeleteDialogProps) {
+  const AccessToken = Cookies.get("accessToken");
   const [publish, _setPublish] = useState([
     { label: "مشنور", enLable: "publish", value: true },
     { label: "غير منشور", enLable: "unpublished", value: false },
   ]);
   const navigate = useNavigate();
-  const {  i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
   const fetchData = async () => {
-    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`, {});
+    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`, {
+      headers: {
+        Authorization: `Bearer ${AccessToken}`,
+      },
+    });
     return response.data;
   };
   const {
@@ -86,10 +87,14 @@ export default function ChangePublishesDialog({ id }: DeleteDialogProps) {
 
   const { mutate } = useMutation({
     mutationFn: (data: UpdateAvailable) => {
-      return patchApi(`/api/Jobs/Publish/${id}?publish=${data.publish}`, {});
+      return patchApi(`/api/Jobs/Publish/${id}?publish=${data.publish}`, {},{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      });
     },
     onSuccess: (data) => {
-      
       toast.success("تمت العملية بنجاح.");
       navigate("/admin-dashboard/jobs");
       window.location.reload();

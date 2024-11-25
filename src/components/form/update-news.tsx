@@ -38,8 +38,9 @@ import {
 import EngTiptap from "src/ui/EngTiptap";
 import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 type WriterOption = {
   value: number;
@@ -138,6 +139,7 @@ const kindOfCase = [
   { label: "تحليلات", value: 3 },
 ] as const;
 export default function UpdateNews() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
@@ -157,12 +159,24 @@ export default function UpdateNews() {
   };
   const { data } = useQuery({
     queryKey: ["writer"],
-    queryFn: () => getApi<WriterProp[]>("/api/Writers"),
+    queryFn: () =>
+      getApi<WriterProp[]>("/api/Writers", {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const { data: referenceData } = useQuery({
     queryKey: ["reference"],
-    queryFn: () => getApi<ReferenceResp[]>("/api/References"),
+    queryFn: () =>
+      getApi<ReferenceResp[]>("/api/References", {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const [selectedWriters, setSelectedWriters] = useState<number[]>([]);
@@ -207,7 +221,11 @@ export default function UpdateNews() {
   };
 
   // First Mutation: Adding Publications
-  const { mutate } = useMutation<WriterResponse, Error, NewsFormValue>({
+  const { mutate, isPending } = useMutation<
+    WriterResponse,
+    Error,
+    NewsFormValue
+  >({
     mutationKey: ["updateNews"],
     mutationFn: (datas: NewsFormValue) => {
       const formData = new FormData();
@@ -228,11 +246,11 @@ export default function UpdateNews() {
       return putApi(`/api/News/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
     onSuccess: (data, variables) => {
-      
       const publishesID = data.data.id;
       secondMutate({
         id: publishesID,
@@ -263,12 +281,20 @@ export default function UpdateNews() {
   } = useMutation({
     mutationKey: ["publishesPatch"],
     mutationFn: (datas: MutationData) => {
-      return patchApi(`/api/News/${id}`, {
-        tags: datas.tags,
-      });
+      return patchApi(
+        `/api/News/${id}`,
+        {
+          tags: datas.tags,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      );
     },
     onSuccess: (data) => {
-      
       toast.success("تمت التعديل بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -284,7 +310,6 @@ export default function UpdateNews() {
       window.location.reload();
     },
     onError: (error) => {
-      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",
@@ -301,7 +326,12 @@ export default function UpdateNews() {
   const fetchPublishesData = async () => {
     const response = await axiosInstance.get<PublishesDataResp>(
       `/api/ManagingPublications/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -393,9 +423,7 @@ export default function UpdateNews() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
           >
-            <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-              
-            </div>
+            <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right "></div>
             <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
               <div className="text-start col-span-1 h-auto ">
                 <label htmlFor="">News Photo</label>
@@ -647,7 +675,11 @@ export default function UpdateNews() {
 
             <div className="w-full -translate-x-10 flex justify-end mt-20 ">
               <Button className=" mb-10 text-md inline-flex h-10 px-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000]  py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Update
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>Update</>
+                )}
               </Button>
             </div>
           </form>
@@ -664,9 +696,7 @@ export default function UpdateNews() {
             onSubmit={form.handleSubmit(onSubmit)}
             className="min-h-[90vh]  w-[100%] bg-[#f2f2f2] px-9"
           >
-            <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
-              
-            </div>
+            <div className="grid h-[100px]  grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right "></div>
             <div className="grid  h-[100px] grid-cols-3 items-start gap-4 overflow-y-scroll scroll-smooth text-right ">
               <div className=" col-span-1 h-auto ">
                 <label htmlFor="">صورة الخبر</label>
@@ -914,7 +944,11 @@ export default function UpdateNews() {
 
             <div className="w-full translate-x-10 flex justify-end mt-20 ">
               <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>تعديل</>
+                )}
               </Button>
             </div>
           </form>

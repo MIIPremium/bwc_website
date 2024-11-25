@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
 import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 
 type ReferenceFormValue = z.infer<typeof addReferenceSchema>;
 
@@ -32,7 +33,7 @@ export default function AddReferenceForm() {
     resolver: zodResolver(addReferenceSchema),
   });
 
-  const { mutate } = useMutation({
+  const { mutate ,isPending} = useMutation({
     mutationKey: ["AddReferences"],
     mutationFn: (datas: ReferenceFormValue) =>
       postApi(
@@ -161,7 +162,13 @@ export default function AddReferenceForm() {
               }
             >
               <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                add a reference
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  add a reference
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -233,7 +240,13 @@ export default function AddReferenceForm() {
             </div>
             <div className="w-full translate-x-10 flex justify-end">
               <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                إضافة مرجع
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  إضافة مرجع
+                  </>
+                )}
               </Button>
             </div>
           </form>
