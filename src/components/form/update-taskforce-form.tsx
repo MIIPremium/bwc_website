@@ -19,9 +19,12 @@ import { axiosInstance, putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 type TaskForceFormValue = z.infer<typeof addTaskForceSchema>;
 
 export default function UpdateTaskForce() {
+  const AccessToken = Cookies.get("accessToken");
   const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
@@ -36,7 +39,12 @@ export default function UpdateTaskForce() {
   const fetchData = async () => {
     const response = await axiosInstance.get<TaskForceResp>(
       `/api/Taskforce/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -66,7 +74,7 @@ export default function UpdateTaskForce() {
     }
   }, [taskForceData]);
 
-  const { mutate } = useMutation({
+  const { mutate,isPending } = useMutation({
     mutationKey: ["UpdateTaskForce"],
     mutationFn: (datas: TaskForceFormValue) => {
       const formData = new FormData();
@@ -86,6 +94,7 @@ export default function UpdateTaskForce() {
       return putApi(`/api/Taskforce/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -330,7 +339,13 @@ export default function UpdateTaskForce() {
 
             <div className="w-full -translate-x-10 flex justify-end">
               <Button className="text-lg inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-6 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Update
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  Update
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -520,7 +535,13 @@ export default function UpdateTaskForce() {
 
             <div className="w-full translate-x-10 flex justify-end">
               <Button className="text-lg inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-6 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  تعديل
+                  </>
+                )}
               </Button>
             </div>
           </form>

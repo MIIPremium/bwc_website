@@ -9,9 +9,11 @@ import { axiosInstance } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
 import { ServicesProp } from "../table/services-table";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 type ReferenceFormValue = z.infer<typeof addServicesSchema>;
 
 export default function ServicesInfo() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
@@ -23,7 +25,11 @@ export default function ServicesInfo() {
   const fetchData = async () => {
     const response = await axiosInstance.get<ServicesProp>(
       `/api/Services/${id}`,
-      {}
+      {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };

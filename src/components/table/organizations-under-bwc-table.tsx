@@ -21,6 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
 
 export interface OrgProp {
@@ -40,7 +41,8 @@ export type OrgResp = {
 };
 
 export default function OrganizationsUnderBwcTable() {
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddOrganizationsOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddOrganizationsColumns, []);
@@ -48,7 +50,11 @@ export default function OrganizationsUnderBwcTable() {
   const [data, setData] = useState<OrgProp[]>([]);
   const fetchIssueById = async () => {
     try {
-      const response = await axiosInstance.get<OrgResp>(`/api/OrgUndBWC`);
+      const response = await axiosInstance.get<OrgResp>(`/api/OrgUndBWC`, {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      });
       return [response.data];
     } catch (error) {
       console.error("Error fetching issue:", error);

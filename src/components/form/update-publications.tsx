@@ -31,9 +31,9 @@ import {
 import EngTiptap from "src/ui/EngTiptap";
 import { MultiSelect } from "primereact/multiselect";
 import { Badge } from "src/ui/badge";
-import { CircleX } from "lucide-react";
+import { CircleX, LoaderIcon } from "lucide-react";
 import { useTranslation } from "react-i18next";
-
+import Cookies from "js-cookie";
 
 type PublishesFormValue = z.infer<typeof updatePublishes>;
 interface WriterResponse {
@@ -125,7 +125,8 @@ const kindOfCase = [
   { label: "تحليلات", value: 3 },
 ] as const;
 export default function UpdatePublications() {
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -144,16 +145,31 @@ export default function UpdatePublications() {
   };
   const { data } = useQuery({
     queryKey: ["writer"],
-    queryFn: () => getApi<WriterProp[]>("/api/writers/writers"),
+    queryFn: () => getApi<WriterProp[]>("/api/writers/writers",{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const { data: referenceData } = useQuery({
     queryKey: ["reference"],
-    queryFn: () => getApi<ReferenceResp[]>("/api/References"),
+    queryFn: () => getApi<ReferenceResp[]>("/api/References",{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
   const { data: ReportPub } = useQuery({
     queryKey: ["ReportPub"],
-    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub",{
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
   const [selectedReference, setSelectedReference] = useState<number[]>([]);
 
@@ -192,7 +208,11 @@ export default function UpdatePublications() {
   };
 
   // First Mutation: Adding Publications
-  const { mutate } = useMutation<WriterResponse, Error, PublishesFormValue>({
+  const { mutate, isPending } = useMutation<
+    WriterResponse,
+    Error,
+    PublishesFormValue
+  >({
     mutationKey: ["updatePublishes"],
     mutationFn: (datas: PublishesFormValue) => {
       const formData = new FormData();
@@ -214,6 +234,7 @@ export default function UpdatePublications() {
       return putApi(`/api/Publications/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -252,13 +273,22 @@ export default function UpdatePublications() {
   } = useMutation({
     mutationKey: ["publishesPatch"],
     mutationFn: (datas: MutationData) => {
-      return patchApi(`/api/Publications/${id}`, {
-        tags: datas.tags,
-        t2read: datas.t2read,
-        writersIdes: datas.writersIdes, // Corrected
-        referencesIdes: datas.referencesIdes, // Corrected
-        reportId: +datas.reportId,
-      });
+      return patchApi(
+        `/api/Publications/${id}`,
+        {
+          tags: datas.tags,
+          t2read: datas.t2read,
+          writersIdes: datas.writersIdes, // Corrected
+          referencesIdes: datas.referencesIdes, // Corrected
+          reportId: +datas.reportId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      );
     },
     onSuccess: (data) => {
       toast.success("تمت التعديل بنجاح.", {
@@ -293,7 +323,12 @@ export default function UpdatePublications() {
   const fetchPublishesData = async () => {
     const response = await axiosInstance.get<PublishesDataResp>(
       `/api/ManagingPublications/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -798,7 +833,11 @@ export default function UpdatePublications() {
             </div>
             <div className="w-full -translate-x-10 flex justify-end mt-20 ">
               <Button className=" mb-10 text-lg inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Edit
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>Edit</>
+                )}
               </Button>
             </div>
           </form>
@@ -1237,7 +1276,11 @@ export default function UpdatePublications() {
             </div>
             <div className="w-full translate-x-10 flex justify-end mt-20 ">
               <Button className=" mb-10 text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>تعديل</>
+                )}
               </Button>
             </div>
           </form>

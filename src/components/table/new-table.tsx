@@ -31,6 +31,7 @@ import {
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
 
 export interface newsProp {
@@ -80,7 +81,8 @@ export type newsResp = {
 };
 
 export default function NewsTable() {
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddNewOrder[]>(() => [], []);
   const columnsMemo = useMemo(() => AddNewsColumns, []);
@@ -89,7 +91,12 @@ export default function NewsTable() {
   const fetchIssueById = async () => {
     try {
       const response = await axiosInstance.get<newsResp>(
-        `/api/ManagingPublications?type=news&ascending=false&publish=true`
+        `/api/ManagingPublications?type=news&ascending=false&publish=true`,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
       );
       return [response.data];
     } catch (error) {

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosInstance, getApi, postApi } from "src/lib/http";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 export interface publicationView {
   id: number;
@@ -81,6 +82,7 @@ export interface ReportPubResp {
 type ReferenceFormValue = z.infer<typeof addPublishes>;
 
 export default function ViewPublications() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const [modalOpen, setModalOpen] = useState(false);
@@ -90,7 +92,12 @@ export default function ViewPublications() {
   const fetchData = async () => {
     const response = await axiosInstance.get<publicationView>(
       `/api/ManagingPublications/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -106,7 +113,12 @@ export default function ViewPublications() {
 
   const { data: ReportPub } = useQuery({
     queryKey: ["ReportPubView"],
-    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub",{
+      headers: {
+        "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+        Authorization: `Bearer ${AccessToken}`,
+      },
+    }),
   });
 
   // Assuming this is your data structure

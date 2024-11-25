@@ -28,6 +28,8 @@ import toast from "react-hot-toast";
 import { Textarea } from "src/ui/textarea";
 import { useTranslation } from "react-i18next";
 import { MultiSelect } from "primereact/multiselect";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 
 type WriterFormValue = z.infer<typeof UpdateWriterSchema>;
 
@@ -49,7 +51,7 @@ interface City {
 }
 export default function UpdateWriterForm() {
   const [selectedCities, setSelectedCities] = useState<City[]>([]);
-  
+  const AccessToken = Cookies.get("accessToken");
   const [socialMediaFields, setSocialMediaFields] = useState<
     { name: string; url: string }[]
   >([]);
@@ -97,7 +99,12 @@ export default function UpdateWriterForm() {
   const fetchData = async () => {
     const response = await axiosInstance.get<WriterResp>(
       `/api/Writers/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -129,7 +136,7 @@ export default function UpdateWriterForm() {
     mutate: firstMutate,
     isError: _firstIsError,
     isSuccess: _firstIsSuccess,
-    isPending: _firstIsPending,
+    isPending: firstIsPending,
   } = useMutation<WriterResponse, Error, WriterFormValue>({
     mutationKey: ["Writer"],
     mutationFn: (datas: WriterFormValue) => {
@@ -146,6 +153,7 @@ export default function UpdateWriterForm() {
       return putApi(`/api/Writers/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -183,7 +191,7 @@ export default function UpdateWriterForm() {
     mutate: secondMutate,
     isError: _secondIsError,
     isSuccess: _secondIsSuccess,
-    isPending: _secondIsPending,
+    isPending: secondIsPending,
   } = useMutation({
     mutationKey: ["SocialMedia"],
     mutationFn: (datas: {
@@ -193,7 +201,12 @@ export default function UpdateWriterForm() {
       
 
       // Send the array of social media objects directly as the body
-      return patchApi(`/api/Writers/${datas.id}`, datas.Soicalmedia);
+      return patchApi(`/api/Writers/${datas.id}`, datas.Soicalmedia,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        });
     },
     onSuccess: (data) => {
       
@@ -642,7 +655,14 @@ export default function UpdateWriterForm() {
 
             <div className="w-full -translate-x-10 flex justify-end mt-20">
               <Button className="text-lg mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                update
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  update
+                  
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -983,7 +1003,14 @@ export default function UpdateWriterForm() {
 
             <div className="w-full translate-x-10 flex justify-end mt-20">
               <Button className="text-md mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  تعديل
+                  
+                  </>
+                )}
               </Button>
             </div>
           </form>

@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -22,11 +23,16 @@ export type JobResp = {
   endDate: Date;
 };
 export default function JobInfo() {
+  const AccessToken = Cookies.get("accessToken");
   const { id } = useParams<{ id: string }>();
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const fetchData = async () => {
-    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`, {});
+    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`, {
+      headers: {
+        Authorization: `Bearer ${AccessToken}`,
+      },
+    });
     return response.data;
   };
   const {

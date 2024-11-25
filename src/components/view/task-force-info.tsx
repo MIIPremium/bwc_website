@@ -8,8 +8,10 @@ import { addTaskForceSchema, TaskForceResp } from "src/types/validation";
 import Label from "src/ui/label";
 import { z } from "zod";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 export default function TaskForceInfo() {
+  const AccessToken = Cookies.get("accessToken");
   const {  i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
@@ -17,7 +19,12 @@ export default function TaskForceInfo() {
   const fetchData = async () => {
     const response = await axiosInstance.get<TaskForceResp>(
       `/api/Taskforce/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };

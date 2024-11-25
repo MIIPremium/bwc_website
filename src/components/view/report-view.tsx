@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "src/lib/http";
 import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 export interface ReportRespById {
   id: number;
@@ -73,6 +74,7 @@ export interface Writer {
 type ReferenceFormValue = z.infer<typeof addPublishes>;
 
 export default function ViewReportById() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const [modalOpen, setModalOpen] = useState(false);
@@ -83,7 +85,12 @@ export default function ViewReportById() {
   const fetchData = async () => {
     const response = await axiosInstance.get<ReportRespById>(
       `api/Reports/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };

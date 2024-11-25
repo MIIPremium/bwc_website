@@ -21,12 +21,14 @@ import toast from "react-hot-toast";
 import { ServicesProp } from "../table/services-table";
 import { Textarea } from "src/ui/textarea";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 
 type ReferenceFormValue = z.infer<typeof addServicesSchema>;
 
 export default function UpdateServicesIndex() {
-  // const { toast } = useToast();
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -37,7 +39,11 @@ export default function UpdateServicesIndex() {
   const fetchData = async () => {
     const response = await axiosInstance.get<ServicesProp>(
       `/api/Services/${id}`,
-      {}
+      {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -61,7 +67,7 @@ export default function UpdateServicesIndex() {
       });
     }
   }, [ServicesData]);
-  const { mutate } = useMutation({
+  const { mutate,isPending } = useMutation({
     mutationKey: ["UpdateServices"],
     mutationFn: (datas: ReferenceFormValue) =>
       putApi(`/api/Services/${id}`, {
@@ -69,6 +75,11 @@ export default function UpdateServicesIndex() {
         en_name: datas.en_name,
         ar_Description: datas.ar_Description,
         en_Description: datas.en_Description,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
       }),
     onSuccess: () => {
       toast.success("تمت التعديل بنجاح.", {
@@ -216,7 +227,13 @@ export default function UpdateServicesIndex() {
             </div>
             <div className="w-full -translate-x-10 flex justify-end mt-20">
               <Button className="text-lg inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-7 py-2 font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                update
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  update
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -327,7 +344,13 @@ export default function UpdateServicesIndex() {
             </div>
             <div className="w-full translate-x-10 flex justify-end mt-20">
               <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-7 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  تعديل
+                  </>
+                )}
               </Button>
             </div>
           </form>

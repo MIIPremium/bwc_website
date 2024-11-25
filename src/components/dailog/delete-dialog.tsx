@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "src/ui/button";
 import DeleteIcon from "src/assets/icons/delete-icon";
+import Cookies from "js-cookie";
 
 interface DeleteDialogProps {
   url: string;
@@ -30,12 +31,18 @@ export default function DeleteDialog({
   keys,
   path,
 }: DeleteDialogProps) {
+  const AccessToken = Cookies.get("accessToken");
   const queryClient = useQueryClient();
-  const {  i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
 
   const { mutate, isSuccess, isError, error } = useMutation({
-    mutationFn: () => deleteApi(url),
+    mutationFn: () =>
+      deleteApi(url, {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
     onSuccess: () => {
       if (keys) {
         queryClient.invalidateQueries({ queryKey: keys });
@@ -46,7 +53,6 @@ export default function DeleteDialog({
       }, 1000);
     },
   });
-
 
   useEffect(() => {
     if (isSuccess) {
@@ -66,7 +72,8 @@ export default function DeleteDialog({
 
   useEffect(() => {
     if (isError) {
-      const backendMessage = (error as any)?.response?.data || "لم تتم العملية.";
+      const backendMessage =
+        (error as any)?.response?.data || "لم تتم العملية.";
       toast.error(`${backendMessage}`, {
         style: {
           border: "1px solid #FF5733",

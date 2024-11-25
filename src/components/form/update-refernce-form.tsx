@@ -20,6 +20,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 // import { ReferenceResp } from "../table/referencesTable";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 
 type ReferenceFormValue = z.infer<typeof addReferenceSchema>;
 export type ReferenceResp = {
@@ -29,8 +31,8 @@ export type ReferenceResp = {
   link: string;
 };
 export default function UpdateReferenceForm() {
-  // const { toast } = useToast();
-  const {  i18n } = useTranslation();
+  const AccessToken = Cookies.get("accessToken");
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -41,7 +43,12 @@ export default function UpdateReferenceForm() {
   const fetchData = async () => {
     const response = await axiosInstance.get<ReferenceResp>(
       `/api/References/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -64,14 +71,23 @@ export default function UpdateReferenceForm() {
       });
     }
   }, [complaintData]);
-  const { mutate } = useMutation({
+  const { mutate ,isPending} = useMutation({
     mutationKey: ["UpdateReferences"],
     mutationFn: (datas: ReferenceFormValue) =>
-      putApi(`/api/References/${id}`, {
-        ar_title: datas.ar_title,
-        en_title: datas.en_title,
-        link: datas.link,
-      }),
+      putApi(
+        `/api/References/${id}`,
+        {
+          ar_title: datas.ar_title,
+          en_title: datas.en_title,
+          link: datas.link,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      ),
     onSuccess: () => {
       toast.success("تمت التعديل بنجاح.", {
         style: {
@@ -190,7 +206,13 @@ export default function UpdateReferenceForm() {
               }
             >
               <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                update a reference
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  update a reference
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -262,7 +284,13 @@ export default function UpdateReferenceForm() {
             </div>
             <div className="w-full translate-x-10 flex justify-end">
               <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل مرجع
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  تعديل مرجع
+                  </>
+                )}
               </Button>
             </div>
           </form>

@@ -21,6 +21,7 @@ import { EnAddReferenceColumns } from "../../components/column/add-refernce-colu
 
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
 
 export interface ReferenceProp {
@@ -40,6 +41,7 @@ export type ReferenceResp = {
 };
 
 export default function ReferencesTable() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<AddReferenceOrder[]>(() => [], []);
@@ -49,7 +51,12 @@ export default function ReferencesTable() {
   const fetchIssueById = async () => {
     try {
       const response = await axiosInstance.get<ReferenceResp>(
-        `/api/References`
+        `/api/References`,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
       );
       return [response.data];
     } catch (error) {

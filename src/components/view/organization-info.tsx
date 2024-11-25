@@ -8,6 +8,7 @@ import { axiosInstance } from "src/lib/http";
 import { addOrgSchema } from "src/types/validation";
 import { useTranslation } from "react-i18next";
 import { z } from "zod";
+import Cookies from "js-cookie";
 export type OrgResp = {
   id: number;
   ar_name: string;
@@ -16,6 +17,7 @@ export type OrgResp = {
   link: string;
 };
 export default function OrganizationInfo() {
+  const AccessToken = Cookies.get("accessToken");
   const { id } = useParams<{ id: string }>();
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
@@ -23,7 +25,12 @@ export default function OrganizationInfo() {
   const fetchData = async () => {
     const response = await axiosInstance.get<OrgResp>(
       `/api/OrgUndBWC/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };

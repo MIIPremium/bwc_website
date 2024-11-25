@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
@@ -72,6 +73,7 @@ export interface Writer {
 }
 
 export default function ViewNews() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const [modalOpen, setModalOpen] = useState(false);
@@ -81,7 +83,12 @@ export default function ViewNews() {
   const fetchData = async () => {
     const response = await axiosInstance.get<publicationView>(
       `/api/ManagingPublications/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };

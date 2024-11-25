@@ -30,6 +30,7 @@ import toast from "react-hot-toast";
 import Label from "src/ui/label";
 import { useTranslation } from "react-i18next";
 import EnBreadcrumb from "src/ui/en-breadcrumb";
+import Cookies from "js-cookie";
 
 const formSchema = z.object({
   FormFile: z
@@ -47,6 +48,7 @@ const formSchema = z.object({
 });
 type ProfileFormValue = z.infer<typeof formSchema>;
 export default function Profile() {
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -76,6 +78,7 @@ export default function Profile() {
       return postApi("/api/ProfileFile", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },

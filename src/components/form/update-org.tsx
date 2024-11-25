@@ -17,8 +17,10 @@ import { Button } from "../../ui/button";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { axiosInstance, putApi } from "src/lib/http";
 import { useNavigate, useParams } from "react-router-dom";
-import toast, { LoaderIcon } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 
 export type OrgResp = {
   id: number;
@@ -30,6 +32,7 @@ export type OrgResp = {
 type OrgFormValue = z.infer<typeof updateOrgSchema>;
 
 export default function UpdateOrg() {
+  const AccessToken = Cookies.get("accessToken");
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
@@ -43,7 +46,12 @@ export default function UpdateOrg() {
   const fetchData = async () => {
     const response = await axiosInstance.get<OrgResp>(
       `/api/OrgUndBWC/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
@@ -94,7 +102,7 @@ export default function UpdateOrg() {
     }
   };
 
-  const { mutate } = useMutation({
+  const { mutate,isPending } = useMutation({
     mutationKey: ["AddOrg"],
     mutationFn: (datas: OrgFormValue) => {
       const formData = new FormData();
@@ -111,6 +119,7 @@ export default function UpdateOrg() {
       return putApi(`/api/OrgUndBWC/${id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
@@ -285,7 +294,13 @@ export default function UpdateOrg() {
             </div>
             <div className="w-full -translate-x-10 flex justify-end">
               <Button className="text-lg inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Update
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  Update
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -411,7 +426,13 @@ export default function UpdateOrg() {
             </div>
             <div className="w-full translate-x-10 flex justify-end">
               <Button className="text-md inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                تعديل
+                {isPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  تعديل
+                  </>
+                )}
               </Button>
             </div>
           </form>

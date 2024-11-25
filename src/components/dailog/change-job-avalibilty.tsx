@@ -25,6 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "src/ui/select";
+import Cookies from "js-cookie";
 
 interface DeleteDialogProps {
   id: number;
@@ -51,6 +52,7 @@ export type JobResp = {
 };
 type UpdateAvailable = z.infer<typeof formSchema>;
 export default function ChangeAvailabilityDialog({ id }: DeleteDialogProps) {
+  const AccessToken = Cookies.get("accessToken");
   const [states, _setStates] = useState([
     { label: "متاحة", enLable: "available", value: true },
     { label: "غير متاحة", enLable: "unavailable", value: false },
@@ -64,7 +66,12 @@ export default function ChangeAvailabilityDialog({ id }: DeleteDialogProps) {
     resolver: zodResolver(formSchema),
   });
   const fetchData = async () => {
-    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`, {});
+    const response = await axiosInstance.get<JobResp>(`/api/Jobs/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      });
     return response.data;
   };
   const {
@@ -81,8 +88,12 @@ export default function ChangeAvailabilityDialog({ id }: DeleteDialogProps) {
   const { mutate } = useMutation({
     mutationFn: (data: UpdateAvailable) => {
       return patchApi(
-        `/api/Jobs/Avaliable/${id}?availabel=${data.availabel}`,
-        {}
+        `/api/Jobs/Avaliable/${id}?availabel=${data.availabel}`,{},
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
       );
     },
     onSuccess: (data) => {

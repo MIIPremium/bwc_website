@@ -30,6 +30,7 @@ import {
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
 export interface ResponseReport {
   id: number;
@@ -71,6 +72,7 @@ export interface ReportProp {
   listOfSections: any[];
 }
 export default function ReportTable() {
+  const AccessToken = Cookies.get("accessToken");
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const defaultData = useMemo<ReportColProp[]>(() => [], []);
@@ -80,7 +82,12 @@ export default function ReportTable() {
   const fetchIssueById = async () => {
     try {
       const response = await axiosInstance.get<ResponseReport>(
-        `/api/website/Reports`
+        `/api/website/Reports`,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
       );
       return [response.data];
     } catch (error) {

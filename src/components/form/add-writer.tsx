@@ -29,6 +29,8 @@ import { Textarea } from "src/ui/textarea";
 import { useTranslation } from "react-i18next";
 
 import { MultiSelect } from "primereact/multiselect";
+import Cookies from "js-cookie";
+import { LoaderIcon } from "lucide-react";
 
 type WriterFormValue = z.infer<typeof addWriterSchema>;
 
@@ -50,7 +52,7 @@ interface City {
 }
 export default function AddWriterForm() {
   const [selectedCities, setSelectedCities] = useState<City[]>([]);
-
+  const AccessToken = Cookies.get("accessToken");
   const cities: City[] = [
     { name: "Instagram", code: "instagram" },
     { name: "WhatsApp", code: "whatsapp" },
@@ -79,7 +81,7 @@ export default function AddWriterForm() {
   const isSelected = (code: string): boolean => {
     return selectedCities.some((city) => city.code === code);
   };
-  const {  i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const navigate = useNavigate();
   const [_preview, setPreview] = useState<string | null>(null);
@@ -87,7 +89,7 @@ export default function AddWriterForm() {
   const [socialMediaFields, setSocialMediaFields] = useState<
     { name: string; url: string }[]
   >([]);
- 
+
   const handleSocialMediaChange = (name: string, url: string) => {
     setSocialMediaFields((prev) => {
       const updatedFields = prev.map((item) =>
@@ -107,7 +109,7 @@ export default function AddWriterForm() {
     mutate: firstMutate,
     isError: _firstIsError,
     isSuccess: _firstIsSuccess,
-    isPending: _firstIsPending,
+    isPending: firstIsPending,
   } = useMutation<WriterResponse, Error, WriterFormValue>({
     mutationKey: ["AddWriter"],
     mutationFn: async (datas: WriterFormValue) => {
@@ -127,15 +129,14 @@ export default function AddWriterForm() {
       return postApi("/api/Writers", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${AccessToken}`,
         },
       });
     },
     onSuccess: (data) => {
       const writerId = data.data.id;
-      
 
       if (writerId && socialMediaFields.length > 0) {
-        
         secondMutate({
           id: writerId,
           Soicalmedia: socialMediaFields,
@@ -163,20 +164,21 @@ export default function AddWriterForm() {
     mutate: secondMutate,
     isError: _secondIsError,
     isSuccess: _secondIsSuccess,
-    isPending: _secondIsPending,
+    isPending: secondIsPending,
   } = useMutation({
     mutationKey: ["SocialMedia"],
     mutationFn: (datas: {
       id: number;
       Soicalmedia: { name: string; url: string }[];
     }) => {
-      
-
       // Send the array of social media objects directly as the body
-      return patchApi(`/api/Writers/${datas.id}`, datas.Soicalmedia);
+      return patchApi(`/api/Writers/${datas.id}`, datas.Soicalmedia, {
+        headers: {
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      });
     },
     onSuccess: (data) => {
-     
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -192,7 +194,6 @@ export default function AddWriterForm() {
       window.location.reload();
     },
     onError: (error) => {
-      
       toast.error("لم تتم العميله.", {
         style: {
           border: "1px solid  #FF5733 ",
@@ -538,7 +539,13 @@ export default function AddWriterForm() {
 
             <div className="w-full -translate-x-10 flex justify-end mt-20">
               <Button className=" mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-lg font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Add
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  Add
+                  </>
+                )}
               </Button>
             </div>
           </form>
@@ -864,7 +871,13 @@ export default function AddWriterForm() {
 
             <div className="w-full translate-x-10 flex justify-end mt-20">
               <Button className="text-md mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                إضافة
+                {secondIsPending || firstIsPending ? (
+                  <LoaderIcon className="animate-spin duration-1000" />
+                ) : (
+                  <>
+                  إضافة
+                  </>
+                )}
               </Button>
             </div>
           </form>
