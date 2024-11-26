@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
+import { LoaderIcon } from "lucide-react";
 
 export interface NewssResp {
   id: number;
@@ -46,7 +47,7 @@ export default function NewsDetails() {
   dayjs.locale("ar");
   const {  i18n } = useTranslation();
   const dir = i18n.dir();
-  const { data: NewssDetails } = useQuery({
+  const { data: NewssDetails ,isPending } = useQuery({
     queryKey: ["NewssDetails"],
     queryFn: () => getApi<NewssResp>(`/api/website/Publications/Details/${id}`),
   });
@@ -86,6 +87,13 @@ export default function NewsDetails() {
   const closeArrayModal = () => {
     setSelectedImage(null);
   };
+  if (isPending) {
+    return (
+      <div className="flex justify-center items-center w-full ">
+        <LoaderIcon className="mt-12 flex animate-spin items-center justify-end duration-1000" />
+      </div>
+    );
+  }
   return (
     <>
       {dir === "ltr" ? (

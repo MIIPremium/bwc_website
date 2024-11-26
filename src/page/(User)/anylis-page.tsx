@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
+import { LoaderIcon } from "lucide-react";
 
 export interface AnalysisResp {
   id: number;
@@ -73,7 +74,7 @@ export default function AnalysisDetails() {
   const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
   const [modalOpen, setModalOpen] = useState(false);
-  const { data: AnalysisDetails } = useQuery({
+  const { data: AnalysisDetails,isPending } = useQuery({
     queryKey: ["AnalysisDetails"],
     queryFn: () =>
       getApi<AnalysisResp>(`/api/website/Publications/Details/${id}`),
@@ -101,6 +102,13 @@ export default function AnalysisDetails() {
     changeLanguage(language);
     document.body.dir = i18n.dir();
   }, [i18n, i18n.language, language]);
+  if (isPending) {
+    return (
+      <div className="flex justify-center items-center w-full ">
+        <LoaderIcon className="mt-12 flex animate-spin items-center justify-end duration-1000" />
+      </div>
+    );
+  }
   return (
     <>
       {dir === "ltr" ? (
@@ -123,7 +131,7 @@ export default function AnalysisDetails() {
                 <img
                   src={AnalysisDetails?.data.b_image} // Replace with actual image path
                   alt="Report cover"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain cursor-pointer"
                   onClick={openModal}
                 />
               </div>
@@ -349,7 +357,7 @@ export default function AnalysisDetails() {
                 <img
                   src={AnalysisDetails?.data.b_image} // Replace with actual image path
                   alt="Report cover"
-                  className="w-full h-full object-contain"
+                  className="w-full h-full object-contain cursor-pointer"
                   onClick={openModal}
                 />
               </div>

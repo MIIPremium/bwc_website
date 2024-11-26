@@ -11,8 +11,8 @@ import "dayjs/locale/ar";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { getApi } from "src/lib/http";
-import { LoaderIcon } from "react-hot-toast";
 import MoreREports from "src/components/(user)/moreReports";
+import { LoaderIcon } from "lucide-react";
 
 export interface ReportDetailsResponse {
   id: number;

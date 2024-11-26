@@ -13,6 +13,8 @@ import "dayjs/locale/ar";
 import { useTranslation } from "react-i18next";
 import { useQuery } from "@tanstack/react-query";
 import { getApi } from "src/lib/http";
+import { LoaderIcon } from "lucide-react";
+import Cookies from "js-cookie";
 
 export interface PubblicationResp {
   id: number;
@@ -63,6 +65,7 @@ export interface ReportPubResp {
   en_Title: string;
 }
 export default function PublishDetails() {
+  const AccessToken = Cookies.get("accessToken");
   const { id } = useParams<{ id: string }>();
   const [language, setLanguage] = useState<string>("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -72,7 +75,7 @@ export default function PublishDetails() {
   const { i18n } = useTranslation();
   const dir = i18n.dir();
 
-  const { data: PPublicDetails } = useQuery({
+  const { data: PPublicDetails ,isPending} = useQuery({
     queryKey: ["PPublicDetails"],
     queryFn: () =>
       getApi<PubblicationResp>(`/api/website/Publications/Details/${id}`),
@@ -86,7 +89,12 @@ export default function PublishDetails() {
 
   const { data: ReportPub } = useQuery({
     queryKey: ["ReportPubInViewPage"],
-    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub"),
+    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub",{
+      headers: {
+        "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+        Authorization: `Bearer ${AccessToken}`,
+      },
+    }),
   });
 
   const matchingItem = ReportPub?.data?.find(
@@ -129,6 +137,13 @@ export default function PublishDetails() {
   const closeArrayModal = () => {
     setSelectedImage(null);
   };
+  if (isPending) {
+    return (
+      <div className="flex justify-center items-center w-full ">
+        <LoaderIcon className="mt-12 flex animate-spin items-center justify-end duration-1000" />
+      </div>
+    );
+  }
   return (
     <>
       {dir === "ltr" ? (

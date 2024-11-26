@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CarousealReportDeatials from "src/components/carouseal-report-deatials";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import { CalendarMinus2Icon, MoveLeft, MoveRight } from "lucide-react";
+import { CalendarMinus2Icon, LoaderIcon, MoveLeft, MoveRight } from "lucide-react";
 import { Input } from "src/ui/input";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +13,6 @@ import formattedDate from "src/utilities/formattedDate";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
-import { LoaderIcon } from "react-hot-toast";
 import JobNotFound from "src/assets/icons/job-not-found";
 
 export interface sidInfo {
