@@ -25,7 +25,8 @@ import Services from "./components/(user)/Services";
 import ServicesArb from "./components/(user)/ServicesArb";
 import { ServicesHomeProp, ServicesHomeResp } from "./types/validation";
 import { useQuery } from "@tanstack/react-query";
-import { LoaderIcon } from "react-hot-toast";
+import { LoaderIcon } from "lucide-react";
+
 
 function App() {
   const serversRef = useRef<HTMLDivElement>(null);
