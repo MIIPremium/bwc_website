@@ -15,7 +15,8 @@ export default function OurPortfolio() {
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "https://bwc-api-testing.runasp.net/api/ProfileFile";
+    link.href =
+      "https://bwc-api-testing.runasp.net/api/website/Home/DownloadProfileFile";
     link.download = "Business World Company Profile 2024.pdf";
     link.click();
   };
