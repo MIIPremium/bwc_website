@@ -75,13 +75,12 @@ export default function PublishDetails() {
   const { i18n } = useTranslation();
   const dir = i18n.dir();
 
-  const { data: PPublicDetails ,isPending} = useQuery({
+  const { data: PPublicDetails, isPending } = useQuery({
     queryKey: ["PPublicDetails"],
     queryFn: () =>
       getApi<PubblicationResp>(`/api/website/Publications/Details/${id}`),
   });
-  
-  
+
   const getRelativeTime = (date: string | Date, language: string): string => {
     dayjs.locale(language);
     return dayjs().to(dayjs(date));
@@ -89,12 +88,13 @@ export default function PublishDetails() {
 
   const { data: ReportPub } = useQuery({
     queryKey: ["ReportPubInViewPage"],
-    queryFn: () => getApi<ReportPubResp[]>("/api/reports/pub",{
-      headers: {
-        "Content-Type": "application/json", // Ensures that the request body is treated as JSON
-        Authorization: `Bearer ${AccessToken}`,
-      },
-    }),
+    queryFn: () =>
+      getApi<ReportPubResp[]>("/api/website/Reports/pub", {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }),
   });
 
   const matchingItem = ReportPub?.data?.find(

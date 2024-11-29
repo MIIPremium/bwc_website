@@ -385,7 +385,7 @@ function App() {
 
                 <div className="w-full grid grid-cols-12 px-2 ">
                   <div className=" flex justify-around items-center flex-row-reverse backdrop-blur-md bg-white/30 border border-black w-[90%]  h-36 text-white absolute p-4 text-center transform -translate-x-1/2 rounded-[2rem] bottom-[-10px] z-10 left-1/2">
-                    <Link to={"InProucation"} className="translate-y-3 ">
+                    <Link to={"/departments"} className="translate-y-3 ">
                       <div
                         className={
                           dir === "ltr"
@@ -405,7 +405,7 @@ function App() {
                       </p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div className="h-[60px] w-[58px] -translate-y-4">
                         <img
                           src={whiteboard2}
@@ -417,7 +417,7 @@ function App() {
                       <p className="text-black">{t("studies")}</p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div
                         className={
                           dir === "ltr"
@@ -435,7 +435,7 @@ function App() {
                       <p className="text-black">{t("entrepreneurship")}</p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div
                         className={
                           dir === "ltr"
@@ -453,7 +453,7 @@ function App() {
                       <p className="text-black">{t("project_management")}</p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div
                         className={
                           dir === "ltr"
@@ -518,7 +518,7 @@ function App() {
 
                 <div className="w-full grid grid-cols-12 px-2 ">
                   <div className=" flex justify-around items-center flex-row-reverse backdrop-blur-md bg-white/30 border border-black w-[90%]  h-36 text-white absolute p-4 text-center transform -translate-x-1/2 rounded-[2rem] bottom-[-10px] z-10 left-1/2">
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div className="h-[60px] w-[58px] -translate-y-4 -translate-x-6">
                         <img
                           src={educationLearning}
@@ -532,7 +532,7 @@ function App() {
                       </p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div className="h-[60px] w-[58px] -translate-y-4">
                         <img
                           src={whiteboard2}
@@ -544,7 +544,7 @@ function App() {
                       <p className="text-black">{t("studies")}</p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div className="h-[60px] w-[58px] -translate-y-4 -translate-x-2">
                         <img
                           src={enterpnure}
@@ -556,7 +556,7 @@ function App() {
                       <p className="text-black">{t("entrepreneurship")}</p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div className="h-[60px] w-[58px] -translate-y-4 -translate-x-5">
                         <img
                           src={projectManager}
@@ -568,7 +568,7 @@ function App() {
                       <p className="text-black">{t("project_management")}</p>
                     </Link>
 
-                    <Link to={"InProucation"} className="translate-y-3">
+                    <Link to={"/departments"} className="translate-y-3">
                       <div className="h-[60px] w-[58px] -translate-y-4 -translate-x-6">
                         <img src={tech} alt="" className="w-full h-full" />
                       </div>
