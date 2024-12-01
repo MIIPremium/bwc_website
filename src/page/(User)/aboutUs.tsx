@@ -46,15 +46,15 @@ export default function AboutUs() {
 
       <VideoCourse
         items={[
-          "https://www.youtube.com/watch?v=kdeL2LwWDC4",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
-          "https://www.youtube.com/watch?v=AuLg79Th3xE",
+          "https://www.youtube.com/watch?v=kkv2vh_PvZ4",
+          "https://www.youtube.com/watch?v=2vcXxilg650",
+          "https://www.youtube.com/watch?v=Bp7UYlluj20",
+          "https://www.youtube.com/watch?v=RycxQx2H0qY",
+          "https://www.youtube.com/watch?v=U85UenSIjKI",
+          "https://www.youtube.com/watch?v=0UkLUtQJPhU",
+          "https://www.youtube.com/watch?v=l8lqIyoaGfw",
+          "https://www.youtube.com/watch?v=VTAYQqNpfe8",
+          "https://www.youtube.com/watch?v=1GyTKexJcw8",
         ]}
         itemsToShow={3}
       />

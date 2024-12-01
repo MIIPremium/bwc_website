@@ -4,6 +4,7 @@ import { FaArrowRightLong, FaArrowLeftLong } from "react-icons/fa6";
 import ReactPlayer from "react-player/youtube";
 import Button from "../../components/button";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface CarouselProps {
   items: string[];
@@ -60,7 +61,9 @@ export default function Carousel({ items, itemsToShow }: CarouselProps) {
         <>
           <div className="w-full h-36 flex justify-around items-center ">
             <div className="w-[20%] lg:-translate-x-0 md:-translate-x-0 sm:-translate-x-7">
+              <Link to={"https://www.youtube.com/@Manhal-podcast"} target="_blank">
               <Button>{t("See-All")}</Button>
+              </Link>
             </div>
             <div className="w-[80%] ">
               <div className="flex p-5 justify-end">
@@ -125,7 +128,9 @@ export default function Carousel({ items, itemsToShow }: CarouselProps) {
               </div>
             </div>
             <div className="w-[20%] lg:translate-x-0 md:translate-x-0 sm:translate-x-7">
+            <Link to={"https://www.youtube.com/@Manhal-podcast"} target="_blank">
               <Button>{t("See-All")}</Button>
+              </Link>
             </div>
           </div>
 
