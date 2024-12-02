@@ -122,7 +122,7 @@ export default function AllDepertments() {
                 <div className="h-60 w-full ">
                   <img
                     src={allDepertments} // Replace with your image path
-                    alt="Studies"
+                    alt="Studies and Consultations"
                     className="object-cover h-full w-full "
                   />
                 </div>
@@ -133,17 +133,18 @@ export default function AllDepertments() {
                   <div className="flex ">
                     <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                     <h2 className="text-2xl font-bold text-primary mb-4">
-                      Studies
+                      Studies and Consultations
                     </h2>
                   </div>
                   <p className="text-gray-600 mb-4">
-                    The Department of Studies devotes its efforts to in-depth
-                    research and comprehensive analysis About economic and
-                    market trends. This section offers studies Feasibility,
-                    analytical reports and strategic consulting to assist
-                    Companies in making informed decisions. We seek to provide
-                    accurate information Reliable business growth supports and
-                    helps develop strategies Effective.
+                    The Department of Studies and Consulting is dedicated to
+                    conducting in-depth research and comprehensive analysis on
+                    economic and market trends. This section provides
+                    feasibility studies, analytical reports, and strategic
+                    consulting to help companies make informed decisions. We
+                    seek to provide accurate and reliable information that
+                    supports business growth and helps develop effective
+                    strategies.
                   </p>
                 </div>
 
@@ -183,7 +184,7 @@ export default function AllDepertments() {
                 <div className="h-60 w-full ">
                   <img
                     src={management} // Replace with your image path
-                    alt="إدارة مشاريع"
+                    alt="إدارة المشاريع"
                     className="object-cover h-full w-full "
                   />
                 </div>
@@ -191,7 +192,7 @@ export default function AllDepertments() {
                   <div className="flex ">
                     <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                     <h2 className="text-2xl font-bold text-primary mb-4">
-                      إدارة مشاريع
+                      إدارة المشاريع
                     </h2>
                   </div>
                   <p className="text-gray-600 mb-4 text-justify leading-[25px]">
@@ -210,7 +211,7 @@ export default function AllDepertments() {
                 <div className="h-60 w-full ">
                   <img
                     src={enterpurnore} // Replace with your image path
-                    alt="ريادة إعمال"
+                    alt="ريادة الأعمال"
                     className="object-cover h-full w-full "
                   />
                 </div>
@@ -218,7 +219,7 @@ export default function AllDepertments() {
                   <div className="flex ">
                     <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                     <h2 className="text-2xl font-bold text-primary mb-4">
-                      ريادة إعمال
+                      ريادة الأعمال
                     </h2>
                   </div>
                   <p className="text-gray-600 mb-4 text-justify leading-[25px]">
@@ -237,7 +238,7 @@ export default function AllDepertments() {
                 <div className="h-60 w-full ">
                   <img
                     src={allDepertments} // Replace with your image path
-                    alt="دراسات"
+                    alt="الدراسات والاستشارات"
                     className="object-cover h-full w-full "
                   />
                 </div>
@@ -245,15 +246,16 @@ export default function AllDepertments() {
                   <div className="flex ">
                     <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                     <h2 className="text-2xl font-bold text-primary mb-4">
-                      دراسات
+                      الدراسات والاستشارات
                     </h2>
                   </div>
                   <p className="text-gray-600 mb-4 text-justify leading-[25px]">
-                    يكرس قسم الدراسات جهوده لإجراء أبحاث معمقة وتحليلات شاملة
-                    حول الاتجاهات الاقتصادية والسوقية. يقدم هذا القسم دراسات
-                    جدوى، وتقارير تحليلية، واستشارات استراتيجية لمساعدة الشركات
-                    في اتخاذ قرارات مستنيرة. نسعى لتوفير معلومات دقيقة وموثوقة
-                    تدعم نمو الأعمال وتساعد في تطوير استراتيجيات فعالة.
+                    يكرس قسم الدراسات والاستشارات جهوده لإجراء أبحاث معمقة
+                    وتحليلات شاملة حول الاتجاهات الاقتصادية والسوقية. يقدم هذا
+                    القسم دراسات جدوى، وتقارير تحليلية، واستشارات استراتيجية
+                    لمساعدة الشركات في اتخاذ قرارات مستنيرة. نسعى لتوفير معلومات
+                    دقيقة وموثوقة تدعم نمو الأعمال وتساعد في تطوير استراتيجيات
+                    فعالة.
                   </p>
                 </div>
               </div>
@@ -271,7 +273,7 @@ export default function AllDepertments() {
                 {/* First Section (Image) */}
 
                 <div dir="ltr" className="w-[50%] relative z-10 ">
-                  <div className="flex w-[100%]  right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center py-4 shadow-md min-h-60">
+                  <div className="flex w-[100%]  right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center py-4 shadow-md min-h-72">
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
@@ -391,17 +393,18 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        Studies
+                        Studies and Consultations
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
-                      The Department of Studies devotes its efforts to in-depth
-                      research and comprehensive analysis About economic and
-                      market trends. This section offers studies Feasibility,
-                      analytical reports and strategic consulting to assist
-                      Companies in making informed decisions. We seek to provide
-                      accurate information Reliable business growth supports and
-                      helps develop strategies Effective.
+                      The Department of Studies and Consulting is dedicated to
+                      conducting in-depth research and comprehensive analysis on
+                      economic and market trends. This section provides
+                      feasibility studies, analytical reports, and strategic
+                      consulting to help companies make informed decisions. We
+                      seek to provide accurate and reliable information that
+                      supports business growth and helps develop effective
+                      strategies.
                     </p>
                   </div>
                 </div>
@@ -409,7 +412,7 @@ export default function AllDepertments() {
                 <div className="h-[500px] w-[50%] relative -z-20">
                   <img
                     src={allDepertments} // Replace with your image path
-                    alt="Studiest"
+                    alt="studies and consultations"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -462,7 +465,7 @@ export default function AllDepertments() {
                 <div className="min-h-[500px] w-[50%] relative -z-20">
                   <img
                     src={management} // Replace with your image path
-                    alt="إدارة مشاريع"
+                    alt="إدارة المشاريع"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -473,7 +476,7 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        إدارة مشاريع
+                        إدارة المشاريع
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
@@ -495,7 +498,7 @@ export default function AllDepertments() {
                 <div className="min-h-[500px] w-[50%] relative -z-20">
                   <img
                     src={enterpurnore} // Replace with your image path
-                    alt="ريادة إعمال"
+                    alt="ريادة الأعمال"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -506,7 +509,7 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        ريادة إعمال
+                        ريادة الأعمال
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
@@ -528,7 +531,7 @@ export default function AllDepertments() {
                 <div className="min-h-[500px] w-[50%] relative -z-20">
                   <img
                     src={allDepertments} // Replace with your image path
-                    alt="دراسات"
+                    alt="الدراسات والاستشارات"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -539,16 +542,16 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        دراسات
+                        الدراسات والاستشارات
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
-                      يكرس قسم الدراسات جهوده لإجراء أبحاث معمقة وتحليلات شاملة
-                      حول الاتجاهات الاقتصادية والسوقية. يقدم هذا القسم دراسات
-                      جدوى، وتقارير تحليلية، واستشارات استراتيجية لمساعدة
-                      الشركات في اتخاذ قرارات مستنيرة. نسعى لتوفير معلومات دقيقة
-                      وموثوقة تدعم نمو الأعمال وتساعد في تطوير استراتيجيات
-                      فعالة.
+                      يكرس قسم الدراسات والاستشارات جهوده لإجراء أبحاث معمقة
+                      وتحليلات شاملة حول الاتجاهات الاقتصادية والسوقية. يقدم هذا
+                      القسم دراسات جدوى، وتقارير تحليلية، واستشارات استراتيجية
+                      لمساعدة الشركات في اتخاذ قرارات مستنيرة. نسعى لتوفير
+                      معلومات دقيقة وموثوقة تدعم نمو الأعمال وتساعد في تطوير
+                      استراتيجيات فعالة.
                     </p>
                   </div>
                 </div>
@@ -569,7 +572,7 @@ export default function AllDepertments() {
                 {/* First Section (Image) */}
 
                 <div dir="ltr" className="w-[50%] relative z-10 ">
-                  <div className="flex w-[100%] right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center shadow-md h-60">
+                  <div className="flex w-[100%] right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center shadow-md h-72">
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
@@ -608,7 +611,7 @@ export default function AllDepertments() {
                 {/* First Section (Image) */}
 
                 <div dir="ltr" className="w-[50%] relative z-10 ">
-                  <div className="flex w-[100%] right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center shadow-md h-60">
+                  <div className="flex w-[100%] right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center shadow-md h-64">
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
@@ -645,7 +648,7 @@ export default function AllDepertments() {
                 {/* First Section (Image) */}
 
                 <div dir="ltr" className="w-[50%] relative z-10 ">
-                  <div className="flex w-[100%] right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center shadow-md h-60">
+                  <div className="flex w-[100%] right-20 top-16 bg-white absolute mx-auto flex-col px-10 justify-center shadow-md h-72">
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
@@ -687,17 +690,18 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        Studies
+                        Studies and Consultations
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
-                      The Department of Studies devotes its efforts to in-depth
-                      research and comprehensive analysis About economic and
-                      market trends. This section offers studies Feasibility,
-                      analytical reports and strategic consulting to assist
-                      Companies in making informed decisions. We seek to provide
-                      accurate information Reliable business growth supports and
-                      helps develop strategies Effective.
+                      The Department of Studies and Consulting is dedicated to
+                      conducting in-depth research and comprehensive analysis on
+                      economic and market trends. This section provides
+                      feasibility studies, analytical reports, and strategic
+                      consulting to help companies make informed decisions. We
+                      seek to provide accurate and reliable information that
+                      supports business growth and helps develop effective
+                      strategies.
                     </p>
                   </div>
                 </div>
@@ -705,7 +709,7 @@ export default function AllDepertments() {
                 <div className="h-96 w-[50%] relative -z-20">
                   <img
                     src={allDepertments} // Replace with your image path
-                    alt="studies"
+                    alt="studies and consultations"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -758,7 +762,7 @@ export default function AllDepertments() {
                 <div className="h-96 w-[50%] relative -z-20">
                   <img
                     src={management} // Replace with your image path
-                    alt="إدارة مشاريع"
+                    alt="إدارة المشاريع"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -769,7 +773,7 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        إدارة مشاريع
+                        إدارة المشاريع
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
@@ -792,7 +796,7 @@ export default function AllDepertments() {
                 <div className="h-96 w-[50%] relative -z-20">
                   <img
                     src={enterpurnore} // Replace with your image path
-                    alt="ريادة إعمال"
+                    alt="ريادة الأعمال"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -803,7 +807,7 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        ريادة إعمال
+                        ريادة الأعمال
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
@@ -826,7 +830,7 @@ export default function AllDepertments() {
                 <div className="h-96 w-[50%] relative -z-20">
                   <img
                     src={allDepertments} // Replace with your image path
-                    alt="دراسات"
+                    alt="الدراسات والاستشارات"
                     className="object-cover h-full w-full"
                   />
                 </div>
@@ -837,16 +841,16 @@ export default function AllDepertments() {
                     <div className="flex ">
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                       <h2 className="text-2xl font-bold text-primary mb-4">
-                        دراسات
+                        الدراسات والاستشارات
                       </h2>
                     </div>
                     <p className="text-gray-600 mb-4 text-justify leading-[25px]">
-                      يكرس قسم الدراسات جهوده لإجراء أبحاث معمقة وتحليلات شاملة
-                      حول الاتجاهات الاقتصادية والسوقية. يقدم هذا القسم دراسات
-                      جدوى، وتقارير تحليلية، واستشارات استراتيجية لمساعدة
-                      الشركات في اتخاذ قرارات مستنيرة. نسعى لتوفير معلومات دقيقة
-                      وموثوقة تدعم نمو الأعمال وتساعد في تطوير استراتيجيات
-                      فعالة.
+                      يكرس قسم الدراسات والاستشارات جهوده لإجراء أبحاث معمقة
+                      وتحليلات شاملة حول الاتجاهات الاقتصادية والسوقية. يقدم هذا
+                      القسم دراسات جدوى، وتقارير تحليلية، واستشارات استراتيجية
+                      لمساعدة الشركات في اتخاذ قرارات مستنيرة. نسعى لتوفير
+                      معلومات دقيقة وموثوقة تدعم نمو الأعمال وتساعد في تطوير
+                      استراتيجيات فعالة.
                     </p>
                   </div>
                 </div>

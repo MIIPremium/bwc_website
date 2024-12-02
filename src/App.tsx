@@ -27,7 +27,6 @@ import { ServicesHomeProp, ServicesHomeResp } from "./types/validation";
 import { useQuery } from "@tanstack/react-query";
 import { LoaderIcon } from "lucide-react";
 
-
 function App() {
   const serversRef = useRef<HTMLDivElement>(null);
   const [_topPosition, setTopPosition] = useState<number>(0);
@@ -87,9 +86,6 @@ function App() {
     };
   }, [widthScreen, serversRef]);
 
-  
-
- 
   if (isPending)
     return (
       <div className="flex justify-center items-center w-full ">
@@ -263,7 +259,7 @@ function App() {
                 </div>
                 <Link
                   to={"InProucation"}
-                  className="flex items-center h-[30%] m-auto mt-2 rounded-[2rem] justify-center"
+                  className="flex items-center h-[30%] m-auto mt-2 rounded-[2rem] justify-center invisible"
                 >
                   <div className="translate-y-4">
                     <div className="h-[60px] w-[58px] -translate-y-4">
@@ -301,15 +297,15 @@ function App() {
                     <div
                       className={
                         dir === "ltr"
-                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-12"
-                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-6"
+                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-0"
+                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-0"
                       }
                     >
-                      <img src={tech} alt="" className="w-full h-full" />
+                      <img src={anlyisit} alt="" className="w-full h-full" />
                     </div>
 
                     <p className="text-black text-sm">
-                      {t("software_development")}
+                      {t("studies")}
                     </p>
                   </div>
                 </Link>
@@ -453,7 +449,7 @@ function App() {
                       <p className="text-black">{t("project_management")}</p>
                     </Link>
 
-                    <Link to={"/departments"} className="translate-y-3">
+                    {/* <Link to={"/departments"} className="translate-y-3">
                       <div
                         className={
                           dir === "ltr"
@@ -465,7 +461,7 @@ function App() {
                       </div>
 
                       <p className="text-black">{t("software_development")}</p>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </>
@@ -568,13 +564,13 @@ function App() {
                       <p className="text-black">{t("project_management")}</p>
                     </Link>
 
-                    <Link to={"/departments"} className="translate-y-3">
+                    {/* <Link to={"/departments"} className="translate-y-3">
                       <div className="h-[60px] w-[58px] -translate-y-4 -translate-x-6">
                         <img src={tech} alt="" className="w-full h-full" />
                       </div>
 
                       <p className="text-black">{t("software_development")}</p>
-                    </Link>
+                    </Link> */}
                   </div>
                 </div>
               </>
