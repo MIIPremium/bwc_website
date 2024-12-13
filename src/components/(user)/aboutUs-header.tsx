@@ -92,13 +92,13 @@ export default function AboutUsHeader() {
                         </span>
                       </div>
 
-                      <div className=" flex justify-start items-center -translate-x-1">
+                      <div className=" flex justify-start items-center translate-x-1">
                         <p className="text-lg">{t("our_goals")}</p>
                         <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
                           <Target color="white" size={50} className="p-1" />
                         </span>
                       </div>
-                      <div className=" flex justify-start items-center translate-x-2">
+                      <div className=" flex justify-start items-center -translate-x-4">
                         <p className="text-lg">{t("our_message")}</p>
                         <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
                           <PiHandshakeThin
@@ -166,7 +166,7 @@ export default function AboutUsHeader() {
                         <p className="text-lg">{t("our_mission")}</p>
                       </div>
 
-                      <div className=" flex justify-start items-center">
+                      <div className=" flex justify-start items-center translate-x-1">
                         <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-2">
                           <Target color="white" size={50} className="p-1" />
                         </span>
@@ -453,8 +453,7 @@ export default function AboutUsHeader() {
                         <p className="text-start  text-[#5B5B5B] leading-7">
                           شركه عالم الاعمال هي شركه وطنية ذات مسؤولية
                           محدودة.أسسها الدكتور ربيع بن علي العوبثاني في مدينة
-                          المكلا و حضرموت في مارس 2021م تحمل سجل تجاري
-                          رقم(21/2831).
+                          المكلا و حضرموت في مارس 2021م.
                         </p>
                         <p className="text-start  mt-8 text-[#5B5B5B] leading-8">
                           تعمل على إدارة وتشغيل المشاريع الاستثمارية وتقديم

@@ -14,13 +14,18 @@ export default function OutMission() {
     <>
       <div>
         <div className="px-5" dir={dir === "ltr" ? "ltr" : "rtl"}>
-          <h1 className="text-5xl">{t("our_mission1")}</h1>
-          <p className="mt-8 text-xl text-[#5B5B5B] ">{t("our_missionDesc")}</p>
+          <h1 className="text-5xl">{t("our_mission")}</h1>
+          <p className="mt-8 text-xl text-[#5B5B5B] text-justify ">
+            {t("our_missionDesc")}
+          </p>
         </div>
         {/*  */}
-        <div className={dir === "ltr" ? "px-5 text-left mt-20" : "px-5 mt-20"}>
-          <h1 className="text-5xl">{t("our_goals1")}</h1>
-          <p className="mt-8 text-xl text-[#5B5B5B] leading-10">
+        <div
+          dir={dir === "ltr" ? "ltr" : "rtl"}
+          className={dir === "ltr" ? "px-5 text-left mt-20" : "px-5 mt-20"}
+        >
+          <h1 className="text-5xl">{t("our_goals")}</h1>
+          <p className="mt-8 text-xl text-[#5B5B5B] leading-10 text-justify">
             {t("our_goalsDesc")}
           </p>
         </div>
@@ -31,7 +36,7 @@ export default function OutMission() {
               dir === "ltr" ? "text-5xl text-end" : "text-5xl text-start"
             }
           >
-            {t("our_message1")}
+            {t("our_message")}
           </h1>
           <div className="mt-10">
             {dir === "ltr" ? (

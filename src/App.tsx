@@ -200,25 +200,44 @@ function App() {
             </div>
 
             <div className=" px-4">
-              <div className="text-end">
-                <p dir="ltr" className="text-start text-[#5B5B5B] leading-7">
-                  Business World is a national limited liability company. It was
-                  founded by Dr. Rabi Ben Ali al-Awabthani in the city of
-                  Mukalla and Hadramawt in March 2021 with a commercial record
-                  number (21/2831).
-                </p>
-                <p
-                  dir="ltr"
-                  className="text-start mt-6 text-[#5B5B5B] leading-8"
-                >
-                  It manages and operates investment projects and provides
-                  economic studies, administrative, financial and marketing
-                  consulting and IT solutions and provides its services through
-                  a group of specialized experts and consultants who work in the
-                  company and another group of contracting experts and
-                  consultants.
-                </p>
-              </div>
+              {dir === "ltr" ? (
+                <div className="text-end">
+                  <p dir="ltr" className="text-start text-[#5B5B5B] leading-7">
+                    Business World is a national limited liability company. It
+                    was founded by Dr. Rabi Ben Ali al-Awabthani in the city of
+                    Mukalla and Hadramawt in March 2021 .
+                  </p>
+                  <p
+                    dir="ltr"
+                    className="text-start mt-6 text-[#5B5B5B] leading-8"
+                  >
+                    It manages and operates projects, works and conducts
+                    economic studies, administrative, financial and marketing
+                    consulting, IT solutions and quality systems, and provides
+                    its services through a group of specialized experts and
+                    consultants who work for the company and another group of
+                    contracting experts and consultants.
+                  </p>
+                </div>
+              ) : (
+                <div className="text-start">
+                  <p dir="rtl" className="text-start text-[#5B5B5B] leading-7">
+                    شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
+                    الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت في
+                    مارس 2021م .
+                  </p>
+                  <p
+                    dir="rtl"
+                    className="text-start mt-6 text-[#5B5B5B] leading-8"
+                  >
+                    وتعمل على إدارة وتشغيل المشاريع وعمل وإجراء الدراسات
+                    الاقتصادية والاستشارات الإدارية والمالية والتسويقية وحلول
+                    تكنولوجيا المعلومات وأنظمة الجودة، وتقدم خدماتها من خلال
+                    مجموعة من الخبراء والاستشاريين المتخصصين الذين يعملون في
+                    الشركة ومجموعة أخرى من الخبراء والاستشاريين المتعاقدين.
+                  </p>
+                </div>
+              )}
               <div className="w-[100%] h-[50vh] rounded-[2rem] backdrop-blur-md p-[15px] bg-white/30 border border-black mt-8">
                 <div className="flex items-center h-[30%] m-auto mt-2 rounded-[2rem] justify-between ">
                   {" "}
@@ -262,7 +281,7 @@ function App() {
                   className="flex items-center h-[30%] m-auto mt-2 rounded-[2rem] justify-center invisible"
                 >
                   <div className="translate-y-4">
-                    <div className="h-[60px] w-[58px] -translate-y-4">
+                    <div className="h-[60px] w-[58px] -translate-y-4 ">
                       <img src={anlyisit} alt="" className="w-full h-full" />
                     </div>
 
@@ -297,16 +316,14 @@ function App() {
                     <div
                       className={
                         dir === "ltr"
-                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-0"
-                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-0"
+                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-8"
+                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-8"
                       }
                     >
                       <img src={anlyisit} alt="" className="w-full h-full" />
                     </div>
 
-                    <p className="text-black text-sm">
-                      {t("studies")}
-                    </p>
+                    <p className="text-black text-sm">{t("studies")}</p>
                   </div>
                 </Link>
               </div>
@@ -344,19 +361,18 @@ function App() {
                     >
                       Business World is a national limited liability company. It
                       was founded by Dr. Rabi Ben Ali al-Awabthani in the city
-                      of Mukalla and Hadramawt in March 2021 with a commercial
-                      record number (21/2831).
+                      of Mukalla and Hadramawt in March 2021 .
                     </p>
                     <p
                       dir="ltr"
                       className="text-start  mt-6 text-[#5B5B5B] leading-8"
                     >
-                      It manages and operates investment projects and provides
+                      It manages and operates projects, works and conducts
                       economic studies, administrative, financial and marketing
-                      consulting and IT solutions and provides its services
-                      through a group of specialized experts and consultants who
-                      work in the company and another group of contracting
-                      experts and consultants.
+                      consulting, IT solutions and quality systems, and provides
+                      its services through a group of specialized experts and
+                      consultants who work for the company and another group of
+                      contracting experts and consultants.
                     </p>
                   </div>
                   <div className="flex justify-end mt-10">
@@ -364,7 +380,7 @@ function App() {
                       <Link
                         target="_blank"
                         to={"/about-us"}
-                        className="inline-flex w-[9rem] h-[3.8rem] outline outline-1 outline-[#CCA972]/80 bg-black text-white items-center justify-center whitespace-nowrap rounded-full text-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                        className="inline-flex w-[9rem] h-[3.8rem] outline outline-1 outline-[#CCA972]/80 bg-black text-white items-center justify-center whitespace-nowrap rounded-full text-lg font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                       >
                         {t("knowMoreAboutUs")}
                       </Link>
@@ -402,7 +418,7 @@ function App() {
                     </Link>
 
                     <Link to={"/departments"} className="translate-y-3">
-                      <div className="h-[60px] w-[58px] -translate-y-4">
+                      <div className="h-[60px] w-[58px] -translate-y-4 -translate-x-12">
                         <img
                           src={whiteboard2}
                           alt=""
@@ -489,22 +505,22 @@ function App() {
                     <p className="text-start  text-[#5B5B5B] leading-7">
                       شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
                       الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت في
-                      مارس 2021م تحمل سجل تجاري رقم(21/2831).
+                      مارس 2021م .
                     </p>
                     <p className="text-start  mt-6 text-[#5B5B5B] leading-8">
-                      تعمل على إدارة وتشغيل المشاريع الاستثمارية وتقديم الدراسات
-                      الاقتصادية والاستشارات الادارية والمالية والتسويقية وحلول
-                      تكنولوجيا المعلومات وتقدم خدماتها من خلال مجموعة من
-                      الخبراء والاستشاريين المتخصصين الذين يعملون في الشركة
-                      ومجموعة اخرى من الخبراء والاستشاريين المتعاقدين.
+                      وتعمل على إدارة وتشغيل المشاريع وعمل وإجراء الدراسات
+                      الاقتصادية والاستشارات الإدارية والمالية والتسويقية وحلول
+                      تكنولوجيا المعلومات وأنظمة الجودة، وتقدم خدماتها من خلال
+                      مجموعة من الخبراء والاستشاريين المتخصصين الذين يعملون في
+                      الشركة ومجموعة أخرى من الخبراء والاستشاريين المتعاقدين.
                     </p>
                   </div>
                   <div className="flex justify-start mt-10">
-                    <div className="outline outline-offset-1 outline-1 outline-[#ccc]/60 rounded-full w-[9rem] h-[3.8rem] flex justify-center items-center">
+                    <div className="outline outline-offset-1 outline-1 outline-[#ccc]/60 rounded-full w-[9.5rem] h-[3.8rem] flex justify-center items-center">
                       <Link
                         target="_blank"
                         to={"/about-us"}
-                        className="inline-flex w-[9rem] h-[3.8rem] outline outline-1 outline-[#CCA972]/80 bg-black text-white items-center justify-center whitespace-nowrap rounded-full text-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+                        className="inline-flex  w-[9.5rem] h-[3.8rem] outline outline-1 outline-[#CCA972]/80 bg-black text-white items-center justify-center whitespace-nowrap rounded-full text-md font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
                       >
                         {t("knowMoreAboutUs")}
                       </Link>
@@ -529,7 +545,7 @@ function App() {
                     </Link>
 
                     <Link to={"/departments"} className="translate-y-3">
-                      <div className="h-[60px] w-[58px] -translate-y-4">
+                      <div className="h-[60px] w-[58px] -translate-y-4 -translate-x-12">
                         <img
                           src={whiteboard2}
                           alt=""

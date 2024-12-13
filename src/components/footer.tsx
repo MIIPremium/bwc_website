@@ -115,7 +115,7 @@ export default function Footer() {
                   <FaLinkedinIn size={24} />
                 </Link>
               </li>
-              <li>
+              <li className={`${dir === "ltr" ? "-translate-x-[1px]" :"translate-x-1"}`}>
                 <Link
                   target="_blank"
                   to="https://www.facebook.com/bwiscompltd/"
@@ -190,7 +190,7 @@ export default function Footer() {
                     <FaLinkedinIn size={23} />
                   </Link>
                 </li>
-                <li>
+                <li className={`${dir === "ltr" ? "-translate-x-[2px]" : "translate-x-1" }`}>
                   <Link
                     target="_blank"
                     to="https://www.facebook.com/bwiscompltd/"
