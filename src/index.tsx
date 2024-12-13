@@ -69,6 +69,7 @@ import ViewReportById from "./components/view/report-view";
 import ReportPage from "./page/(User)/reportPage";
 import UpdateReportsForm from "./components/form/update-reports";
 import ArchiveIndex from "./page/(User)/archive";
+import ResetPassWordIndex from "./page/(Admin)/reset-password";
 
 const router = createBrowserRouter([
   {
@@ -300,6 +301,10 @@ const router = createBrowserRouter([
       {
         path: "/admin-dashboard/profile",
         element: <Profile />,
+      },
+      {
+        path: "/admin-dashboard/reset-password",
+        element: <ResetPassWordIndex />,
       },
     ],
   },

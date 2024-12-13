@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import LanguageWorld from "../../assets/icons/language-world";
 import Cookies from "js-cookie";
 import ArrowDowm from "../../assets/icons/arrow-dowm";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import nav from "react-router-dom";
 export default function NavBar() {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export default function NavBar() {
   const changeLanguage = (code: string) => {
     i18n.changeLanguage(code);
   };
- 
+
   useEffect(() => {
     changeLanguage(language);
     document.body.dir = i18n.dir();
@@ -54,14 +54,17 @@ export default function NavBar() {
                   <ArrowDowm />
                   {isLogoutDropDown && (
                     <div className="flex flex-col logout">
-                      <ul className="flex flex-col gap-4" onClick={onLogOut}>
-                        <li>Logout</li>
+                      <ul className="flex flex-col gap-4">
+                        {/* <Link to={`/admin-dashboard/reset-password`}>
+                          <li>Reset Password</li>
+                        </Link> */}
+                        <li onClick={onLogOut}>Logout</li>
                       </ul>
                     </div>
                   )}
                 </div>
-                <div className="w-[60%] text-center ml-1 m-auto text-sm text-black ">
-                  Mahfouz Ben Sabah
+                <div className="w-[60%] text-center font-black ml-1 m-auto text-base text-black ">
+                  Admin
                 </div>
                 <div className="w-[20%] h-[50%] m-auto ">
                   <img
@@ -89,10 +92,7 @@ export default function NavBar() {
 
           <div className="w-[17.2%] h-full flex justify-between items-center ">
             <div className="w-[1px] h-[70%] bg-[#D4D4D4] float-end"></div>
-            <div
-              className="w-[80%] mr-7 cursor-pointer "
-              
-            >
+            <div className="w-[80%] mr-7 cursor-pointer ">
               <img src={adminLogo} alt="" className="w-[60%] h-[80%]" />
             </div>
           </div>
@@ -128,8 +128,8 @@ export default function NavBar() {
                     className="rounded-full float-end h-[100%] w-[80%]"
                   />
                 </div>
-                <div className="w-[60%] text-center ml-1 m-auto text-sm text-black ">
-                  محفوظ بن سباح
+                <div className="w-[60%] text-center font-black ml-1 m-auto text-base text-black ">
+                  إدارة الموقع
                 </div>
                 <div
                   className="w-[20%] mr-1 flex justify-start cursor-pointer relative "
@@ -138,8 +138,11 @@ export default function NavBar() {
                   <ArrowDowm />
                   {isLogoutDropDown && (
                     <div className="flex flex-col logout-ar">
-                      <ul className="flex flex-col gap-4" onClick={onLogOut}>
-                        <li>تسجيل الخروج</li>
+                      <ul className="flex flex-col gap-4" >
+                        {/* <Link to={`/admin-dashboard/reset-password`}>
+                          <li>إعادة تعيين كلمة المرور</li>
+                        </Link> */}
+                        <li onClick={onLogOut}>تسجيل الخروج</li>
                       </ul>
                     </div>
                   )}
