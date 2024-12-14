@@ -222,9 +222,9 @@ function App() {
               ) : (
                 <div className="text-start">
                   <p dir="rtl" className="text-start text-[#5B5B5B] leading-7">
-                    شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
-                    الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت في
-                    مارس 2021م .
+                    شركة عالم الأعمال هي شركة وطنية ذات مسؤولية محدودة، أسسها
+                    الدكتور ربيع بن علي العوبثاني في مدينة المكلا في مارس 2021م
+                    .
                   </p>
                   <p
                     dir="rtl"
@@ -296,8 +296,8 @@ function App() {
                     <div
                       className={
                         dir === "ltr"
-                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-10"
-                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-6"
+                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-8"
+                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-5"
                       }
                     >
                       <img
@@ -316,8 +316,8 @@ function App() {
                     <div
                       className={
                         dir === "ltr"
-                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-8"
-                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-8"
+                          ? "h-[60px] w-[58px] -translate-y-4 -translate-x-12"
+                          : "h-[60px] w-[58px] -translate-y-4 -translate-x-12"
                       }
                     >
                       <img src={anlyisit} alt="" className="w-full h-full" />
@@ -503,12 +503,12 @@ function App() {
                   </div>
                   <div>
                     <p className="text-start  text-[#5B5B5B] leading-7">
-                      شركه عالم الاعمال هي شركه وطنية ذات مسؤولية محدودة.أسسها
-                      الدكتور ربيع بن علي العوبثاني في مدينة المكلا و حضرموت في
-                      مارس 2021م .
+                      شركة عالم الأعمال هي شركة وطنية ذات مسؤولية محدودة، أسسها
+                      الدكتور ربيع بن علي العوبثاني في مدينة المكلا في مارس
+                      2021م .
                     </p>
                     <p className="text-start  mt-6 text-[#5B5B5B] leading-8">
-                      وتعمل على إدارة وتشغيل المشاريع وعمل وإجراء الدراسات
+                      تعمل على إدارة وتشغيل المشاريع وعمل وإجراء الدراسات
                       الاقتصادية والاستشارات الإدارية والمالية والتسويقية وحلول
                       تكنولوجيا المعلومات وأنظمة الجودة، وتقدم خدماتها من خلال
                       مجموعة من الخبراء والاستشاريين المتخصصين الذين يعملون في

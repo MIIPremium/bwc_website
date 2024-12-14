@@ -409,11 +409,11 @@ export default function ArchiveIndex() {
                               }
                             >
                               {publication.type === "publish"
-                                ? "منشور"
+                                ? "المنشورات"
                                 : publication.type === "news"
-                                ? "الاخبار"
+                                ? "الأخبار"
                                 : publication.type === "analysis"
-                                ? "تحليلات"
+                                ? "التحليلات"
                                 : ""}
                             </p>
                             <p className="sm:line-clamp-2 md:line-clamp-1">

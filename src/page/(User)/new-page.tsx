@@ -45,19 +45,18 @@ export default function NewsDetails() {
   const [selectedImage, setSelectedImage] = useState(null);
   dayjs.extend(relativeTime);
   dayjs.locale("ar");
-  const {  i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
-  const { data: NewssDetails ,isPending } = useQuery({
+  const { data: NewssDetails, isPending } = useQuery({
     queryKey: ["NewssDetails"],
     queryFn: () => getApi<NewssResp>(`/api/website/Publications/Details/${id}`),
   });
-  
-  
+
   const getRelativeTime = (date: string | Date, language: string): string => {
     dayjs.locale(language);
     return dayjs().to(dayjs(date));
   };
- 
+
   const onChangeLanguage = () => {
     language === "ar" ? setLanguage("en") : setLanguage("ar");
   };
@@ -296,7 +295,7 @@ export default function NewsDetails() {
             <main className="md:max-w-[90vw] mx-auto  md:p-6">
               <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
                 <span className="bg-[#CCA972] h-10 w-[10px] rounded-full "></span>
-                <span>الاخبار</span>
+                <span>الأخبار</span>
               </h1>
               <h1 className=" text-2xl font-bold mb-[43px]">
                 {NewssDetails?.data.ar_Title}
@@ -350,7 +349,7 @@ export default function NewsDetails() {
                       <div className="flex items-center gap-x-2">
                         <ClockCircle />
                         <span>
-                          وقت القراءة: {String(NewssDetails?.data.t2read)} دقيقه
+                          وقت القراءة: {String(NewssDetails?.data.t2read)} دقيقة
                         </span>
                       </div>
                     </div>
@@ -402,7 +401,7 @@ export default function NewsDetails() {
                       htmlFor=""
                       className="block mb-2 text-lg font-semibold"
                     >
-                      ✅ صور اخرى الخبر
+                      ✅ صور أخرى للخبر
                     </label>
                     <div className="overflow-y-auto min-h-96">
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">

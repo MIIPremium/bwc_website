@@ -222,7 +222,7 @@ export default function AnalysisDetails() {
                   <div className="mb-[47px] mt-7">
                     <h2 className="text-xl font-bold mb-5">
                       {" "}
-                      ✅ Table Of Content
+                      ✅ Table Of Contents
                     </h2>
                     <ul>
                       {AnalysisDetails?.data.en_table_of_content.map(
@@ -347,7 +347,7 @@ export default function AnalysisDetails() {
             <main className="md:max-w-[90vw] mx-auto  md:p-6">
               <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
                 <span className="bg-[#CCA972] h-10 w-[10px] rounded-full "></span>
-                <span>التحاليل</span>
+                <span>التحليلات</span>
               </h1>
               <h1 className=" text-2xl font-bold mb-[43px]">
                 {AnalysisDetails?.data.ar_Title}
@@ -401,7 +401,7 @@ export default function AnalysisDetails() {
                         <ClockCircle />
                         <span>
                           وقت القراءة: {String(AnalysisDetails?.data.t2read)}{" "}
-                          دقيقه
+                          دقيقة
                         </span>
                       </div>
                     </div>
@@ -446,7 +446,7 @@ export default function AnalysisDetails() {
                   </div>
                   {/* ------ Report description ----------- */}
                   <div className="mb-[47px] mt-7">
-                    <h2 className="text-xl font-bold mb-5"> ✅ جدول محتويات</h2>
+                    <h2 className="text-xl font-bold mb-5"> ✅ جدول المحتويات</h2>
                     <ul>
                       {AnalysisDetails?.data.ar_table_of_content.map(
                         (x, index) => (
@@ -486,7 +486,7 @@ export default function AnalysisDetails() {
                       onClick={toggleDiv}
                       className="flex items-center px-4 py-2 relative bg-white rounded hover:bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-gray-400"
                     >
-                      <span>{isOpen ? "إخفاء المراجع" : "إظهار المراجع"}</span>
+                      <span>{isOpen ? "إخفاء المراجع" : "عرض المراجع"}</span>
                       <span className="ml-2 transform transition-transform">
                         {isOpen ? "▲" : "▼"}
                       </span>

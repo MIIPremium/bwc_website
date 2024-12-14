@@ -485,7 +485,7 @@ export default function PublishDetails() {
                         <ClockCircle />
                         <span>
                           وقت القراءة: {String(PPublicDetails?.data.t2read)}{" "}
-                          دقيقه
+                          دقيقة
                         </span>
                       </div>
                     </div>
@@ -533,7 +533,7 @@ export default function PublishDetails() {
                       htmlFor=""
                       className="block mb-2 text-lg font-semibold"
                     >
-                      ✅ صور اخرى للمنشور
+                      ✅ صور أخرى للمنشور
                     </label>
                     <div className="overflow-y-auto min-h-96">
                       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
@@ -624,7 +624,7 @@ export default function PublishDetails() {
                       onClick={toggleDiv}
                       className="flex items-center px-4 py-2 relative bg-white rounded hover:bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-gray-400"
                     >
-                      <span>{isOpen ? "إخفاء المراجع" : "إظهار المراجع"}</span>
+                      <span>{isOpen ? "إخفاء المراجع" : "عرض المراجع"}</span>
                       <span className="ml-2 transform transition-transform">
                         {isOpen ? "▲" : "▼"}
                       </span>

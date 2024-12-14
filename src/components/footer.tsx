@@ -42,11 +42,11 @@ export default function Footer() {
                   {t("footerLink1")}
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
+                  {/* <li className="mb-4">
                     <a href="/departments"  className="hover:underline">
                       {t("departmentLinks")}
                     </a>
-                  </li>
+                  </li> */}
                   <li className="mb-4">
                     <a href="/departments"  className="hover:underline">
                       {t("departmentLinks1")}
@@ -276,11 +276,11 @@ export default function Footer() {
                       {t("departmentLinks")}
                     </a>
                   </li>
-                  <li className="mb-4">
+                  {/* <li className="mb-4">
                     <a href="/departments"  className="hover:underline">
                       {t("departmentLinks1")}
                     </a>
-                  </li>
+                  </li> */}
                   <li className="mb-4">
                     <a href="/departments"  className="hover:underline">
                       {t("departmentLinks2")}
