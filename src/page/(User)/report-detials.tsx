@@ -52,8 +52,7 @@ export default function ReportDetials() {
     queryFn: () =>
       getApi<ReportDetailsResponse>(`/api/website/Reports/Details/${id}`),
   });
-  
-  
+
   const getRelativeTime = (date: string | Date, language: string): string => {
     dayjs.locale(language);
     return dayjs().to(dayjs(date));
@@ -83,8 +82,6 @@ export default function ReportDetials() {
   const closeModal = () => {
     setModalOpen(false);
   };
-
-  
 
   const handleDownload = () => {
     const link = document.createElement("a");
@@ -178,7 +175,7 @@ export default function ReportDetials() {
                     <div className="mb-[47px] mt-7">
                       <h2 className="text-xl font-bold mb-5">
                         {" "}
-                        ✅ Table Of Content
+                        ✅ Table Of Contents
                       </h2>
                       <ul>
                         {ReportHomeDetails?.data.en_table_of_content.map(
@@ -342,7 +339,7 @@ export default function ReportDetials() {
                     <div className="mb-[47px] mt-7">
                       <h2 className="text-xl font-bold mb-5">
                         {" "}
-                        ✅ جدول محتويات
+                        ✅ جدول المحتويات
                       </h2>
                       <ul>
                         {ReportHomeDetails?.data.ar_table_of_content.map(
@@ -369,7 +366,10 @@ export default function ReportDetials() {
                   </div>
 
                   <div className="mb-[47px]">
-                    <h2 className="text-xl font-bold mb-5"> ✅ ملخص تنفيذي</h2>
+                    <h2 className="text-xl font-bold mb-5">
+                      {" "}
+                      ✅ الملخص التنفيذي
+                    </h2>
                     <p>
                       {ReportHomeDetails?.data.ar_executive_summary && (
                         <div

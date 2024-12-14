@@ -61,13 +61,24 @@ export default function Carousel({ items, itemsToShow }: CarouselProps) {
         <>
           <div className="w-full h-36 flex justify-around items-center ">
             <div className="w-[20%] lg:-translate-x-0 md:-translate-x-0 sm:-translate-x-7">
-              <Link to={"https://www.youtube.com/@Manhal-podcast"} target="_blank">
-              <Button>{t("See-All")}</Button>
+              <Link
+                to={"https://www.youtube.com/@Manhal-podcast"}
+                target="_blank"
+              >
+                <Button>{t("See-All")}</Button>
               </Link>
             </div>
             <div className="w-[80%] ">
               <div className="flex p-5 justify-end">
-                <h1 className="text-3xl">{t("Talk-about-us")}</h1>
+                <h1
+                  className={`text-3xl ${
+                    dir === "ltr"
+                      ? "sm:relative lg:relative lg:left-0 sm:-left-12 "
+                      : "sm:relative sm:-right-12"
+                  }`}
+                >
+                  {t("Talk-about-us")}
+                </h1>
                 <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
               </div>
             </div>
@@ -128,8 +139,11 @@ export default function Carousel({ items, itemsToShow }: CarouselProps) {
               </div>
             </div>
             <div className="w-[20%] lg:translate-x-0 md:translate-x-0 sm:translate-x-7">
-            <Link to={"https://www.youtube.com/@Manhal-podcast"} target="_blank">
-              <Button>{t("See-All")}</Button>
+              <Link
+                to={"https://www.youtube.com/@Manhal-podcast"}
+                target="_blank"
+              >
+                <Button>{t("See-All")}</Button>
               </Link>
             </div>
           </div>

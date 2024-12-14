@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import CarouselsReport from "src/components/carouselsReport";
 import Footer from "src/components/footer";
 import Navbar from "src/components/navbar";
-import { CalendarMinus2Icon, LoaderIcon, MoveLeft, MoveRight } from "lucide-react";
+import {
+  CalendarMinus2Icon,
+  LoaderIcon,
+  MoveLeft,
+  MoveRight,
+} from "lucide-react";
 import { Input } from "src/ui/input";
 import {
   Select,
@@ -118,8 +123,7 @@ const PublicationPage = () => {
     queryKey: ["ReadMore"],
     queryFn: () => getApi<sidInfo[]>(`/api/website/Publications/ReadMore/5`),
   });
-  
-  
+
   const itemsPerPage = 3; // Display 3 posts per page
   const totalItems = PubResp?.data.length || 0;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -230,11 +234,11 @@ const PublicationPage = () => {
               <div className="col-span-4 md:col-span-1 flex justify-between gap-4">
                 <Select dir="ltr" onValueChange={handleAscendingChange}>
                   <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="select Publication order" />
+                    <SelectValue placeholder="Sorting by date" />
                   </SelectTrigger>
                   <SelectContent className="bg-white">
-                    <SelectItem value="oldest">oldest</SelectItem>
                     <SelectItem value="newest">newest</SelectItem>
+                    <SelectItem value="oldest">oldest</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -487,23 +491,23 @@ const PublicationPage = () => {
                   onValueChange={(value) => setSelectedValue(value)}
                 >
                   <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="ابحث بالنوع " />
+                    <SelectValue placeholder="ابحث حسب النوع" />
                   </SelectTrigger>
                   <SelectContent className="bg-white">
                     <SelectItem value="all">الكل</SelectItem>
-                    <SelectItem value="publish">مشنورات</SelectItem>
-                    <SelectItem value="news">الاخبار</SelectItem>
+                    <SelectItem value="publish">منشورات</SelectItem>
+                    <SelectItem value="news">الأخبار</SelectItem>
                     <SelectItem value="analysis">تحليلات</SelectItem>
                   </SelectContent>
                 </Select>
 
                 <Select dir="rtl" onValueChange={handleAscendingChange}>
                   <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="فلتر بالتاريخ" />
+                    <SelectValue placeholder="رتب حسب التاريخ" />
                   </SelectTrigger>
                   <SelectContent className="bg-white">
-                    <SelectItem value="oldest">الاقدم</SelectItem>
-                    <SelectItem value="newest">الاحدث</SelectItem>
+                    <SelectItem value="newest">الأحدث</SelectItem>
+                    <SelectItem value="oldest">الأقدم</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -598,7 +602,7 @@ const PublicationPage = () => {
                           className="  w-full"
                         >
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
-                            إقراء المزيد ...
+                            اقرأ المزيد ...
                           </button>
                         </Link>
                       </div>
@@ -651,7 +655,7 @@ const PublicationPage = () => {
               <div className=" h-full w-full flex justify-center items-center">
                 <div className=" text-center">
                   <JobNotFound />
-                  <p>لا توجد نتيجة للبحث، جرب البحث باسم منشور اخرى</p>
+                  <p>لا توجد نتيجة للبحث، جرب البحث باسم منشور آخر</p>
                 </div>
               </div>
             )}
