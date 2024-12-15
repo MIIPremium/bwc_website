@@ -64,7 +64,7 @@ export default function AboutUsHeader() {
                       </h1>
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                     </div>
-                    <div className="text-end">
+                    <div dir="ltr" className="text-start">
                       <p className="  text-[#5B5B5B] leading-7">
                         Business World is a national limited liability company.
                         It was founded by Dr. Rabi Ben Ali al-Awabthani in the
@@ -218,12 +218,18 @@ export default function AboutUsHeader() {
                       <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                     </div>
                     <div>
-                      <p className="text-end  text-[#5B5B5B] leading-7">
+                      <p
+                        dir="ltr"
+                        className="text-start text-[#5B5B5B] leading-7"
+                      >
                         Business World is a national limited liability company.
                         It was founded by Dr. Rabi Ben Ali al-Awabthani in the
                         city of Mukalla and Hadramawt in March 2021 .
                       </p>
-                      <p className="text-end  mt-8 text-[#5B5B5B] leading-8">
+                      <p
+                        dir="ltr"
+                        className="text-start  mt-8 text-[#5B5B5B] leading-8"
+                      >
                         It manages and operates projects, works and conducts
                         economic studies, administrative, financial and
                         marketing consulting, IT solutions and quality systems,
@@ -353,13 +359,19 @@ export default function AboutUsHeader() {
                         <div className="w-3 h-10 rounded-md bg-[#CCA972] mr-2 bg-gradient-to-r from-[#A27942] "></div>
                       </div>
                       <div>
-                        <p className="text-end  text-[#5B5B5B] leading-7">
+                        <p
+                          dir="ltr"
+                          className="text-start  text-[#5B5B5B] leading-7"
+                        >
                           Business World is a national limited liability
                           company. It was founded by Dr. Rabi Ben Ali
                           al-Awabthani in the city of Mukalla and Hadramawt in
                           March 2021 .
                         </p>
-                        <p className="text-end  mt-8 text-[#5B5B5B] leading-8">
+                        <p
+                          dir="ltr"
+                          className="text-start  mt-8 text-[#5B5B5B] leading-8"
+                        >
                           It manages and operates projects, works and conducts
                           economic studies, administrative, financial and
                           marketing consulting, IT solutions and quality
