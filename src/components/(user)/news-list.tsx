@@ -50,3 +50,4 @@ export const dataNews = [
     imgUrl: require("../../assets/img/news_1.jpg"),
   },
 ];
+

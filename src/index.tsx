@@ -71,6 +71,7 @@ import UpdateReportsForm from "./components/form/update-reports";
 import ArchiveIndex from "./page/(User)/archive";
 import ResetPassWordIndex from "./page/(Admin)/reset-password";
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -325,6 +326,10 @@ const router = createBrowserRouter([
     path: "*",
     element: <NotFoundPage />,
   },
+  {
+    path: "/report-detials",
+    element: <ReportDetials />,
+  },
 ]);
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -332,7 +337,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <ReactQueryClientProvider>
     <React.StrictMode>
-      <React.Suspense fallback={<Loading />}>
+      <React.Suspense fallback={<Loading/>}>
         <RouterProvider router={router} />
       </React.Suspense>
     </React.StrictMode>

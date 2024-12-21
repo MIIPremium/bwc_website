@@ -1,3 +1,4 @@
+
 import { CalendarMinus2Icon } from "lucide-react";
 import React from "react";
 import dayjs from "dayjs";
@@ -48,10 +49,12 @@ export default function NewsCard({
           <div className="size-20  min-w-[80px] ">
             <img
               src={b_image} // Replace with actual image path
+
               alt="Report cover"
               className="w-full   object-cover h-full rounded-lg"
             />
           </div>
+
           <div className="overflow-hidden p-4">
             <h3>{en_Title}</h3>
             <span className="flex font-normal text-sm gap-2 mt-2">
@@ -91,4 +94,5 @@ export default function NewsCard({
       )}
     </>
   );
+
 }

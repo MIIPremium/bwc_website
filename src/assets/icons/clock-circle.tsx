@@ -23,5 +23,6 @@ export default function ClockCircle() {
         stroke-linecap="round"
       />
     </svg>
+
   );
 }

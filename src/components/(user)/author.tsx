@@ -1,3 +1,4 @@
+
 import React from "react";
 import authorImgUrl from "../../assets/img/Profile.png";
 export default function Author() {
@@ -13,4 +14,5 @@ export default function Author() {
       <span className="text-base font-bold">حمود عبدالرقيب احمد سيف</span>
     </div>
   );
+
 }
