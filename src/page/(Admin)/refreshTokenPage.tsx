@@ -43,7 +43,7 @@ export default function RefreshTokenPage() {
       const response = await axios({
         url: "/refresh",
         method: "post",
-        baseURL: "https://bwc-api-testing.runasp.net/",
+        baseURL: "https://bwc.runasp.net/",
         data: {
           refreshToken: refreshToken,
         },
