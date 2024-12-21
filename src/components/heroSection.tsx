@@ -1,10 +1,5 @@
 import React from "react";
 import CarouselsHeroSection from "./carouselsHeroSection";
-
-import image1 from "../assets/img/1706714290731.jpg";
-import image2 from "../assets/img/1706714564880.jpg";
-import image3 from "../assets/img/IMG_9024.jpg";
-import writerImagePlaceholder from "../assets/img/IMG_9024.jpg";
 import sliderImagePlaceholder from "../assets/img/news_1.jpg";
 import sliderImagePlaceholder1 from "../assets/img/news_2.jpg";
 

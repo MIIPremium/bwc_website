@@ -9,41 +9,58 @@ import {
 } from "../../ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { addReferenceSchema } from "src/types/validation";
+import { addReportSchema } from "src/types/validation";
 import { z } from "zod";
 import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import { Button } from "../../ui/button";
 import { useMutation } from "@tanstack/react-query";
 import { postApi } from "src/lib/http";
-import { useToast } from "src/ui/use-toast";
 import { useNavigate } from "react-router-dom";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import AddPersonalImageDialog from "../dailog/add-personal-image-dialog";
+import { Textarea } from "src/ui/textarea";
+import Cookies from "js-cookie";
 
-type ReferenceFormValue = z.infer<typeof addReferenceSchema>;
+type ReportFormValue = z.infer<typeof addReportSchema>;
 
 export default function AddReportForm() {
-  // const { toast } = useToast();
+  const AccessToken = Cookies.get("accessToken");
   const navigate = useNavigate();
-  const form = useForm<z.infer<typeof addReferenceSchema>>({
-    resolver: zodResolver(addReferenceSchema),
+  const form = useForm<z.infer<typeof addReportSchema>>({
+    resolver: zodResolver(addReportSchema),
   });
 
   const { mutate } = useMutation({
     mutationKey: ["AddReferences"],
-    mutationFn: (datas: ReferenceFormValue) =>
-      postApi("/api/References", {
-        ar_title: datas.ar_title,
-        en_title: datas.en_title,
-        link: datas.link,
-      }),
+    mutationFn: (datas: ReportFormValue) =>
+      postApi(
+        "/api/References",
+        {
+          Ar_Title: datas.Ar_Title,
+          En_Title: datas.En_Title,
+          Img: datas.Img,
+          Ar_description: datas.Ar_description,
+          En_description: datas.En_description,
+          Ar_executive_summary: datas.Ar_executive_summary,
+          En_executive_summary: datas.En_executive_summary,
+          Ar_table_of_content: datas.Ar_table_of_content,
+          Er_table_of_content: datas.Er_table_of_content,
+          date_of_report: datas.date_of_report,
+          date_of_publish: datas.date_of_publish,
+          PdfImg: datas.PdfImg,
+          pdf_link: datas.pdf_link,
+          An_note: datas.An_note,
+          En_note: datas.En_note,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
+      ),
     onSuccess: () => {
-      // toast({
-      //   title: "اشعار",
-      //   variant: "success",
-      //   description: "تمت الاضافة بنجاح",
-      // });
       toast.success("تمت الاضافة بنجاح.", {
         style: {
           border: "1px solid #4FFFB0",
@@ -58,16 +75,22 @@ export default function AddReportForm() {
       navigate("/admin-dashboard/references");
     },
     onError: (error) => {
-      // toast({
-      //   title: "لم تتم العملية",
-      //   description: error.message,
-      //   variant: "destructive",
-      // });
+      toast.error("لم تتم العميله.", {
+        style: {
+          border: "1px solid  #FF5733 ",
+          padding: "16px",
+          color: " #FF5733 ",
+        },
+        iconTheme: {
+          primary: " #FF5733 ",
+          secondary: "#FFFAEE",
+        },
+      });
     },
   });
   const [personalPhoto, setPersonalPhoto] = useState<string>();
   // data?.file.personalPhoto ?? "",
-  const onSubmit = (datas: ReferenceFormValue) => {
+  const onSubmit = (datas: ReportFormValue) => {
     mutate(datas);
   };
 
@@ -89,7 +112,7 @@ export default function AddReportForm() {
               />
               <FormField
                 control={form.control}
-                name="ar_title"
+                name="Img"
                 render={({ field }) => (
                   <FormItem>
                     <FormControl>
@@ -114,7 +137,7 @@ export default function AddReportForm() {
             <Label text="عنوان التقرير" />
             <FormField
               control={form.control}
-              name="ar_title"
+              name="Ar_Title"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
@@ -132,7 +155,7 @@ export default function AddReportForm() {
             <Label text="Title" />
             <FormField
               control={form.control}
-              name="en_title"
+              name="En_Title"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">{"Title"}</FormLabel>
@@ -148,7 +171,7 @@ export default function AddReportForm() {
             <Label text="تاريخ النشر" />
             <FormField
               control={form.control}
-              name="en_title"
+              name="date_of_publish"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
@@ -168,7 +191,7 @@ export default function AddReportForm() {
             <Label text="تاريخ التقرير" />
             <FormField
               control={form.control}
-              name="link"
+              name="date_of_report"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
@@ -186,7 +209,7 @@ export default function AddReportForm() {
             <Label text="رابط الملف" />
             <FormField
               control={form.control}
-              name="link"
+              name="pdf_link"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">{"رابط الملف"}</FormLabel>
@@ -202,7 +225,7 @@ export default function AddReportForm() {
             <Label text="صورة الغلاف للتقرير" />
             <FormField
               control={form.control}
-              name="link"
+              name="PdfImg"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
@@ -221,20 +244,24 @@ export default function AddReportForm() {
           </div>
         </div>
 
-        {/* TODO:Textarea */}
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="وصف التقرير" />
             <FormField
               control={form.control}
-              name="link"
+              name="Ar_description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
                     {"وصف التقرير"}
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="ادخل وصف التقرير..." {...field} />
+                    <Textarea
+                      placeholder="ادخل وصف التقرير..."
+                      rows={5}
+                      className="bg-white"
+                      {...field}
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -243,19 +270,24 @@ export default function AddReportForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="Description" />
             <FormField
               control={form.control}
-              name="link"
+              name="En_description"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
                     {"Description"}
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="enter Description ..." {...field} />
+                    <Textarea
+                      rows={5}
+                      className="bg-white"
+                      placeholder="enter Description ..."
+                      {...field}
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -264,19 +296,24 @@ export default function AddReportForm() {
           </div>
         </div>
 
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="ملخص تنفيذي" />
             <FormField
               control={form.control}
-              name="link"
+              name="Ar_executive_summary"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
                     {"ملخص تنفيذي"}
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="ادخل ملخص تنفيذي ..." {...field} />
+                    <Textarea
+                      rows={5}
+                      className="bg-white"
+                      placeholder="ادخل ملخص تنفيذي ..."
+                      {...field}
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -284,22 +321,24 @@ export default function AddReportForm() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="Executive summary" />
             <FormField
               control={form.control}
-              name="link"
+              name="En_executive_summary"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
                     {"Executive summary"}
                   </FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
+                      rows={5}
+                      className="bg-white"
                       placeholder="enter Executive summary ..."
                       {...field}
-                    />
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -307,19 +346,24 @@ export default function AddReportForm() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="فهرس المحتوى" />
             <FormField
               control={form.control}
-              name="link"
+              name="Ar_table_of_content"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
                     {"فهرس المحتوى"}
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="ادخل فهرس المحتوى ..." {...field} />
+                    <Textarea
+                      rows={5}
+                      className="bg-white"
+                      placeholder="ادخل فهرس المحتوى ..."
+                      {...field}
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -327,22 +371,24 @@ export default function AddReportForm() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="Table of content" />
             <FormField
               control={form.control}
-              name="link"
+              name="Er_table_of_content"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">
                     {"Table of content"}
                   </FormLabel>
                   <FormControl>
-                    <Input
+                    <Textarea
+                      rows={5}
+                      className="bg-white"
                       placeholder="enter Table of content ..."
                       {...field}
-                    />
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -350,17 +396,22 @@ export default function AddReportForm() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="ملاحظة" />
             <FormField
               control={form.control}
-              name="link"
+              name="An_note"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">{"ملاحظة"}</FormLabel>
                   <FormControl>
-                    <Input placeholder="ادخل ملاحظة ..." {...field} />
+                    <Textarea
+                      rows={5}
+                      className="bg-white"
+                      placeholder="ادخل ملاحظة ..."
+                      {...field}
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -368,17 +419,22 @@ export default function AddReportForm() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+        <div className="grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
           <div className=" col-span-1 h-auto translate-y-10">
             <Label text="Note" />
             <FormField
               control={form.control}
-              name="link"
+              name="En_note"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-red-900">{"Note"}</FormLabel>
                   <FormControl>
-                    <Input placeholder="enter the Note ..." {...field} />
+                    <Textarea
+                      rows={5}
+                      className="bg-white"
+                      placeholder="enter the Note ..."
+                      {...field}
+                    ></Textarea>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -386,7 +442,7 @@ export default function AddReportForm() {
             />
           </div>
         </div>
-        <div className="w-full translate-x-10 flex justify-end">
+        <div className="w-full translate-x-10 flex justify-end mt-20">
           <Button className="text-md mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
             إضافة
           </Button>

@@ -18,17 +18,28 @@ export default function SideNab() {
   const [publishes, setPublishes] = useState<boolean>(false);
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
+  const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const handleSelect = (item: string) => {
+    setSelectedItem(item);
+  };
   return (
     <div className="w-full h-full text-end overflow-y-auto">
       {dir === "ltr" ? (
         <>
           <ul
-            className={`w-full mb-5 px-3 duration-500 ease-in-out ${"min-h-[30%]"} `}
+            className={`w-full  px-3 duration-500 ease-in-out ${"min-h-[27%]"} `}
           >
             <div className="float-end w-[90%] h-[1px] bg-[#E5E5E5] mb-3"></div>
             <p className="text-[12px] text-end text-[#9E9E9E]">Publications</p>
             <NavLink to="/admin-dashboard/references">
-              <li className="mt-1 p-2 rounded-md flex justify-end items-center">
+              <li
+                className={`mt-1 p-2 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "references"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("references")}
+              >
                 References
                 <i className="mr-2">
                   <Refernce />
@@ -37,7 +48,14 @@ export default function SideNab() {
             </NavLink>
 
             <NavLink to={"/admin-dashboard/reports"}>
-              <li className="mt-1 py-2 px-1 rounded-md flex justify-end items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "reports"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("reports")}
+              >
                 Reports
                 <i className="mr-2">
                   <Reports />
@@ -65,24 +83,51 @@ export default function SideNab() {
                   publishes ? "max-height-[200px]" : "max-height-0"
                 }`}
               >
-                <li className="px-5 mt-1 p-2 rounded-md flex justify-end items-center">
-                  Publications
-                  <i className="mr-2">
-                    <img src={NewsIcon} alt="" />
-                  </i>
-                </li>
-                <li className="px-5 mt-1 p-2 rounded-md flex justify-end items-center">
-                  News
-                  <i className="mr-2">
-                    <img src={NewsIcon2} alt="" />
-                  </i>
-                </li>
-                <li className="px-5 mt-1 p-2 rounded-md flex justify-end items-center">
-                  Analysis
-                  <i className="mr-2">
-                    <StudiesIcon />
-                  </i>
-                </li>
+                <NavLink to={"/admin-dashboard/publications"}>
+                  <li
+                    className={`px-5 mt-1 p-2 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                      selectedItem === "publications"
+                        ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect("publications")}
+                  >
+                    Publications
+                    <i className="mr-2">
+                      <img src={NewsIcon} alt="" />
+                    </i>
+                  </li>
+                </NavLink>
+                <NavLink to={"/admin-dashboard/news"}>
+                  <li
+                    className={`px-5 mt-1 p-2 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                      selectedItem === "news"
+                        ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect("news")}
+                  >
+                    News
+                    <i className="mr-2">
+                      <img src={NewsIcon2} alt="" />
+                    </i>
+                  </li>
+                </NavLink>
+                <NavLink to={"/admin-dashboard/analysis"}>
+                  <li
+                    className={`px-5 mt-1 p-2 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                      selectedItem === "Analysis"
+                        ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect("Analysis")}
+                  >
+                    Analysis
+                    <i className="mr-2">
+                      <StudiesIcon />
+                    </i>
+                  </li>
+                </NavLink>
               </ul>
             )}
           </ul>
@@ -93,7 +138,14 @@ export default function SideNab() {
               Organizations and Employees
             </p>
             <NavLink to={"/admin-dashboard/taskforce"}>
-              <li className="px-3 mt-1 p-2 flex justify-end items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Task-Force"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Task-Force")}
+              >
                 Task Force
                 <i className="mr-2">
                   <img src={Teams} alt="" />
@@ -101,21 +153,42 @@ export default function SideNab() {
               </li>
             </NavLink>
             <NavLink to={"/admin-dashboard/organization"}>
-              <li className="px-3 mt-1 p-2 flex justify-end items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Institutions"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Institutions")}
+              >
                 Institutions We Manage
                 <i className="mr-2">
                   <Orgnaztion />
                 </i>
               </li>
             </NavLink>
-            <li className="px-3 mt-1 p-2 flex justify-end items-center">
+            {/* <li
+              className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                selectedItem === "Partners"
+                  ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                  : ""
+              }`}
+              onClick={() => handleSelect("Partners")}
+            >
               Our Partners
               <i className="mr-2">
                 <Massage />
               </i>
-            </li>
+            </li> */}
             <NavLink to={"/admin-dashboard/writer"}>
-              <li className="px-3 mt-1 p-2 flex justify-end items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Writers"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Writers")}
+              >
                 Writers
                 <i className="mr-2">
                   <Massage />
@@ -128,7 +201,14 @@ export default function SideNab() {
             <div className="float-end w-[90%] h-[1px] bg-[#E5E5E5] mb-3"></div>
             <p className="text-[12px] text-end text-[#9E9E9E]">Features</p>
             <NavLink to={"/admin-dashboard/jobs"}>
-              <li className="px-3 mt-1 p-2 rounded-md flex justify-end items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Job"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Job")}
+              >
                 Job
                 <i className="mr-2">
                   <img src={Busniess} alt="" />
@@ -136,31 +216,53 @@ export default function SideNab() {
               </li>
             </NavLink>
             <NavLink to={"/admin-dashboard/services"}>
-              <li className="px-3 mt-1 p-2 rounded-md flex justify-end items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Services"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Services")}
+              >
                 Our Services
                 <i className="mr-2">
                   <img src={Service} alt="" />
                 </i>
               </li>
             </NavLink>
-
-            <li className="px-3 mt-1 p-2 flex justify-end items-center">
-              Portfolio
-              <i className="mr-2">
-                <OurFiles />
-              </i>
-            </li>
+            <NavLink to={"/admin-dashboard/profile"}>
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-end items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Portfolio"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Portfolio")}
+              >
+                Portfolio
+                <i className="mr-2">
+                  <OurFiles />
+                </i>
+              </li>
+            </NavLink>
           </ul>
         </>
       ) : (
         <>
           <ul
-            className={`w-full mb-5 px-3 duration-500 ease-in-out ${"min-h-[30%]"} `}
+            className={`w-full  px-3 duration-500 ease-in-out ${"min-h-[27%]"} `}
           >
             <div className="float-start w-[90%] h-[1px] bg-[#E5E5E5] mb-3"></div>
             <p className="text-[12px] text-right text-[#9E9E9E]">المنشورات</p>
             <NavLink to="/admin-dashboard/references">
-              <li className="mt-1 p-2 rounded-md flex justify-start items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "references"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("references")}
+              >
                 <i className="ml-2">
                   <Refernce />
                 </i>
@@ -168,7 +270,14 @@ export default function SideNab() {
               </li>
             </NavLink>
             <NavLink to={"/admin-dashboard/reports"}>
-              <li className="mt-1 py-2 px-1 rounded-md flex justify-start items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "reports"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("reports")}
+              >
                 <i className="ml-2">
                   <Reports />
                 </i>
@@ -195,24 +304,51 @@ export default function SideNab() {
                   publishes ? "max-height-[200px]" : "max-height-0"
                 }`}
               >
-                <li className="px-5 mt-1 p-2 rounded-md flex justify-start items-center">
-                  <i className="ml-2">
-                    <img src={NewsIcon} alt="" />
-                  </i>
-                  المنشورات
-                </li>
-                <li className="px-5 mt-1 p-2 rounded-md flex justify-start items-center">
-                  <i className="ml-2">
-                    <img src={NewsIcon2} alt="" />
-                  </i>
-                  الاخبار
-                </li>
-                <li className="px-5 mt-1 p-2 rounded-md flex justify-start items-center">
-                  <i className="ml-2">
-                    <StudiesIcon />
-                  </i>
-                  التحاليل
-                </li>
+                <NavLink to={"/admin-dashboard/publications"}>
+                  <li
+                    className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                      selectedItem === "publications"
+                        ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect("publications")}
+                  >
+                    <i className="ml-2">
+                      <img src={NewsIcon} alt="" />
+                    </i>
+                    المنشورات
+                  </li>
+                </NavLink>
+                <NavLink to={"/admin-dashboard/news"}>
+                  <li
+                    className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                      selectedItem === "news"
+                        ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect("news")}
+                  >
+                    <i className="ml-2">
+                      <img src={NewsIcon2} alt="" />
+                    </i>
+                    الاخبار
+                  </li>
+                </NavLink>
+                <NavLink to={"/admin-dashboard/analysis"}>
+                  <li
+                    className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                      selectedItem === "Analysis"
+                        ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                        : ""
+                    }`}
+                    onClick={() => handleSelect("Analysis")}
+                  >
+                    <i className="ml-2">
+                      <StudiesIcon />
+                    </i>
+                    التحاليل
+                  </li>
+                </NavLink>
               </ul>
             )}
           </ul>
@@ -223,7 +359,14 @@ export default function SideNab() {
               المؤسسات و الموظفين
             </p>
             <NavLink to={"/admin-dashboard/taskforce"}>
-              <li className="px-3 mt-1 p-2 flex justify-start items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Task-Force"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Task-Force")}
+              >
                 <i className="ml-2">
                   <img src={Teams} alt="" />
                 </i>
@@ -231,21 +374,42 @@ export default function SideNab() {
               </li>
             </NavLink>
             <NavLink to={"/admin-dashboard/organization"}>
-              <li className="px-3 mt-1 p-2 flex justify-start items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Institutions"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Institutions")}
+              >
                 <i className="ml-2">
                   <Orgnaztion />
                 </i>
                 المؤسسات التي نديرها
               </li>
             </NavLink>
-            <li className="px-3 mt-1 p-2 flex justify-start items-center">
+            {/* <li
+              className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                selectedItem === "Partners"
+                  ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                  : ""
+              }`}
+              onClick={() => handleSelect("Partners")}
+            >
               <i className="ml-2">
                 <Massage />
               </i>
               شركائنا
-            </li>
+            </li> */}
             <NavLink to={"/admin-dashboard/writer"}>
-              <li className="px-3 mt-1 p-2 flex justify-start items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Writers"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Writers")}
+              >
                 <i className="ml-2">
                   <Massage />
                 </i>
@@ -258,7 +422,14 @@ export default function SideNab() {
             <div className="float-start w-[90%] h-[1px] bg-[#E5E5E5] mb-3"></div>
             <p className="text-[12px] text-start text-[#9E9E9E]">المزايا</p>
             <NavLink to={"/admin-dashboard/jobs"}>
-              <li className="px-3 mt-1 p-2 rounded-md flex justify-start items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Job"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Job")}
+              >
                 <i className="ml-2">
                   <img src={Busniess} alt="" />
                 </i>
@@ -266,20 +437,35 @@ export default function SideNab() {
               </li>
             </NavLink>
             <NavLink to={"/admin-dashboard/services"}>
-              <li className="px-3 mt-1 p-2 rounded-md flex justify-start items-center">
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Services"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Services")}
+              >
                 <i className="ml-2">
                   <img src={Service} alt="" />
                 </i>
                 خدماتنا
               </li>
             </NavLink>
-
-            <li className="px-3 mt-1 p-2 flex justify-start items-center">
-              <i className="ml-2">
-                <OurFiles />
-              </i>
-              ملف تعريقي لاعمالنا
-            </li>
+            <NavLink to={"/admin-dashboard/profile"}>
+              <li
+                className={`mt-1 py-2 px-1 rounded-md flex justify-start items-center hover:bg-[rgb(213,174,120)]/[.20] hover:text-[#D5AE78] cursor-pointer ${
+                  selectedItem === "Portfolio"
+                    ? "bg-[rgb(213,174,120)]/[.20] text-[#D5AE78]"
+                    : ""
+                }`}
+                onClick={() => handleSelect("Portfolio")}
+              >
+                <i className="ml-2">
+                  <OurFiles />
+                </i>
+                ملف تعريقي لاعمالنا
+              </li>
+            </NavLink>
           </ul>
         </>
       )}

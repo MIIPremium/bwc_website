@@ -1,135 +1,184 @@
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import { CgInstagram } from "react-icons/cg";
+import { Link, useParams } from "react-router-dom";
 import { axiosInstance } from "src/lib/http";
-import { addWriterSchema, WriterResp } from "src/types/validation";
+import { FaXTwitter, FaWhatsapp } from "react-icons/fa6";
+import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { WriterResp } from "src/types/validation";
 import Label from "src/ui/label";
-import { z } from "zod";
-type ReferenceFormValue = z.infer<typeof addWriterSchema>;
+import { IconType } from "react-icons";
+import Cookies from "js-cookie";
+
+const socialIcons: { [key: string]: IconType } = {
+  Instagram: CgInstagram,
+  WhatsApp: FaWhatsapp,
+  LinkedIn: FaLinkedinIn,
+  X: FaXTwitter,
+  Facebook: FaFacebookF, // Add Facebook if needed
+};
 export default function WriterInfo() {
+  const AccessToken = Cookies.get("accessToken");
+  const { t, i18n } = useTranslation();
+  const dir = i18n.dir();
   const { id } = useParams<{ id: string }>();
-  const [existingImageUrl, setExistingImageUrl] = useState<string | null>(null);
+
   const fetchData = async () => {
     const response = await axiosInstance.get<WriterResp>(
       `/api/Writers/${id}`,
-      {}
+      {
+        headers: {
+          "Content-Type": "application/json", // Ensures that the request body is treated as JSON
+          Authorization: `Bearer ${AccessToken}`,
+        },
+      }
     );
     return response.data;
   };
-  const {
-    data: WriterData,
-    error: WriterError,
-    isLoading: WriterIsLoading,
-  } = useQuery({
+  const { data: WriterData } = useQuery({
     queryKey: ["Writer", id],
     queryFn: fetchData,
     enabled: !!id,
   });
 
-  const form = useForm<z.infer<typeof addWriterSchema>>({
-    resolver: zodResolver(addWriterSchema),
-  });
-  useEffect(() => {
-    if (WriterData) {
-      form.reset({
-        ar_fullName: WriterData.ar_fullName,
-        En_fullName: WriterData.en_fullName,
-        ar_description: WriterData.ar_description,
-        en_description: WriterData.en_description,
-        ar_role: WriterData.ar_role,
-        en_role: WriterData.en_role,
-      });
-
-      // Set the existing image URL for preview
-      setExistingImageUrl(WriterData.image); // This should be the image URL string
-    }
-  }, [WriterData]);
+  useEffect(() => {}, [WriterData]);
   return (
-    <div className="min-h-[90vh]   w-[100%] bg-[#f2f2f2]">
-      <div className=" grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]">
-        {/* <label className="text-md mb-2 block font-bold text-gray-950">
-            صورة الكاتب
-          </label> */}
+    <>
+      {dir === "ltr" ? (
+        <div className="min-h-[90vh]   w-[100%] bg-[#f2f2f2]">
+          <div className="h-[2px]  w-[95%] mx-auto bg-black"></div>
+          <div className=" grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[46vh] ">
+            <div className=" col-span-1 h-auto translate-y-10 ">
+              <div className="bg-black w-56 h-56 rounded-full mx-auto flex justify-center items-center">
+                {/* <label htmlFor="">Writer Photo</label>*/}
+                <img
+                  src={WriterData?.image}
+                  alt=""
+                  className="rounded-full w-full h-full object-fill"
+                />
+              </div>
+              <div className=" text-center ">
+                {" "}
+                <h3 className=" text-[#000] text-3xl">
+                  {WriterData?.en_fullName}
+                </h3>
+                <h3 className=" text-[#797979] text-xl">
+                  {WriterData?.en_role}
+                </h3>
+                <h3>عددالمنشورات</h3>
+              </div>
+            </div>
+          </div>
+          <div className="w-full h-[20vh]">
+            <div className=" col-span-1 h-auto px-10 translate-y-8 ">
+              <div className=" w-full gap-3  rounded-full mx-auto flex justify-center items-center">
+                <div className="flex space-x-4">
+                  {WriterData?.soicalmedia.map((social, index) => {
+                    // Get the appropriate icon based on the name
+                    const IconComponent = socialIcons[social.name];
 
-        <div className=" col-span-1 h-auto translate-y-10">
-          <Label text="صورة الكاتب " />
-          {WriterData?.image}
+                    return (
+                      <a
+                        key={social.id}
+                        href={social.url}
+                        className="w-14 h-14 border-2 border-black rounded-full flex justify-center items-center"
+                        target="_blank" // Optional: Opens in a new tab
+                        rel="noopener noreferrer" // For security when opening new tabs
+                      >
+                        {IconComponent && <IconComponent size={30} />}{" "}
+                        {/* Render the icon if it exists */}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+            <div className="text-start col-span-3 h-auto translate-y-10">
+              <Label text="about writer" />
+              {WriterData?.en_description}
+            </div>
+          </div>
+          <div className="w-full -translate-x-10 flex justify-end mt-20">
+            <Link
+              to={`/admin-dashboard/writer/update-writer/${id}`}
+              className="text-lg mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2  font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            >
+              update
+            </Link>
+          </div>
+          <div className="h-[2px]  w-[95%] mx-auto bg-black mb-7"></div>
         </div>
-      </div>
-      <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
-        <div className=" col-span-1 h-auto translate-y-10">
-          <Label text="الاسم الكامل بالعربي " />
-          {WriterData?.ar_fullName}
-        </div>
-        <div dir="ltr" className="text-end col-span-1 h-auto translate-y-10">
-          <Label text="المسمئ الوظيفي" />
-          {WriterData?.ar_role}
-        </div>
-        {/* <div dir="ltr" className="text-end col-span-1 h-auto translate-y-10">
-            <Label text="وسائل التواصل " />
-            <FormField
-              control={form.control}
-              name="en_title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-red-900">
-                    {"وسائل التواصل "}
-                  </FormLabel>
-                  <FormControl>
-                    <Input placeholder="ادخل وسائل التواصل " {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div> */}
-      </div>
-      <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
-        <div className=" col-span-1 h-auto translate-y-10">
-          <Label text="role" />
-          {WriterData?.en_role}
-        </div>
-        <div className=" col-span-1 h-auto translate-y-10">
-          <Label text="full name" />
-          {WriterData?.en_fullName}
-        </div>
-        {/* <div className=" col-span-1 h-auto translate-y-10">
-            <Label text="instgram" />
-            <FormField
-              control={form.control}
-              name="link"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-red-900">{"full name"}</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="https://www.instagram.com/"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div> */}
-      </div>
+      ) : (
+        <div className="min-h-[90vh]   w-[100%] bg-[#f2f2f2]">
+          <div className="h-[2px]  w-[95%] mx-auto bg-black"></div>
+          <div className=" grid grid-cols-1 w-[100%] px-10 items-start gap-4 text-right h-[46vh] ">
+            <div className=" col-span-1 h-auto translate-y-10 ">
+              <div className="bg-black w-56 h-56 rounded-full mx-auto flex justify-center items-center">
+                {/* <label htmlFor="">Writer Photo</label>*/}
+                <img
+                  src={WriterData?.image}
+                  alt=""
+                  className="rounded-full w-full h-full object-fill"
+                />
+              </div>
+              <div className=" text-center ">
+                {" "}
+                <h3 className=" text-[#000] text-3xl">
+                  {WriterData?.ar_fullName}
+                </h3>
+                <h3 className=" text-[#797979] text-xl">
+                  {WriterData?.ar_role}
+                </h3>
+                <h3>عددالمنشورات</h3>
+              </div>
+            </div>
+          </div>
+          <div className="w-full h-[20vh]">
+            <div className=" col-span-1 h-auto px-10 translate-y-8 ">
+              <div className=" w-full gap-3  rounded-full mx-auto flex justify-center items-center">
+                <div className="flex space-x-4">
+                  {WriterData?.soicalmedia.map((social, index) => {
+                    // Get the appropriate icon based on the name
+                    const IconComponent = socialIcons[social.name];
 
-      {/* TODO:Textarea */}
-      <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
-        <div className=" col-span-3 h-auto translate-y-10">
-          <Label text="عن الكتاب" />
-          {WriterData?.ar_fullName}
-        </div>
-      </div>
+                    return (
+                      <a
+                        key={social.id}
+                        href={social.url}
+                        className="w-14 h-14 border-2 border-black rounded-full flex justify-center ml-2 items-center"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {IconComponent && <IconComponent size={30} />}{" "}
+                        {/* Render the icon if it exists */}
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
+            <div className="text-start col-span-3 h-auto translate-y-10">
+              <Label text="عن الكاتب" />
+              {WriterData?.ar_description}
+            </div>
+          </div>
 
-      <div className="grid grid-cols-3 w-[100%] px-10 items-start gap-4 text-right h-[20vh]  ">
-        <div className=" col-span-3 h-auto translate-y-10">
-          <Label text="about writer" />
-          {WriterData?.en_description}
+          <div className="w-full translate-x-10 flex justify-end mt-20">
+            <Link
+              to={`/admin-dashboard/writer/update-writer/${id}`}
+              className="text-md mb-10 inline-flex h-10 items-center  justify-center whitespace-nowrap rounded-lg bg-[#000] px-10 py-2 text-sm font-bold text-white ring-offset-background transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+            >
+              تعديل
+            </Link>
+          </div>
+          <div className="h-[2px]  w-[95%] mx-auto bg-black mb-7"></div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

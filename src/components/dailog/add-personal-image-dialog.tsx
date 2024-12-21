@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Image from "next/image";
 import { Button } from "./../../ui/button";
 import Label from "./../../ui/label";
 import uploader from "../../assets/img/uploader.png";
@@ -31,7 +30,7 @@ export default function AddPersonalImageDialog({
     undefined
   );
   const [isUploaded, setIsUploaded] = useState<boolean>(false);
-  const [imagePrev, setImagePrev] = useState<string | null>(null);
+  const [_imagePrev, setImagePrev] = useState<string | null>(null);
   const handleRemoveClick = async () => {
     if (files) {
       const response = await axios.post(serverUrl + filesApiUrl, {

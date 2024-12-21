@@ -336,14 +336,46 @@ opacity: 1;
   box-sizing: border-box;
   backdrop-filter: blur(10px);
 }
-.info-carousel-end {
+.pub-carousel {
   position: absolute;
-  width: 32rem;
+  width: 25rem;
   height: 10rem;
   background-color: rgb(49, 51, 53, 55%);
   bottom: 1rem;
   color: black;
-  left: 5rem;
+  right: 2rem;
+  display: flex;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: end;
+  padding: 20px;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+}
+.info-carousel-end {
+  position: absolute;
+  width: 25rem;
+  height: 10rem;
+  background-color: rgb(49, 51, 53, 55%);
+  bottom: 1rem;
+  color: black;
+  left: 2rem;
+  display: flex;
+  border-radius: 8px;
+  align-items: center;
+  justify-content: end;
+  padding: 20px;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+}
+.info-carousel-end-en {
+  position: absolute;
+  width: 26rem;
+  height: 10rem;
+  background-color: rgb(49, 51, 53, 55%);
+  bottom: 1rem;
+  color: black;
+  left: 1rem;
   display: flex;
   border-radius: 8px;
   align-items: center;
@@ -357,10 +389,20 @@ opacity: 1;
   text-overflow: ellipsis;
   text-align: justify;
 }
+.title-pub-carousel {
+  width: 100%;
+  text-overflow: ellipsis;
+  text-align: start;
+}
 .title-info-carousel-end {
   width: 100%;
   text-overflow: ellipsis;
   text-align: start;
+}
+.title-info-carousel-end-en {
+  width: 100%;
+  text-overflow: ellipsis;
+  text-align: end;
 }
 .title-info-carousel h2 {
   font-size: 20px;
@@ -384,6 +426,14 @@ opacity: 1;
   gap: 10px;
   flex-direction: row-reverse;
 }
+.inside-image-pub {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-top: 10px;
+  gap: 10px;
+  flex-direction: row-reverse;
+}
 .inside-image-en {
   display: flex;
   align-items: center;
@@ -392,9 +442,15 @@ opacity: 1;
   gap: 10px;
   flex-direction: row-reverse;
 }
-
+.inside-image-en-pub {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 10px;
+  gap: 10px;
+  flex-direction: row-reverse;
+}
 .slide img {
-  object-fit: cover;
   aspect-ratio: 16/9;
   transition: opacity 0.3 ease;
 }
@@ -558,6 +614,13 @@ opacity: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.publishesHero-en {
+  text-align: end;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .publishesProject,
 .job {
   text-align: end;
@@ -566,6 +629,242 @@ opacity: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+.archiveTitle {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.archiveTitleResponsive {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 .job {
   text-align: start;
+}
+.publication {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  width: 100%; /* Ensure the element respects the container's width */
+  max-width: 100%; /* Prevent overflow beyond the parent container */
+  overflow-wrap: anywhere; /* Allow breaking of long words anywhere */
+}
+.reportIndex {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  width: 100%; /* Ensure the element respects the container's width */
+  max-width: 100%; /* Prevent overflow beyond the parent container */
+  overflow-wrap: anywhere; /* Allow breaking of long words anywhere */
+}
+.publicationEn {
+  text-align: start;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-wrap: break-word;
+  width: 100%; /* Ensure the element respects the container's width */
+  max-width: 100%; /* Prevent overflow beyond the parent container */
+  overflow-wrap: anywhere; /* Allow breaking of long words anywhere */
+}
+.text-shadow {
+  text-shadow: 1px 1px 2px black, 0 0 1em #d5ae78, 0 0 0.2em #cca972;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.p-multiselect-item .p-checkbox {
+  display: none;
+}
+.container-pub {
+  width: 100%;
+}
+@media (min-width: 300px) {
+  .container-pub {
+    max-width: 400px;
+  }
+}
+@media (min-width: 768px) {
+  .container-pub {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  .container-pub {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+  .container-pub {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+  .container-pub {
+    max-width: 1536px;
+  }
+}
+.custom-html-editor ul,
+.custom-html-editor ol {
+  padding-left: 1.5rem; /* Indent the list */
+  list-style-position: outside; /* Make sure markers are outside */
+  list-style-type: disc; /* Use bullets for unordered lists */
+}
+
+.custom-html-editor ol {
+  list-style-type: decimal; /* Use numbers for ordered lists */
+}
+
+.custom-html-editor li {
+  margin-bottom: 0.5rem; /* Add space between list items */
+  padding-right: 0.5rem; /* Adjust space between marker and text */
+  text-align: left; /* Ensure the text aligns correctly on the right */
+  direction: ltr;
+}
+.custom-html-editor {
+  background-color: #fff; /* Ensure a white background for better readability */
+  border-radius: 8px; /* Smooth rounded edges */
+}
+
+.custom-html-editor .editor-content {
+  padding: 8px; /* Space around the editor content */
+}
+
+/* ------------ */
+.custom-html-editor-en ul,
+.custom-html-editor-en ol {
+  padding-right: 1.5rem; /* Indent the list */
+  list-style-position: outside; /* Make sure markers are outside */
+  list-style-type: disc; /* Use bullets for unordered lists */
+}
+
+.custom-html-editor-en ol {
+  list-style-type: decimal; /* Use numbers for ordered lists */
+}
+
+.custom-html-editor-en li {
+  margin-bottom: 0.5rem; /* Add space between list items */
+  padding-left: 0.5rem; /* Adjust space between marker and text */
+  text-align: right; /* Ensure the text aligns correctly on the right */
+  direction: rtl;
+}
+.custom-html-editor-en {
+  background-color: #fff; /* Ensure a white background for better readability */
+  border-radius: 8px; /* Smooth rounded edges */
+}
+
+.custom-html-editor-en .editor-content-en {
+  padding: 8px; /* Space around the editor content */
+}
+
+/* ------------- */
+.custom-html-content ul,
+.custom-html-content ol {
+  padding-right: 1.5rem; /* Indent the list */
+  list-style-position: outside; /* Make sure markers are outside */
+  list-style-type: disc; /* Use bullets for unordered lists */
+}
+
+.custom-html-content ol {
+  list-style-type: decimal; /* Use numbers for ordered lists */
+}
+
+.custom-html-content li {
+  margin-bottom: 0.5rem; /* Add space between list items */
+  padding-left: 0.5rem; /* Adjust space between marker and text */
+  text-align: right; /* Ensure the text aligns correctly on the right */
+  direction: rtl;
+}
+.custom-html-content,
+.custom-html-content-view {
+  background-color: transparent; /* Ensure a white background for better readability */
+  border-radius: 8px; /* Smooth rounded edges */
+}
+
+.custom-html-content {
+  padding: 8px; /* Space around the editor content */
+}
+/* ------------- */
+.custom-html-content-en ul,
+.custom-html-content-en ol {
+  padding-left: 1.5rem; /* Indent the list */
+  list-style-position: outside; /* Make sure markers are outside */
+  list-style-type: disc; /* Use bullets for unordered lists */
+}
+
+.custom-html-content-en ol {
+  list-style-type: decimal; /* Use numbers for ordered lists */
+}
+
+.custom-html-content-en li {
+  margin-bottom: 0.5rem; /* Add space between list items */
+  padding-right: 0.5rem; /* Adjust space between marker and text */
+  text-align: left; /* Ensure the text aligns correctly on the right */
+  direction: ltr;
+}
+.custom-html-content-en {
+  background-color: transparent; /* Ensure a white background for better readability */
+  border-radius: 8px; /* Smooth rounded edges */
+}
+
+.custom-html-content {
+  padding: 8px; /* Space around the editor content */
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fedain {
+    scale: 0.8;
+    opacity: 0;
+    animation: fade-in linear forwards;
+    animation-timeline: view(200px);
+    animation-range: entry 0% cover 30%;
+  }
+  @keyframes fade-in {
+    to {
+      scale: 1;
+      opacity: 1;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .fedaup {
+    animation: fade-up 20s linear forwards;
+    animation-timeline: view();
+    animation-range: entry 0% cover 20%;
+  }
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }

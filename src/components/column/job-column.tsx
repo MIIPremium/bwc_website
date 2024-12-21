@@ -1,114 +1,219 @@
 import { type ColumnDef } from "@tanstack/react-table";
-import { Eye, MoreHorizontal } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Button } from "../../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
-import { SquarePen, Trash2 } from "lucide-react";
-import { Checkbox } from "../../ui/checkbox";
-
-import { type z } from "zod";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../../ui/sheet";
 import DeleteDialog from "../dailog/delete-dialog";
 import { Link } from "react-router-dom";
+import ChangeAvailabilityDialog from "../dailog/change-job-avalibilty";
+import ChangePublishesDialog from "../dailog/change-publish";
+import EditIcon from "src/assets/icons/edit-icon";
+import Tooltip from "src/ui/tooltap";
 
 export type AddJobOrder = {
   isSelected: boolean;
-  id: string;
+  id: number;
+  ar_jobTitle: string;
+  en_jobTitle: string;
   img: string;
-  name: string;
-  link: string;
+  avaliable: boolean;
+  publish: boolean;
+  ar_basicDescription: string;
+  en_basicDescription: string;
+  ar_skiles: string[];
+  en_skiles: string[];
+  ar_advances: string[];
+  en_advances: string[];
+  formLink: string;
+  endDate: Date;
 };
 
 export const AddJobColumns: ColumnDef<AddJobOrder>[] = [
   {
-    accessorKey: "isSelected",
-    header: ({ table }) => (
-      <Checkbox
-        className="m-2"
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        className="m-2"
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => {
-          row.toggleSelected(!!value);
-        }}
-        aria-label="Select row"
-      />
-    ),
+    accessorKey: "id",
+    header: "رقم الوظيفة",
   },
-
   {
-    id: "img",
-    accessorKey: "img",
-    header: "صورة المؤسسة",
+    id: "ar_jobTitle",
+    accessorKey: "ar_jobTitle",
+    header: "عنوان الوظيفة",
     cell: ({ row }) => {
       return (
-        <div className=" w-[50px] h-[50px] rounded-full">
-          <img
-            src={row.original.img}
-            className="w-full h-full object-cover"
-            alt=""
-          />
-        </div>
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_jobTitle}
+        </p>
       );
     },
   },
   {
-    accessorKey: "name",
-    header: "اسم المؤسسة",
+    accessorKey: "endDate",
+    header: "اخر تاريخ للتسجيل",
+    sortingFn: "datetime",
   },
   {
-    accessorKey: "link",
-    header: "رابط موقع المؤسسة",
+    id: "avaliable",
+    accessorKey: "avaliable",
+    header: "حالة الوظيفة",
+    cell: ({ row }) => {
+      const avaliable = row.original.avaliable;
+      return avaliable === true ? "متاحة" : "غير متاحة";
+    },
+    filterFn: (row, columnId, filterValue) => {
+      // If no filter is applied, show all rows
+      if (filterValue === undefined) {
+        return true;
+      }
+      return row.getValue(columnId) === filterValue;
+    },
+  },
+
+  {
+    accessorKey: "publish",
+    header: "حالة النشر",
+    cell: ({ row }) => {
+      const publish = row.original.publish;
+      return publish === true ? "نشر" : "غير منشور";
+    },
   },
 
   {
     id: "actions",
+    header: "الإعدادات",
     cell: ({ row }) => {
       //   const { data: session } = useSession();
 
       return (
-        <div className="flex justify-center ">
-          <Link to={`/admin-dashboard/references/update/${row.original?.id}`}>
-            <Button
-              className="bg-[#d5ae78] text-white ml-3 rounded-lg"
-              size={"sm"}
-            >
-              <SquarePen className="" />
-            </Button>
+        <div className="flex justify-start ">
+          <Link to={`/admin-dashboard/jobs/update-job/${row.original?.id}`}>
+            <Tooltip text="تعديل">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+              >
+                <EditIcon />
+              </Button>
+            </Tooltip>
           </Link>
-          <Link to={`/admin-dashboard/jobs/info`}>
-            <Button
-              className="bg-[#d5ae78] text-white ml-3 rounded-lg"
-              size={"sm"}
-            >
-              <Eye className="" />
-            </Button>
+          <Link to={`/admin-dashboard/jobs/info/${row.original.id}`}>
+            <Tooltip text="عرض">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+              >
+                <Eye className="" />
+              </Button>
+            </Tooltip>
           </Link>
-          <DeleteDialog
-            url={`/api/References/${row.original?.id}`}
-            path={"/admin-dashboard/references"}
-          />
+          <Tooltip text="تغير حالة الوظيفة">
+            <ChangeAvailabilityDialog id={row.original.id} />
+          </Tooltip>
+          <Tooltip text="تغير حالة النشر">
+            <ChangePublishesDialog id={row.original.id} />
+          </Tooltip>
+          <Tooltip text="حذف">
+            <DeleteDialog
+              url={`/api/Jobs/${row.original?.id}`}
+              path={"/admin-dashboard/jobs"}
+            />
+          </Tooltip>
+        </div>
+      );
+    },
+  },
+];
+
+export const AddEnJobColumns: ColumnDef<AddJobOrder>[] = [
+  {
+    accessorKey: "id",
+    header: "job num",
+  },
+  {
+    id: "en_jobTitle",
+    accessorKey: "en_jobTitle",
+    header: "Job Title",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_jobTitle}
+        </p>
+      );
+    },
+  },
+
+  {
+    accessorKey: "endDate",
+    header: "Ending Date",
+    sortingFn: "datetime",
+  },
+  {
+    accessorKey: "avaliable",
+    header: "Available",
+    cell: ({ row }) => {
+      const avaliable = row.original.avaliable;
+      return avaliable === true ? "available" : "unavailable";
+    },
+    filterFn: (row, columnId, filterValue) => {
+      // If no filter is applied, include all rows
+      if (filterValue === undefined) {
+        return true;
+      }
+      return row.getValue(columnId) === filterValue;
+    },
+  },
+
+  {
+    accessorKey: "publish",
+    header: "publication Status",
+    cell: ({ row }) => {
+      const publish = row.original.publish;
+      return publish === true ? "publish" : "unpublished";
+    },
+  },
+
+  {
+    id: "actions",
+    header: "settings",
+    cell: ({ row }) => {
+      //   const { data: session } = useSession();
+
+      return (
+        <div className="flex justify-start ">
+          <Link to={`/admin-dashboard/jobs/update-job/${row.original?.id}`}>
+            <Tooltip text="Edit">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+              >
+                <EditIcon />
+              </Button>
+            </Tooltip>
+          </Link>
+          <Link to={`/admin-dashboard/jobs/info/${row.original.id}`}>
+            <Tooltip text="view">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+              >
+                <Eye className="" />
+              </Button>
+            </Tooltip>
+          </Link>
+          <Tooltip text="Change in job status">
+            <ChangeAvailabilityDialog id={row.original.id} />
+          </Tooltip>
+          <Tooltip text="Change in publishing status">
+            <ChangePublishesDialog id={row.original.id} />
+          </Tooltip>
+          <Tooltip text="delete">
+            <DeleteDialog
+              url={`/api/Jobs/${row.original?.id}`}
+              path={"/admin-dashboard/jobs"}
+            />
+          </Tooltip>
         </div>
       );
     },

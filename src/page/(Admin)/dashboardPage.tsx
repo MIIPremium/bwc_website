@@ -1,43 +1,22 @@
-import React, { useState, useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import React, { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import NavBar from "../../components/(Admin)/navBar";
 import SideNab from "../../components/(Admin)/sideNab";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 
 export default function DashboardPage() {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
 
-  const isLoggedIn = localStorage.getItem("accessToken");
-  const isRefreshToken = localStorage.getItem("refreshToken");
-  const [isRefreshTokenDeleted, setIsRefreshTokenDeleted] = useState(false);
-  // useEffect(() => {
-  //   if (isLoggedIn) {
-  //     toast.success("You are logged in successfully!");
-  //   }
-  //   if (!isLoggedIn) {
-  //     navigate("/NoAccess");
-  //   }
-  //   // if (!isRefreshToken) {
-  //   //   navigate("/RefreshToken");
-  //   // }
-  //   // const checkAndDeleteRefreshToken = async () => {
-  //   //   const localStorageRefreshToken = localStorage.getItem("refreshToken");
-
-  //   //   if (localStorageRefreshToken) {
-  //   //     const timeoutId = setTimeout(() => {
-  //   //       setIsRefreshTokenDeleted(true);
-  //   //       navigate("/RefreshToken");
-  //   //     }, 3000);
-
-  //   //     return () => clearTimeout(timeoutId);
-  //   //   }
-  //   // };
-
-  //   // checkAndDeleteRefreshToken();
-  // }, []);
+  const isLoggedIn = Cookies.get("accessToken");
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/RefreshToken");
+    }
+  }, []);
   return (
     <>
       {dir === "ltr" ? (
@@ -57,7 +36,7 @@ export default function DashboardPage() {
           {/* Main content area */}
           <div
             dir="ltr"
-            className=" col-span-10 w-full h-[calc(100vh-10vh)] overflow-y-auto ml-auto mt-[10vh]"
+            className=" col-span-10 w-full h-[calc(100vh-10vh)] overflow-y-auto ml-auto mt-[10vh] bg-[#f2f2f2]"
           >
             <Outlet />
           </div>
@@ -79,7 +58,7 @@ export default function DashboardPage() {
           {/* Main content area */}
           <div
             dir="rtl"
-            className="col-start-3 col-span-10 w-full h-[calc(100vh-10vh)] overflow-y-auto ml-auto mt-[10vh]"
+            className="col-start-3 col-span-10 w-full h-[calc(100vh-10vh)] overflow-y-auto ml-auto mt-[10vh] bg-[#f2f2f2]"
           >
             <Outlet />
           </div>

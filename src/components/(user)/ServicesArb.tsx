@@ -1,6 +1,8 @@
+import { useQuery } from "@tanstack/react-query";
 import { motion, useTransform, useScroll } from "framer-motion";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { ServicesHomeProp } from "src/types/validation";
 
 const ServicesArb = () => {
   return (
@@ -17,6 +19,22 @@ const ServicesArb = () => {
 };
 
 const HorizontalScrollCarousel = () => {
+  const {
+    data: services, // Renamed to `services` for clarity
+    isLoading,
+    error,
+  } = useQuery<ServicesHomeProp[]>({
+    queryFn: () =>
+      fetch(
+        "https://bwc.runasp.net/api/website/Home/Services"
+      ).then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch services");
+        }
+        return res.json();
+      }),
+    queryKey: ["services"], // Unique key for this query
+  });
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
   const targetRef = useRef(null);
@@ -30,58 +48,14 @@ const HorizontalScrollCarousel = () => {
     <section ref={targetRef} className="relative h-[180vh] ">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden ">
         <motion.div style={{ x }} className="flex gap-4">
-          {cards.map((card) => {
-            return <Card card={card} key={card.id} />;
+          {services?.map((service) => {
+            return <Card card={service} key={service.ar_name} />;
           })}
         </motion.div>
       </div>
     </section>
   );
 };
-const cards = [
-  {
-    url: "/imgs/abstract/1.jpg",
-    title: "تصميم الاستراتيجيات",
-    subTitle: "تصميم الاستراتيجيات الفعالة وتطوير خطط العمــــــــل للشركــــــــات والمؤسسات التجارية",
-    id: 1,
-  },
-  {
-    url: "/imgs/abstract/2.jpg",
-    title: "تصميم الاستراتيجيات",
-    subTitle: "تصميم الاستراتيجيات الفعالة وتطوير خطط العمــــــــل للشركــــــــات والمؤسسات التجارية",
-    id: 2,
-  },
-  {
-    url: "/imgs/abstract/3.jpg",
-    title: "تصميم الاستراتيجيات",
-    subTitle: "تصميم الاستراتيجيات الفعالة وتطوير خطط العمــــــــل للشركــــــــات والمؤسسات التجارية",
-    id: 3,
-  },
-  {
-    url: "/imgs/abstract/4.jpg",
-    title: "تصميم الاستراتيجيات",
-    subTitle: "تصميم الاستراتيجيات الفعالة وتطوير خطط العمــــــــل للشركــــــــات والمؤسسات التجارية",
-    id: 4,
-  },
-  {
-    url: "/imgs/abstract/5.jpg",
-    title: "تصميم الاستراتيجيات",
-    subTitle: "تصميم الاستراتيجيات الفعالة وتطوير خطط العمــــــــل للشركــــــــات والمؤسسات التجارية",
-    id: 5,
-  },
-  {
-    url: "/imgs/abstract/6.jpg",
-    title: "إدارة  المشاريع",
-    subTitle: "إدارة وتشغيل المشاريع التجارية في اليمن.",
-    id: 6,
-  },
-  {
-    url: "/imgs/abstract/7.jpg",
-    title: "تصميم الاستراتيجيات",
-    subTitle: "تصميم الاستراتيجيات الفعالة وتطوير خطط العمــــــــل للشركــــــــات والمؤسسات التجارية",
-    id: 7,
-  },
-];
 
 const Card = ({ card }: any) => {
   return (
@@ -97,13 +71,13 @@ const Card = ({ card }: any) => {
         }}
         className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
       ></div>
-      <div className="absolute inset-0 z-10 grid place-content-center">
-        <div className=" text-start w-[100%] h-[50%] p-4">
-          <h1 className="text-3xl mb-6">{card.title}</h1>
-          <p className="text-xl text-[#525252]">
-            {card.subTitle}
-          </p>
-        </div>
+      <div className=" text-start w-[100%] min-h-[50%] p-4">
+        <h1 className="text-3xl mb-4  mt-14 break-words whitespace-pre-wrap">
+          {card.ar_name}
+        </h1>
+        <p className="text-xl text-[#525252] break-words whitespace-normal">
+          {card.ar_Description}
+        </p>
       </div>
     </div>
   );

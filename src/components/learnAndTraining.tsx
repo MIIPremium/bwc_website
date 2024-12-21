@@ -1,11 +1,8 @@
 import React from "react";
-import imga from "../assets/img/1706714290731.jpg";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import formattedDate from "../utilities/formattedDate";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import image2 from "../assets/img/treaningImagePlaceholder.jpg";
 import miiImage from "../assets/img/mii_brand.png";
 import premiumImage from "../assets/img/premium_brand.png";
 interface publishesDataCard {

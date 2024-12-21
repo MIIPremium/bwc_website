@@ -9,54 +9,85 @@ import {
   getFilteredRowModel,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import Label from "src/ui/label";
 import { Input } from "src/ui/input";
 import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../../ui/sheet";
+  ReportColumns,
+  ReportEnColumns,
+  type ReportColProp,
+} from "../column/report-column";
 import {
-  AddReportColumns,
-  type AddReportOrder,
-} from "../../components/column/add-report-column";
-
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "src/ui/select";
 import { OrderDataTable } from "src/ui/order-data-table";
 import { axiosInstance } from "src/lib/http";
+import { useTranslation } from "react-i18next";
+import Cookies from "js-cookie";
 // import { ReferenceResp } from "src/types/validation";
-
-export interface ReferenceProp {
+export interface ResponseReport {
   id: number;
-  ar_title: string;
-  en_title: string;
-  link: string;
+  ar_Title: string;
+  en_Title: string;
+  img: string;
+  ar_description: string;
+  en_description: string;
+  ar_executive_summary: string;
+  en_executive_summary: string;
+  ar_table_of_content: string[];
+  en_table_of_content: string[];
+  date_of_report: Date;
+  date_of_publish: Date;
+  pdfImg: string;
+  pdfFile: string;
+  an_note: string;
+  en_note: string;
+  listOfSections: any[];
 }
 
-export type ReferenceResp = {
+export interface ReportProp {
   id: number;
-  ar_title: string;
-  en_title: string;
-  link: string;
-};
-
-const reference: ReferenceProp[] = [
-  { id: 1, ar_title: "sss1", en_title: "dfgdf", link: "asdasdasd1" },
-  { id: 1, ar_title: "sss2", en_title: "dfgdf", link: "asdasdasd2" },
-  { id: 1, ar_title: "sss3", en_title: "dfgdf", link: "asdasdasd3" },
-  { id: 1, ar_title: "sss4", en_title: "dfgdf", link: "asdasdasd4" },
-  { id: 1, ar_title: "sss5", en_title: "dfgdf", link: "asdasdasd5" },
-];
+  ar_Title: string;
+  en_Title: string;
+  img: string;
+  ar_description: string;
+  en_description: string;
+  ar_executive_summary: string;
+  en_executive_summary: string;
+  ar_table_of_content: string[];
+  en_table_of_content: string[];
+  date_of_report: Date;
+  date_of_publish: Date;
+  pdfImg: string;
+  pdfFile: string;
+  an_note: string;
+  en_note: string;
+  listOfSections: any[];
+}
 export default function ReportTable() {
-  const defaultData = useMemo<AddReportOrder[]>(() => [], []);
-  const columnsMemo = useMemo(() => AddReportColumns, []);
-  const [data, setData] = useState<ReferenceProp[]>([]);
+  const AccessToken = Cookies.get("accessToken");
+  const { t, i18n } = useTranslation();
+  const dir = i18n.dir();
+  const defaultData = useMemo<ReportColProp[]>(() => [], []);
+  const columnsMemo = useMemo(() => ReportColumns, []);
+  const columnsMemos = useMemo(() => ReportEnColumns, []);
+  const [data, setData] = useState<ReportProp[]>([]);
   const fetchIssueById = async () => {
     try {
-      const response = await axiosInstance.get<ReferenceResp>(
-        `/api/References`
+      const response = await axiosInstance.get<ResponseReport>(
+        `/api/website/Reports`,
+        {
+          headers: {
+            Authorization: `Bearer ${AccessToken}`,
+          },
+        }
       );
       return [response.data];
     } catch (error) {
@@ -78,99 +109,185 @@ export default function ReportTable() {
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const table = useReactTable({
     // @ts-ignore
-    data:
-      // data.length ? data[0] :
-      defaultData,
+    data: data.length ? data[0] : defaultData,
     // @ts-ignore
-    columns: columnsMemo,
+    columns: dir === "ltr" ? columnsMemos : columnsMemo,
     state: {
       rowSelection,
       columnFilters,
+    },
+    initialState: {
+      pagination: {
+        pageSize: 5,
+      },
     },
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    sortingFns: {
+      myCustomSortingFn: (rowA, rowB, columnId) => {
+        return rowA.original[columnId] > rowB.original[columnId] ? 1 : -1;
+      },
+    },
   });
   return (
-    <div className="max-w-screen-3xl mx-auto grid grid-cols-4 gap-2 px-12">
-      <div className="col-span-4 mt-5 h-auto">
-        <div className="">
-          <div className="grid grid-cols-4 gap-2 text-right">
-            {/* Start : input Text */}
-            <div className=" col-span-1 h-auto">
-              <Label text="عنوان التقرير" />
-              <Input
-                placeholder="بحث بعنوان التقرير ..."
-                value={
-                  (table
-                    .getColumn("data.militaryNumber")
-                    ?.getFilterValue() as string) ?? ""
-                }
-                onChange={(event) =>
-                  table
-                    .getColumn("data.militaryNumber")
-                    ?.setFilterValue(event.target.value)
-                }
-              />
+    <>
+      {dir === "ltr" ? (
+        <div className="max-w-screen-3xl mx-auto grid grid-cols-4 gap-2 px-12">
+          <div className="col-span-4 mt-5 h-auto">
+            <div className="">
+              <div className="grid grid-cols-4 gap-2 text-right">
+                {/* Start : input Text */}
+                <div className="text-start col-span-1 h-auto">
+                  <Label text="Report title" />
+                  <Input
+                    placeholder="search by Report title"
+                    value={
+                      (table
+                        .getColumn("en_Title")
+                        ?.getFilterValue() as string) ?? ""
+                    }
+                    onChange={(event) =>
+                      table
+                        .getColumn("en_Title")
+                        ?.setFilterValue(event.target.value)
+                    }
+                  />
+                </div>
+                {/* End : input Text */}
+              </div>
             </div>
-            {/* End : input Text */}
-          </div>
-        </div>
-        <div className=" grid grid-cols-4 w-full  items-start gap-4 ">
-          <div className="col-span-1 ">
-            {/* <p className="">اجمالي نتائج البحث : {orders?.length ?? 0}</p> */}
-          </div>
-          <div className="col-span-3">
-            <div className="flex flex-row-reverse gap-4 ">
-              <Button
-                className="mr-2 bg-[#d4d4d4] hover:bg-white"
-                type="submit"
-                form="searchEmployee"
-              >
-                {" "}
-                فلتر بالتاريخ{" "}
-              </Button>
-              <Button
-                className="mr-2 bg-[#d4d4d4] hover:bg-white"
-                type="submit"
-                form="searchEmployee"
-              >
-                {" "}
-                فلتر الحالة{" "}
-              </Button>
-              <Button
-                className="mr-2 bg-[#d4d4d4] hover:bg-white"
-                type="submit"
-                form="searchEmployee"
-              >
-                {" "}
-                فلتر التحميل{" "}
-              </Button>
-              <Button
-                className="mr-2 bg-[#d4d4d4] hover:bg-white"
-                type="submit"
-                form="searchEmployee"
-              >
-                {" "}
-                بحث سريع{" "}
-              </Button>
-              <Link to={"/admin-dashboard/reports/add-report"}>
-                <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                  <Plus className="ml-2" />
-                  إضافة تقرير
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+            <div className=" grid grid-cols-4 w-full  items-start gap-4 ">
+              <div className="col-span-1 ">
+                {/* <p className="">اجمالي نتائج البحث : {orders?.length ?? 0}</p> */}
+              </div>
+              <div className="col-span-3">
+                <div className="flex flex-row-reverse gap-4 ">
+                  <Select
+                    dir="ltr"
+                    onValueChange={(value) => {
+                      if (value === "All") {
+                        // Remove all sorting
+                        table.setSorting([]);
+                      } else {
+                        table.setSorting([
+                          {
+                            id: "date_of_report",
+                            desc: value === "newest",
+                          },
+                        ]);
+                      }
+                    }}
+                  >
+                    <SelectTrigger className="w-[180px] bg-[#d4d4d4]">
+                      <SelectValue placeholder="Published Date Filter" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#d4d4d4]">
+                      <SelectGroup>
+                        <SelectLabel>Published Date Filter</SelectLabel>
+                        <SelectItem value="All">All</SelectItem>
+                        <SelectItem value="oldest">oldest</SelectItem>
+                        <SelectItem value="newest">newest</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
 
-      <div className="col-span-4 rounded-md">
-        {/* @ts-ignore */}
-        <OrderDataTable columns={columnsMemo} table={table} />
-      </div>
-    </div>
+                  <Link to={`/admin-dashboard/reports/add-report`}>
+                    <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                      <Plus className="mr-2" />
+                      Add Report
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-4 rounded-md">
+            {/* @ts-ignore */}
+            <OrderDataTable columns={columnsMemo} table={table} />
+          </div>
+        </div>
+      ) : (
+        <div className="max-w-screen-3xl mx-auto grid grid-cols-4 gap-2 px-12">
+          <div className="col-span-4 mt-5 h-auto">
+            <div className="">
+              <div className="grid grid-cols-4 gap-2 text-right">
+                {/* Start : input Text */}
+                <div className=" col-span-1 h-auto">
+                  <Label text="عنوان التقرير" />
+                  <Input
+                    placeholder="بحث بعنوان التقرير"
+                    value={
+                      (table
+                        .getColumn("ar_Title")
+                        ?.getFilterValue() as string) ?? ""
+                    }
+                    onChange={(event) =>
+                      table
+                        .getColumn("ar_Title")
+                        ?.setFilterValue(event.target.value)
+                    }
+                  />
+                </div>
+                {/* End : input Text */}
+              </div>
+            </div>
+            <div className=" grid grid-cols-4 w-full  items-start gap-4 ">
+              <div className="col-span-1 ">
+                {/* <p className="">اجمالي نتائج البحث : {orders?.length ?? 0}</p> */}
+              </div>
+              <div className="col-span-3">
+                <div className="flex flex-row-reverse gap-4 ">
+                  <Select
+                    dir="rtl"
+                    onValueChange={(value) => {
+                      if (value === "الجميع") {
+                        // Remove all sorting
+                        table.setSorting([]);
+                      } else {
+                        table.setSorting([
+                          {
+                            id: "date_of_report",
+                            desc: value === "الاحدث",
+                          },
+                        ]);
+                      }
+                    }}
+                  >
+                    <SelectTrigger className="w-[180px] bg-[#d4d4d4]">
+                      <SelectValue placeholder="فلتر بالتاريخ" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-[#d4d4d4]">
+                      <SelectGroup>
+                        <SelectLabel>فلتر بالتاريخ</SelectLabel>
+                        <SelectItem value="الجميع">الجميع</SelectItem>
+                        <SelectItem value="الاقدم">الاقدم</SelectItem>
+                        <SelectItem value="الاحدث">الاحدث</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+
+                  <Link to={`/admin-dashboard/reports/add-report`}>
+                    <Button className="text-md inline-flex h-10 items-center justify-center whitespace-nowrap rounded-lg bg-[#000] px-4 py-2 text-sm font-bold text-white ring-offset-background  transition-colors hover:bg-[#201f1f] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+                      <Plus className="ml-2" />
+                      اضافة تقرير
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-span-4 rounded-md">
+            {/* @ts-ignore */}
+            <OrderDataTable columns={columnsMemo} table={table} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }

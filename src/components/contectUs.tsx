@@ -1,8 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+interface FormData {
+  name: string;
+  title: string;
+  email: string;
+  details: string;
+}
+
+interface FormErrors {
+  name?: string;
+  title?: string;
+  email?: string;
+  details?: string;
+}
+
 export default function ContectUs() {
-  const { t, i18n } = useTranslation();
+  const initialFormData: FormData = {
+    name: "",
+    title: "",
+    email: "",
+    details: "",
+  };
+
+  const { i18n } = useTranslation();
   const dir = i18n.dir();
   const [widthScreen, setWidthScreen] = useState({
     winWidth: window.innerWidth,
@@ -15,7 +36,74 @@ export default function ContectUs() {
       winHight: window.innerHeight,
     });
   };
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [errors, setErrors] = useState<FormErrors>({});
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    // Clear the error message as the user types
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
+  };
+
+  const validate = (): FormErrors => {
+    const newErrors: FormErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required.";
+    }
+
+    if (!formData.title.trim()) {
+      newErrors.title = "Title is required.";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required.";
+    } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)
+    ) {
+      newErrors.email = "Invalid email address.";
+    }
+
+    if (!formData.details.trim()) {
+      newErrors.details = "Details are required.";
+    }
+
+    return newErrors;
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    const { name, title, email, details } = formData;
+    const mailtoLink = `mailto:info@bwiscompltd.com?subject=${encodeURIComponent(
+      title
+    )}&body=${encodeURIComponent(
+      `Name: ${name}\nEmail: ${email}\n\nDetails:\n${details}`
+    )}`;
+
+    window.location.href = mailtoLink;
+
+    // Reset the form fields after submission
+    setFormData(initialFormData);
+    setErrors({});
+  };
   useEffect(() => {
     window.addEventListener("resize", detectSize);
     return () => {
@@ -28,20 +116,29 @@ export default function ContectUs() {
         <div className=" w-full h-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
           <div className="flex-1 w-[100%] h-[100vh]">
             {dir === "ltr" ? (
-              <form action="" className="lg:px-10 sm:px-1 text-end">
+              <form
+                onSubmit={handleSubmit}
+                className="lg:px-10 sm:px-1 text-end"
+              >
                 <div>
                   <label className="block text-balck font-black text-lg mb-2 mt-1">
                     Name
                   </label>
                   <input
                     type="text"
-                    name=""
+                    name="name"
                     id=""
+                    value={formData.name}
+                    onChange={handleChange}
                     dir="ltr"
                     placeholder="Enter Name ... "
-                    className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white placeholder:text-start focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                    className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                      errors.name ? "border-red-500" : "border-[#CCA972]"
+                    } focus:bg-white placeholder:text-start focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                   />
-
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
                   <div>
                     <label className="block text-balck font-black text-lg mb-2 mt-1">
                       Title
@@ -49,12 +146,21 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
                       id=""
                       dir="ltr"
                       placeholder="Enter Title ..."
-                      className="w-full px-4 py-3 rounded-lg mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                      className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                        errors.title ? "border-red-500" : "border-[#CCA972]"
+                      } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                     />
+                    {errors.title && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.title}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -64,12 +170,21 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       id=""
                       dir="ltr"
                       placeholder="Email Address ..."
-                      className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                      className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                        errors.email ? "border-red-500" : "border-[#CCA972]"
+                      } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                     />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -78,17 +193,26 @@ export default function ContectUs() {
                   </label>
 
                   <textarea
-                    name=""
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
                     id=""
                     rows={10}
                     cols={40}
                     dir="ltr"
                     placeholder="Enter Details ..."
-                    className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#cca972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                    className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                      errors.details ? "border-red-500" : "border-[#CCA972]"
+                    } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                   />
+                  {errors.details && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.details}
+                    </p>
+                  )}
                 </div>
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full block mt-3 shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                 >
                   <div className="flex items-center justify-center">
@@ -97,19 +221,29 @@ export default function ContectUs() {
                 </button>
               </form>
             ) : (
-              <form action="" className="lg:px-10 sm:px-1 text-start">
+              <form
+                onSubmit={handleSubmit}
+                className="lg:px-10 sm:px-1 text-start"
+              >
                 <div>
                   <label className="block text-balck font-black text-lg mb-2 mt-1">
                     الاسم
                   </label>
                   <input
                     type="text"
-                    name=""
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
                     id=""
                     dir="rtl"
                     placeholder="ادخل الاسم ..."
-                    className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                    className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                      errors.name ? "border-red-500" : "border-[#CCA972]"
+                    } focus:bg-white placeholder:text-start focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
 
                   <div>
                     <label className="block text-balck font-black text-lg mb-2 mt-1">
@@ -118,12 +252,21 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="title"
+                      value={formData.title}
+                      onChange={handleChange}
                       id=""
                       dir="rtl"
                       placeholder="ادخل الموضوع ..."
-                      className="w-full px-4 py-3 rounded-lg mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                      className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                        errors.title ? "border-red-500" : "border-[#CCA972]"
+                      } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                     />
+                    {errors.title && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.title}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -133,12 +276,21 @@ export default function ContectUs() {
 
                     <input
                       type="text"
-                      name=""
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       id=""
                       dir="rtl"
                       placeholder="البريد الإلكتروني ..."
-                      className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                      className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                        errors.email ? "border-red-500" : "border-[#CCA972]"
+                      } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                     />
+                    {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -147,17 +299,26 @@ export default function ContectUs() {
                   </label>
 
                   <textarea
-                    name=""
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
                     id=""
                     rows={10}
                     cols={40}
                     dir="rtl"
                     placeholder="ادخل التفاصيل ..."
-                    className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#cca972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                    className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                      errors.details ? "border-red-500" : "border-[#CCA972]"
+                    } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                   />
+                  {errors.details && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.details}
+                    </p>
+                  )}
                 </div>
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full mt-3 block shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                 >
                   <div className="flex items-center justify-center">
@@ -208,19 +369,28 @@ export default function ContectUs() {
                 </div>
                 <div className="flex-1 w-[100%] h-full">
                   {dir === "ltr" ? (
-                    <form action="" className="px-10 text-end">
+                    <form onSubmit={handleSubmit} className="px-10 text-end">
                       <div>
                         <label className="block text-balck font-black text-lg mb-2 mt-1">
                           Name
                         </label>
                         <input
                           type="text"
-                          name=""
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           id=""
                           dir="ltr"
                           placeholder="Enter Name ..."
-                          className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                          className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                            errors.name ? "border-red-500" : "border-[#CCA972]"
+                          } focus:bg-white placeholder:text-start focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                         />
+                        {errors.name && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.name}
+                          </p>
+                        )}
 
                         <div>
                           <label className="block text-balck font-black text-lg mb-2 mt-1">
@@ -229,12 +399,23 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
                             id=""
                             dir="ltr"
                             placeholder="Enter Title ..."
-                            className="w-full px-4 py-3 rounded-lg mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                            className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                              errors.title
+                                ? "border-red-500"
+                                : "border-[#CCA972]"
+                            } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                           />
+                          {errors.title && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors.title}
+                            </p>
+                          )}
                         </div>
 
                         <div>
@@ -244,12 +425,23 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             id=""
                             dir="ltr"
                             placeholder="Email Address ... "
-                            className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                            className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                              errors.email
+                                ? "border-red-500"
+                                : "border-[#CCA972]"
+                            } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                           />
+                          {errors.email && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors.email}
+                            </p>
+                          )}
                         </div>
                       </div>
                       <div>
@@ -258,17 +450,28 @@ export default function ContectUs() {
                         </label>
 
                         <textarea
-                          name=""
+                          name="details"
+                          value={formData.details}
+                          onChange={handleChange}
                           id=""
                           rows={10}
                           cols={40}
                           dir="ltr"
                           placeholder="Enter Details ... "
-                          className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#cca972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                          className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                            errors.details
+                              ? "border-red-500"
+                              : "border-[#CCA972]"
+                          } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                         />
+                        {errors.details && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.details}
+                          </p>
+                        )}
                       </div>
                       <button
-                        type="button"
+                        type="submit"
                         className="w-full block mt-3 shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                       >
                         <div className="flex items-center justify-center">
@@ -277,19 +480,28 @@ export default function ContectUs() {
                       </button>
                     </form>
                   ) : (
-                    <form action="" className="px-10 text-start">
+                    <form onSubmit={handleSubmit} className="px-10 text-start">
                       <div>
                         <label className="block text-balck font-black text-lg mb-2 mt-1">
                           الاسم
                         </label>
                         <input
                           type="text"
-                          name=""
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
                           id=""
                           dir="rtl"
                           placeholder="ادخل الاسم ..."
-                          className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                          className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                            errors.name ? "border-red-500" : "border-[#CCA972]"
+                          } focus:bg-white placeholder:text-start focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                         />
+                        {errors.name && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.name}
+                          </p>
+                        )}
 
                         <div>
                           <label className="block text-balck font-black text-lg mb-2 mt-1">
@@ -298,12 +510,23 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="title"
+                            value={formData.title}
+                            onChange={handleChange}
                             id=""
                             dir="rtl"
                             placeholder="ادخل الموضوع ..."
-                            className="w-full px-4 py-3 rounded-lg mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                            className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                              errors.title
+                                ? "border-red-500"
+                                : "border-[#CCA972]"
+                            } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                           />
+                          {errors.title && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors.title}
+                            </p>
+                          )}
                         </div>
 
                         <div>
@@ -313,12 +536,23 @@ export default function ContectUs() {
 
                           <input
                             type="text"
-                            name=""
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
                             id=""
                             dir="rtl"
                             placeholder="البريد الإلكتروني ..."
-                            className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                            className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                              errors.email
+                                ? "border-red-500"
+                                : "border-[#CCA972]"
+                            } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                           />
+                          {errors.email && (
+                            <p className="text-red-500 text-sm mt-1">
+                              {errors.email}
+                            </p>
+                          )}
                         </div>
                       </div>
                       <div>
@@ -327,17 +561,28 @@ export default function ContectUs() {
                         </label>
 
                         <textarea
-                          name=""
+                          name="details"
+                          value={formData.details}
+                          onChange={handleChange}
                           id=""
                           rows={10}
                           cols={40}
                           dir="rtl"
                           placeholder="ادخل التفاصيل ..."
-                          className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#cca972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                          className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                            errors.details
+                              ? "border-red-500"
+                              : "border-[#CCA972]"
+                          } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                         />
+                        {errors.details && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.details}
+                          </p>
+                        )}
                       </div>
                       <button
-                        type="button"
+                        type="submit"
                         className="w-full block shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                       >
                         <div className="flex items-center justify-center">
@@ -353,19 +598,28 @@ export default function ContectUs() {
             <>
               <div className=" w-full h-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2">
                 <div className="flex-1 w-[100%] h-full">
-                  <form action="" className="px-10 text-start">
+                  <form onSubmit={handleSubmit} className="px-10 text-start">
                     <div>
                       <label className="block text-balck font-black text-lg mb-2 mt-1">
                         الاسم
                       </label>
                       <input
                         type="text"
-                        name=""
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
                         id=""
                         dir="lrt"
                         placeholder="ادخل الاسم ..."
-                        className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                        className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                          errors.name ? "border-red-500" : "border-[#CCA972]"
+                        } focus:bg-white placeholder:text-start focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                       />
+                      {errors.name && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.name}
+                        </p>
+                      )}
 
                       <div>
                         <label className="block text-balck font-black text-lg mb-2 mt-1">
@@ -374,12 +628,21 @@ export default function ContectUs() {
 
                         <input
                           type="text"
-                          name=""
+                          name="title"
+                          value={formData.title}
+                          onChange={handleChange}
                           id=""
                           dir="lrt"
                           placeholder="ادخل الموضوع ..."
-                          className="w-full px-4 py-3 rounded-lg mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                          className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                            errors.title ? "border-red-500" : "border-[#CCA972]"
+                          } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                         />
+                        {errors.title && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.title}
+                          </p>
+                        )}
                       </div>
 
                       <div>
@@ -389,12 +652,21 @@ export default function ContectUs() {
 
                         <input
                           type="text"
-                          name=""
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
                           id=""
                           dir="lrt"
                           placeholder="البريد الإلكتروني ... "
-                          className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#CCA972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                          className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                            errors.email ? "border-red-500" : "border-[#CCA972]"
+                          } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                         />
+                        {errors.email && (
+                          <p className="text-red-500 text-sm mt-1">
+                            {errors.email}
+                          </p>
+                        )}
                       </div>
                     </div>
                     <div>
@@ -403,17 +675,26 @@ export default function ContectUs() {
                       </label>
 
                       <textarea
-                        name=""
+                        name="details"
+                        value={formData.details}
+                        onChange={handleChange}
                         id=""
                         rows={10}
                         cols={40}
                         dir="lrt"
                         placeholder="التفاصيل ... "
-                        className="w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 border-[#cca972] focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]"
+                        className={`w-full px-4 py-3 rounded-lg bg-white mt-2 border-2 ${
+                          errors.details ? "border-red-500" : "border-[#CCA972]"
+                        } focus:bg-white focus:outline-none focus:text-[#818080] placeholder:text-[#818080]`}
                       />
+                      {errors.details && (
+                        <p className="text-red-500 text-sm mt-1">
+                          {errors.details}
+                        </p>
+                      )}
                     </div>
                     <button
-                      type="button"
+                      type="submit"
                       className="w-full block mt-3 shadow-[0_05px_20px_5px_rgba(204,169,114,0.3)] bg-black hover:bg-[#cca972] focus:bg-gray-100 text font-semibold rounded-lg px-4 py-3 outline-2 outline-gray-500"
                     >
                       <div className="flex items-center justify-center">

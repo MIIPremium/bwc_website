@@ -1,27 +1,9 @@
 import { type ColumnDef } from "@tanstack/react-table";
-import { Eye, MoreHorizontal } from "lucide-react";
+import { Eye } from "lucide-react";
 import { Button } from "../../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
-import { SquarePen, Trash2 } from "lucide-react";
-import { Checkbox } from "../../ui/checkbox";
-
-import { type z } from "zod";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../../ui/sheet";
 import DeleteDialog from "../dailog/delete-dialog";
 import { Link } from "react-router-dom";
+import EditIcon from "src/assets/icons/edit-icon";
 
 export type AddReportOrder = {
   isSelected: boolean;
@@ -31,31 +13,6 @@ export type AddReportOrder = {
 };
 
 export const AddReportColumns: ColumnDef<AddReportOrder>[] = [
-  {
-    accessorKey: "isSelected",
-    header: ({ table }) => (
-      <Checkbox
-        className="m-2"
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        className="m-2"
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => {
-          row.toggleSelected(!!value);
-        }}
-        aria-label="Select row"
-      />
-    ),
-  },
-
   {
     id: "ar_title",
     accessorKey: "ar_title",
@@ -90,7 +47,7 @@ export const AddReportColumns: ColumnDef<AddReportOrder>[] = [
               className="bg-[#d5ae78] text-white ml-3 rounded-lg"
               size={"sm"}
             >
-              <SquarePen className="" />
+              <EditIcon />
             </Button>
           </Link>
           <Link to={`/admin-dashboard/reports/info`}>

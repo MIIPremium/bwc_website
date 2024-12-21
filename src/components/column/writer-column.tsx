@@ -1,27 +1,10 @@
 import { type ColumnDef } from "@tanstack/react-table";
 import { Eye, MoreHorizontal } from "lucide-react";
 import { Button } from "../../ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
-import { SquarePen, Trash2 } from "lucide-react";
-import { Checkbox } from "../../ui/checkbox";
-
-import { type z } from "zod";
-
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "../../ui/sheet";
 import DeleteDialog from "../dailog/delete-dialog";
 import { Link } from "react-router-dom";
+import EditIcon from "src/assets/icons/edit-icon";
+import Tooltip from "src/ui/tooltap";
 
 export type AddWriterOrder = {
   isSelected: boolean;
@@ -29,37 +12,19 @@ export type AddWriterOrder = {
   ar_fullName: string;
   en_fullName: string;
   image: string;
-  ar_description: string;
-  en_description: string;
+  no_of_publication: number;
   ar_role: string;
   en_role: string;
 };
 
+export interface Soicalmedia {
+  id: number;
+  name: string;
+  url: string;
+  writerId: number;
+  writer: null;
+}
 export const AddWriterColumns: ColumnDef<AddWriterOrder>[] = [
-  {
-    accessorKey: "isSelected",
-    header: ({ table }) => (
-      <Checkbox
-        className="m-2"
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        className="m-2"
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => {
-          row.toggleSelected(!!value);
-        }}
-        aria-label="Select row"
-      />
-    ),
-  },
   {
     accessorKey: "image",
     header: "ص",
@@ -67,7 +32,7 @@ export const AddWriterColumns: ColumnDef<AddWriterOrder>[] = [
       return (
         <div className=" w-[50px] h-[50px] rounded-full">
           <img
-            src="https://mahfoudsabbah-001-site2.jtempurl.com/uploads/profileImages/c7a39e56-0386-458c-801b-528904db9191.png"
+            src={row.original.image}
             className="w-full h-full object-cover"
             alt=""
           />
@@ -79,42 +44,162 @@ export const AddWriterColumns: ColumnDef<AddWriterOrder>[] = [
     id: "ar_fullName",
     accessorKey: "ar_fullName",
     header: "الاسم الكامل",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_fullName}
+        </p>
+      );
+    },
   },
 
   {
+    accessorKey: "no_of_publication",
+    header: "عدد المنشورات",
+  },
+  {
     accessorKey: "ar_role",
     header: "المسمى الوظيفي",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.ar_role}
+        </p>
+      );
+    },
   },
 
   {
     id: "actions",
+    header: "الإعدادات",
     cell: ({ row }) => {
-      //   const { data: session } = useSession();
-
       return (
-        <div className="flex justify-center ">
+        <div className="flex justify-start ">
           <Link
             to={`/admin-dashboard/writer/update-writer/${row.original?.id}`}
           >
-            <Button
-              className="bg-[#d5ae78] text-white ml-3 rounded-lg"
-              size={"sm"}
-            >
-              <SquarePen className="" />
-            </Button>
+            <Tooltip text="تعديل">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+              >
+                <EditIcon />
+              </Button>
+            </Tooltip>
           </Link>
           <Link to={`/admin-dashboard/writer/info/${row.original?.id}`}>
-            <Button
-              className="bg-[#d5ae78] text-white ml-3 rounded-lg"
-              size={"sm"}
-            >
-              <Eye className="" />
-            </Button>
+            <Tooltip text="عرض">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+              >
+                <Eye className="" />
+              </Button>
+            </Tooltip>
           </Link>
-          <DeleteDialog
-            url={`/api/Writers/${row.original?.id}`}
-            path={"/admin-dashboard/writer"}
+          <Tooltip text="حذف">
+            <DeleteDialog
+              url={`/api/Writers/${row.original?.id}`}
+              path={"/admin-dashboard/writer"}
+            />
+          </Tooltip>
+        </div>
+      );
+    },
+  },
+];
+export const AddEnWriterColumns: ColumnDef<AddWriterOrder>[] = [
+  {
+    accessorKey: "image",
+    header: "image",
+    cell: ({ row }) => {
+      return (
+        <div className=" w-[50px] h-[50px] rounded-full">
+          <img
+            src={row.original.image}
+            className="w-full h-full object-cover"
+            alt=""
           />
+        </div>
+      );
+    },
+  },
+  {
+    id: "en_fullName",
+    accessorKey: "en_fullName",
+    header: "full name",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_fullName}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "no_of_publication",
+    header: "number of publishes",
+  },
+  {
+    accessorKey: "en_role",
+    header: "role",
+    cell: ({ row }) => {
+      return (
+        <p
+          className="whitespace-nowrap overflow-hidden text-ellipsis"
+          style={{ maxWidth: "20ch" }}
+        >
+          {row.original.en_role}
+        </p>
+      );
+    },
+  },
+
+  {
+    id: "actions",
+    header: "settings",
+    cell: ({ row }) => {
+      return (
+        <div className="flex justify-start ">
+          <Link
+            to={`/admin-dashboard/writer/update-writer/${row.original?.id}`}
+          >
+            <Tooltip text="Edit">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+                title="Edit"
+                aria-label="Edit"
+              >
+                <EditIcon />
+              </Button>
+            </Tooltip>
+          </Link>
+          <Link to={`/admin-dashboard/writer/info/${row.original?.id}`}>
+            <Tooltip text="view">
+              <Button
+                className="bg-[#d5ae78] text-white ml-3 rounded-lg"
+                size={"sm"}
+              >
+                <Eye className="" />
+              </Button>
+            </Tooltip>
+          </Link>
+          <Tooltip text="delete">
+            <DeleteDialog
+              url={`/api/Writers/${row.original?.id}`}
+              path={"/admin-dashboard/writer"}
+            />
+          </Tooltip>
         </div>
       );
     },

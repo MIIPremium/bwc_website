@@ -42,30 +42,30 @@ export default function Footer() {
                   {t("footerLink1")}
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
-                  <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                  {/* <li className="mb-4">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks")}
-                    </Link>
-                  </li>
+                    </a>
+                  </li> */}
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks1")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks2")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks3")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks4")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -75,35 +75,35 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline ">
+                    <a href="all-publishes" className="hover:underline ">
                       {t("Publications1")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications2")}
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications3")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink3")}
+                  <a href="/about-us">{t("footerLink3")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink4")}
+                  <a href="/all-Reports">{t("footerLink4")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink5")}
+                  <a href="/archives">{t("footerLink5")}</a>
                 </h2>
               </div>
             </div>
@@ -115,7 +115,7 @@ export default function Footer() {
                   <FaLinkedinIn size={24} />
                 </Link>
               </li>
-              <li>
+              <li className={`${dir === "ltr" ? "-translate-x-[1px]" :"translate-x-1"}`}>
                 <Link
                   target="_blank"
                   to="https://www.facebook.com/bwiscompltd/"
@@ -152,11 +152,11 @@ export default function Footer() {
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-[#BA8D30] lg:my-8" />
           <div className=" text-sm text-gray-500 sm:text-start dark:text-gray-400 sm:mt-10">
             <div className=" w-[100%] sm:mb-5  text-end">
-              <Link to={`/privacy-policy`} className=" sm:block sm:mb-5">
+              <a href={`/privacy-policy`} className=" sm:block sm:mb-5">
                 {t("policy_privacy")}
-              </Link>
-              <Link
-                to={`/terms-of-use`}
+              </a>
+              <a
+                href={`/terms-of-use`}
                 className={
                   dir === "ltr"
                     ? "ml-2 sm:ml-0 sm:block sm:mt-5"
@@ -164,7 +164,7 @@ export default function Footer() {
                 }
               >
                 {t("terms_of_use")}
-              </Link>
+              </a>
             </div>
 
             <div className="w-[100%] sm:mb-5 text-end sm:mt-2">
@@ -190,7 +190,7 @@ export default function Footer() {
                     <FaLinkedinIn size={23} />
                   </Link>
                 </li>
-                <li>
+                <li className={`${dir === "ltr" ? "-translate-x-[2px]" : "translate-x-1" }`}>
                   <Link
                     target="_blank"
                     to="https://www.facebook.com/bwiscompltd/"
@@ -231,17 +231,17 @@ export default function Footer() {
             <div className="grid grid-cols-2 gap-1 sm:gap-6 text-end sm:grid-cols-5 h-[35vh]">
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink5")}
+                  <a href="/archives">{t("footerLink5")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink4")}
+                  <a href="/all-Reports">{t("footerLink4")}</a>
                 </h2>
               </div>
               <div>
                 <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">
-                  {t("footerLink3")}
+                  <a href="/about-us">{t("footerLink3")}</a>
                 </h2>
               </div>
               <div>
@@ -250,19 +250,19 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline ">
+                    <a href="all-publishes" className="hover:underline ">
                       {t("Publications1")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications2")}
-                    </Link>
+                    </a>
                   </li>
                   <li>
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/all-publishes" className="hover:underline">
                       {t("Publications3")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -272,29 +272,29 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks")}
-                    </Link>
+                    </a>
                   </li>
-                  <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                  {/* <li className="mb-4">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks1")}
-                    </Link>
-                  </li>
+                    </a>
+                  </li> */}
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks2")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks3")}
-                    </Link>
+                    </a>
                   </li>
                   <li className="mb-4">
-                    <Link to="/InProucation" className="hover:underline">
+                    <a href="/departments"  className="hover:underline">
                       {t("departmentLinks4")}
-                    </Link>
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -303,15 +303,15 @@ export default function Footer() {
           <hr className="my-6 border-gray-200 sm:mx-auto dark:border-[#BA8D30] lg:my-8" />
           <div className="flex items-center justify-between text-sm text-gray-500 sm:text-center dark:text-gray-400">
             <div className=" w-[35%] text-start">
-              <Link to={`/privacy-policy`} className="">
+              <a href={`/privacy-policy`} className="">
                 {t("policy_privacy")}
-              </Link>
-              <Link
-                to={`/terms-of-use`}
+              </a>
+              <a
+                href={`/terms-of-use`}
                 className={dir === "ltr" ? "ml-2" : "mr-2"}
               >
                 {t("terms_of_use")}
-              </Link>
+              </a>
             </div>
             <div className="w-[30%] ">
               <img src={LogoWhite} alt="" className="m-auto" />
