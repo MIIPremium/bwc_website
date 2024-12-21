@@ -4,12 +4,11 @@ import axios, { AxiosRequestConfig } from "axios";
 
 export const axiosInstance = axios.create({
   // baseURL: "https://localhost:7157",
-  baseURL: "https://bwc-api-testing.runasp.net",
+  // baseURL: "https://bwc-api-testing.runasp.net",
+  baseURL: "https://bwc.runasp.net",
 });
 
 type Config = AxiosRequestConfig<unknown> | undefined;
-
-
 
 export function getApi<T>(url: string, config?: Config) {
   // if (isAuth()) return
@@ -21,8 +20,6 @@ export function putApi<T>(url: string, data: unknown, config?: Config) {
 }
 
 export function postApi<T>(url: string, data: unknown, config?: Config) {
-  
-  
   return axiosInstance.post<T>(url, data, config);
 }
 

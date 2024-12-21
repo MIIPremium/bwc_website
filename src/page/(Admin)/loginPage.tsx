@@ -30,7 +30,7 @@ export default function LoginPage() {
     try {
       // إرسال طلب تسجيل الدخول
       const response = await axios.post(
-        "https://bwc-api-testing.runasp.net/login",
+        "https://bwc.runasp.net/login",
         {
           email: "hamoud@gmail.com",
           password: loginPassword,

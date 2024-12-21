@@ -26,7 +26,7 @@ const HorizontalScrollCarousel = () => {
   } = useQuery<ServicesHomeProp[]>({
     queryFn: () =>
       fetch(
-        "https://bwc-api-testing.runasp.net/api/website/Home/Services"
+        "https://bwc.runasp.net/api/website/Home/Services"
       ).then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch services");
