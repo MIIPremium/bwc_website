@@ -599,7 +599,7 @@ function App() {
         <div className="w-full h-8 mt-16 flex justify-center items-center ">
           <Link
             target="_blank"
-            to={"/about-us"}
+            to={"/departments"}
             className="text-3xl text-[#CCA972]"
           >
             {t("showMore")}

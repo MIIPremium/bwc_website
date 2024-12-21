@@ -92,7 +92,7 @@ export default function ContectUs() {
     }
 
     const { name, title, email, details } = formData;
-    const mailtoLink = `mailto:hamod2131.a@gmail.com?subject=${encodeURIComponent(
+    const mailtoLink = `mailto:info@bwiscompltd.com?subject=${encodeURIComponent(
       title
     )}&body=${encodeURIComponent(
       `Name: ${name}\nEmail: ${email}\n\nDetails:\n${details}`
