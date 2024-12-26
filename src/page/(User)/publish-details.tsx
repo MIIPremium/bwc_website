@@ -347,7 +347,7 @@ export default function PublishDetails() {
                       className="flex items-center px-4 py-2 relative bg-white rounded hover:bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-gray-400"
                     >
                       <span>
-                        {isOpen ? "Hide references" : "Show References"}
+                        {isOpen ? "hide references" : "show references"}
                       </span>
                       <span className="mr-2 transform transition-transform">
                         {isOpen ? "▲" : "▼"}

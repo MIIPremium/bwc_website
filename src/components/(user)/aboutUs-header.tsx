@@ -56,7 +56,7 @@ export default function AboutUsHeader() {
                     />
                   </div>
                 </div>
-                <div className="h-full w-full">
+                <div className="h-full w-full ">
                   <div>
                     <div className="flex items-start justify-end py-16">
                       <h1 className="text-3xl font-extrabold">
@@ -66,23 +66,25 @@ export default function AboutUsHeader() {
                     </div>
                     <div dir="ltr" className="text-start">
                       <p className="  text-[#5B5B5B] leading-7">
-                        Business World is a national limited liability company.
-                        It was founded by Dr. Rabi Ben Ali al-Awabthani in the
-                        city of Mukalla and Hadramawt in March 2021 .
+                        Business World Company Ltd. for Investment and Studies
+                        is a national limited company which has been founded by
+                        Dr. Rabea Ali Al-Awbathani in Mukalla in March 2021.
                       </p>
                       <p className="  mt-8 text-[#5B5B5B] leading-8">
-                        It manages and operates projects, works and conducts
-                        economic studies, administrative, financial and
-                        marketing consulting, IT solutions and quality systems,
-                        and provides its services through a group of specialized
-                        experts and consultants who work for the company and
-                        another group of contracting experts and consultants.
+                        The company specializes in managing and running
+                        projects, conducting economic studies, and providing
+                        management, financial, and marketing consulting
+                        services, as well as information technology solutions
+                        and quality systems. Our services are delivered by a
+                        team of specialized experts and consultants employed by
+                        the company, along with a network of contracted
+                        professionals
                       </p>
                     </div>
-                    <div className="grid grid-cols-3 gap-2 mt-6">
-                      <div className=" flex justify-start items-center translate-x-1">
-                        <p className="text-lg">{t("our_mission")}</p>
-                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
+                    <div className="grid grid-cols-3 gap-2  my-6 ">
+                      <div className=" flex justify-start items-center translate-x-3">
+                        <p className="text-base">{t("our_mission")}</p>
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2 translate-x-2">
                           <TbDeviceAnalytics
                             color="white"
                             size={60}
@@ -91,15 +93,15 @@ export default function AboutUsHeader() {
                         </span>
                       </div>
 
-                      <div className=" flex justify-start items-center translate-x-1">
-                        <p className="text-lg">{t("our_goals")}</p>
-                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
+                      <div className=" flex justify-start items-center translate-x-5">
+                        <p className="text-base">{t("our_goals")}</p>
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2 translate-x-2">
                           <Target color="white" size={50} className="p-1" />
                         </span>
                       </div>
-                      <div className=" flex justify-start items-center -translate-x-4">
-                        <p className="text-lg">{t("our_message")}</p>
-                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2">
+                      <div className=" flex justify-start items-center translate-x-4">
+                        <p className="text-base">{t("our_message")}</p>
+                        <span className=" w-[50px] h-[50px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-2 ">
                           <PiHandshakeThin
                             color="white"
                             size={60}
@@ -222,20 +224,22 @@ export default function AboutUsHeader() {
                         dir="ltr"
                         className="text-start text-[#5B5B5B] leading-7"
                       >
-                        Business World is a national limited liability company.
-                        It was founded by Dr. Rabi Ben Ali al-Awabthani in the
-                        city of Mukalla and Hadramawt in March 2021 .
+                        Business World Company Ltd. for Investment and Studies
+                        is a national limited company which has been founded by
+                        Dr. Rabea Ali Al-Awbathani in Mukalla in March 2021.
                       </p>
                       <p
                         dir="ltr"
                         className="text-start  mt-8 text-[#5B5B5B] leading-8"
                       >
-                        It manages and operates projects, works and conducts
-                        economic studies, administrative, financial and
-                        marketing consulting, IT solutions and quality systems,
-                        and provides its services through a group of specialized
-                        experts and consultants who work for the company and
-                        another group of contracting experts and consultants.
+                        The company specializes in managing and running
+                        projects, conducting economic studies, and providing
+                        management, financial, and marketing consulting
+                        services, as well as information technology solutions
+                        and quality systems. Our services are delivered by a
+                        team of specialized experts and consultants employed by
+                        the company, along with a network of contracted
+                        professionals
                       </p>
                     </div>
                     <div className="grid grid-cols-3 mt-6">
@@ -363,27 +367,30 @@ export default function AboutUsHeader() {
                           dir="ltr"
                           className="text-start  text-[#5B5B5B] leading-7"
                         >
-                          Business World is a national limited liability
-                          company. It was founded by Dr. Rabi Ben Ali
-                          al-Awabthani in the city of Mukalla and Hadramawt in
-                          March 2021 .
+                          Business World Company Ltd. for Investment and Studies
+                          is a national limited company which has been founded
+                          by Dr. Rabea Ali Al-Awbathani in Mukalla in March
+                          2021.
                         </p>
                         <p
                           dir="ltr"
                           className="text-start  mt-8 text-[#5B5B5B] leading-8"
                         >
-                          It manages and operates projects, works and conducts
-                          economic studies, administrative, financial and
-                          marketing consulting, IT solutions and quality
-                          systems, and provides its services through a group of
-                          specialized experts and consultants who work for the
-                          company and another group of contracting experts and
-                          consultants.
+                          The company specializes in managing and running
+                          projects, conducting economic studies, and providing
+                          management, financial, and marketing consulting
+                          services, as well as information technology solutions
+                          and quality systems. Our services are delivered by a
+                          team of specialized experts and consultants employed
+                          by the company, along with a network of contracted
+                          professionals
                         </p>
                       </div>
                       <div className="grid grid-cols-3 mt-6">
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
-                          <p className="text-3xl">{t("our_message")}</p>
+                          <p className="text-lg font-medium">
+                            {t("our_message")}
+                          </p>
                           <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                             <PiHandshakeThin
                               color="white"
@@ -394,13 +401,17 @@ export default function AboutUsHeader() {
                         </div>
 
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
-                          <p className="text-3xl">{t("our_goals")}</p>
+                          <p className="text-lg font-medium">
+                            {t("our_goals")}
+                          </p>
                           <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                             <Target size={80} color="white" />
                           </span>
                         </div>
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
-                          <p className="text-3xl">{t("our_mission")}</p>
+                          <p className="text-lg font-medium">
+                            {t("our_mission")}
+                          </p>
                           <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center mr-4">
                             <TbDeviceAnalytics
                               color="white"
@@ -477,30 +488,36 @@ export default function AboutUsHeader() {
                       </div>
                       <div className="grid grid-cols-3 mt-6">
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
-                          <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
+                          <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
                             <TbDeviceAnalytics
                               color="white"
-                              size={80}
+                              size={60}
                               className="p-1"
                             />
                           </span>
-                          <p className="text-3xl">{t("our_mission")}</p>
+                          <p className="text-lg font-medium">
+                            {t("our_mission")}
+                          </p>
                         </div>
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
-                          <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
-                            <Target size={80} color="white" />
+                          <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
+                            <Target size={60} color="white" />
                           </span>
-                          <p className="text-3xl">{t("our_goals")}</p>
+                          <p className="text-lg font-medium">
+                            {t("our_goals")}
+                          </p>
                         </div>
                         <div className="w-[95%] h-[100px] flex justify-center items-center">
-                          <span className=" w-[100px] h-[100px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
+                          <span className=" w-[70px] h-[70px] rounded-full bg-gradient-to-r from-[#997740] to-[#CCA972] flex justify-center items-center ml-4">
                             <PiHandshakeThin
                               color="white"
                               size={80}
                               className="p-1"
                             />
                           </span>
-                          <p className="text-3xl">{t("our_message")}</p>
+                          <p className="text-lg font-medium">
+                            {t("our_message")}
+                          </p>
                         </div>
                       </div>
                     </div>
