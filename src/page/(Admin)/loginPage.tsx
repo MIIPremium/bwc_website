@@ -32,7 +32,7 @@ export default function LoginPage() {
       const response = await axios.post(
         "https://bwc.runasp.net/login",
         {
-          email: "hamoud@gmail.com",
+          email: "sa.awbathani@gmail.com",
           password: loginPassword,
         },
         { headers: { "X-Requested-With": "XMLHttpRequest" } }

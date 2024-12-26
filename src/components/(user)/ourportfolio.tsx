@@ -15,8 +15,7 @@ export default function OurPortfolio() {
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href =
-      "https://bwc.runasp.net/api/website/Home/DownloadProfileFile";
+    link.href = "https://bwc.runasp.net/api/website/Home/DownloadProfileFile";
     link.download = "Business World Company Profile 2024.pdf";
     link.click();
   };
@@ -44,10 +43,8 @@ export default function OurPortfolio() {
                   </div>
                   <div className="flex justify-center items-start h-full w-[90%] m-auto">
                     <p className="text-lg text-center text-white">
-                      Business World Investment & Studies Co. Ltd is a
-                      specialized and leading company in managing and operating
-                      investment projects and providing high quality management
-                      studies and consulting in Hadhramaut
+                      The Reliable Gateway for Investment and Project Management
+                      in Yemen
                     </p>
                   </div>
                   <div className="flex justify-center items-start">
@@ -82,10 +79,7 @@ export default function OurPortfolio() {
                   </div>
                   <div className="flex justify-center items-start h-full w-[90%] m-auto">
                     <p className="text-md text-center text-white">
-                      شركة عالم الأعمال للاستثمار والدراسات المحدودة الشركة
-                      المتخصصة والرائدة في إدارة وتشغيل المشاريع الاستثمارية
-                      وتقديم الدراسات والاستشارات الإدارية ذات الجودة العالية في
-                      حضرموت
+                      البوابة الموثوقة للاستثمار وإدارة المشاريع في اليمن
                     </p>
                   </div>
                   <div className="flex justify-center items-start">
@@ -125,10 +119,8 @@ export default function OurPortfolio() {
                   </div>
                   <div className="flex justify-center items-start h-full w-[90%] m-auto">
                     <p className="text-xl text-center text-white">
-                      Business World Investment & Studies Co. Ltd is a
-                      specialized and leading company in managing and operating
-                      investment projects and providing high quality management
-                      studies and consulting in Hadhramaut
+                      The Reliable Gateway for Investment and Project Management
+                      in Yemen
                     </p>
                   </div>
                   <div className="flex justify-center items-start">
@@ -163,10 +155,7 @@ export default function OurPortfolio() {
                   </div>
                   <div className="flex justify-center items-start h-full w-[90%] m-auto">
                     <p className="text-xl text-center text-white">
-                      شركة عالم الأعمال للاستثمار والدراسات المحدودة الشركة
-                      المتخصصة والرائدة في إدارة وتشغيل المشاريع الاستثمارية
-                      وتقديم الدراسات والاستشارات الإدارية ذات الجودة العالية في
-                      حضرموت
+                      البوابة الموثوقة للاستثمار وإدارة المشاريع في اليمن
                     </p>
                   </div>
                   <div className="flex justify-center items-start">
@@ -206,10 +195,8 @@ export default function OurPortfolio() {
                   </div>
                   <div className="flex justify-center items-start h-full w-[90%] m-auto">
                     <p className="text-xl text-center text-white">
-                      Business World Investment & Studies Co. Ltd is a
-                      specialized and leading company in managing and operating
-                      investment projects and providing high quality management
-                      studies and consulting in Hadhramaut
+                      The Reliable Gateway for Investment and Project Management
+                      in Yemen
                     </p>
                   </div>
                   <div className="flex justify-center items-start">
@@ -244,10 +231,7 @@ export default function OurPortfolio() {
                   </div>
                   <div className="flex justify-center items-start h-full w-[90%] m-auto">
                     <p className="text-xl text-center text-white">
-                      شركة عالم الأعمال للاستثمار والدراسات المحدودة الشركة
-                      المتخصصة والرائدة في إدارة وتشغيل المشاريع الاستثمارية
-                      وتقديم الدراسات والاستشارات الإدارية ذات الجودة العالية في
-                      حضرموت
+                      البوابة الموثوقة للاستثمار وإدارة المشاريع في اليمن
                     </p>
                   </div>
                   <div className="flex justify-center items-start">

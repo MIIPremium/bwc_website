@@ -166,6 +166,7 @@ export default function PublishesCards() {
   const { i18n } = useTranslation();
   const dir = i18n.dir();
   const [data, setData] = useState<LastPubRespHome[]>([]);
+  // console.log("🚀 ~ PublishesCards ~ data:", data);
   const fetchIssueById = async () => {
     try {
       const response = await axiosInstance.get<LastPubRespHomeProp>(
@@ -174,7 +175,7 @@ export default function PublishesCards() {
       return response.data;
     } catch (error) {
       console.error("Error fetching issue:", error);
-      throw error;
+      // throw ;
     }
   };
 

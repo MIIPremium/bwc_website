@@ -39,9 +39,7 @@ function App() {
     error,
   } = useQuery<ServicesHomeProp[]>({
     queryFn: () =>
-      fetch(
-        "https://bwc.runasp.net/api/website/Home/Services"
-      ).then((res) => {
+      fetch("https://bwc.runasp.net/api/website/Home/Services").then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch services");
         }
@@ -49,6 +47,7 @@ function App() {
       }),
     queryKey: ["services"], // Unique key for this query
   });
+
 
   const { t, i18n } = useTranslation();
   const dir = i18n.dir();
@@ -203,20 +202,21 @@ function App() {
               {dir === "ltr" ? (
                 <div className="text-end">
                   <p dir="ltr" className="text-start text-[#5B5B5B] leading-7">
-                    Business World is a national limited liability company. It
-                    was founded by Dr. Rabi Ben Ali al-Awabthani in the city of
-                    Mukalla and Hadramawt in March 2021 .
+                    Business World Company Ltd. for Investment and Studies is a
+                    national limited company which has been founded by Dr. Rabea
+                    Ali Al-Awbathani in Mukalla in March 2021.
                   </p>
                   <p
                     dir="ltr"
                     className="text-start mt-6 text-[#5B5B5B] leading-8"
                   >
-                    It manages and operates projects, works and conducts
-                    economic studies, administrative, financial and marketing
-                    consulting, IT solutions and quality systems, and provides
-                    its services through a group of specialized experts and
-                    consultants who work for the company and another group of
-                    contracting experts and consultants.
+                    The company specializes in managing and running projects,
+                    conducting economic studies, and providing management,
+                    financial, and marketing consulting services, as well as
+                    information technology solutions and quality systems. Our
+                    services are delivered by a team of specialized experts and
+                    consultants employed by the company, along with a network of
+                    contracted professionals
                   </p>
                 </div>
               ) : (
@@ -359,20 +359,21 @@ function App() {
                       dir="ltr"
                       className="text-start  text-[#5B5B5B] leading-7"
                     >
-                      Business World is a national limited liability company. It
-                      was founded by Dr. Rabi Ben Ali al-Awabthani in the city
-                      of Mukalla and Hadramawt in March 2021 .
+                      Business World Company Ltd. for Investment and Studies is
+                      a national limited company which has been founded by Dr.
+                      Rabea Ali Al-Awbathani in Mukalla in March 2021.
                     </p>
                     <p
                       dir="ltr"
                       className="text-start  mt-6 text-[#5B5B5B] leading-8"
                     >
-                      It manages and operates projects, works and conducts
-                      economic studies, administrative, financial and marketing
-                      consulting, IT solutions and quality systems, and provides
-                      its services through a group of specialized experts and
-                      consultants who work for the company and another group of
-                      contracting experts and consultants.
+                      The company specializes in managing and running projects,
+                      conducting economic studies, and providing management,
+                      financial, and marketing consulting services, as well as
+                      information technology solutions and quality systems. Our
+                      services are delivered by a team of specialized experts
+                      and consultants employed by the company, along with a
+                      network of contracted professionals
                     </p>
                   </div>
                   <div className="flex justify-end mt-10">

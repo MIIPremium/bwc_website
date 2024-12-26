@@ -192,7 +192,7 @@ const PublicationPage = () => {
             <div className=" grid grid-cols-3 gap-3">
               <div dir="ltr" className=" col-span-3 md:col-span-1">
                 <div className="p-3 bg-[#D5AE78] rounded-[8px] text-start">
-                  <h1 className="font-bold">Read also in publications</h1>
+                  <h1 className="font-bold">Discover more</h1>
                 </div>
 
                 <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
@@ -234,7 +234,7 @@ const PublicationPage = () => {
               <div className="col-span-4 md:col-span-1 flex justify-between gap-4">
                 <Select dir="ltr" onValueChange={handleAscendingChange}>
                   <SelectTrigger className="w-[48%] rounded-lg border-2 border-gray-300 px-4 py-2 text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    <SelectValue placeholder="Sorting by date" />
+                    <SelectValue placeholder="sorting by date" />
                   </SelectTrigger>
                   <SelectContent className="bg-white">
                     <SelectItem value="newest">newest</SelectItem>
@@ -251,7 +251,7 @@ const PublicationPage = () => {
                   </SelectTrigger>
                   <SelectContent className="bg-white">
                     <SelectItem value="all">All</SelectItem>
-                    <SelectItem value="publish">publish</SelectItem>
+                    <SelectItem value="publish">posts</SelectItem>
                     <SelectItem value="news">news</SelectItem>
                     <SelectItem value="analysis">analysis</SelectItem>
                   </SelectContent>
@@ -355,7 +355,7 @@ const PublicationPage = () => {
                           target="_blank"
                         >
                           <button className="bg-[#E3E3E3] hover:bg-[#c3c3c3] text-center w-full mt-6 py-3 rounded-md">
-                            Read More ...
+                            read more ...
                           </button>
                         </Link>
                       </div>
