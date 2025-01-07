@@ -91,8 +91,7 @@ export default function TaskForce() {
       );
       return response.data; // Ensure this returns OrgProp[]
     } catch (error) {
-      console.error("Error fetching issue:", error);
-      throw error;
+      console.error("Error TaskForce fetching issue:", error);
     }
   };
 
