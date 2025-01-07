@@ -174,7 +174,7 @@ export default function PublishesCards() {
       );
       return response.data;
     } catch (error) {
-      console.error("Error fetching issue:", error);
+      console.error("Error fetching LastPublications issue:", error);
       // throw ;
     }
   };

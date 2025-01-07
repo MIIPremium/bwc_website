@@ -9,8 +9,6 @@ interface publishesDataCard {
   img: string;
 }
 
-
-
 export interface OrgProp {
   id: number;
   name: string;
@@ -26,7 +24,7 @@ export default function OurOrgnaztion() {
       );
       return response.data;
     } catch (error) {
-      console.error("Error fetching issue:", error);
+      console.error("Error fetching OrgUndBWC issue:", error);
       throw error;
     }
   };
