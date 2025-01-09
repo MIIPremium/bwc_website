@@ -453,6 +453,7 @@ opacity: 1;
 .slide img {
   aspect-ratio: 16/9;
   transition: opacity 0.3 ease;
+  object-fit:cover;
 }
 .slide {
   border-radius: 0.5rem;
