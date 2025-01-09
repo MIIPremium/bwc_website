@@ -24,7 +24,7 @@ export default function JobsIndex() {
               <Breadcrumb
                 tilte1="المزايا"
                 path1="/admin-dashboard/jobs"
-                tilte2=" الوظائف"
+                tilte2=" وظائف"
                 path2="/admin-dashboard/jobs"
                 tilte3=""
                 path3=""
