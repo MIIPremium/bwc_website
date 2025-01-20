@@ -137,75 +137,91 @@ export default function Navbar() {
                   }`
             }
           >
-            <li
-              className={
-                dir === "ltr"
-                  ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-                  : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
-            >
-              <Link
-                to={"/departments"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer "
+            <Link to={"/departments"}>
+              <li
+                className={
+                  dir === "ltr"
+                    ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                    : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                }
               >
-                {t("depertment")}
-              </Link>
-            </li>
+                <Link
+                  to={"/departments"}
+                  className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer "
+                >
+                  {t("depertment")}
+                </Link>
+              </li>
+            </Link>
 
-            <li
-              className={
-                dir === "ltr"
-                  ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[150%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-                  : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[150%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
-            >
-              <Link
-                to={"/about-us"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+            <Link to={"/about-us"}>
+              <li
+                className={
+                  dir === "ltr"
+                    ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[150%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                    : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[150%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                }
               >
-                {t("About_us")}
-              </Link>
-            </li>
+                <Link
+                  to={"/about-us"}
+                  className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+                >
+                  {t("About_us")}
+                </Link>
+              </li>
+            </Link>
+            <Link to={"/all-publishes"}>
+              <li
+                className={
+                  dir === "ltr"
+                    ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                    : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                }
+              >
+                <Link
+                  to={"/all-publishes"}
+                  className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+                >
+                  {t("publishes")}
+                </Link>
+              </li>
+            </Link>
+            <Link to={"/all-Reports"}>
+              <li
+                className={
+                  dir === "ltr"
+                    ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                    : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                }
+              >
+                <NavLink
+                  to={"/all-Reports"}
+                  className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+                >
+                  {t("reports")}
+                </NavLink>
+              </li>
+            </Link>
+            <Link
+              to={"/archives"}
+              className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+            >
+              <li
+                className={
+                  dir === "ltr"
+                    ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                    : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
+                }
+              >
+                <NavLink
+                  to={"/archives"}
+                  className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+                >
+                  {t("archive")}
+                </NavLink>
+              </li>
+            </Link>
 
-            <li
-              className={
-                dir === "ltr"
-                  ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-                  : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
-            >
-              <Link
-                to={"/all-publishes"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
-              >
-                {t("publishes")}
-              </Link>
-            </li>
-            <li
-              className={
-                dir === "ltr"
-                  ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-                  : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
-            >
-              <NavLink
-                to={"/all-Reports"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
-              >
-                {t("reports")}
-              </NavLink>
-            </li>
-            <li
-              className={
-                dir === "ltr"
-                  ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-                  : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
-            >
-              <NavLink to={"/archives"} className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
-                {t("archive")}
-              </NavLink>
-            </li>
             {dir === "ltr" ? (
               <>
                 <li className="lg:hidden md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%]  sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md">
@@ -311,7 +327,10 @@ export default function Navbar() {
               </NavLink>
             </li>
             <li className="md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md">
-              <NavLink to={"/archives"} className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
+              <NavLink
+                to={"/archives"}
+                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+              >
                 {t("archive")}
               </NavLink>
             </li>

@@ -142,7 +142,7 @@ const ReportPage = () => {
           <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
             <Navbar />
           </div>
-          <main className="px-5">
+          <main className="px-5 overflow-hidden">
             <div className="w-full h-36 flex justify-end items-center ">
               <div className="flex py-5 ">
                 <h1 className="text-3xl">Publications</h1>
@@ -281,8 +281,8 @@ const ReportPage = () => {
               <div className=" h-full w-full flex justify-center items-center">
                 <div className=" text-center">
                   <JobNotFound />
-                  <p>
-                    There is no result of your search, try another publication
+                  <p className="text-sm">
+                    There is no result of your search, try another report
                     search
                   </p>
                 </div>
@@ -298,7 +298,7 @@ const ReportPage = () => {
           <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
             <Navbar />
           </div>
-          <main className="px-5">
+          <main className="px-5 overflow-hidden">
             <div className="w-full h-36 flex justify-start items-center ">
               <div className="flex py-5 ">
                 <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
@@ -437,10 +437,10 @@ const ReportPage = () => {
                 </div>
               </div>
             ) : (
-              <div className=" h-full w-full flex justify-center items-center">
+              <div className=" h-full w-full flex justify-center  items-center">
                 <div className=" text-center">
                   <JobNotFound />
-                  <p>لا توجد نتيجة للبحث، جرب البحث باسم منشور اخرى</p>
+                  <p>لا توجد نتيجة للبحث، جرب البحث باسم تقرير اخرى</p>
                 </div>
               </div>
             )}

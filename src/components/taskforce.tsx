@@ -173,9 +173,9 @@ export default function TaskForce() {
                   alt="Sunset in the mountains"
                 />
 
-                <div className="w-full h-[15vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-end hover:px-3 hover:pt-44">
+                <div className="w-full h-[19vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-end hover:px-3 hover:pt-44">
                   <h3 className="text-2xl">{data[0].en_name}</h3>
-                  <h5 className="leading-[70px]">{data[0].en_degree}</h5>
+                  <h5 className="leading-[50px]">{data[0].en_degree}</h5>
                   <p>{data[0].en_role}</p>
                 </div>
               </div>
@@ -194,9 +194,9 @@ export default function TaskForce() {
                   alt="Sunset in the mountains"
                 />
 
-                <div className="w-full h-[15vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-start hover:px-3 hover:pt-44">
+                <div className="w-full h-[18vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-start hover:px-3 hover:pt-44">
                   <h3 className="text-2xl">{data[0].ar_name}</h3>
-                  <h5 className="leading-[70px]">{data[0].ar_degree}</h5>
+                  <h5 className="leading-[50px]">{data[0].ar_degree}</h5>
                   <p>{data[0].ar_role}</p>
                 </div>
               </div>
@@ -218,15 +218,15 @@ export default function TaskForce() {
                   alt="Sunset in the mountains"
                 />
                 {dir === "ltr" ? (
-                  <div className="w-full h-[15vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-start hover:px-3 hover:pt-44">
+                  <div className="w-full h-[19vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-start hover:px-3 hover:pt-44">
                     <h3 className="text-2xl">{item.en_name}</h3>
-                    <h5 className="leading-[70px]">{item.en_degree}</h5>
+                    <h5 className="leading-[50px]">{item.en_degree}</h5>
                     <p>{item.en_role}</p>
                   </div>
                 ) : (
-                  <div className="w-full h-[15vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-end hover:px-3 hover:pt-44">
+                  <div className="w-full h-[18vh] bg-[rgb(49,51,53)]/[.55] absolute rounded-t-md bottom-0 z-10 text-white hover:h-full hover:duration-500 hover:ease-in-out text-center hover:text-end hover:px-3 hover:pt-44">
                     <h3 className="text-2xl">{item.ar_name}</h3>
-                    <h5 className="leading-[70px]">{item.ar_degree}</h5>
+                    <h5 className="leading-[50px]">{item.ar_degree}</h5>
                     <p>{item.ar_role}</p>
                   </div>
                 )}

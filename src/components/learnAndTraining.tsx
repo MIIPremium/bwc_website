@@ -80,19 +80,19 @@ export default function LeariningAndTraning() {
             className=" rounded-xl  h-[250px] overflow-hidden mt-2 shadow-[0_0px_10px_0px_rgba(0,0,0,0.3)] hover:bg-[#FFDAA0]/[.35] hover:cursor-pointer "
             key={idx}
           >
-            <div className=" flex-row-reverse w-[100%] h-[100%] flex">
-              <div className="flex justify-center items-center w-[40%] h-full p-5">
+            <div className=" flex-row-reverse w-[100%] min-h-[100%]  flex">
+              <div className="flex justify-center  items-center w-[30%]  min-h-[100%] py-5">
                 <img
                   src={item.img}
-                  className="object-contain w-[100%] h-[100%]"
+                  className="object-contain w-[100%] h-[100%] flex items-center justify-center"
                   alt=""
                 />
               </div>
-              <div className=" w-[60%] flex justify-center items-center">
+              <div className=" w-[70%] flex justify-center sm:py-0  md:py-0  min-h-[100%] items-center">
                 <div className="text-end px-3 text-sm w-[95%]">
-                  <h1 className="text-xl mb-2">{item.title}</h1>
+                  <h1 className="md:text-xl sm:text-base mb-2">{item.title}</h1>
                   <div className="bg-black w-[100%] h-[1px] "></div>
-                  <p className="text-[12px] font-black mt-2 leading-6 text-[#525252]">
+                  <p className="text-[12px] font-black mt-2 sm:leading-5 md:leading-6 text-[#525252]">
                     {item.subTitle}
                   </p>
                 </div>
