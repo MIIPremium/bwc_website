@@ -711,7 +711,7 @@ function App() {
         </div>
       </div>
 
-      <div className="w-full  relative mt-5 mb-20">
+      <div className="w-full  relative mt-5 mb-20 ">
         {dir === "ltr" ? (
           <div className="flex justify-end p-5 sm:mt-20">
             <h1 className="text-3xl">{t("homePage5")}</h1>
@@ -724,7 +724,7 @@ function App() {
           </div>
         )}
 
-        <div className=" p-2 overflow-hidden relative ">
+        <div className=" p-2  relative ">
           <LeariningAndTraning />
         </div>
       </div>
