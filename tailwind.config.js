@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        xlg: "1180px",
         sm: "300px",
       },
       keyframes: {

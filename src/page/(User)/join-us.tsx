@@ -19,6 +19,7 @@ export default function JoinUs() {
     <>
       {dir === "ltr" ? (
         <div>
+        <div className="xlg:min-w-[1200px] justify-self-center">
           <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
             <Navbar />
           </div>
@@ -81,69 +82,72 @@ export default function JoinUs() {
           <div className={` ${isFading ? "mt-7" : "mt-0"}`}>
             <Jobs />
           </div>
+        </div>
           <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
             <Footer />
           </footer>
         </div>
       ) : (
         <div>
-          <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
-            <Navbar />
-          </div>
-          <div
-            className={`w-full lg:h-[25vh] flex justify-center items-center md:mt-11 sm:mt-8 ${
-              isFading ? "hidden" : "opacity-100"
-            } transition-opacity duration-300 ease-in-out`}
-          >
-            <div className="md:w-[50%] md:h-[100%] sm:w-[80%] sm:h-[100%] bg-[#D5AE78]/[.5] rounded-lg px-2 py-1 relative">
-              {/* 'x' Button */}
+          <div className="xlg:min-w-[1200px] justify-self-center">
+            <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
+              <Navbar />
+            </div>
+            <div
+              className={`w-full lg:h-[25vh] flex justify-center items-center md:mt-11 sm:mt-8 ${
+                isFading ? "hidden" : "opacity-100"
+              } transition-opacity duration-300 ease-in-out`}
+            >
+              <div className="md:w-[50%] md:h-[100%] sm:w-[80%] sm:h-[100%] bg-[#D5AE78]/[.5] rounded-lg px-2 py-1 relative">
+                {/* 'x' Button */}
 
-              {/* Content */}
-              <h1 className="text-xl text-start font-bold ">
-                لتعزيز فريق العمل في شركة عالم الاعمال للاستثمار والدراسات
-              </h1>
-              <button
-                className="absolute top-2 left-2 text-gray-700 hover:text-gray-900 focus:outline-none"
-                onClick={handleClose}
-                aria-label="Close"
-              >
-                <X size={20} />
-              </button>
-              {/* First Item */}
-              <div className="flex items-center mt-5">
-                <div className="lg:w-[3%] md:w-[5%] sm:w-[6%] sm:ml-2 md:mr-3 lg:mr-0">
-                  <div className="w-4 h-4 border-2 border-[#333333] bg-gradient-to-r from-[#997740] to-[#CCA972] rounded-full"></div>
+                {/* Content */}
+                <h1 className="text-xl text-start font-bold ">
+                  لتعزيز فريق العمل في شركة عالم الاعمال للاستثمار والدراسات
+                </h1>
+                <button
+                  className="absolute top-2 left-2 text-gray-700 hover:text-gray-900 focus:outline-none"
+                  onClick={handleClose}
+                  aria-label="Close"
+                >
+                  <X size={20} />
+                </button>
+                {/* First Item */}
+                <div className="flex items-center mt-5">
+                  <div className="lg:w-[3%] md:w-[5%] sm:w-[6%] sm:ml-2 md:mr-3 lg:mr-0">
+                    <div className="w-4 h-4 border-2 border-[#333333] bg-gradient-to-r from-[#997740] to-[#CCA972] rounded-full"></div>
+                  </div>
+                  <div className="w-[95%]">
+                    <p className="text-[#5B5B5B]">مقابل مادي ممتاز .</p>
+                  </div>
                 </div>
-                <div className="w-[95%]">
-                  <p className="text-[#5B5B5B]">مقابل مادي ممتاز .</p>
-                </div>
-              </div>
 
-              {/* Second Item */}
-              <div className="flex items-center mt-5">
-                <div className="lg:w-[3%] md:w-[5%] sm:w-[6%] sm:ml-2 md:mr-3 lg:mr-0">
-                  <div className="w-4 h-4 border-2 border-[#333333] bg-gradient-to-r from-[#997740] to-[#CCA972] rounded-full"></div>
+                {/* Second Item */}
+                <div className="flex items-center mt-5">
+                  <div className="lg:w-[3%] md:w-[5%] sm:w-[6%] sm:ml-2 md:mr-3 lg:mr-0">
+                    <div className="w-4 h-4 border-2 border-[#333333] bg-gradient-to-r from-[#997740] to-[#CCA972] rounded-full"></div>
+                  </div>
+                  <div className="w-[95%]">
+                    <p className="text-[#5B5B5B]">بيئة عمل محفزة .</p>
+                  </div>
                 </div>
-                <div className="w-[95%]">
-                  <p className="text-[#5B5B5B]">بيئة عمل محفزة .</p>
-                </div>
-              </div>
 
-              {/* Third Item */}
-              <div className="flex items-center mt-5">
-                <div className="lg:w-[3%] md:w-[5%] sm:w-[6%] sm:ml-2 md:mr-3 lg:mr-0">
-                  <div className="w-4 h-4 border-2 border-[#333333] bg-gradient-to-r from-[#997740] to-[#CCA972] rounded-full"></div>
-                </div>
-                <div className="w-[95%]">
-                  <p className="text-[#5B5B5B]">تدريب وتأهيل مستمر .</p>
+                {/* Third Item */}
+                <div className="flex items-center mt-5">
+                  <div className="lg:w-[3%] md:w-[5%] sm:w-[6%] sm:ml-2 md:mr-3 lg:mr-0">
+                    <div className="w-4 h-4 border-2 border-[#333333] bg-gradient-to-r from-[#997740] to-[#CCA972] rounded-full"></div>
+                  </div>
+                  <div className="w-[95%]">
+                    <p className="text-[#5B5B5B]">تدريب وتأهيل مستمر .</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          {/*  */}
-          <div className={` ${isFading ? "mt-7" : "mt-0"}`}>
-            <Jobs />
+            {/*  */}
+            <div className={` ${isFading ? "mt-7" : "mt-0"}`}>
+              <Jobs />
+            </div>
           </div>
           <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
             <Footer />

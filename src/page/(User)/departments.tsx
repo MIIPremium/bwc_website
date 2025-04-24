@@ -9,7 +9,7 @@ export default function Departments() {
       <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
         <Navbar />
       </div>
-      <div className="w-full lg:h-[80vh] md:min-h-[250vh] sm:min-h-[150vh] md:mt-11 sm:mt-8">
+      <div className="w-full xlg:max-w-[1200px] justify-self-center lg:h-[80vh] md:min-h-[250vh] sm:min-h-[150vh] md:mt-11 sm:mt-8">
         <AllDepertments />
       </div>
 

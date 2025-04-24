@@ -148,9 +148,9 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                         <img
                           src={item.b_image}
                           key={idx}
-                          className={
-                            slide === idx ? "slide" : "slide slide-hidden"
-                          }
+                          className={`
+                            max-h-fit ${slide === idx ? "slide" : "slide slide-hidden"}
+                          `}
                         />
                         <div dir="ltr" className="bg-[#979CA1]/[.70] md:min-h-[20vh] sm:min-h-[30vh]">
                           <div className="" key={idx}>
@@ -209,7 +209,7 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                     <ArrowRight color="white" onClick={nextSlide} />
                   </div> */}
 
-                  <span className="indicators">
+                  <span className="indicators mb-24">
                     {HomeSlider?.data.map((_, idx) => {
                       return (
                         <button
@@ -226,13 +226,6 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                   </span>
                 </div>
               </div>
-              <div className="w-full md:h-[20vh] sm:h-[30vh] bg-black">
-                {/* {publishes.map((item, idx) => {
-          return(
-            
-          )
-        })} */}
-              </div>
             </>
           ) : (
             <div className="carousel_parant">
@@ -244,13 +237,13 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                   return (
                     <div
                       key={idx}
-                      className={slide === idx ? "slide" : "slide slide-hidden"}
+                      className={`${slide === idx ? "slide" : "slide slide-hidden"}`}
                     >
                       <img
                         src={item.b_image}
                         key={idx}
                         className={
-                          slide === idx ? "slide" : "slide slide-hidden"
+                          `max-w-fit xlg:min-h-[600px] justify-self-center ${slide === idx ? "slide" : "slide slide-hidden"}`
                         }
                       />
 
@@ -338,9 +331,9 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                         <img
                           src={item.b_image}
                           key={idx}
-                          className={
-                            slide === idx ? "slide" : "slide slide-hidden"
-                          }
+                          className={`
+                            max-h-fit justify-self-center ${slide === idx ? "slide" : "slide slide-hidden"}
+                          `}
                         />
                         <div className="bg-[#979CA1]/[.70] md:min-h-[20vh] sm:min-h-[30vh]">
                           <div className="" key={idx}>
@@ -387,7 +380,7 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                     <ArrowRight color="white" onClick={nextSlide} />
                   </div> */}
 
-                  <span className="indicators">
+                  <span className="indicators mb-24">
                     {HomeSlider?.data.map((_, idx) => {
                       return (
                         <button
@@ -404,13 +397,6 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                   </span>
                 </div>
               </div>
-              <div className="w-full md:h-[20vh] sm:h-[30vh] bg-black">
-                {/* {publishes.map((item, idx) => {
-          return(
-            
-          )
-        })} */}
-              </div>
             </>
           ) : (
             <div className="carousel_parant">
@@ -422,38 +408,37 @@ export default function CarouselsHeroSection({ publishes }: CarouselProps) {
                   return (
                     <div
                       key={idx}
-                      className={slide === idx ? "slide" : "slide slide-hidden"}
+                      className={`${slide === idx ? "slide" : "slide slide-hidden"}`}
                     >
                       <img
                         src={item.b_image}
                         key={idx}
                         className={
-                          slide === idx ? "slide" : "slide slide-hidden"
+                          `max-w-fit xlg:min-h-[600px] justify-self-center ${slide === idx ? "slide" : "slide slide-hidden"}`
                         }
                       />
-
-                      <div className={"info-carousel"}>
-                        <div className={"title-info-carousel"} key={idx}>
-                          <h2 className="publishesHero">{item.ar_Title}</h2>
-                          <p className="mt-4">
-                            {}
-                            {formattedDate(new Date(item.date_of_publish))}
-                          </p>
-                          <div className={"inside-image"}>
-                            <p>{item?.writers[0]?.ar_role}</p>
-                            <img
-                              src={item?.writers[0]?.image}
-                              className={
-                                item?.writers[0]?.image
-                                  ? "w-[50px] h-[50px] bg-cover rounded-full outline outline-offset-0.5 outline-[#CCA972]"
-                                  : ""
-                              }
-                              alt=""
-                            />
+                        <div className={"info-carousel mt-12"}>
+                          <div className={"title-info-carousel"} key={idx}>
+                            <h2 className="publishesHero">{item.ar_Title}</h2>
+                            <p className="mt-4">
+                              {}
+                              {formattedDate(new Date(item.date_of_publish))}
+                            </p>
+                            <div className={"inside-image"}>
+                              <p>{item?.writers[0]?.ar_role}</p>
+                              <img
+                                src={item?.writers[0]?.image}
+                                className={
+                                  item?.writers[0]?.image
+                                    ? "w-[50px] h-[50px] bg-cover rounded-full outline outline-offset-0.5 outline-[#CCA972]"
+                                    : ""
+                                }
+                                alt=""
+                              />
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
                   );
                 })}
 

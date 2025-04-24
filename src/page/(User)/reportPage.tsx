@@ -142,7 +142,7 @@ const ReportPage = () => {
           <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
             <Navbar />
           </div>
-          <main className="px-5">
+          <main className="xlg:min-w-[1200px] justify-self-center px-5">
             <div className="w-full h-36 flex justify-end items-center ">
               <div className="flex py-5 ">
                 <h1 className="text-3xl">Publications</h1>
@@ -298,7 +298,7 @@ const ReportPage = () => {
           <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
             <Navbar />
           </div>
-          <main className="px-5">
+          <main className="xlg:min-w-[1200px] justify-self-center px-5">
             <div className="w-full h-36 flex justify-start items-center ">
               <div className="flex py-5 ">
                 <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>

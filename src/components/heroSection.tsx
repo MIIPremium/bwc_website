@@ -28,7 +28,7 @@ const publishes: publish[] = [
 ];
 export default function HeroSection() {
   return (
-    <div className="w-full  text-white text-center">
+    <div className="w-full  text-white text-center mb-20">
       <CarouselsHeroSection publishes={publishes} />
     </div>
   );

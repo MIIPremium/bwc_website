@@ -148,550 +148,558 @@ export default function PublishDetails() {
     <>
       {dir === "ltr" ? (
         <div>
-          <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
-            <Navbar />
-          </div>
-          <div dir="ltr" className=" min-h-screen md:p-4 p-4">
-            {/* Main Content Section */}
-            <main className="md:max-w-[90vw] mx-auto  md:p-6">
-              <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
-                <span className="bg-[#CCA972] h-10 w-[10px] rounded-full "></span>
-                <span>Publication</span>
-              </h1>
-              <h1 className=" text-2xl font-bold mb-[43px]">
-                {PPublicDetails?.data.en_Title}
-              </h1>
-              {/* Image Section */}
-              <div className="mb-8 relative h-[400px] overflow-hidden">
-                <img
-                  src={PPublicDetails?.data.b_image} // Replace with actual image path
-                  alt="Report cover"
-                  className="w-full h-full object-contain cursor-pointer"
-                  onClick={openModal}
-                />
-              </div>
-              {modalOpen && (
-                <div
-                  className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
-                  onClick={closeModal}
-                >
-                  <div
-                    className="relative w-[100%] h-[100%] overflow-hidden"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <>
-                      <img
-                        src={PPublicDetails?.data.b_image!}
-                        className="w-[80%] h-[80%] mx-auto object-fill"
-                        alt=""
-                      />
-                      <button
-                        onClick={closeModal}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
-                      >
-                        &times;
-                      </button>
-                    </>
-                  </div>
+          <div className="xlg:max-w-[1200px] justify-self-center">
+            <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
+              <Navbar />
+            </div>
+            <div dir="ltr" className=" min-h-screen md:p-4 p-4 mb-80">
+              {/* Main Content Section */}
+              <main className="md:max-w-[90vw] mx-auto  md:p-6">
+                <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
+                  <span className="bg-[#CCA972] h-10 w-[10px] rounded-full "></span>
+                  <span>Publication</span>
+                </h1>
+                <h1 className=" text-2xl font-bold mb-[43px]">
+                  {PPublicDetails?.data.en_Title}
+                </h1>
+                {/* Image Section */}
+                <div className="mb-8 relative h-[400px] overflow-hidden">
+                  <img
+                    src={PPublicDetails?.data.b_image} // Replace with actual image path
+                    alt="Report cover"
+                    className="w-full h-full object-contain cursor-pointer"
+                    onClick={openModal}
+                  />
                 </div>
-              )}
-              <div className="grid grid-cols-6 gap-x-2 gap-y-2">
-                <div className=" col-span-6 md:col-span-4 ">
-                  <div className="flex flex-col md:flex-row justify-between md:h-[70px] bg-[#D5AE78] items-center mb-4 rounded-lg">
-                    <div className="flex items-center gap-x-2 py-5 ps-8">
-                      <div className="flex items-center gap-x-2">
-                        <CalendarIcon />
-                        <span>{` ${getRelativeTime(
-                          PPublicDetails?.data.date_of_publish ?? new Date(),
-                          "en"
-                        )}`}</span>
-                      </div>
-                      <div className="flex items-center gap-x-2">
-                        <ClockCircle />
-                        <span>
-                          Time to read: {String(PPublicDetails?.data.t2read)}{" "}
-                          minutes
-                        </span>
-                      </div>
-                    </div>
-                    <button className="bg-[#C4A171]  md:h-[68px] w-full md:w-fit flex items-center place-content-center gap-x-2  text-black px-4 py-2 rounded-[8px]">
-                      <TranslateIcon />
-                      <span
-                        onClick={onChangeLanguage}
-                        className="cursor-pointer"
-                      >
-                        اقرأ هذا باللغة بالعربية
-                      </span>
-                    </button>
-                  </div>
-                  {/*-------- author ------------- */}
-                  <div>
-                    {PPublicDetails?.data.writers.map((items, index) => (
-                      <div className="flex items-center gap-x-2">
-                        <div className="">
-                          <img
-                            src={items.image} // Replace with actual image path
-                            className="rounded-full object-cover mr-4 mb-4"
-                            width="60" // Add fixed width here
-                            height="60" // Add fixed height here
-                            alt={`Image of ${items.en_fullName}`}
-                          />
-                        </div>
-                        <span className="text-base font-bold">
-                          {items.en_fullName}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mb-[47px]">
-                    <h2 className="text-xl font-bold mb-5"> ✅ Tags</h2>
-                    <p>
-                      {PPublicDetails?.data.tags.map((item, index) => (
-                        <span className="border-[1px] border-black text-base rounded-3xl p-2 ml-2 hover:bg-gray-100">
-                          {item}
-                        </span>
-                      ))}
-                    </p>
-                  </div>
-                  <div className=" grid min-h-[100px] my-4 items-start gap-4 overflow-y-scroll scroll-smooth text-start">
-                    <label htmlFor="" className="">
-                      ✅ More Photos Of The Publication
-                    </label>
-                    <div className="overflow-y-auto min-h-96">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {PPublicDetails?.data.images.map((item, index) => (
-                          <div
-                            key={index}
-                            className="rounded-lg shadow-md flex items-center justify-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
-                            onClick={() => openArrayModal(item)}
-                          >
-                            <img
-                              src={item}
-                              alt={`publication-${index}`}
-                              className="w-full h-48 object-fill"
-                              loading="lazy"
-                            />
-                            <div className="p-4">
-                              {/* Optional: Add any additional content like captions or buttons here */}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  {selectedImage && (
+                {modalOpen && (
+                  <div
+                    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                    onClick={closeModal}
+                  >
                     <div
-                      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
-                      onClick={closeArrayModal}
+                      className="relative w-[100%] h-[100%] overflow-hidden"
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      <div
-                        className="relative w-[80%] h-[80%] overflow-hidden"
-                        onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside the modal content
-                      >
+                      <>
                         <img
-                          src={selectedImage}
-                          className="w-full h-full object-contain"
-                          alt="Enlarged view"
+                          src={PPublicDetails?.data.b_image!}
+                          className="w-[80%] h-[80%] mx-auto object-fill"
+                          alt=""
                         />
                         <button
-                          onClick={closeArrayModal}
+                          onClick={closeModal}
                           className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
                         >
                           &times;
                         </button>
+                      </>
+                    </div>
+                  </div>
+                )}
+                <div className="grid grid-cols-6 gap-x-2 gap-y-2">
+                  <div className=" col-span-6 md:col-span-4 ">
+                    <div className="flex flex-col md:flex-row justify-between md:h-[70px] bg-[#D5AE78] items-center mb-4 rounded-lg">
+                      <div className="flex items-center gap-x-2 py-5 ps-8">
+                        <div className="flex items-center gap-x-2">
+                          <CalendarIcon />
+                          <span>{` ${getRelativeTime(
+                            PPublicDetails?.data.date_of_publish ?? new Date(),
+                            "en"
+                          )}`}</span>
+                        </div>
+                        <div className="flex items-center gap-x-2">
+                          <ClockCircle />
+                          <span>
+                            Time to read: {String(PPublicDetails?.data.t2read)}{" "}
+                            minutes
+                          </span>
+                        </div>
+                      </div>
+                      <button className="bg-[#C4A171]  md:h-[68px] w-full md:w-fit flex items-center place-content-center gap-x-2  text-black px-4 py-2 rounded-[8px]">
+                        <TranslateIcon />
+                        <span
+                          onClick={onChangeLanguage}
+                          className="cursor-pointer"
+                        >
+                          اقرأ هذا باللغة بالعربية
+                        </span>
+                      </button>
+                    </div>
+                    {/*-------- author ------------- */}
+                    <div>
+                      {PPublicDetails?.data.writers.map((items, index) => (
+                        <div className="flex items-center gap-x-2">
+                          <div className="">
+                            <img
+                              src={items.image} // Replace with actual image path
+                              className="rounded-full object-cover mr-4 mb-4"
+                              width="60" // Add fixed width here
+                              height="60" // Add fixed height here
+                              alt={`Image of ${items.en_fullName}`}
+                            />
+                          </div>
+                          <span className="text-base font-bold">
+                            {items.en_fullName}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mb-[47px]">
+                      <h2 className="text-xl font-bold mb-5"> ✅ Tags</h2>
+                      <p>
+                        {PPublicDetails?.data.tags.map((item, index) => (
+                          <span className="border-[1px] border-black text-base rounded-3xl p-2 ml-2 hover:bg-gray-100">
+                            {item}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                    <div className=" grid min-h-[100px] my-4 items-start gap-4 overflow-y-scroll scroll-smooth text-start">
+                      <label htmlFor="" className="">
+                        ✅ More Photos Of The Publication
+                      </label>
+                      <div className="overflow-y-auto min-h-96">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                          {PPublicDetails?.data.images.map((item, index) => (
+                            <div
+                              key={index}
+                              className="rounded-lg shadow-md flex items-center justify-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                              onClick={() => openArrayModal(item)}
+                            >
+                              <img
+                                src={item}
+                                alt={`publication-${index}`}
+                                className="w-full h-48 object-fill"
+                                loading="lazy"
+                              />
+                              <div className="p-4">
+                                {/* Optional: Add any additional content like captions or buttons here */}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  )}
-                  <div className="mb-[47px] ">
-                    <h2 className="text-xl font-bold mb-5 "> ✅ Description</h2>
-                    <p>
-                      {PPublicDetails?.data.en_description && (
-                        <div
-                          className="custom-html-content-en max-w-[800px] break-words"
-                          dangerouslySetInnerHTML={{
-                            __html: PPublicDetails.data.en_description,
-                          }}
-                        />
-                      )}
-                    </p>
-                  </div>
-                  {/* ------ note ----------- */}
-                  <div className="mb-[47px]">
-                    <h2 className="text-xl font-bold mb-5"> ✅ Note</h2>
-                    <div className="max-w-[800px] break-words">
-                      {PPublicDetails?.data.en_Note}
-                    </div>
-                  </div>
-
-                  {matchingIEn ? (
-                    <div className="mb-[47px]">
-                      <h2 className="text-xl font-bold mb-5">
-                        ✅ Associated report
-                      </h2>
-                      <Link
-                        to={`/report-details/${matchingIEn}`}
-                        target="_blank"
+                    {selectedImage && (
+                      <div
+                        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                        onClick={closeArrayModal}
                       >
-                        {en_Title}
-                      </Link>
+                        <div
+                          className="relative w-[80%] h-[80%] overflow-hidden"
+                          onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside the modal content
+                        >
+                          <img
+                            src={selectedImage}
+                            className="w-full h-full object-contain"
+                            alt="Enlarged view"
+                          />
+                          <button
+                            onClick={closeArrayModal}
+                            className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
+                          >
+                            &times;
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                    <div className="mb-[47px] ">
+                      <h2 className="text-xl font-bold mb-5 ">
+                        {" "}
+                        ✅ Description
+                      </h2>
+                      <p>
+                        {PPublicDetails?.data.en_description && (
+                          <div
+                            className="custom-html-content-en max-w-[800px] break-words"
+                            dangerouslySetInnerHTML={{
+                              __html: PPublicDetails.data.en_description,
+                            }}
+                          />
+                        )}
+                      </p>
                     </div>
-                  ) : null}
-                  {/* <div className="w-full max-w-md mx-auto">
+                    {/* ------ note ----------- */}
+                    <div className="mb-[47px]">
+                      <h2 className="text-xl font-bold mb-5"> ✅ Note</h2>
+                      <div className="max-w-[800px] break-words">
+                        {PPublicDetails?.data.en_Note}
+                      </div>
+                    </div>
+
+                    {matchingIEn ? (
+                      <div className="mb-[47px]">
+                        <h2 className="text-xl font-bold mb-5">
+                          ✅ Associated report
+                        </h2>
+                        <Link
+                          to={`/report-details/${matchingIEn}`}
+                          target="_blank"
+                        >
+                          {en_Title}
+                        </Link>
+                      </div>
+                    ) : null}
+                    {/* <div className="w-full max-w-md mx-auto">
  
 
   
 </div> */}
-                  <div dir="rtl" className="mb-[47px] bg-[#EEEEEE] py-5 px-3">
-                    <button
-                      onClick={toggleDiv}
-                      className="flex items-center px-4 py-2 relative bg-white rounded hover:bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-gray-400"
-                    >
-                      <span>
-                        {isOpen ? "Hide references" : "Show References"}
-                      </span>
-                      <span className="mr-2 transform transition-transform">
-                        {isOpen ? "▲" : "▼"}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <div className="mt-4 p-4 rounded">
-                        <p className="flex flex-wrap gap-2">
-                          {PPublicDetails?.data.references.map(
-                            (item, index) => (
-                              <a
-                                key={index}
-                                href={`${item.link}`}
-                                target="_blank"
-                                className="border-[1px] border-black text-base rounded-3xl p-2 hover:bg-gray-100"
-                              >
-                                {item.ar_title}
-                              </a>
-                            )
-                          )}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="w-full border-t my-14"></div>
-
-                  <div dir="rtl" className="mb-[47px]">
-                    {PPublicDetails?.data.writers.map((item, index) => (
-                      <div
-                        className="border border-gray-300 rounded-lg p-4 mx-auto w-[100%] mb-2 flex items-center"
-                        key={index}
+                    <div dir="rtl" className="mb-[47px] bg-[#EEEEEE] py-5 px-3">
+                      <button
+                        onClick={toggleDiv}
+                        className="flex items-center px-4 py-2 relative bg-white rounded hover:bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-gray-400"
                       >
-                        <div className="flex-1 pr-4  ">
-                          <p className="m-0 text-base text-end leading-6">
-                            {item.ar_description}
+                        <span>
+                          {isOpen ? "Hide references" : "Show References"}
+                        </span>
+                        <span className="mr-2 transform transition-transform">
+                          {isOpen ? "▲" : "▼"}
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <div className="mt-4 p-4 rounded">
+                          <p className="flex flex-wrap gap-2">
+                            {PPublicDetails?.data.references.map(
+                              (item, index) => (
+                                <a
+                                  key={index}
+                                  href={`${item.link}`}
+                                  target="_blank"
+                                  className="border-[1px] border-black text-base rounded-3xl p-2 hover:bg-gray-100"
+                                >
+                                  {item.ar_title}
+                                </a>
+                              )
+                            )}
                           </p>
                         </div>
-                        <div className="flex flex-col items-center">
-                          <img
-                            src={item.image}
-                            className="rounded-full object-cover mb-2"
-                            width="60"
-                            height="60"
-                            alt={`Image of ${item.ar_fullName}`}
-                          />
-                          <span className="font-bold text-lg">
-                            {item.ar_fullName}
-                          </span>
-                          <span className="text-gray-500 text-sm">
-                            {item.ar_role}
-                          </span>
+                      )}
+                    </div>
+
+                    <div className="w-full border-t my-14"></div>
+
+                    <div dir="rtl" className="mb-[47px]">
+                      {PPublicDetails?.data.writers.map((item, index) => (
+                        <div
+                          className="border border-gray-300 rounded-lg p-4 mx-auto w-[100%] mb-2 flex items-center"
+                          key={index}
+                        >
+                          <div className="flex-1 pr-4  ">
+                            <p className="m-0 text-base text-end leading-6">
+                              {item.ar_description}
+                            </p>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <img
+                              src={item.image}
+                              className="rounded-full object-cover mb-2"
+                              width="60"
+                              height="60"
+                              alt={`Image of ${item.ar_fullName}`}
+                            />
+                            <span className="font-bold text-lg">
+                              {item.ar_fullName}
+                            </span>
+                            <span className="text-gray-500 text-sm">
+                              {item.ar_role}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                  </div>
+                  <div className=" hidden md:block col-span-6 md:col-span-2 h-10">
+                    {/* last news here */}
+                    <div className="md:h-[70px] bg-[#D5AE78] rounded-lg flex items-center ps-4">
+                      <h2 className="text-2xl font-bold">Read more</h2>
+                    </div>
+                    <NewsList />
                   </div>
                 </div>
-                <div className=" hidden md:block col-span-6 md:col-span-2 h-10">
-                  {/* last news here */}
-                  <div className="md:h-[70px] bg-[#D5AE78] rounded-lg flex items-center ps-4">
-                    <h2 className="text-2xl font-bold">Read more</h2>
-                  </div>
-                  <NewsList />
-                </div>
-              </div>
-            </main>
+              </main>
+            </div>
+            <MorePublish />
           </div>
-          <MorePublish />
           <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
             <Footer />
           </footer>
         </div>
       ) : (
         <div>
-          <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
-            <Navbar />
-          </div>
-          <div className=" min-h-screen md:p-4 p-4">
-            {/* Main Content Section */}
-            <main className="md:max-w-[90vw] mx-auto  md:p-6">
-              <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
-                <span className="bg-[#CCA972] h-10 w-[10px] rounded-full "></span>
-                <span>منشور</span>
-              </h1>
-              <h1 className=" text-2xl font-bold mb-[43px]">
-                {PPublicDetails?.data.ar_Title}
-              </h1>
-              {/* Image Section */}
-              <div className="mb-8 relative h-[400px] overflow-hidden">
-                <img
-                  src={PPublicDetails?.data.b_image} // Replace with actual image path
-                  alt="Report cover"
-                  className="w-full h-full object-contain cursor-pointer"
-                  onClick={openModal}
-                />
-              </div>
-              {modalOpen && (
-                <div
-                  className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
-                  onClick={closeModal}
-                >
-                  <div
-                    className="relative w-[100%] h-[100%] overflow-hidden"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <>
-                      <img
-                        src={PPublicDetails?.data.b_image!}
-                        className="w-[80%] h-[80%] mx-auto object-fill"
-                        alt=""
-                      />
-                      <button
-                        onClick={closeModal}
-                        className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
-                      >
-                        &times;
-                      </button>
-                    </>
-                  </div>
+          <div className="xlg:max-w-[1200px] justify-self-center">
+            {/* Navbar Section */}
+            <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
+              <Navbar />
+            </div>
+            <div className="min-h-screen md:p-4 p-4 mb-44">
+              {/* Main Content Section */}
+              <main className="md:max-w-[90vw] mx-auto  md:p-6">
+                <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
+                  <span className="bg-[#CCA972] h-10 w-[10px] rounded-full "></span>
+                  <span>منشور</span>
+                </h1>
+                <h1 className=" text-2xl font-bold mb-[43px]">
+                  {PPublicDetails?.data.ar_Title}
+                </h1>
+                {/* Image Section */}
+                <div className="mb-8 relative h-[400px] overflow-hidden">
+                  <img
+                    src={PPublicDetails?.data.b_image} // Replace with actual image path
+                    alt="Report cover"
+                    className="w-full h-full object-contain cursor-pointer"
+                    onClick={openModal}
+                  />
                 </div>
-              )}
-
-              <div className="grid grid-cols-6 gap-x-2 gap-y-2">
-                <div className=" col-span-6 md:col-span-4 ">
-                  <div className="flex flex-col md:flex-row justify-between md:h-[70px] bg-[#D5AE78] items-center mb-4 rounded-lg">
-                    <div className="flex items-center gap-x-2 py-5 ps-8">
-                      <div className="flex items-center gap-x-2">
-                        <CalendarIcon />
-                        <span>{` ${getRelativeTime(
-                          PPublicDetails?.data.date_of_publish ?? new Date(),
-                          "ar"
-                        )}`}</span>
-                      </div>
-                      <div className="flex items-center gap-x-2">
-                        <ClockCircle />
-                        <span>
-                          وقت القراءة: {String(PPublicDetails?.data.t2read)}{" "}
-                          دقيقة
-                        </span>
-                      </div>
-                    </div>
-                    <button className="bg-[#C4A171]  md:h-[68px] w-full md:w-fit flex items-center place-content-center gap-x-2  text-black px-4 py-2 rounded-[8px]">
-                      <span
-                        onClick={onChangeLanguage}
-                        className="cursor-pointer"
-                      >
-                        Read this in English
-                      </span>
-                      <TranslateIcon />
-                    </button>
-                  </div>
-                  {/*-------- author ------------- */}
-                  <div>
-                    {PPublicDetails?.data.writers.map((items, index) => (
-                      <div className="flex items-center gap-x-2">
-                        <div className="">
-                          <img
-                            src={items.image} // Replace with actual image path
-                            className="rounded-full object-cover mr-4 mb-4"
-                            width="60" // Add fixed width here
-                            height="60" // Add fixed height here
-                            alt={`Image of ${items.ar_fullName}`}
-                          />
-                        </div>
-                        <span className="text-base font-bold">
-                          {items.ar_fullName}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="mb-[47px]">
-                    <h2 className="text-xl font-bold mb-5"> ✅ الوسوم</h2>
-                    <p>
-                      {PPublicDetails?.data.tags.map((item, index) => (
-                        <span className="border-[1px] border-black text-base rounded-3xl p-2 ml-2 hover:bg-gray-100">
-                          {item}
-                        </span>
-                      ))}
-                    </p>
-                  </div>
-                  <div className="my-4">
-                    <label
-                      htmlFor=""
-                      className="block mb-2 text-lg font-semibold"
-                    >
-                      ✅ صور أخرى للمنشور
-                    </label>
-                    <div className="overflow-y-auto min-h-96">
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                        {PPublicDetails?.data.images.map((item, index) => (
-                          <div
-                            key={index}
-                            className="rounded-lg shadow-md flex items-center justify-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
-                            onClick={() => openArrayModal(item)}
-                          >
-                            <img
-                              src={item}
-                              alt={`publication-${index}`}
-                              className="w-full h-48 object-fill"
-                              loading="lazy"
-                            />
-                            <div className="p-4">
-                              {/* Optional: Add any additional content like captions or buttons here */}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  {selectedImage && (
+                {modalOpen && (
+                  <div
+                    className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                    onClick={closeModal}
+                  >
                     <div
-                      className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
-                      onClick={closeArrayModal}
+                      className="relative w-[100%] h-[100%] overflow-hidden"
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      <div
-                        className="relative w-[80%] h-[80%] overflow-hidden"
-                        onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside the modal content
-                      >
+                      <>
                         <img
-                          src={selectedImage}
-                          className="w-full h-full object-contain"
-                          alt="Enlarged view"
+                          src={PPublicDetails?.data.b_image!}
+                          className="w-[80%] h-[80%] mx-auto object-fill"
+                          alt=""
                         />
                         <button
-                          onClick={closeArrayModal}
+                          onClick={closeModal}
                           className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
                         >
                           &times;
                         </button>
+                      </>
+                    </div>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-6 gap-x-2 gap-y-2">
+                  <div className=" col-span-6 md:col-span-4 ">
+                    <div className="flex flex-col md:flex-row justify-between md:h-[70px] bg-[#D5AE78] items-center mb-4 rounded-lg">
+                      <div className="flex items-center gap-x-2 py-5 ps-8">
+                        <div className="flex items-center gap-x-2">
+                          <CalendarIcon />
+                          <span>{` ${getRelativeTime(
+                            PPublicDetails?.data.date_of_publish ?? new Date(),
+                            "ar"
+                          )}`}</span>
+                        </div>
+                        <div className="flex items-center gap-x-2">
+                          <ClockCircle />
+                          <span>
+                            وقت القراءة: {String(PPublicDetails?.data.t2read)}{" "}
+                            دقيقة
+                          </span>
+                        </div>
+                      </div>
+                      <button className="bg-[#C4A171]  md:h-[68px] w-full md:w-fit flex items-center place-content-center gap-x-2  text-black px-4 py-2 rounded-[8px]">
+                        <span
+                          onClick={onChangeLanguage}
+                          className="cursor-pointer"
+                        >
+                          Read this in English
+                        </span>
+                        <TranslateIcon />
+                      </button>
+                    </div>
+                    {/*-------- author ------------- */}
+                    <div>
+                      {PPublicDetails?.data.writers.map((items, index) => (
+                        <div className="flex items-center gap-x-2">
+                          <div className="">
+                            <img
+                              src={items.image} // Replace with actual image path
+                              className="rounded-full object-cover mr-4 mb-4"
+                              width="60" // Add fixed width here
+                              height="60" // Add fixed height here
+                              alt={`Image of ${items.ar_fullName}`}
+                            />
+                          </div>
+                          <span className="text-base font-bold">
+                            {items.ar_fullName}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="mb-[47px]">
+                      <h2 className="text-xl font-bold mb-5"> ✅ الوسوم</h2>
+                      <p>
+                        {PPublicDetails?.data.tags.map((item, index) => (
+                          <span className="border-[1px] border-black text-base rounded-3xl p-2 ml-2 hover:bg-gray-100">
+                            {item}
+                          </span>
+                        ))}
+                      </p>
+                    </div>
+                    <div className="my-4">
+                      <label
+                        htmlFor=""
+                        className="block mb-2 text-lg font-semibold"
+                      >
+                        ✅ صور أخرى للمنشور
+                      </label>
+                      <div className="overflow-y-auto min-h-96">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                          {PPublicDetails?.data.images.map((item, index) => (
+                            <div
+                              key={index}
+                              className="rounded-lg shadow-md flex items-center justify-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                              onClick={() => openArrayModal(item)}
+                            >
+                              <img
+                                src={item}
+                                alt={`publication-${index}`}
+                                className="w-full h-48 object-fill"
+                                loading="lazy"
+                              />
+                              <div className="p-4">
+                                {/* Optional: Add any additional content like captions or buttons here */}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  )}
 
-                  <div className="mb-[47px]">
-                    <h2 className="text-xl font-bold mb-5"> ✅ الوصف</h2>
-                    <p>
-                      {PPublicDetails?.data.ar_description && (
-                        <div
-                          className="custom-html-content max-w-[800px] break-words"
-                          dangerouslySetInnerHTML={{
-                            __html: PPublicDetails.data.ar_description,
-                          }}
-                        />
-                      )}
-                    </p>
-                  </div>
-                  {/* ------ note ----------- */}
-                  <div className="mb-[47px]">
-                    <h2 className="text-xl font-bold mb-5"> ✅ ملاحظة</h2>
-                    <p>{PPublicDetails?.data.ar_Note}</p>
-                  </div>
-
-                  {matchingId ? (
-                    <div className="mb-[47px]">
-                      <h2 className="text-xl font-bold mb-5">
-                        ✅ التقرير المرتبط به
-                      </h2>
-                      <Link
-                        to={`/report-details/${matchingId}`}
-                        target="_blank"
+                    {selectedImage && (
+                      <div
+                        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 z-50"
+                        onClick={closeArrayModal}
                       >
-                        {ar_Title}
-                      </Link>
+                        <div
+                          className="relative w-[80%] h-[80%] overflow-hidden"
+                          onClick={(e) => e.stopPropagation()} // Prevents modal from closing when clicking inside the modal content
+                        >
+                          <img
+                            src={selectedImage}
+                            className="w-full h-full object-contain"
+                            alt="Enlarged view"
+                          />
+                          <button
+                            onClick={closeArrayModal}
+                            className="absolute top-4 right-4 p-2 rounded-full bg-white text-black hover:bg-gray-200"
+                          >
+                            &times;
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="mb-[47px]">
+                      <h2 className="text-xl font-bold mb-5"> ✅ الوصف</h2>
+                      <p>
+                        {PPublicDetails?.data.ar_description && (
+                          <div
+                            className="custom-html-content max-w-[800px] break-words"
+                            dangerouslySetInnerHTML={{
+                              __html: PPublicDetails.data.ar_description,
+                            }}
+                          />
+                        )}
+                      </p>
                     </div>
-                  ) : null}
-                  {/* <div className="w-full max-w-md mx-auto">
+                    {/* ------ note ----------- */}
+                    <div className="mb-[47px]">
+                      <h2 className="text-xl font-bold mb-5"> ✅ ملاحظة</h2>
+                      <p>{PPublicDetails?.data.ar_Note}</p>
+                    </div>
+
+                    {matchingId ? (
+                      <div className="mb-[47px]">
+                        <h2 className="text-xl font-bold mb-5">
+                          ✅ التقرير المرتبط به
+                        </h2>
+                        <Link
+                          to={`/report-details/${matchingId}`}
+                          target="_blank"
+                        >
+                          {ar_Title}
+                        </Link>
+                      </div>
+                    ) : null}
+                    {/* <div className="w-full max-w-md mx-auto">
    
 
     
   </div> */}
-                  <div dir="ltr" className="mb-[47px] bg-[#EEEEEE] py-5 px-3">
-                    <button
-                      onClick={toggleDiv}
-                      className="flex items-center px-4 py-2 relative bg-white rounded hover:bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-gray-400"
-                    >
-                      <span>{isOpen ? "إخفاء المراجع" : "عرض المراجع"}</span>
-                      <span className="ml-2 transform transition-transform">
-                        {isOpen ? "▲" : "▼"}
-                      </span>
-                    </button>
-                    {isOpen && (
-                      <div className="mt-4 p-4 rounded">
-                        <p className="flex flex-wrap gap-2">
-                          {PPublicDetails?.data.references.map(
-                            (item, index) => (
-                              <a
-                                key={index}
-                                href={`${item.link}`}
-                                target="_blank"
-                                className="border-[1px] border-black text-base rounded-3xl p-2 hover:bg-gray-100"
-                              >
-                                {item.ar_title}
-                              </a>
-                            )
-                          )}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="w-full border-t my-14"></div>
-
-                  <div dir="ltr" className="mb-[47px]">
-                    {PPublicDetails?.data.writers.map((item, index) => (
-                      <div
-                        className="border border-gray-300 rounded-lg p-4 mx-auto w-[100%] mb-2 flex items-center"
-                        key={index}
+                    <div dir="ltr" className="mb-[47px] bg-[#EEEEEE] py-5 px-3">
+                      <button
+                        onClick={toggleDiv}
+                        className="flex items-center px-4 py-2 relative bg-white rounded hover:bg-gray-200 text-black focus:outline-none focus:ring-2 focus:ring-gray-400"
                       >
-                        <div className="flex-1 pr-4  ">
-                          <p className="m-0 text-base text-end leading-6">
-                            {item.ar_description}
+                        <span>{isOpen ? "إخفاء المراجع" : "عرض المراجع"}</span>
+                        <span className="ml-2 transform transition-transform">
+                          {isOpen ? "▲" : "▼"}
+                        </span>
+                      </button>
+                      {isOpen && (
+                        <div className="mt-4 p-4 rounded">
+                          <p className="flex flex-wrap gap-2">
+                            {PPublicDetails?.data.references.map(
+                              (item, index) => (
+                                <a
+                                  key={index}
+                                  href={`${item.link}`}
+                                  target="_blank"
+                                  className="border-[1px] border-black text-base rounded-3xl p-2 hover:bg-gray-100"
+                                >
+                                  {item.ar_title}
+                                </a>
+                              )
+                            )}
                           </p>
                         </div>
-                        <div className="flex flex-col items-center">
-                          <img
-                            src={item.image}
-                            className="rounded-full object-cover mb-2"
-                            width="60"
-                            height="60"
-                            alt={`Image of ${item.ar_fullName}`}
-                          />
-                          <span className="font-bold text-lg">
-                            {item.ar_fullName}
-                          </span>
-                          <span className="text-gray-500 text-sm">
-                            {item.ar_role}
-                          </span>
+                      )}
+                    </div>
+
+                    <div className="w-full border-t my-14"></div>
+
+                    <div dir="ltr" className="mb-[47px]">
+                      {PPublicDetails?.data.writers.map((item, index) => (
+                        <div
+                          className="border border-gray-300 rounded-lg p-4 mx-auto w-[100%] mb-2 flex items-center"
+                          key={index}
+                        >
+                          <div className="flex-1 pr-4  ">
+                            <p className="m-0 text-base text-end leading-6">
+                              {item.ar_description}
+                            </p>
+                          </div>
+                          <div className="flex flex-col items-center">
+                            <img
+                              src={item.image}
+                              className="rounded-full object-cover mb-2"
+                              width="60"
+                              height="60"
+                              alt={`Image of ${item.ar_fullName}`}
+                            />
+                            <span className="font-bold text-lg">
+                              {item.ar_fullName}
+                            </span>
+                            <span className="text-gray-500 text-sm">
+                              {item.ar_role}
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
+                  </div>
+                  <div className=" hidden md:block col-span-6 md:col-span-2 h-10">
+                    {/* last news here */}
+                    <div className="md:h-[70px] bg-[#D5AE78] rounded-lg flex items-center ps-4">
+                      <h2 className="text-2xl font-bold">اقرأ أيضًا</h2>
+                    </div>
+                    <NewsList />
                   </div>
                 </div>
-                <div className=" hidden md:block col-span-6 md:col-span-2 h-10">
-                  {/* last news here */}
-                  <div className="md:h-[70px] bg-[#D5AE78] rounded-lg flex items-center ps-4">
-                    <h2 className="text-2xl font-bold">اقرأ أيضًا</h2>
-                  </div>
-                  <NewsList />
-                </div>
-              </div>
-            </main>
+              </main>
+            </div>
+            <MorePublish />
           </div>
-          <MorePublish />
           <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
             <Footer />
           </footer>

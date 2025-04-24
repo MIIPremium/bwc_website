@@ -1,4 +1,5 @@
 .App {
+  @apply xlg:max-w-[1200px] xlg:justify-self-center;
   text-align: center;
 }
 
