@@ -182,7 +182,7 @@ const PublicationPage = () => {
           <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
             <Navbar />
           </div>
-          <main className="px-5">
+          <main className="xlg:max-w-[1200px] justify-self-center px-5">
             <div className="w-full h-36 flex justify-end items-center ">
               <div className="flex py-5 ">
                 <h1 className="text-3xl">Publications</h1>
@@ -190,44 +190,89 @@ const PublicationPage = () => {
               </div>
             </div>
             <div className=" grid grid-cols-3 gap-3">
-              <div dir="ltr" className=" col-span-3 md:col-span-1">
-                <div className="p-3 bg-[#D5AE78] rounded-[8px] text-start">
-                  <h1 className="font-bold">Read also in publications</h1>
-                </div>
+              {window.innerWidth <= 980 ? (
+                <>
+                  <div className=" col-span-3 md:col-span-2">
+                    <CarouselsReport />
+                  </div>
+                  <div dir="ltr" className=" col-span-3 md:col-span-1">
+                    <div className="p-3 bg-[#D5AE78] rounded-[8px] text-start">
+                      <h1 className="font-bold">Read also in publications</h1>
+                    </div>
 
-                <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
-                  {SidInfoResp?.data.map((item, index) => (
-                    <Link
-                      to={
-                        item.type === "publish"
-                          ? `/publish-details/${item.id}`
-                          : item.type === "news"
-                          ? `/news-details/${item.id}`
-                          : item.type === "analysis"
-                          ? `/Analysis-details/${item.id}`
-                          : ""
-                      }
-                      className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
-                    >
-                      <img
-                        src={item.b_image}
-                        alt="publicationImage"
-                        className="w-[92px] h-[70.18px] object-cover rounded-sm"
-                      />
-                      <div className="flex flex-col">
-                        <span>{item.en_Title}</span>
-                        <span className="flex font-normal text-sm gap-2 mt-2">
-                          <CalendarMinus2Icon size={19} />
-                          {`${getRelativeTime(item.date_of_publish, "en")}`}
-                        </span>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-              <div className=" col-span-3 md:col-span-2">
-                <CarouselsReport />
-              </div>
+                    <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
+                      {SidInfoResp?.data.map((item, index) => (
+                        <Link
+                          to={
+                            item.type === "publish"
+                              ? `/publish-details/${item.id}`
+                              : item.type === "news"
+                              ? `/news-details/${item.id}`
+                              : item.type === "analysis"
+                              ? `/Analysis-details/${item.id}`
+                              : ""
+                          }
+                          className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
+                        >
+                          <img
+                            src={item.b_image}
+                            alt="publicationImage"
+                            className="w-[92px] h-[70.18px] object-cover rounded-sm"
+                          />
+                          <div className="flex flex-col">
+                            <span>{item.en_Title}</span>
+                            <span className="flex font-normal text-sm gap-2 mt-2">
+                              <CalendarMinus2Icon size={19} />
+                              {`${getRelativeTime(item.date_of_publish, "en")}`}
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div dir="ltr" className=" col-span-3 md:col-span-1">
+                    <div className="p-3 bg-[#D5AE78] rounded-[8px] text-start">
+                      <h1 className="font-bold">Read also in publications</h1>
+                    </div>
+
+                    <div className="border-[2px] border-[#D2D2D2] rounded-lg p-2 mt-2">
+                      {SidInfoResp?.data.map((item, index) => (
+                        <Link
+                          to={
+                            item.type === "publish"
+                              ? `/publish-details/${item.id}`
+                              : item.type === "news"
+                              ? `/news-details/${item.id}`
+                              : item.type === "analysis"
+                              ? `/Analysis-details/${item.id}`
+                              : ""
+                          }
+                          className="flex mt-4 gap-2 shadow-sm hover:bg-gray-100 cursor-pointer"
+                        >
+                          <img
+                            src={item.b_image}
+                            alt="publicationImage"
+                            className="w-[92px] h-[70.18px] object-cover rounded-sm"
+                          />
+                          <div className="flex flex-col">
+                            <span>{item.en_Title}</span>
+                            <span className="flex font-normal text-sm gap-2 mt-2">
+                              <CalendarMinus2Icon size={19} />
+                              {`${getRelativeTime(item.date_of_publish, "en")}`}
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                  <div className=" col-span-3 md:col-span-2">
+                    <CarouselsReport />
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="grid grid-cols-4  gap-3 mt-3">
@@ -425,14 +470,14 @@ const PublicationPage = () => {
           <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
             <Navbar />
           </div>
-          <main className="px-5">
+          <main className="xlg:max-w-[1200px] justify-self-center px-5">
             <div className="w-full h-36 flex justify-start items-center ">
               <div className="flex py-5 ">
                 <div className="w-3 h-10 rounded-md bg-[#CCA972] ml-2 bg-gradient-to-r from-[#A27942] "></div>
                 <h1 className="text-3xl">المنشورات</h1>
               </div>
             </div>
-            <div className=" grid grid-cols-3 gap-3">
+            <div className=" md:grid md:grid-cols-3 gap-3">
               <div className=" col-span-3 md:col-span-2">
                 <CarouselsReport />
               </div>

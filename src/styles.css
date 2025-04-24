@@ -122,7 +122,7 @@
 .dropdownlanguage {
   position: absolute;
   top: 4.5rem;
-  right: 10px;
+  right: screen-x;
   color: black;
   width: 100px;
   text-align: center;
@@ -212,7 +212,7 @@
 .dropdownlanguage-rigth {
   position: absolute;
   top: 4.5rem;
-  left: 10px;
+  left: screen-x;
   color: black;
   width: 100px;
   text-align: center;
@@ -325,7 +325,7 @@ opacity: 1;
   width: 32rem;
   height: 10rem;
   background-color: rgb(49, 51, 53, 55%);
-  bottom: 1rem;
+  bottom: -4rem;
   color: black;
   right: 5rem;
   display: flex;
@@ -357,9 +357,9 @@ opacity: 1;
   width: 25rem;
   height: 10rem;
   background-color: rgb(49, 51, 53, 55%);
-  bottom: 1rem;
+  bottom: -4rem;
   color: black;
-  left: 2rem;
+  left: 5rem;
   display: flex;
   border-radius: 8px;
   align-items: center;
@@ -530,7 +530,7 @@ opacity: 1;
 .indicators {
   display: flex;
   position: absolute;
-  bottom: 1rem;
+  bottom: -5rem;
 }
 
 .indicator {
@@ -868,4 +868,9 @@ opacity: 1;
       transform: scale(1);
     }
   }
+}
+
+.custom-swiper .swiper-button-next,
+.custom-swiper .swiper-button-prev {
+  color: #b3905b; /* or any Tailwind-compatible color */
 }

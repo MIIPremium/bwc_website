@@ -26,7 +26,7 @@ export default function Footer() {
   }, [widthScreen]);
   const dir = i18n.dir();
   return (
-    <>
+    <div className="app">
       {widthScreen.winWidth <= 980 ? (
         <div
           dir={dir === "ltr" ? "rtl" : "ltr"}
@@ -48,22 +48,22 @@ export default function Footer() {
                     </a>
                   </li> */}
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks1")}
                     </a>
                   </li>
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks2")}
                     </a>
                   </li>
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks3")}
                     </a>
                   </li>
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks4")}
                     </a>
                   </li>
@@ -115,7 +115,11 @@ export default function Footer() {
                   <FaLinkedinIn size={24} />
                 </Link>
               </li>
-              <li className={`${dir === "ltr" ? "-translate-x-[1px]" :"translate-x-1"}`}>
+              <li
+                className={`${
+                  dir === "ltr" ? "-translate-x-[1px]" : "translate-x-1"
+                }`}
+              >
                 <Link
                   target="_blank"
                   to="https://www.facebook.com/bwiscompltd/"
@@ -190,7 +194,11 @@ export default function Footer() {
                     <FaLinkedinIn size={23} />
                   </Link>
                 </li>
-                <li className={`${dir === "ltr" ? "-translate-x-[2px]" : "translate-x-1" }`}>
+                <li
+                  className={`${
+                    dir === "ltr" ? "-translate-x-[2px]" : "translate-x-1"
+                  }`}
+                >
                   <Link
                     target="_blank"
                     to="https://www.facebook.com/bwiscompltd/"
@@ -272,7 +280,7 @@ export default function Footer() {
                 </h2>
                 <ul className="text-gray-500 dark:text-gray-400 font-medium">
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks")}
                     </a>
                   </li>
@@ -282,17 +290,17 @@ export default function Footer() {
                     </a>
                   </li> */}
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks2")}
                     </a>
                   </li>
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks3")}
                     </a>
                   </li>
                   <li className="mb-4">
-                    <a href="/departments"  className="hover:underline">
+                    <a href="/departments" className="hover:underline">
                       {t("departmentLinks4")}
                     </a>
                   </li>
@@ -327,6 +335,6 @@ export default function Footer() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

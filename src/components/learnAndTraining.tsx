@@ -77,7 +77,7 @@ export default function LeariningAndTraning() {
           <Link
             target="_blank"
             to={item.link}
-            className=" rounded-xl  h-[250px] overflow-hidden mt-2 shadow-[0_0px_10px_0px_rgba(0,0,0,0.3)] hover:bg-[#FFDAA0]/[.35] hover:cursor-pointer "
+            className=" rounded-xl  h-[240px] overflow-auto mt-2 shadow-[0_0px_10px_0px_rgba(0,0,0,0.3)] hover:bg-[#FFDAA0]/[.35] hover:cursor-pointer "
             key={idx}
           >
             <div className=" flex-row-reverse w-[100%] h-[100%] flex">
@@ -88,7 +88,7 @@ export default function LeariningAndTraning() {
                   alt=""
                 />
               </div>
-              <div className=" w-[60%] flex justify-center items-center">
+              <div className=" w-[60%] flex justify-center items-center min-h-fit">
                 <div className="text-end px-3 text-sm w-[95%]">
                   <h1 className="text-xl mb-2">{item.title}</h1>
                   <div className="bg-black w-[100%] h-[1px] "></div>

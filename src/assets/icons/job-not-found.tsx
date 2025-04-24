@@ -8,6 +8,7 @@ export default function JobNotFound() {
       viewBox="0 0 454 454"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      className="max-w-[20em]"
     >
       <g clip-path="url(#clip0_183_2679)">
         <path d="M454 0H0V454H454V0Z" fill="white" />

@@ -93,13 +93,14 @@ export default function Navbar() {
     <div className="shadow-md w-full fixed top-0 left-0 z-50 bg-white">
       <div
         className={
-          dir === "ltr"
+          `${dir === "ltr"
             ? "md:flex items-center justify-between flex-row-reverse py-2 md:px-10 px-7"
-            : "md:flex items-center justify-between py-2 md:px-10 px-7"
+            : "md:flex items-center justify-between py-2 md:px-10 px-7"}`
         }
+        style={{maxWidth: "1300px"}}
       >
         <div
-          className="font-bold text-2xl cursor-pointer flex items-center font-[Poppins] 
+          className="font-bold text-2xl cursor-pointer flex center font-[Poppins] 
       text-gray-800"
         >
           <a href="/" className="site-title">
@@ -139,14 +140,14 @@ export default function Navbar() {
           >
             <li
               className={
-                dir === "ltr"
+                `flex ${dir === "ltr"
                   ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
                   : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
+                }`}
             >
               <Link
                 to={"/departments"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer "
+                className="w-full h-full text-gray-800 hover:text-gray-400 duration-500 cursor-pointer "
               >
                 {t("depertment")}
               </Link>
@@ -154,14 +155,14 @@ export default function Navbar() {
 
             <li
               className={
-                dir === "ltr"
+                `flex ${dir === "ltr"
                   ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[150%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
                   : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[150%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
+                }`}
             >
               <Link
                 to={"/about-us"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+                className="w-full h-full text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
               >
                 {t("About_us")}
               </Link>
@@ -169,40 +170,40 @@ export default function Navbar() {
 
             <li
               className={
-                dir === "ltr"
+                `flex ${dir === "ltr"
                   ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
                   : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
+                }`}
             >
               <Link
                 to={"/all-publishes"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+                className="w-full h-full text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
               >
                 {t("publishes")}
               </Link>
             </li>
             <li
               className={
-                dir === "ltr"
+                `flex ${dir === "ltr"
                   ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
                   : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
+                }`}
             >
               <NavLink
                 to={"/all-Reports"}
-                className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
+                className="w-full h-full text-gray-800 hover:text-gray-400 duration-500 cursor-pointer"
               >
                 {t("reports")}
               </NavLink>
             </li>
             <li
               className={
-                dir === "ltr"
+                `flex ${dir === "ltr"
                   ? "md:ml-8 sm:text-end text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
                   : "md:ml-8 sm:text-start text-xl md:my-0 my-7 md:bg-[#fff] md:w-[100%] sm:bg-[#e9eaed] sm:w-[95%] sm:px-2 sm:py-3 sm:rounded-md"
-              }
+                }`}
             >
-              <NavLink to={"/archives"} className="text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
+              <NavLink to={"/archives"} className="w-full h-full text-gray-800 hover:text-gray-400 duration-500 cursor-pointer">
                 {t("archive")}
               </NavLink>
             </li>

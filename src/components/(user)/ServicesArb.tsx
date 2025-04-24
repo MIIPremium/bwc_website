@@ -1,85 +1,73 @@
 import { useQuery } from "@tanstack/react-query";
-import { motion, useTransform, useScroll } from "framer-motion";
-import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import { ServicesHomeProp } from "src/types/validation";
 
 const ServicesArb = () => {
+  const { i18n } = useTranslation();
+  const dir = i18n.dir();
+
   return (
-    <div className="">
-      <div className="flex h-48 items-center justify-center">
-        <span className="font-semibold uppercase "></span>
-      </div>
-      <HorizontalScrollCarousel />
-      <div className="flex h-48 items-center justify-center">
-        <span className="font-semibold uppercase "></span>
-      </div>
+    <div dir={dir} className="w-full px-4 py-8">
+      <ServicesCarousel isRTL={dir === "rtl"} />
     </div>
   );
 };
 
-const HorizontalScrollCarousel = () => {
+const ServicesCarousel = ({ isRTL }: { isRTL: boolean }) => {
   const {
-    data: services, // Renamed to `services` for clarity
+    data: services,
     isLoading,
     error,
   } = useQuery<ServicesHomeProp[]>({
     queryFn: () =>
-      fetch(
-        "https://bwc.runasp.net/api/website/Home/Services"
-      ).then((res) => {
+      fetch("https://bwc.runasp.net/api/website/Home/Services").then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch services");
         }
         return res.json();
       }),
-    queryKey: ["services"], // Unique key for this query
-  });
-  const { t, i18n } = useTranslation();
-  const dir = i18n.dir();
-  const targetRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
+    queryKey: ["services"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], ["-1%", "84%"]);
+  if (isLoading) return <p>جاري التحميل...</p>;
+  if (error) return <p>حدث خطأ أثناء تحميل البيانات.</p>;
 
   return (
-    <section ref={targetRef} className="relative h-[180vh] ">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden ">
-        <motion.div style={{ x }} className="flex gap-4">
-          {services?.map((service) => {
-            return <Card card={service} key={service.ar_name} />;
-          })}
-        </motion.div>
-      </div>
+    <section className="w-full px-4 md:px-16">
+      <Swiper
+        modules={[Navigation, Autoplay]}
+        slidesPerView={1}
+        spaceBetween={20}
+        navigation
+        autoplay={{ delay: 4000 }}
+        loop
+        dir={"rtl"}
+        className="w-[100%] custom-swiper"
+      >
+        {services?.map((card: any) => (
+          <SwiperSlide key={card.id}>
+            <div className="relative h-[300px] w-[90%] m-3 justify-self-center bg-white rounded-lg shadow-[0_5px_20px_rgba(0,0,0,0.2)] overflow-hidden group">
+              <div
+                style={{
+                  backgroundImage: `url(${card.url})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+                className="absolute inset-0 group-hover:scale-105 transition-transform duration-300 opacity-20"
+              ></div>
+              <div className="relative z-10 p-6 text-start">
+                <h1 className="text-3xl font-bold mb-4">{card.ar_name}</h1>
+                <p className="text-lg text-[#525252]">{card.ar_Description}</p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </section>
-  );
-};
-
-const Card = ({ card }: any) => {
-  return (
-    <div
-      key={card.id}
-      className="group relative h-[350px] w-[450px] overflow-hidden bg-white rounded-lg hover:bg-[#FFDAA0]/[.35] cursor-pointer shadow-[0_05px_20px_0px_rgba(0,0,0,0.3)] services-ar"
-    >
-      <div
-        style={{
-          backgroundImage: `url(${card.url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        className="absolute inset-0 z-0 transition-transform duration-300 group-hover:scale-110"
-      ></div>
-      <div className=" text-start w-[100%] min-h-[50%] p-4">
-        <h1 className="text-3xl mb-4  mt-14 break-words whitespace-pre-wrap">
-          {card.ar_name}
-        </h1>
-        <p className="text-xl text-[#525252] break-words whitespace-normal">
-          {card.ar_Description}
-        </p>
-      </div>
-    </div>
   );
 };
 
