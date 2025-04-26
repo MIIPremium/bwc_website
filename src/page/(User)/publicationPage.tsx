@@ -477,7 +477,7 @@ const PublicationPage = () => {
                 <h1 className="text-3xl">المنشورات</h1>
               </div>
             </div>
-            <div className=" md:grid md:grid-cols-3 gap-3">
+            <div className="md:grid md:grid-cols-3 gap-3">
               <div className=" col-span-3 md:col-span-2">
                 <CarouselsReport />
               </div>
@@ -516,7 +516,7 @@ const PublicationPage = () => {
                 </div>
               </div>
             </div>
-
+            <div id="other" className="mb-24"></div>
             <div className="grid grid-cols-4 gap-3 mt-3">
               <div className="col-span-4 md:col-span-1"></div>
               <div className=" col-span-4 md:col-span-2">
@@ -669,20 +669,21 @@ const PublicationPage = () => {
 
                   <div className="md:pr-0 sm:pr-5">
                     {getPaginationNumbers().map((page, index) => (
-                      <button
-                        key={index}
-                        className={`px-4 py-2 rounded ml-1 ${
-                          currentPage === page
+                      <a href="#other" key={index}>
+                        <button
+                          className={`px-4 py-2 rounded ml-1 ${
+                            currentPage === page
                             ? "bg-[#d5ae78] rounded-md  text-white"
                             : "bg-white border border-black  rounded-md text-black hover:bg-[#d5ae78] hover:text-white"
-                        }`}
-                        onClick={() =>
-                          typeof page === "number" && paginate(page)
-                        }
-                        disabled={typeof page !== "number"}
-                      >
-                        {page}
-                      </button>
+                          }`}
+                          onClick={() =>
+                            typeof page === "number" && paginate(page)
+                          }
+                          disabled={typeof page !== "number"}
+                          >
+                          {page}
+                        </button>
+                      </a>
                     ))}
                   </div>
 
