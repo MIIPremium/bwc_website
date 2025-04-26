@@ -39,7 +39,7 @@ export default function MorePublish() {
         <div dir="ltr" className="container-pub mx-auto sm:px-0 md:px-4 ">
           {/* Display Images */}
           <div
-            className={`mt-8   ${
+            className={`${
               sideInfos?.data.length && sideInfos?.data.length >= 3
                 ? "md:grid sm:hidden grid-cols-3 gap-8"
                 : "flex flex-col md:flex-row sm:hidden justify-evenly space-x-8"
@@ -57,7 +57,8 @@ export default function MorePublish() {
                     : ""
                 }
                 key={index}
-                className={`${
+                className={`group *
+                  ${
                   sideInfos?.data.length >= 3 ? "" : "w-1/4"
                 } mb-4 relative`}
               >
@@ -66,7 +67,7 @@ export default function MorePublish() {
                   src={img.b_image}
                   alt=""
                 />
-                <div className="absolute text-[#D1D1D1] bottom-0 w-full right-0 mb-4">
+                <div className="absolute max-h-0 group-hover:max-h-32 transition-all duration-300 ease-in-out overflow-y-scroll bg-black bg-opacity-30 custom-scrollbar text-[#D1D1D1] bottom-0 w-full right-0 mb-4">
                   <p className="text-xl w-[95%] mx-auto font-bold">
                     {img.en_Title}
                   </p>
@@ -132,7 +133,7 @@ export default function MorePublish() {
         <div className="container-pub mx-auto sm:px-0 md:px-4">
           {/* Display Images */}
           <div
-            className={`mt-8   ${
+            className={`${
               sideInfos?.data.length && sideInfos?.data.length >= 3
                 ? "md:grid sm:hidden grid-cols-3 gap-8"
                 : "flex flex-col md:flex-row sm:hidden justify-evenly space-x-8"
@@ -150,17 +151,18 @@ export default function MorePublish() {
                     : ""
                 }
                 key={index}
-                className={`${
-                  sideInfos?.data.length >= 3 ? "" : "w-1/4"
-                } mb-4 relative`}
+                className={`group
+                  ${ 
+                    sideInfos?.data.length >= 3 ? "" : "w-1/4"
+                  } mb-4 relative`}
               >
                 <img
                   className="rounded-lg object-cover h-full w-full"
                   src={img.b_image}
                   alt=""
                 />
-                <div className="absolute text-[#D1D1D1] bottom-0 w-full right-0 mb-4">
-                  <p className="text-xl w-[95%] mx-auto font-bold">
+                <div className="absolute max-h-0 group-hover:max-h-32 transition-all duration-300 ease-in-out overflow-y-scroll bg-black bg-opacity-30 custom-scrollbar text-[#D1D1D1] bottom-0 w-full right-0 mb-4">
+                  <p className=" text-xl w-[95%] mx-auto font-bold">
                     {img.ar_Title}
                   </p>
                   <div className="h-1 w-[95%] mx-auto bg-[#D5AE78] rounded-full"></div>

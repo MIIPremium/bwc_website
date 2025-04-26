@@ -97,11 +97,11 @@ export default function NewsDetails() {
     <>
       {dir === "ltr" ? (
         <div>
-          <div className="xlg:max-w-[1200px] justify-self-center">
+          <div className="flex flex-col min-h-screen overflow-hidden xlg:max-w-[1200px] justify-self-center">
             <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
               <Navbar />
             </div>
-            <div dir="ltr" className=" min-h-screen md:p-4 p-4">
+            <div dir="ltr" className="min-h-0 md:p-4 p-4">
               {/* Main Content Section */}
               <main className="md:max-w-[90vw] mx-auto  md:p-6">
                 <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
@@ -145,7 +145,7 @@ export default function NewsDetails() {
                     </div>
                   </div>
                 )}
-                <div className="grid grid-cols-6 gap-x-2 gap-y-2">
+                <div className="overflow-auto grid grid-cols-6 gap-x-2 gap-y-2">
                   <div className=" col-span-6 md:col-span-4 ">
                     <div className="flex flex-col md:flex-row justify-between md:h-[70px] bg-[#D5AE78] items-center mb-4 rounded-lg">
                       <div className="flex items-center gap-x-2 py-5 ps-8">
@@ -206,22 +206,22 @@ export default function NewsDetails() {
                         ))}
                       </p>
                     </div>
-                    <div className=" grid min-h-[100px] my-4 items-start gap-4 overflow-y-scroll scroll-smooth text-start">
+                    <div className=" grid min-h-[100px] my-4 items-start gap-4 overflow-auto text-start">
                       <label htmlFor="" className="">
                         ✅ More Photos Of The News
                       </label>
                       <div className="overflow-y-auto min-h-96">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-32">
                           {NewssDetails?.data.images.map((item, index) => (
                             <div
                               key={index}
-                              className="rounded-lg shadow-md flex items-center justify-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                              className="rounded-lg w-[180px] shadow-md flex items-center justify-self-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
                               onClick={() => openArrayModal(item)}
                             >
                               <img
                                 src={item}
                                 alt={`publication-${index}`}
-                                className="w-full h-48 object-fill"
+                                className="w-full h-fit object-fill"
                                 loading="lazy"
                               />
                               <div className="p-4">
@@ -292,14 +292,14 @@ export default function NewsDetails() {
         </div>
       ) : (
         <div>
-          <div className="xlg:max-w-[1200px] justify-self-center">
+          <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
+            <Navbar />
+          </div>
+          <div className="flex flex-col min-h-screen overflow-hidden xlg:max-w-[1200px] justify-self-center">
             {/* Navbar Section */}
             {/* Add your navbar component here */}
             {/* Example: <Navbar /> */}
-            <div className="w-full lg:h-[8vh] md:h-[8vh]  sm:h-[11vh]">
-              <Navbar />
-            </div>
-            <div className=" min-h-screen md:p-4 p-4">
+            <div className=" min-h-0 md:p-4 p-4">
               {/* Main Content Section */}
               <main className="md:max-w-[90vw] mx-auto  md:p-6">
                 <h1 className=" text-[36px] font-bold mb-[43px] flex items-center gap-x-2">
@@ -344,8 +344,8 @@ export default function NewsDetails() {
                   </div>
                 )}
 
-                <div className="grid grid-cols-6 gap-x-2 gap-y-2">
-                  <div className=" col-span-6 md:col-span-4 ">
+                <div className="overflow-auto max-h-[100vh] grid grid-cols-6 gap-x-2 gap-y-2">
+                  <div className="col-span-6 md:col-span-4 ">
                     <div className="flex flex-col md:flex-row justify-between md:h-[70px] bg-[#D5AE78] items-center mb-4 rounded-lg">
                       <div className="flex items-center gap-x-2 py-5 ps-8">
                         <div className="flex items-center gap-x-2">
@@ -409,22 +409,22 @@ export default function NewsDetails() {
                     <div className="my-4">
                       <label
                         htmlFor=""
-                        className="block mb-2 text-lg font-semibold"
+                        className="block mb-2 text-lg overflow-auto font-semibold"
                       >
                         ✅ صور أخرى للخبر
                       </label>
                       <div className="overflow-y-auto min-h-96">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-28 items-center">
                           {NewssDetails?.data.images.map((item, index) => (
                             <div
                               key={index}
-                              className="rounded-lg shadow-md flex items-center justify-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
+                              className="w-[180px] rounded-lg shadow-md flex items-center justify-self-center mx-auto bg-slate-200 overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-300"
                               onClick={() => openArrayModal(item)}
                             >
                               <img
                                 src={item}
                                 alt={`publication-${index}`}
-                                className="w-full h-48 object-fill"
+                                className="w-full h-fit object-fill"
                                 loading="lazy"
                               />
                               <div className="p-4">
@@ -486,7 +486,9 @@ export default function NewsDetails() {
                 </div>
               </main>
             </div>
-            <MorePublish />
+            <div className="min-h-0 overflow-auto">
+              <MorePublish />
+            </div>
           </div>
           <footer className="min-h-[65vh] p-2 overflow-hidden relative bg-black mt-10">
             <Footer />

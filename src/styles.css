@@ -12,9 +12,10 @@
   margin: 0;
   box-sizing: border-box;
   font-family: Tajawal;
+  scroll-behavior: smooth;
 }
 .slider-anmition {
-  animation: 20s slide infinite linear;
+  animation: 2s slide infinite linear;
 }
 .rever-slider-anmition {
   animation: slide-left 8s infinite linear;
@@ -854,7 +855,7 @@ opacity: 1;
 
 @media (prefers-reduced-motion: no-preference) {
   .fedaup {
-    animation: fade-up 20s linear forwards;
+    animation: fade-up 2s linear forwards;
     animation-timeline: view();
     animation-range: entry 0% cover 20%;
   }
@@ -873,4 +874,8 @@ opacity: 1;
 .custom-swiper .swiper-button-next,
 .custom-swiper .swiper-button-prev {
   color: #b3905b; /* or any Tailwind-compatible color */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #b4b4b4; /* or any Tailwind-compatible color */
 }
